@@ -27,7 +27,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
   const [chatPrompt, setChatPrompt] = useState('')
   const [genPrompt, setGenPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hello! I'm Caret AI. I'm connected to Gemini 1.5. How can I help you build today?" }
+    { role: 'assistant', content: "Hello! I'm Caret AI. I'm connected to Gemini. How can I help you build today?" }
   ])
   const [isBusy, setIsBusy] = useState(false)
   const [explanation, setExplanation] = useState('')
@@ -55,8 +55,8 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
       })
       setMessages(prev => [...prev, { role: 'assistant', content: result.code }])
     } catch (err: any) {
-      toast({ variant: 'destructive', title: "AI Connection Error", description: "Could not reach Gemini. Please check your API configuration." })
-      setMessages(prev => [...prev, { role: 'assistant', content: "I'm sorry, I'm having trouble connecting to my brain right now. Please try again in a moment." }])
+      toast({ variant: 'destructive', title: "AI Connection Error", description: "Please check your configuration or try again." })
+      setMessages(prev => [...prev, { role: 'assistant', content: "I encountered an error. Please ensure your environment is configured correctly." }])
     } finally {
       setIsBusy(false)
     }
@@ -69,9 +69,9 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
       const result = await aiCodeGeneration({ description: genPrompt })
       onGeneratedCode(result.code)
       setGenPrompt('')
-      toast({ title: "Magic happened!", description: "AI code has been inserted into your file." })
+      toast({ title: "Success!", description: "AI code has been generated and updated." })
     } catch (err) {
-      toast({ variant: 'destructive', title: "Generation failed", description: "Check your connection and try again." })
+      toast({ variant: 'destructive', title: "Generation failed", description: "Try a more specific prompt." })
     } finally {
       setIsBusy(false)
     }
@@ -93,10 +93,6 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
     }
   }
 
-  const clearChat = () => {
-    setMessages([{ role: 'assistant', content: "Chat cleared. Ready for new questions!" }])
-  }
-
   return (
     <div className="w-80 flex flex-col h-full overflow-hidden bg-[#0A0A0A] border-l border-white/5 shadow-2xl">
       <div className="p-4 border-b border-white/5 flex items-center justify-between bg-black/40">
@@ -106,16 +102,16 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
           </div>
           <span className="text-[10px] font-black tracking-widest text-primary uppercase">Caret AI Assistant</span>
         </div>
-        <button onClick={clearChat} className="p-1 hover:text-white text-muted-foreground/40 transition-colors" title="Clear Chat">
+        <button onClick={() => setMessages([{ role: 'assistant', content: "Chat cleared." }])} className="p-1 hover:text-white text-muted-foreground/40 transition-colors">
           <Trash2 className="h-3.5 w-3.5" />
         </button>
       </div>
 
       <Tabs defaultValue="chat" className="flex-1 flex flex-col overflow-hidden">
         <TabsList className="w-full bg-transparent p-1 h-10 border-b border-white/5 gap-1 rounded-none">
-          <TabsTrigger value="chat" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter data-[state=active]:bg-primary/10"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
-          <TabsTrigger value="gen" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter data-[state=active]:bg-primary/10"><Code2 className="h-3 w-3" />Build</TabsTrigger>
-          <TabsTrigger value="help" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter data-[state=active]:bg-primary/10"><HelpCircle className="h-3 w-3" />Logic</TabsTrigger>
+          <TabsTrigger value="chat" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
+          <TabsTrigger value="gen" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><Code2 className="h-3 w-3" />Build</TabsTrigger>
+          <TabsTrigger value="help" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><HelpCircle className="h-3 w-3" />Logic</TabsTrigger>
         </TabsList>
 
         <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0">
@@ -126,7 +122,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
                   <div className={cn("w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-lg", m.role === 'user' ? "bg-accent" : "bg-primary")}>
                     {m.role === 'user' ? <div className="text-[10px] font-bold">U</div> : <Bot className="h-3.5 w-3.5" />}
                   </div>
-                  <div className={cn("rounded-2xl p-3 text-[11px] leading-relaxed shadow-sm", m.role === 'user' ? "bg-accent/10 border border-accent/20 text-accent-foreground" : "bg-muted/30 border border-white/5")}>
+                  <div className={cn("rounded-2xl p-3 text-[11px] leading-relaxed", m.role === 'user' ? "bg-accent/10 border border-accent/20" : "bg-muted/30 border border-white/5")}>
                     <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
                   </div>
                 </div>
@@ -136,67 +132,49 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
                   <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   </div>
-                  <div className="bg-muted/30 rounded-2xl p-3 text-[10px] border border-white/5 italic opacity-50">Thinking...</div>
+                  <div className="bg-muted/30 rounded-2xl p-3 text-[10px] border border-white/5">Thinking...</div>
                 </div>
               )}
             </div>
           </ScrollArea>
           <div className="p-4 border-t border-white/5 bg-black/40">
-            <div className="relative group">
+            <div className="relative">
               <Textarea 
-                placeholder="Ask about your code..."
-                className="min-h-[70px] max-h-[150px] bg-background border-white/10 resize-none text-[11px] pr-10 focus:ring-1 focus:ring-primary/40 rounded-xl"
+                placeholder="Ask Caret AI..."
+                className="min-h-[70px] max-h-[150px] bg-background border-white/10 text-[11px] pr-10 rounded-xl"
                 value={chatPrompt}
                 onChange={(e) => setChatPrompt(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChat())}
               />
-              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-8 w-8 text-primary hover:bg-primary/10" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
+              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-8 w-8 text-primary" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
                 <Send className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="gen" className="flex-1 p-5 space-y-6 m-0 overflow-y-auto">
-          <div className="space-y-4 animate-in fade-in duration-500">
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Generate Module</h3>
-            </div>
-            <Textarea 
-              placeholder="e.g. 'Write a Python function to sort a list'..."
-              className="min-h-[150px] bg-background border-white/10 text-[11px] rounded-xl focus:ring-1 focus:ring-primary/40"
-              value={genPrompt}
-              onChange={(e) => setGenPrompt(e.target.value)}
-            />
-            <Button className="w-full h-10 text-[11px] font-bold uppercase tracking-widest gap-2 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(124,58,237,0.2)]" onClick={handleGenerate} disabled={isBusy || !genPrompt.trim()}>
-              {isBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-              Build with AI
-            </Button>
-            <p className="text-[9px] text-center text-muted-foreground italic">Code will be appended to your active file.</p>
-          </div>
+        <TabsContent value="gen" className="flex-1 p-5 space-y-4 m-0">
+          <Textarea 
+            placeholder="Describe the code you want to generate..."
+            className="min-h-[150px] bg-background border-white/10 text-[11px] rounded-xl"
+            value={genPrompt}
+            onChange={(e) => setGenPrompt(e.target.value)}
+          />
+          <Button className="w-full bg-primary font-bold uppercase tracking-widest text-[11px]" onClick={handleGenerate} disabled={isBusy || !genPrompt.trim()}>
+            {isBusy ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Sparkles className="h-4 w-4 mr-2" />}
+            Generate Code
+          </Button>
         </TabsContent>
 
-        <TabsContent value="help" className="flex-1 p-5 space-y-6 m-0 overflow-y-auto">
-          <div className="space-y-4 animate-in fade-in duration-500">
-            <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Analyze Logic</h3>
-            <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 space-y-3">
-              <p className="text-[10px] text-muted-foreground leading-relaxed">Select code in the editor and click below for a deep explanation.</p>
-              <Button variant="outline" className="w-full h-10 text-[11px] font-bold uppercase tracking-widest border-primary/20 hover:bg-primary/10 gap-2" onClick={handleExplain} disabled={isBusy}>
-                {isBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <HelpCircle className="h-4 w-4" />}
-                Explain Code
-              </Button>
+        <TabsContent value="help" className="flex-1 p-5 space-y-4 m-0">
+          <Button variant="outline" className="w-full border-primary/20 hover:bg-primary/10 font-bold uppercase text-[11px]" onClick={handleExplain} disabled={isBusy}>
+            Analyze Selection
+          </Button>
+          {explanation && (
+            <div className="bg-muted/10 rounded-xl p-4 border border-white/5 text-[11px] leading-relaxed opacity-80 animate-in slide-in-from-top-2">
+              {explanation}
             </div>
-            {explanation && (
-              <div className="bg-muted/10 rounded-xl p-4 border border-white/5 animate-in slide-in-from-top-2">
-                <div className="flex items-center gap-2 mb-3 border-b border-white/5 pb-2">
-                  <Bot className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Analysis</span>
-                </div>
-                <p className="text-[11px] leading-relaxed whitespace-pre-wrap opacity-80">{explanation}</p>
-              </div>
-            )}
-          </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>

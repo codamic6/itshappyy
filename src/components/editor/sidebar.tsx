@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Plus, ChevronDown, Trash2, FilePlus, FolderPlus, Search } from "lucide-react"
+import { Plus, ChevronDown, Trash2, FilePlus, FolderPlus, Search, MoreVertical, Edit2, Folder } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -10,32 +10,45 @@ import { useEditorStore } from "@/hooks/use-editor-store"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { motion, AnimatePresence } from "framer-motion"
 import { FileIcon } from "./file-icon"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 export function EditorSidebar() {
   const store = useEditorStore()
-  const [newFileName, setNewFileName] = useState("")
-  const [isCreating, setIsCreating] = useState(false)
+  const [newName, setNewName] = useState("")
+  const [isCreating, setIsCreating] = useState<'file' | 'folder' | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
+  const creationProcessed = useRef(false)
 
-  const files = Object.values(store.files || {}).filter((f: any) => 
+  const nodes = Object.values(store.nodes || {}).filter((f: any) => 
     f.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  ).sort((a: any, b: any) => {
+    if (a.type === b.type) return a.name.localeCompare(b.name)
+    return a.type === 'folder' ? -1 : 1
+  })
 
   useEffect(() => {
     if (isCreating && inputRef.current) {
       inputRef.current.focus()
+      creationProcessed.current = false
     }
   }, [isCreating])
 
   const handleCreate = () => {
-    const trimmed = newFileName.trim()
-    if (trimmed) {
-      const id = store.createFile(trimmed)
-      store.selectFile(id)
+    if (creationProcessed.current) return
+    const trimmed = newName.trim()
+    if (trimmed && isCreating) {
+      const id = store.createNode(trimmed, isCreating)
+      if (isCreating === 'file') store.selectFile(id)
+      creationProcessed.current = true
     }
-    setIsCreating(false)
-    setNewFileName("")
+    setIsCreating(null)
+    setNewName("")
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -44,8 +57,15 @@ export function EditorSidebar() {
       handleCreate()
     }
     if (e.key === 'Escape') {
-      setIsCreating(false)
-      setNewFileName("")
+      setIsCreating(null)
+      setNewName("")
+    }
+  }
+
+  const handleRename = (id: string, currentName: string) => {
+    const name = window.prompt("Rename to:", currentName)
+    if (name && name.trim()) {
+      store.renameNode(id, name.trim())
     }
   }
 
@@ -55,8 +75,8 @@ export function EditorSidebar() {
         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Explorer</span>
         <div className="flex items-center gap-1">
           <TooltipProvider>
-            <ActionIcon icon={<FilePlus className="h-4 w-4" />} onClick={() => setIsCreating(true)} label="New File" />
-            <ActionIcon icon={<FolderPlus className="h-4 w-4" />} label="New Folder" />
+            <ActionIcon icon={<FilePlus className="h-4 w-4" />} onClick={() => setIsCreating('file')} label="New File" />
+            <ActionIcon icon={<FolderPlus className="h-4 w-4" />} onClick={() => setIsCreating('folder')} label="New Folder" />
           </TooltipProvider>
         </div>
       </div>
@@ -90,56 +110,59 @@ export function EditorSidebar() {
                   exit={{ height: 0, opacity: 0 }}
                   className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden"
                 >
-                  <FileIcon fileName={newFileName} className="h-4 w-4 shrink-0" />
+                  {isCreating === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
                   <input
                     ref={inputRef}
                     className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
-                    placeholder="filename.ext"
-                    value={newFileName}
-                    onChange={(e) => setNewFileName(e.target.value)}
+                    placeholder={isCreating === 'file' ? "file.ext" : "folder name"}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    onBlur={() => {
-                      if (!newFileName.trim()) {
-                        setIsCreating(false)
-                      } else {
-                        handleCreate()
-                      }
-                    }}
+                    onBlur={handleCreate}
                   />
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {files.length > 0 ? (
-              files.map((file: any) => (
+            {nodes.length > 0 ? (
+              nodes.map((node: any) => (
                 <div
-                  key={file.id}
+                  key={node.id}
                   className={cn(
                     "group flex items-center gap-2 px-2 py-1.5 text-xs cursor-pointer transition-all rounded-md relative",
-                    store.activeFileId === file.id 
+                    store.activeFileId === node.id 
                       ? "bg-primary/20 text-primary font-bold" 
                       : "text-muted-foreground hover:bg-white/5"
                   )}
-                  onClick={() => store.selectFile(file.id)}
+                  onClick={() => store.selectFile(node.id)}
                 >
-                  <FileIcon fileName={file.name} className="h-4 w-4 shrink-0" />
-                  <span className="truncate flex-1">{file.name}</span>
-                  <button 
-                    className="opacity-0 group-hover:opacity-100 p-1 hover:text-destructive transition-all"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      store.deleteFile(file.id)
-                    }}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
+                  {node.type === 'file' ? <FileIcon fileName={node.name} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary/70" />}
+                  <span className="truncate flex-1">{node.name}</span>
+                  
+                  <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button className="p-1 hover:text-white transition-colors" onClick={(e) => e.stopPropagation()}>
+                          <MoreVertical className="h-3 w-3" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="bg-[#111] border-white/10">
+                        <DropdownMenuItem onClick={() => handleRename(node.id, node.name)} className="text-xs gap-2">
+                          <Edit2 className="h-3 w-3" /> Rename
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => store.deleteNode(node.id)} className="text-xs gap-2 text-destructive focus:text-destructive">
+                          <Trash2 className="h-3 w-3" /> Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </div>
               ))
             ) : !isCreating && (
               <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
                 <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
                 <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
-                <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => setIsCreating(true)}>
+                <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => setIsCreating('file')}>
                   Create File
                 </Button>
               </div>

@@ -9,6 +9,8 @@ export interface FileNode {
   content: string
   language: string
   path: string
+  parentId: string | null
+  type: 'file' | 'folder'
 }
 
 export interface TerminalLine {
@@ -49,7 +51,7 @@ export const detectLanguage = (fileName: string) => {
 const EditorContext = createContext<any>(null)
 
 export function EditorProvider({ children }: { children: React.ReactNode }) {
-  const [files, setFiles] = useState<Record<string, FileNode>>({})
+  const [nodes, setNodes] = useState<Record<string, FileNode>>({})
   const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
@@ -68,34 +70,40 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     activeView: 'explorer' as 'explorer' | 'search' | 'git' | 'extensions' | 'ai'
   })
 
-  const activeFile = useMemo(() => activeFileId ? files[activeFileId] : null, [activeFileId, files])
-  const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
+  const files = useMemo(() => {
+    return Object.fromEntries(Object.entries(nodes).filter(([_, node]) => node.type === 'file'))
+  }, [nodes])
+
+  const activeFile = useMemo(() => activeFileId ? nodes[activeFileId] : null, [activeFileId, nodes])
+  const openFiles = useMemo(() => openTabs.map(id => nodes[id]).filter(Boolean), [openTabs, nodes])
 
   const selectFile = useCallback((id: string) => {
+    if (nodes[id]?.type === 'folder') return
     setActiveFileId(id)
     setOpenTabs(prev => {
       if (prev.includes(id)) return prev
       return [...prev, id]
     })
-  }, [])
+  }, [nodes])
 
-  const createFile = useCallback((name: string, content: string = '') => {
+  const createNode = useCallback((name: string, type: 'file' | 'folder' = 'file', parentId: string | null = null, content: string = '') => {
     const id = Math.random().toString(36).substring(7)
-    const language = detectLanguage(name)
+    const language = type === 'file' ? detectLanguage(name) : ''
     const newNode: FileNode = {
       id,
       name,
       content,
       language,
-      path: `/${name}`
+      path: `/${name}`,
+      parentId,
+      type
     }
 
-    setFiles(prev => ({ ...prev, [id]: newNode }))
-    setOpenTabs(prev => {
-      if (prev.includes(id)) return prev
-      return [...prev, id]
-    })
-    setActiveFileId(id)
+    setNodes(prev => ({ ...prev, [id]: newNode }))
+    if (type === 'file') {
+      setOpenTabs(prev => [...prev, id])
+      setActiveFileId(id)
+    }
     return id
   }, [])
 
@@ -110,8 +118,8 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   }, [activeFileId])
 
   const updateFileContent = useCallback((id: string, content: string) => {
-    setFiles(prev => {
-      if (!prev[id]) return prev
+    setNodes(prev => {
+      if (!prev[id] || prev[id].type !== 'file') return prev
       return {
         ...prev,
         [id]: { ...prev[id], content }
@@ -119,8 +127,8 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
-  const deleteFile = useCallback((id: string) => {
-    setFiles(prev => {
+  const deleteNode = useCallback((id: string) => {
+    setNodes(prev => {
       const next = { ...prev }
       delete next[id]
       return next
@@ -128,10 +136,10 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     closeTab(id)
   }, [closeTab])
 
-  const renameFile = useCallback((id: string, newName: string) => {
-    setFiles(prev => {
+  const renameNode = useCallback((id: string, newName: string) => {
+    setNodes(prev => {
       if (!prev[id]) return prev
-      const language = detectLanguage(newName)
+      const language = prev[id].type === 'file' ? detectLanguage(newName) : ''
       return {
         ...prev,
         [id]: { ...prev[id], name: newName, language }
@@ -142,57 +150,38 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const executeCommand = useCallback((input: string) => {
     const cmd = input.trim()
     if (!cmd) return
-    
     setTerminalHistory(prev => [...prev, { type: 'input', content: input }])
-    
     const parts = cmd.toLowerCase().split(' ')
     const baseCmd = parts[0]
 
     switch (baseCmd) {
-      case 'clear':
-        setTerminalHistory([])
-        break
-      case 'help':
-        setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }])
-        break
+      case 'clear': setTerminalHistory([]); break
+      case 'help': setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }]); break
       case 'ls':
-        const fileNames = Object.values(files).map((f: any) => f.name).join('  ')
-        setTerminalHistory(prev => [...prev, { type: 'output', content: fileNames || '(empty workspace)' }])
+        const names = Object.values(nodes).map((f: any) => f.name).join('  ')
+        setTerminalHistory(prev => [...prev, { type: 'output', content: names || '(empty workspace)' }])
         break
-      case 'pwd':
-        setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }])
-        break
-      case 'date':
-        setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toLocaleString() }])
-        break
-      default:
-        setTerminalHistory(prev => [...prev, { type: 'error', content: `caret-sh: command not found: ${baseCmd}` }])
+      case 'pwd': setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }]); break
+      case 'date': setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toLocaleString() }]); break
+      default: setTerminalHistory(prev => [...prev, { type: 'error', content: `caret-sh: command not found: ${baseCmd}` }])
     }
-  }, [files])
-
-  const setIsSidebarOpen = (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val }))
-  const setIsTerminalOpen = (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val }))
-  const setIsAIPanelOpen = (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val }))
-  const setIsSettingsOpen = (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val }))
-  const setFontSize = (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
+  }, [nodes])
 
   const value = {
-    files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
-    setUi, createFile, selectFile, closeTab, updateFileContent, deleteFile, renameFile, executeCommand,
-    setIsSidebarOpen, setIsTerminalOpen, setIsAIPanelOpen, setIsSettingsOpen, setFontSize
+    nodes, files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
+    setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand,
+    setIsSidebarOpen: (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val })),
+    setIsTerminalOpen: (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val })),
+    setIsAIPanelOpen: (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val })),
+    setIsSettingsOpen: (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val })),
+    setFontSize: (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
   }
 
-  return (
-    <EditorContext.Provider value={value}>
-      {children}
-    </EditorContext.Provider>
-  )
+  return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>
 }
 
 export function useEditorStore() {
   const context = useContext(EditorContext)
-  if (!context) {
-    throw new Error('useEditorStore must be used within an EditorProvider')
-  }
+  if (!context) throw new Error('useEditorStore must be used within an EditorProvider')
   return context
 }
