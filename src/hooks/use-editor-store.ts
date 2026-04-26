@@ -36,15 +36,28 @@ export function useEditorStore() {
   const activeFile = activeFileId ? files[activeFileId] : null
   const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
 
-  const createFile = useCallback((name: string, parentId: string | null = null) => {
-    if (!name.trim()) return null
+  const generateUntitledName = useCallback(() => {
+    let index = 1
+    let name = `untitled-${index}`
+    const existingNames = Object.values(files).map(f => f.name.toLowerCase())
+    while (existingNames.includes(name.toLowerCase())) {
+      index++
+      name = `untitled-${index}`
+    }
+    return name
+  }, [files])
+
+  const createFile = useCallback((name?: string, parentId: string | null = null) => {
+    const finalName = name?.trim() || generateUntitledName()
     
-    // Check for duplicates
-    const isDuplicate = Object.values(files).some(f => f.name.toLowerCase() === name.toLowerCase())
-    if (isDuplicate) return null
+    // Check for duplicates if name was provided
+    if (name) {
+      const isDuplicate = Object.values(files).some(f => f.name.toLowerCase() === finalName.toLowerCase())
+      if (isDuplicate) return null
+    }
 
     const id = Math.random().toString(36).substring(7)
-    const ext = name.split('.').pop() || 'ts'
+    const ext = finalName.split('.').pop() || 'ts'
     const languageMap: Record<string, string> = {
       'py': 'python', 'js': 'javascript', 'ts': 'typescript', 
       'html': 'html', 'css': 'css', 'json': 'json', 'md': 'markdown'
@@ -53,7 +66,7 @@ export function useEditorStore() {
 
     const newNode: FileNode = {
       id,
-      name,
+      name: finalName,
       type: 'file',
       parentId,
       content: '',
@@ -66,7 +79,7 @@ export function useEditorStore() {
     setActiveFileId(id)
     setIsCreatingFile(false)
     return id
-  }, [files])
+  }, [files, generateUntitledName])
 
   const updateFileContent = useCallback((id: string, content: string) => {
     setFiles(prev => ({

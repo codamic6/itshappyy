@@ -2,7 +2,7 @@
 "use client"
 
 import { useState } from 'react'
-import { X, Plus, Terminal as TerminalIcon } from 'lucide-react'
+import { X, Plus, Terminal as TerminalIcon, FilePlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Toaster } from '@/components/ui/toaster'
 import { EditorSidebar } from '@/components/editor/sidebar'
@@ -19,21 +19,25 @@ export default function CaretApp() {
   const store = useEditorStore()
   const [selectedText, setSelectedText] = useState('')
 
-  const handleNewFile = () => {
+  const handleNewFileExplorer = () => {
     store.setIsSidebarOpen(true)
     store.setIsCreatingFile(true)
+  }
+
+  const handleFastNewFile = () => {
+    store.createFile()
   }
 
   const showWelcome = store.openTabs.length === 0 && !store.activeFileId && !store.isCreatingFile
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-[#0D0D0D] text-foreground font-body">
-      <MenuBar onNewFile={handleNewFile} />
+      <MenuBar onNewFile={handleFastNewFile} />
 
       <div className="flex-1 flex overflow-hidden">
         {store.isSidebarOpen && (
           <EditorSidebar 
-            onNewFile={handleNewFile}
+            onNewFile={handleNewFileExplorer}
           />
         )}
 
@@ -64,7 +68,7 @@ export default function CaretApp() {
                   </button>
                 </div>
               ))}
-              <Button variant="ghost" size="icon" className="h-full w-9 border-r rounded-none" onClick={handleNewFile}>
+              <Button variant="ghost" size="icon" className="h-full w-9 border-r rounded-none" onClick={handleFastNewFile}>
                 <Plus className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
               </Button>
             </div>
@@ -72,7 +76,7 @@ export default function CaretApp() {
 
           <div className="flex-1 flex flex-col overflow-hidden relative">
             {showWelcome ? (
-              <WelcomeScreen onNewFile={handleNewFile} />
+              <WelcomeScreen onNewFile={handleFastNewFile} />
             ) : store.activeFile ? (
               <CodeEditor 
                 content={store.activeFile.content || ''} 
@@ -82,13 +86,24 @@ export default function CaretApp() {
                 fontSize={store.fontSize}
               />
             ) : (
-              <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground text-[10px] uppercase tracking-[0.3em] font-bold space-y-4">
-                <div className="opacity-20 animate-pulse">
-                   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground text-[10px] uppercase tracking-[0.3em] font-bold space-y-6">
+                <div className="opacity-10">
+                   <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>
                    </svg>
                 </div>
-                <span>Select a file to start editing</span>
+                <div className="text-center space-y-4">
+                  <p>No file open in current workspace</p>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="border-primary/20 hover:bg-primary/5 text-primary text-[10px] h-8 gap-2"
+                    onClick={handleFastNewFile}
+                  >
+                    <FilePlus className="h-3.5 w-3.5" />
+                    Create New File
+                  </Button>
+                </div>
               </div>
             )}
             
