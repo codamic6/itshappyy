@@ -3,9 +3,10 @@
 
 import { useEffect, useRef } from "react"
 import Editor from "@monaco-editor/react"
-import { FileCode, X, Plus } from 'lucide-react'
+import { X } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from 'framer-motion'
+import { FileIcon } from "./file-icon"
 
 interface CodeEditorProps {
   content: string
@@ -21,7 +22,6 @@ interface CodeEditorProps {
 export function CodeEditor({ content, language, fontSize, onChange, openFiles, activeFileId, onTabClick, onTabClose }: CodeEditorProps) {
   const editorRef = useRef<any>(null)
 
-  // Ensure editor focuses when file changes
   useEffect(() => {
     if (editorRef.current) {
       editorRef.current.focus()
@@ -47,7 +47,7 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
               <motion.div layoutId="activeTab" className="absolute top-0 left-0 right-0 h-[2px] bg-primary shadow-[0_0_10px_rgba(124,58,237,0.5)]" />
             )}
             <div className="flex items-center gap-2 truncate">
-              <FileCode className={cn("h-3.5 w-3.5", activeFileId === file.id ? "text-primary" : "text-muted-foreground/50")} />
+              <FileIcon fileName={file.name} className="h-3.5 w-3.5" />
               <span className={cn("truncate font-medium", activeFileId === file.id && "font-bold")}>{file.name}</span>
             </div>
             <button 

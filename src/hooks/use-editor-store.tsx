@@ -27,28 +27,21 @@ export const detectLanguage = (fileName: string) => {
     'html': 'html',
     'css': 'css',
     'scss': 'scss',
-    'less': 'less',
     'json': 'json',
     'md': 'markdown',
     'cpp': 'cpp',
-    'cxx': 'cpp',
-    'h': 'cpp',
-    'hpp': 'cpp',
+    'c': 'c',
     'go': 'go',
     'rs': 'rust',
     'java': 'java',
-    'c': 'c',
-    'sh': 'shell',
-    'bash': 'shell',
     'php': 'php',
     'sql': 'sql',
+    'sh': 'shell',
     'yaml': 'yaml',
     'yml': 'yaml',
     'xml': 'xml',
     'rb': 'ruby',
-    'cs': 'csharp',
-    'swift': 'swift',
-    'kt': 'kotlin'
+    'swift': 'swift'
   }
   return map[ext] || 'plaintext'
 }

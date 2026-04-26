@@ -2,13 +2,14 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { FileCode, Plus, ChevronDown, Trash2, FilePlus, FolderPlus, Search } from "lucide-react"
+import { Plus, ChevronDown, Trash2, FilePlus, FolderPlus, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useEditorStore, detectLanguage } from "@/hooks/use-editor-store"
+import { useEditorStore } from "@/hooks/use-editor-store"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { motion, AnimatePresence } from "framer-motion"
+import { FileIcon } from "./file-icon"
 
 export function EditorSidebar() {
   const store = useEditorStore()
@@ -17,7 +18,7 @@ export function EditorSidebar() {
   const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const files = Object.values(store.files).filter((f: any) => 
+  const files = Object.values(store.files || {}).filter((f: any) => 
     f.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
@@ -89,7 +90,7 @@ export function EditorSidebar() {
                   exit={{ height: 0, opacity: 0 }}
                   className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden"
                 >
-                  <FileCode className="h-4 w-4 text-primary shrink-0" />
+                  <FileIcon fileName={newFileName} className="h-4 w-4 shrink-0" />
                   <input
                     ref={inputRef}
                     className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
@@ -121,7 +122,7 @@ export function EditorSidebar() {
                   )}
                   onClick={() => store.selectFile(file.id)}
                 >
-                  <FileCode className={cn("h-4 w-4 shrink-0", store.activeFileId === file.id ? "text-primary" : "text-muted-foreground/40")} />
+                  <FileIcon fileName={file.name} className="h-4 w-4 shrink-0" />
                   <span className="truncate flex-1">{file.name}</span>
                   <button 
                     className="opacity-0 group-hover:opacity-100 p-1 hover:text-destructive transition-all"
@@ -136,7 +137,7 @@ export function EditorSidebar() {
               ))
             ) : !isCreating && (
               <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
-                <FileCode className="h-8 w-8 mb-2" />
+                <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
                 <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
                 <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => setIsCreating(true)}>
                   Create File
