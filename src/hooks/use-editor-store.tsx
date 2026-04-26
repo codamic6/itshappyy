@@ -103,7 +103,6 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     const id = Math.random().toString(36).substring(7)
     const language = type === 'file' ? detectLanguage(name) : ''
     
-    // Resolve path (simplified)
     const parent = parentId ? nodes[parentId] : null
     const path = parent ? `${parent.path}/${name}` : `/${name}`
 
@@ -124,8 +123,14 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     }
 
     if (type === 'file') {
-      setOpenTabs(prev => [...prev, id])
+      setOpenTabs(prev => {
+        if (prev.includes(id)) return prev
+        return [...prev, id]
+      })
       setActiveFileId(id)
+      setSelectedNodeId(id)
+    } else {
+      setSelectedNodeId(id)
     }
     return id
   }, [nodes])
@@ -151,12 +156,10 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const deleteNode = useCallback((id: string) => {
-    // Also delete children if it's a folder
     setNodes(prev => {
       const next = { ...prev }
       const toDelete = [id]
       
-      // Recursive find children to delete
       const findChildren = (pid: string) => {
         Object.values(prev).forEach(node => {
           if (node.parentId === pid) {
@@ -171,11 +174,10 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
       return next
     })
     
-    if (openTabs.includes(id)) {
-      closeTab(id)
-    }
+    setOpenTabs(prev => prev.filter(tid => tid !== id))
+    if (activeFileId === id) setActiveFileId(null)
     if (selectedNodeId === id) setSelectedNodeId(null)
-  }, [openTabs, closeTab, selectedNodeId])
+  }, [activeFileId, selectedNodeId])
 
   const renameNode = useCallback((id: string, newName: string) => {
     setNodes(prev => {

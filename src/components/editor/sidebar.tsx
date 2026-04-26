@@ -44,9 +44,9 @@ export function EditorSidebar() {
     if (creationProcessed.current) return
     const trimmed = newName.trim()
     if (trimmed && isCreating) {
+      creationProcessed.current = true
       const id = store.createNode(trimmed, isCreating.type, isCreating.parentId)
       if (isCreating.type === 'file') store.selectFile(id)
-      creationProcessed.current = true
     }
     setIsCreating(null)
     setNewName("")
@@ -63,6 +63,13 @@ export function EditorSidebar() {
     }
   }
 
+  const startCreation = (type: 'file' | 'folder', parentId: string | null = null) => {
+    if (parentId && !store.expandedFolders[parentId]) {
+      store.toggleFolder(parentId)
+    }
+    setIsCreating({ type, parentId })
+  }
+
   return (
     <div 
       className="w-full flex flex-col h-full bg-[#0D1117] select-none border-r border-white/5"
@@ -76,7 +83,8 @@ export function EditorSidebar() {
               icon={<FilePlus className="h-4 w-4" />} 
               onClick={(e: any) => {
                 e.stopPropagation();
-                setIsCreating({ type: 'file', parentId: store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null });
+                const parentId = store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null;
+                startCreation('file', parentId);
               }} 
               label="New File" 
             />
@@ -84,7 +92,8 @@ export function EditorSidebar() {
               icon={<FolderPlus className="h-4 w-4" />} 
               onClick={(e: any) => {
                 e.stopPropagation();
-                setIsCreating({ type: 'folder', parentId: store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null });
+                const parentId = store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null;
+                startCreation('folder', parentId);
               }} 
               label="New Folder" 
             />
@@ -142,7 +151,7 @@ export function EditorSidebar() {
                   node={node} 
                   depth={0} 
                   isCreating={isCreating} 
-                  setIsCreating={setIsCreating}
+                  startCreation={startCreation}
                   newName={newName}
                   setNewName={setNewName}
                   handleKeyDown={handleKeyDown}
@@ -154,7 +163,7 @@ export function EditorSidebar() {
               <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
                 <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
                 <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
-                <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => setIsCreating({ type: 'file', parentId: null })}>
+                <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => startCreation('file', null)}>
                   Create File
                 </Button>
               </div>
@@ -166,7 +175,7 @@ export function EditorSidebar() {
   )
 }
 
-function TreeNode({ node, depth, isCreating, setIsCreating, newName, setNewName, handleKeyDown, handleCreate, inputRef }: any) {
+function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName, handleKeyDown, handleCreate, inputRef }: any) {
   const store = useEditorStore()
   const isExpanded = store.expandedFolders[node.id]
   const isSelected = store.selectedNodeId === node.id
@@ -215,10 +224,10 @@ function TreeNode({ node, depth, isCreating, setIsCreating, newName, setNewName,
             <DropdownMenuContent align="end" className="bg-[#111] border-white/10">
               {node.type === 'folder' && (
                 <>
-                  <DropdownMenuItem onClick={() => setIsCreating({ type: 'file', parentId: node.id })} className="text-xs gap-2">
+                  <DropdownMenuItem onClick={() => startCreation('file', node.id)} className="text-xs gap-2">
                     <FilePlus className="h-3 w-3" /> New File
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setIsCreating({ type: 'folder', parentId: node.id })} className="text-xs gap-2">
+                  <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="text-xs gap-2">
                     <FolderPlus className="h-3 w-3" /> New Folder
                   </DropdownMenuItem>
                 </>
@@ -267,7 +276,7 @@ function TreeNode({ node, depth, isCreating, setIsCreating, newName, setNewName,
               node={child} 
               depth={depth + 1} 
               isCreating={isCreating} 
-              setIsCreating={setIsCreating}
+              startCreation={startCreation}
               newName={newName}
               setNewName={setNewName}
               handleKeyDown={handleKeyDown}
