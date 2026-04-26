@@ -1,7 +1,7 @@
 
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ActivityBar } from '@/components/editor/activity-bar';
 import { EditorSidebar } from '@/components/editor/sidebar';
@@ -12,7 +12,7 @@ import { WelcomeScreen } from '@/components/editor/welcome-screen';
 import { CommandPalette } from '@/components/editor/command-palette';
 import { useEditorStore } from '@/hooks/use-editor-store';
 import { Toaster } from '@/components/ui/toaster';
-import { Sparkles, Terminal as TerminalIcon, GitBranch, PanelsTopLeft, MousePointer2 } from 'lucide-react';
+import { Sparkles, Terminal as TerminalIcon, GitBranch, MousePointer2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MenuBar } from '@/components/editor/menu-bar';
 
@@ -20,19 +20,57 @@ export default function App() {
   const store = useEditorStore();
 
   const handleNewFile = () => {
-    // If explorer is closed, open it
-    store.setUi({ ...store.ui, isSidebarOpen: true, activeView: 'explorer' });
-    // This is handled via sidebar creation flow for custom naming
-    // But for quick start from welcome screen, we create "untitled.js"
-    store.createFile(`untitled-${Object.keys(store.files).length + 1}.js`);
+    store.setIsSidebarOpen(true);
+    store.setUi({ ...store.ui, activeView: 'explorer' });
+    const id = store.createNode(`untitled-${Object.keys(store.files).length + 1}.js`, 'file');
+    store.selectFile(id);
   };
+
+  // Global Keyboard Shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key.toLowerCase()) {
+          case 'b':
+            e.preventDefault();
+            store.setIsSidebarOpen(!store.ui.isSidebarOpen);
+            break;
+          case 'i':
+            e.preventDefault();
+            store.setIsAIPanelOpen(!store.ui.isAIPanelOpen);
+            break;
+          case 'j':
+            e.preventDefault();
+            store.setIsTerminalOpen(!store.ui.isTerminalOpen);
+            break;
+          case 'k':
+            e.preventDefault();
+            store.setIsCommandPaletteOpen(!store.ui.isCommandPaletteOpen);
+            break;
+          case 'n':
+            e.preventDefault();
+            handleNewFile();
+            break;
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [store.ui, store.setIsSidebarOpen, store.setIsAIPanelOpen, store.setIsTerminalOpen, store.setIsCommandPaletteOpen]);
 
   return (
     <div className="flex h-screen w-screen bg-[#0A0D12] text-foreground overflow-hidden font-body selection:bg-primary/30 selection:text-white">
       {/* 1. Activity Bar (Fixed Left) */}
       <ActivityBar 
         activeView={store.ui.activeView} 
-        onViewChange={(view) => store.setUi({ ...store.ui, activeView: view, isSidebarOpen: true })} 
+        onViewChange={(view) => {
+          if (store.ui.activeView === view && store.ui.isSidebarOpen) {
+            store.setIsSidebarOpen(false);
+          } else {
+            store.setUi({ ...store.ui, activeView: view, isSidebarOpen: true });
+          }
+        }} 
       />
 
       <div className="flex-1 flex flex-col overflow-hidden relative">
@@ -85,7 +123,7 @@ export default function App() {
                       <Terminal 
                         history={store.terminalHistory} 
                         onExecute={store.executeCommand}
-                        onClose={() => store.setUi({ ...store.ui, isTerminalOpen: false })}
+                        onClose={() => store.setIsTerminalOpen(false)}
                       />
                     </motion.div>
                   )}
@@ -98,7 +136,7 @@ export default function App() {
               <div className="flex items-center gap-5">
                 <button 
                   className={cn("flex items-center gap-2 hover:text-primary transition-colors", store.ui.isTerminalOpen && "text-primary")}
-                  onClick={() => store.setUi({ ...store.ui, isTerminalOpen: !store.ui.isTerminalOpen })}
+                  onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}
                 >
                   <TerminalIcon className="h-3 w-3" /> Terminal
                 </button>
@@ -146,7 +184,7 @@ export default function App() {
       {/* 8. Floating Overlays */}
       <CommandPalette 
         isOpen={store.ui.isCommandPaletteOpen} 
-        onClose={() => store.setUi({ ...store.ui, isCommandPaletteOpen: false })} 
+        onClose={() => store.setIsCommandPaletteOpen(false)} 
       />
 
       <Toaster />

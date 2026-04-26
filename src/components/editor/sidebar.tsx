@@ -22,6 +22,7 @@ export function EditorSidebar() {
   const [newName, setNewName] = useState("")
   const [isCreating, setIsCreating] = useState<{ type: 'file' | 'folder', parentId: string | null } | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const [isWorkspaceCollapsed, setIsWorkspaceCollapsed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const creationProcessed = useRef(false)
 
@@ -116,59 +117,64 @@ export function EditorSidebar() {
 
       <ScrollArea className="flex-1" onClick={(e) => e.stopPropagation()}>
         <div className="py-2">
-          <div className="flex items-center gap-1 px-3 py-1.5 text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1">
-            <ChevronDown className="h-3 w-3" />
+          <div 
+            className="flex items-center gap-1 px-3 py-1.5 text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1 cursor-pointer hover:bg-white/5 transition-colors"
+            onClick={() => setIsWorkspaceCollapsed(!isWorkspaceCollapsed)}
+          >
+            {isWorkspaceCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
             <span>Workspace</span>
           </div>
           
-          <div className="px-2">
-            <AnimatePresence>
-              {isCreating && !isCreating.parentId && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden"
-                >
-                  {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
-                  <input
-                    ref={inputRef}
-                    className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
-                    placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"}
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    onBlur={handleCreate}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+          <AnimatePresence>
+            {!isWorkspaceCollapsed && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="px-2 overflow-hidden"
+              >
+                {isCreating && !isCreating.parentId && (
+                  <div className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1">
+                    {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
+                    <input
+                      ref={inputRef}
+                      className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
+                      placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"}
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      onBlur={handleCreate}
+                    />
+                  </div>
+                )}
 
-            {rootNodes.length > 0 ? (
-              rootNodes.map((node: any) => (
-                <TreeNode 
-                  key={node.id} 
-                  node={node} 
-                  depth={0} 
-                  isCreating={isCreating} 
-                  startCreation={startCreation}
-                  newName={newName}
-                  setNewName={setNewName}
-                  handleKeyDown={handleKeyDown}
-                  handleCreate={handleCreate}
-                  inputRef={inputRef}
-                />
-              ))
-            ) : !isCreating && (
-              <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
-                <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
-                <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
-                <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => startCreation('file', null)}>
-                  Create File
-                </Button>
-              </div>
+                {rootNodes.length > 0 ? (
+                  rootNodes.map((node: any) => (
+                    <TreeNode 
+                      key={node.id} 
+                      node={node} 
+                      depth={0} 
+                      isCreating={isCreating} 
+                      startCreation={startCreation}
+                      newName={newName}
+                      setNewName={setNewName}
+                      handleKeyDown={handleKeyDown}
+                      handleCreate={handleCreate}
+                      inputRef={inputRef}
+                    />
+                  ))
+                ) : !isCreating && (
+                  <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
+                    <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
+                    <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
+                    <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => startCreation('file', null)}>
+                      Create File
+                    </Button>
+                  </div>
+                )}
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </div>
       </ScrollArea>
     </div>

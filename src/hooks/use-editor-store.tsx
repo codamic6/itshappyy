@@ -209,13 +209,19 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     }
   }, [nodes])
 
+  const setIsSidebarOpen = (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val }))
+  const setIsTerminalOpen = (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val }))
+  const setIsAIPanelOpen = (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val }))
+  const setIsCommandPaletteOpen = (val: boolean) => setUi(prev => ({ ...prev, isCommandPaletteOpen: val }))
+
   const value = {
     nodes, files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
     selectedNodeId, setSelectedNodeId, expandedFolders,
     setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand, toggleFolder,
-    setIsSidebarOpen: (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val })),
-    setIsTerminalOpen: (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val })),
-    setIsAIPanelOpen: (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val })),
+    setIsSidebarOpen,
+    setIsTerminalOpen,
+    setIsAIPanelOpen,
+    setIsCommandPaletteOpen,
     setIsSettingsOpen: (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val })),
     setFontSize: (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
   }
