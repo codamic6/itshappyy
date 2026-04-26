@@ -12,7 +12,7 @@ import { WelcomeScreen } from '@/components/editor/welcome-screen';
 import { CommandPalette } from '@/components/editor/command-palette';
 import { useEditorStore } from '@/hooks/use-editor-store';
 import { Toaster } from '@/components/ui/toaster';
-import { Code2, Sparkles, Terminal as TerminalIcon, PanelLeft, PanelRight } from 'lucide-react';
+import { Code2, Sparkles, Terminal as TerminalIcon, PanelLeft, PanelRight, GitBranch } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function App() {
