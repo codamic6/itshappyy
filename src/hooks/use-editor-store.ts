@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 
 export interface FileNode {
   id: string
@@ -16,13 +16,38 @@ export interface TerminalLine {
   content: string
 }
 
+// Language detection helper defined outside to prevent re-creation
+const detectLanguage = (fileName: string) => {
+  const ext = fileName.split('.').pop()?.toLowerCase() || ''
+  const map: Record<string, string> = {
+    'py': 'python',
+    'js': 'javascript',
+    'jsx': 'javascript',
+    'ts': 'typescript',
+    'tsx': 'typescript',
+    'html': 'html',
+    'css': 'css',
+    'json': 'json',
+    'md': 'markdown',
+    'cpp': 'cpp',
+    'go': 'go',
+    'rs': 'rust',
+    'java': 'java',
+    'c': 'c',
+    'sh': 'shell',
+    'php': 'php',
+    'sql': 'sql'
+  }
+  return map[ext] || 'plaintext'
+}
+
 export function useEditorStore() {
   const [files, setFiles] = useState<Record<string, FileNode>>({})
   const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
-    { type: 'output', content: 'Caret Professional Terminal v1.0.0' },
-    { type: 'output', content: 'Ready for commands...' }
+    { type: 'output', content: 'Caret Shell Environment v1.0.0' },
+    { type: 'output', content: 'Status: System Online. AI Ready.' }
   ])
   
   const [ui, setUi] = useState({
@@ -39,25 +64,6 @@ export function useEditorStore() {
   const activeFile = useMemo(() => activeFileId ? files[activeFileId] : null, [activeFileId, files])
   const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
 
-  const detectLanguage = (fileName: string) => {
-    const ext = fileName.split('.').pop()?.toLowerCase() || 'js'
-    const map: Record<string, string> = {
-      'py': 'python',
-      'js': 'javascript',
-      'jsx': 'javascript',
-      'ts': 'typescript',
-      'tsx': 'typescript',
-      'html': 'html',
-      'css': 'css',
-      'json': 'json',
-      'md': 'markdown',
-      'cpp': 'cpp',
-      'go': 'go',
-      'rs': 'rust'
-    }
-    return map[ext] || 'javascript'
-  }
-
   const createFile = useCallback((name: string, content: string = '') => {
     const id = Math.random().toString(36).substring(7)
     const newNode: FileNode = {
@@ -69,8 +75,11 @@ export function useEditorStore() {
     }
 
     setFiles(prev => ({ ...prev, [id]: newNode }))
-    setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
-    setActiveFileId(id)
+    setOpenTabs(prev => {
+      if (prev.includes(id)) return prev
+      return [...prev, id]
+    })
+    setActiveFileId(id) // Immediately set as active
     return id
   }, [])
 
@@ -133,7 +142,7 @@ export function useEditorStore() {
         setTerminalHistory([])
         break
       case 'help':
-        setTerminalHistory(prev => [...prev, { type: 'output', content: 'Commands: help, clear, date, pwd, ls, echo [text]' }])
+        setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }])
         break
       case 'ls':
         const fileNames = Object.values(files).map(f => f.name).join('  ')
@@ -146,7 +155,7 @@ export function useEditorStore() {
         setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toLocaleString() }])
         break
       default:
-        setTerminalHistory(prev => [...prev, { type: 'error', content: `zsh: command not found: ${baseCmd}` }])
+        setTerminalHistory(prev => [...prev, { type: 'error', content: `caret-sh: command not found: ${baseCmd}` }])
     }
   }, [files])
 

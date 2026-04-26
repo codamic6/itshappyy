@@ -5,7 +5,7 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { z } from 'zod';
+import { z } from 'genkit';
 
 const AICodeGenerationInputSchema = z.object({
   description: z.string().describe('A natural language description of the code to generate.'),
@@ -21,13 +21,19 @@ const codeGenPrompt = ai.definePrompt({
   name: 'aiCodeGenerationPrompt',
   input: { schema: AICodeGenerationInputSchema },
   output: { schema: AICodeGenerationOutputSchema },
-  prompt: `You are an expert code generation assistant. Your task is to generate clean, efficient, and well-structured code based on the user's description.
+  prompt: `You are an expert AI code generator. 
 
-If the description is not related to coding, return a polite message asking for a coding-related task.
+Your task is to generate clean, high-quality, and efficient code based on this description:
+{{{description}}}
 
-Description: {{{description}}}
+If the request is not related to coding, technical explanation, or logic, please respond with: "Please describe a coding problem or task."
 
-Output ONLY the raw code or a concise explanation if it's a question. No markdown blocks if possible, just the content.`,
+Rules:
+1. Provide ONLY the code or concise technical answer.
+2. Do not include verbose introductory text.
+3. If generating code, ensure it is syntactically correct.
+
+Output:`,
 });
 
 const aiCodeGenerationFlow = ai.defineFlow(
@@ -37,8 +43,16 @@ const aiCodeGenerationFlow = ai.defineFlow(
     outputSchema: AICodeGenerationOutputSchema,
   },
   async (input) => {
-    const { output } = await codeGenPrompt(input);
-    return output!;
+    try {
+      const { output } = await codeGenPrompt(input);
+      if (!output) {
+        return { code: "// AI: Failed to generate code. Please try a more specific prompt." };
+      }
+      return output;
+    } catch (error: any) {
+      console.error("Genkit Flow Error:", error);
+      throw new Error(error.message || "Failed to connect to AI service.");
+    }
   }
 );
 
