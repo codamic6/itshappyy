@@ -50,11 +50,9 @@ export function useEditorStore() {
   const createFile = useCallback((name?: string, parentId: string | null = null) => {
     const finalName = name?.trim() || generateUntitledName()
     
-    // Check for duplicates if name was provided
-    if (name) {
-      const isDuplicate = Object.values(files).some(f => f.name.toLowerCase() === finalName.toLowerCase())
-      if (isDuplicate) return null
-    }
+    // Check for duplicates
+    const isDuplicate = Object.values(files).some(f => f.name.toLowerCase() === finalName.toLowerCase())
+    if (isDuplicate) return null
 
     const id = Math.random().toString(36).substring(7)
     const ext = finalName.split('.').pop() || 'ts'
@@ -102,7 +100,13 @@ export function useEditorStore() {
       return next
     })
     setOpenTabs(prev => prev.filter(tid => tid !== id))
-    if (activeFileId === id) setActiveFileId(null)
+    if (activeFileId === id) {
+      setOpenTabs(prev => {
+        const newList = prev.filter(tid => tid !== id)
+        setActiveFileId(newList.length > 0 ? newList[newList.length - 1] : null)
+        return newList
+      })
+    }
   }, [activeFileId])
 
   const closeTab = useCallback((id: string) => {

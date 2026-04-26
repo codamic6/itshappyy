@@ -28,10 +28,7 @@ export function EditorSidebar({ onNewFile }: SidebarProps) {
 
   const handleCreateConfirm = () => {
     if (newFileName.trim()) {
-      const id = store.createFile(newFileName)
-      if (!id) {
-        // Handle error (e.g. duplicate name) silently for now, just keep input or clear
-      }
+      store.createFile(newFileName)
     }
     setNewFileName("")
     store.setIsCreatingFile(false)
@@ -76,18 +73,21 @@ export function EditorSidebar({ onNewFile }: SidebarProps) {
             </div>
             
             <div className="mt-1 space-y-0.5">
-              {/* Inline Input for New File */}
+              {/* Inline Input for New File - Appears directly under Workspace */}
               {store.isCreatingFile && (
-                <div className="px-4 py-1.5 flex items-center gap-2 bg-primary/5 border-y border-primary/20 animate-in fade-in slide-in-from-top-1">
+                <div className="px-4 py-1.5 flex items-center gap-2 bg-primary/10 border-y border-primary/30 animate-in fade-in slide-in-from-top-1 z-20">
                   <FileCode className="h-4 w-4 text-primary shrink-0" />
                   <input
                     ref={inputRef}
                     className="flex-1 bg-transparent border-none outline-none text-xs text-foreground placeholder:text-muted-foreground/50 p-0 h-4"
-                    placeholder="File name..."
+                    placeholder="index.html"
                     value={newFileName}
                     onChange={(e) => setNewFileName(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    onBlur={handleCreateConfirm}
+                    onBlur={() => {
+                      if (newFileName.trim()) handleCreateConfirm();
+                      else store.setIsCreatingFile(false);
+                    }}
                   />
                 </div>
               )}
