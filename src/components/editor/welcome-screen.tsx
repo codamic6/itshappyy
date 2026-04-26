@@ -1,6 +1,6 @@
 "use client"
 
-import { FilePlus, FolderOpen, Github, Settings, Layout, Code, Sparkles, Command, ChevronRight } from 'lucide-react'
+import { FilePlus, FolderOpen, Github, Settings, Layout, Code, Sparkles, Command, ChevronRight, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface WelcomeScreenProps {
@@ -9,6 +9,9 @@ interface WelcomeScreenProps {
 }
 
 export function WelcomeScreen({ onNewFile, onOpenFile }: WelcomeScreenProps) {
+  // Recent projects logic - only show if there's actually something to show
+  const hasRecentProjects = false // Initially false as per requirements
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center bg-[#0D0D0D] text-foreground p-8 overflow-y-auto">
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -35,25 +38,28 @@ export function WelcomeScreen({ onNewFile, onOpenFile }: WelcomeScreenProps) {
                 onClick={onNewFile} 
               />
               <WelcomeAction 
-                icon={<FolderOpen className="h-5 w-5" />} 
-                title="Open Project" 
+                icon={<Search className="h-5 w-5" />} 
+                title="Open File" 
                 shortcut="Ctrl+O" 
                 onClick={onOpenFile} 
               />
               <WelcomeAction 
-                icon={<Github className="h-5 w-5" />} 
-                title="Clone Repo" 
-                shortcut="Ctrl+Shift+G" 
+                icon={<FolderOpen className="h-5 w-5" />} 
+                title="Open Project" 
+                shortcut="Ctrl+Shift+O" 
+                onClick={onOpenFile}
               />
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Recent Projects</h2>
-            <div className="space-y-2 opacity-50 px-2">
-              <p className="text-xs italic">No recent workspaces found</p>
+          {hasRecentProjects && (
+            <div className="space-y-6">
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Recent Projects</h2>
+              <div className="space-y-2 opacity-50 px-2">
+                {/* Recent items would go here if they existed */}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="space-y-8 flex flex-col justify-center">

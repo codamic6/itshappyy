@@ -4,7 +4,7 @@ import { FileCode, Plus, FolderOpen, Settings, Zap, BookOpen, Search, Menu, Chev
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import type { FileItem } from "@/hooks/use-editor-store"
 
 interface SidebarProps {
@@ -53,31 +53,40 @@ export function EditorSidebar({ files, activeFileId, onFileSelect, onNewFile, on
             </div>
             
             <div className="mt-1 space-y-0.5">
-              {files.map((file) => (
-                <div
-                  key={file.id}
-                  className={cn(
-                    "group w-full flex items-center gap-2 px-4 py-1.5 text-xs transition-colors cursor-pointer relative",
-                    activeFileId === file.id 
-                      ? "bg-primary/10 text-primary" 
-                      : "hover:bg-white/5 text-muted-foreground hover:text-foreground"
-                  )}
-                  onClick={() => onFileSelect(file.id)}
-                >
-                  {activeFileId === file.id && <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary" />}
-                  <FileCode className={cn("h-4 w-4 shrink-0", activeFileId === file.id ? "text-primary" : "text-muted-foreground/60")} />
-                  <span className="truncate flex-1">{file.name}</span>
-                  <button 
-                    className="opacity-0 group-hover:opacity-100 p-1 hover:text-destructive transition-all"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      onDeleteFile(file.id)
-                    }}
-                  >
-                    <Trash2 className="h-3 w-3" />
-                  </button>
+              {files.length === 0 ? (
+                <div className="px-4 py-8 text-center space-y-2">
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest">No Files</p>
+                  <Button variant="link" size="sm" className="h-auto p-0 text-[10px] text-primary" onClick={onNewFile}>
+                    Create your first file
+                  </Button>
                 </div>
-              ))}
+              ) : (
+                files.map((file) => (
+                  <div
+                    key={file.id}
+                    className={cn(
+                      "group w-full flex items-center gap-2 px-4 py-1.5 text-xs transition-colors cursor-pointer relative",
+                      activeFileId === file.id 
+                        ? "bg-primary/10 text-primary" 
+                        : "hover:bg-white/5 text-muted-foreground hover:text-foreground"
+                    )}
+                    onClick={() => onFileSelect(file.id)}
+                  >
+                    {activeFileId === file.id && <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary" />}
+                    <FileCode className={cn("h-4 w-4 shrink-0", activeFileId === file.id ? "text-primary" : "text-muted-foreground/60")} />
+                    <span className="truncate flex-1">{file.name}</span>
+                    <button 
+                      className="opacity-0 group-hover:opacity-100 p-1 hover:text-destructive transition-all"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onDeleteFile(file.id)
+                      }}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </ScrollArea>

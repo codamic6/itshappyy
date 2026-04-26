@@ -10,26 +10,12 @@ export interface FileItem {
   isOpen?: boolean
 }
 
-const INITIAL_FILES: FileItem[] = [
-  {
-    id: '1',
-    name: 'main.ts',
-    content: '// Welcome to Caret IDE\nexport function start() {\n  console.log("Caret is ready.");\n}',
-    language: 'typescript',
-    isOpen: true
-  },
-  {
-    id: '2',
-    name: 'styles.css',
-    content: 'body {\n  background-color: #0D0D0D;\n  color: white;\n}',
-    language: 'css',
-    isOpen: false
-  }
-]
+// Strictly empty initial state for a professional feel
+const INITIAL_FILES: FileItem[] = []
 
 export function useEditorStore() {
   const [files, setFiles] = useState<FileItem[]>(INITIAL_FILES)
-  const [activeFileId, setActiveFileId] = useState<string | null>('1')
+  const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
