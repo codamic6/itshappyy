@@ -1,98 +1,154 @@
 
 "use client"
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 
-export interface FileItem {
+export interface FileNode {
   id: string
   name: string
-  content: string
-  language: string
+  type: 'file' | 'folder'
+  parentId: string | null
+  content?: string
+  language?: string
   isOpen?: boolean
 }
 
+export interface TerminalLine {
+  type: 'input' | 'output' | 'error'
+  content: string
+}
+
 export function useEditorStore() {
-  const [files, setFiles] = useState<FileItem[]>([])
+  const [files, setFiles] = useState<Record<string, FileNode>>({})
+  const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false)
+  const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
+    { type: 'output', content: 'Caret AI Workspace initialized. Type "help" for commands.' }
+  ])
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false)
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(true)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [fontSize, setFontSize] = useState(13)
 
-  const activeFile = files.find(f => f.id === activeFileId) || null
-  const openFiles = files.filter(f => f.isOpen)
+  const activeFile = activeFileId ? files[activeFileId] : null
+  const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
 
-  const updateActiveFileContent = useCallback((newContent: string) => {
-    if (!activeFileId) return
-    setFiles(prev => prev.map(f => f.id === activeFileId ? { ...f, content: newContent } : f))
-  }, [activeFileId])
-
-  const selectFile = useCallback((id: string) => {
-    setFiles(prev => prev.map(f => f.id === id ? { ...f, isOpen: true } : f))
-    setActiveFileId(id)
-  }, [])
-
-  const createNewFile = useCallback((name: string) => {
-    if (!name) return
-    if (files.some(f => f.name === name)) {
-      alert("A file with this name already exists.")
-      return
-    }
-
+  const createFile = useCallback((name: string, parentId: string | null = null) => {
     const id = Math.random().toString(36).substring(7)
     const ext = name.split('.').pop() || 'ts'
-    const language = ext === 'py' ? 'python' : ext === 'html' ? 'html' : ext === 'css' ? 'css' : 'typescript'
-    
-    const newFile: FileItem = {
+    const languageMap: Record<string, string> = {
+      'py': 'python', 'js': 'javascript', 'ts': 'typescript', 
+      'html': 'html', 'css': 'css', 'json': 'json', 'md': 'markdown'
+    }
+    const language = languageMap[ext] || 'typescript'
+
+    const newNode: FileNode = {
       id,
       name,
+      type: 'file',
+      parentId,
       content: '',
       language,
       isOpen: true
     }
-    setFiles(prev => [...prev, newFile])
-    setActiveFileId(id)
-  }, [files])
 
-  const renameFile = useCallback((id: string, newName: string) => {
-    if (!newName) return
-    setFiles(prev => prev.map(f => f.id === id ? { ...f, name: newName } : f))
+    setFiles(prev => ({ ...prev, [id]: newNode }))
+    setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
+    setActiveFileId(id)
+    return id
   }, [])
 
-  const closeFile = useCallback((id: string) => {
-    setFiles(prev => prev.map(f => f.id === id ? { ...f, isOpen: false } : f))
-    if (activeFileId === id) {
-      const remainingOpen = files.filter(f => f.id !== id && f.isOpen)
-      setActiveFileId(remainingOpen.length > 0 ? remainingOpen[0].id : null)
-    }
-  }, [activeFileId, files])
+  const updateFileContent = useCallback((id: string, content: string) => {
+    setFiles(prev => ({
+      ...prev,
+      [id]: { ...prev[id], content }
+    }))
+  }, [])
+
+  const renameFile = useCallback((id: string, newName: string) => {
+    setFiles(prev => ({
+      ...prev,
+      [id]: { ...prev[id], name: newName }
+    }))
+  }, [])
 
   const deleteFile = useCallback((id: string) => {
-    const file = files.find(f => f.id === id)
-    if (!file) return
-    if (confirm(`Are you sure you want to delete ${file.name}?`)) {
-      setFiles(prev => prev.filter(f => f.id !== id))
+    setFiles(prev => {
+      const next = { ...prev }
+      delete next[id]
+      return next
+    })
+    setOpenTabs(prev => prev.filter(tid => tid !== id))
+    if (activeFileId === id) setActiveFileId(null)
+  }, [activeFileId])
+
+  const closeTab = useCallback((id: string) => {
+    setOpenTabs(prev => {
+      const newList = prev.filter(tid => tid !== id)
       if (activeFileId === id) {
-        setActiveFileId(null)
+        setActiveFileId(newList.length > 0 ? newList[newList.length - 1] : null)
       }
+      return newList
+    })
+  }, [activeFileId])
+
+  const selectFile = useCallback((id: string) => {
+    setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
+    setActiveFileId(id)
+  }, [])
+
+  const executeCommand = useCallback((input: string) => {
+    const cmd = input.trim().toLowerCase()
+    const historyEntry: TerminalLine = { type: 'input', content: `caret@workspace:~$ ${input}` }
+    let output: TerminalLine | null = null
+
+    if (cmd === 'help') {
+      output = { type: 'output', content: 'Available commands: help, clear, date, pwd, echo [text], ls' }
+    } else if (cmd === 'clear') {
+      setTerminalHistory([])
+      return
+    } else if (cmd === 'date') {
+      output = { type: 'output', content: new Date().toString() }
+    } else if (cmd === 'pwd') {
+      output = { type: 'output', content: '/home/caret/workspace' }
+    } else if (cmd.startsWith('echo ')) {
+      output = { type: 'output', content: input.substring(5) }
+    } else if (cmd === 'ls') {
+      const fileNames = Object.values(files).map(f => f.name).join('  ')
+      output = { type: 'output', content: fileNames || '(empty workspace)' }
+    } else if (cmd !== '') {
+      output = { type: 'error', content: `Command not found: ${cmd.split(' ')[0]}` }
     }
-  }, [activeFileId, files])
+
+    setTerminalHistory(prev => output ? [...prev, historyEntry, output] : [...prev, historyEntry])
+  }, [files])
 
   return {
     files,
-    activeFile,
+    openTabs,
     activeFileId,
+    activeFile,
     openFiles,
-    setActiveFileId: selectFile,
-    updateActiveFileContent,
-    createNewFile,
-    renameFile,
-    closeFile,
-    deleteFile,
-    isTerminalOpen,
-    setIsTerminalOpen,
+    terminalHistory,
     isSidebarOpen,
-    setIsSidebarOpen,
+    isTerminalOpen,
     isAIPanelOpen,
-    setIsAIPanelOpen
+    isSettingsOpen,
+    fontSize,
+    setIsSidebarOpen,
+    setIsTerminalOpen,
+    setIsAIPanelOpen,
+    setIsSettingsOpen,
+    setFontSize,
+    createFile,
+    updateFileContent,
+    renameFile,
+    deleteFile,
+    closeTab,
+    selectFile,
+    executeCommand,
+    setActiveFileId
   }
 }

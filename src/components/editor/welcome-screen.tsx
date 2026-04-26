@@ -1,17 +1,13 @@
+
 "use client"
 
-import { FilePlus, FolderOpen, Github, Settings, Layout, Code, Sparkles, Command, ChevronRight, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { FilePlus, FolderOpen, Code, Sparkles, Layout, Settings } from 'lucide-react'
 
 interface WelcomeScreenProps {
   onNewFile: () => void
-  onOpenFile: () => void
 }
 
-export function WelcomeScreen({ onNewFile, onOpenFile }: WelcomeScreenProps) {
-  // Recent projects logic - only show if there's actually something to show
-  const hasRecentProjects = false // Initially false as per requirements
-
+export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
   return (
     <div className="flex-1 flex flex-col items-center justify-center bg-[#0D0D0D] text-foreground p-8 overflow-y-auto">
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -38,28 +34,13 @@ export function WelcomeScreen({ onNewFile, onOpenFile }: WelcomeScreenProps) {
                 onClick={onNewFile} 
               />
               <WelcomeAction 
-                icon={<Search className="h-5 w-5" />} 
-                title="Open File" 
-                shortcut="Ctrl+O" 
-                onClick={onOpenFile} 
-              />
-              <WelcomeAction 
                 icon={<FolderOpen className="h-5 w-5" />} 
                 title="Open Project" 
                 shortcut="Ctrl+Shift+O" 
-                onClick={onOpenFile}
+                onClick={() => alert("Select a project folder (Simulated)")}
               />
             </div>
           </div>
-
-          {hasRecentProjects && (
-            <div className="space-y-6">
-              <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Recent Projects</h2>
-              <div className="space-y-2 opacity-50 px-2">
-                {/* Recent items would go here if they existed */}
-              </div>
-            </div>
-          )}
         </div>
 
         <div className="space-y-8 flex flex-col justify-center">
@@ -88,17 +69,6 @@ export function WelcomeScreen({ onNewFile, onOpenFile }: WelcomeScreenProps) {
                 desc="Automatically resolve syntax issues" 
               />
             </ul>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-5 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-all cursor-pointer group hover:border-primary/20">
-              <h4 className="text-xs font-bold group-hover:text-primary transition-colors uppercase tracking-wider">Shortcuts</h4>
-              <p className="text-[10px] text-muted-foreground mt-1.5 leading-relaxed">Customize your command palette and keys</p>
-            </div>
-            <div className="p-5 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/5 transition-all cursor-pointer group hover:border-primary/20">
-              <h4 className="text-xs font-bold group-hover:text-primary transition-colors uppercase tracking-wider">Extensions</h4>
-              <p className="text-[10px] text-muted-foreground mt-1.5 leading-relaxed">Install language packs and extra tools</p>
-            </div>
           </div>
         </div>
       </div>

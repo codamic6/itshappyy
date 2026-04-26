@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import type { FileItem } from "@/hooks/use-editor-store"
+import type { FileNode } from "@/hooks/use-editor-store"
 
 interface SidebarProps {
-  files: FileItem[]
+  files: FileNode[]
   activeFileId: string
   onFileSelect: (id: string) => void
   onNewFile: () => void
@@ -48,11 +48,9 @@ export function EditorSidebar({ files, activeFileId, onFileSelect, onNewFile, on
             
             <div className="mt-1 space-y-0.5">
               {files.length === 0 ? (
-                <div className="px-6 py-10 text-center space-y-3">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mx-auto opacity-40">
-                    <FileCode className="h-4 w-4" />
-                  </div>
-                  <p className="text-[10px] text-muted-foreground/60 uppercase tracking-widest font-medium">No files created</p>
+                <div className="px-6 py-10 text-center space-y-3 opacity-40">
+                  <FileCode className="h-5 w-5 mx-auto mb-2" />
+                  <p className="text-[9px] uppercase tracking-widest">No files</p>
                 </div>
               ) : (
                 files.map((file) => (
@@ -73,7 +71,7 @@ export function EditorSidebar({ files, activeFileId, onFileSelect, onNewFile, on
                       className="opacity-0 group-hover:opacity-100 p-1 hover:text-destructive transition-all"
                       onClick={(e) => {
                         e.stopPropagation()
-                        onDeleteFile(file.id)
+                        if (confirm(`Delete ${file.name}?`)) onDeleteFile(file.id)
                       }}
                     >
                       <Trash2 className="h-3 w-3" />

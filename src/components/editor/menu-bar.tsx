@@ -13,25 +13,13 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { useEditorStore } from '@/hooks/use-editor-store'
-import { useToast } from '@/hooks/use-toast'
 
 interface MenuBarProps {
   onNewFile: () => void
-  onSave: () => void
 }
 
-export function MenuBar({ onNewFile, onSave }: MenuBarProps) {
-  const { 
-    setIsSidebarOpen, 
-    setIsTerminalOpen, 
-    setIsAIPanelOpen,
-    isSidebarOpen,
-    isTerminalOpen,
-    isAIPanelOpen,
-    activeFile,
-    closeFile
-  } = useEditorStore()
-  const { toast } = useToast()
+export function MenuBar({ onNewFile }: MenuBarProps) {
+  const store = useEditorStore()
 
   return (
     <header className="h-10 border-b flex items-center justify-between px-4 bg-[#0A0A0A] z-50">
@@ -43,20 +31,20 @@ export function MenuBar({ onNewFile, onSave }: MenuBarProps) {
         
         <Menubar className="border-none bg-transparent shadow-none h-auto p-0 gap-1">
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5">File</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">File</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
               <MenubarItem onClick={onNewFile}>New File <MenubarShortcut>Ctrl+N</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={() => toast({ title: "Open", description: "Project picker..." })}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => alert("Simulating Open File picker...")}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
               <MenubarSeparator className="bg-white/5" />
-              <MenubarItem onClick={onSave} disabled={!activeFile}>Save <MenubarShortcut>Ctrl+S</MenubarShortcut></MenubarItem>
-              <MenubarItem disabled={!activeFile}>Save As...</MenubarItem>
+              <MenubarItem disabled={!store.activeFileId}>Save <MenubarShortcut>Ctrl+S</MenubarShortcut></MenubarItem>
+              <MenubarItem disabled={!store.activeFileId}>Save As...</MenubarItem>
               <MenubarSeparator className="bg-white/5" />
-              <MenubarItem onClick={() => activeFile && closeFile(activeFile.id)} disabled={!activeFile}>Close File</MenubarItem>
+              <MenubarItem onClick={() => store.activeFileId && store.closeTab(store.activeFileId)} disabled={!store.activeFileId}>Close File</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5">Edit</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">Edit</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
               <MenubarItem>Undo <MenubarShortcut>Ctrl+Z</MenubarShortcut></MenubarItem>
               <MenubarItem>Redo <MenubarShortcut>Ctrl+Y</MenubarShortcut></MenubarItem>
@@ -64,29 +52,46 @@ export function MenuBar({ onNewFile, onSave }: MenuBarProps) {
               <MenubarItem>Cut</MenubarItem>
               <MenubarItem>Copy</MenubarItem>
               <MenubarItem>Paste</MenubarItem>
+              <MenubarSeparator className="bg-white/5" />
+              <MenubarItem onClick={() => {
+                if (store.activeFileId) {
+                  const name = window.prompt("New name:", store.activeFile?.name)
+                  if (name) store.renameFile(store.activeFileId, name)
+                }
+              }} disabled={!store.activeFileId}>Rename</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5">View</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">View</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
-              <MenubarItem onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                {isSidebarOpen ? "Hide Explorer" : "Show Explorer"}
+              <MenubarItem onClick={() => store.setIsSidebarOpen(!store.isSidebarOpen)}>
+                {store.isSidebarOpen ? "Hide Explorer" : "Show Explorer"}
               </MenubarItem>
-              <MenubarItem onClick={() => setIsTerminalOpen(!isTerminalOpen)}>
-                {isTerminalOpen ? "Hide Terminal" : "Show Terminal"}
+              <MenubarItem onClick={() => store.setIsTerminalOpen(!store.isTerminalOpen)}>
+                {store.isTerminalOpen ? "Hide Terminal" : "Show Terminal"}
               </MenubarItem>
-              <MenubarItem onClick={() => setIsAIPanelOpen(!isAIPanelOpen)}>
-                {isAIPanelOpen ? "Hide AI Assistant" : "Show AI Assistant"}
+              <MenubarItem onClick={() => store.setIsAIPanelOpen(!store.isAIPanelOpen)}>
+                {store.isAIPanelOpen ? "Hide AI Assistant" : "Show AI Assistant"}
               </MenubarItem>
+              <MenubarSeparator className="bg-white/5" />
+              <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>Settings</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5">Help</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">Terminal</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
-              <MenubarItem onClick={() => alert("CARET AI Code Editor v1.0\nProfessional Intelligent Workspace.")}>About Caret</MenubarItem>
-              <MenubarItem>Keyboard Shortcuts</MenubarItem>
+              <MenubarItem onClick={() => store.setIsTerminalOpen(true)}>Open Terminal</MenubarItem>
+              <MenubarItem onClick={() => store.executeCommand('clear')}>Clear Terminal</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">Help</MenubarTrigger>
+            <MenubarContent className="bg-[#111] border-white/5">
+              <MenubarItem onClick={() => alert("CARET AI Editor v1.0\nProfessional Workspace.")}>About Caret</MenubarItem>
+              <MenubarItem>Shortcuts</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
@@ -94,7 +99,7 @@ export function MenuBar({ onNewFile, onSave }: MenuBarProps) {
 
       <div className="flex-1 max-w-md mx-4 hidden md:block">
         <div className="h-7 bg-muted/10 border border-white/5 rounded-md px-3 flex items-center justify-between text-[11px] text-muted-foreground cursor-pointer hover:bg-white/5 transition-all">
-          <span className="truncate">{activeFile?.name || 'Search files or commands'}</span>
+          <span className="truncate">{store.activeFile?.name || 'Search files or commands'}</span>
           <div className="flex items-center gap-1">
             <Command className="h-3 w-3" />
             <span>P</span>

@@ -17,11 +17,17 @@ interface Message {
   content: string
 }
 
-export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: string, onGeneratedCode: (code: string) => void }) {
+interface AIPanelsProps {
+  selectedText: string
+  activeFileContent?: string
+  onGeneratedCode: (code: string) => void
+}
+
+export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: AIPanelsProps) {
   const [chatPrompt, setChatPrompt] = useState('')
   const [genPrompt, setGenPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hello! I'm Caret AI. I'm here to help with your coding tasks. What can I build for you?" }
+    { role: 'assistant', content: "Hello! I'm Caret AI. How can I help with your code today?" }
   ])
   const [isBusy, setIsBusy] = useState(false)
   const [explanation, setExplanation] = useState('')
@@ -51,8 +57,9 @@ export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: stri
     }
 
     try {
+      const context = activeFileContent ? `Current file context:\n${activeFileContent}` : ""
       const result = await aiCodeGeneration({ 
-        description: `As a coding assistant, answer this: ${userMsg}. File context: ${selectedText || 'None'}` 
+        description: `As a coding assistant, answer this: ${userMsg}. ${context}` 
       })
       setMessages(prev => [...prev, { role: 'assistant', content: result.code }])
     } catch (err) {
@@ -102,21 +109,21 @@ export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: stri
 
       <Tabs defaultValue="chat" className="flex-1 flex flex-col overflow-hidden">
         <TabsList className="w-full bg-transparent p-1 h-10 border-b border-white/5">
-          <TabsTrigger value="chat" className="flex-1 text-xs gap-1.5"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
-          <TabsTrigger value="gen" className="flex-1 text-xs gap-1.5"><Code2 className="h-3 w-3" />Build</TabsTrigger>
-          <TabsTrigger value="help" className="flex-1 text-xs gap-1.5"><HelpCircle className="h-3 w-3" />Help</TabsTrigger>
+          <TabsTrigger value="chat" className="flex-1 text-xs gap-1.5 cursor-pointer"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
+          <TabsTrigger value="gen" className="flex-1 text-xs gap-1.5 cursor-pointer"><Code2 className="h-3 w-3" />Build</TabsTrigger>
+          <TabsTrigger value="help" className="flex-1 text-xs gap-1.5 cursor-pointer"><HelpCircle className="h-3 w-3" />Help</TabsTrigger>
         </TabsList>
 
         <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0">
           <ScrollArea className="flex-1 p-4" ref={scrollRef}>
             <div className="space-y-4">
               {messages.map((m, i) => (
-                <div key={i} className={cn("flex gap-2 max-w-[90%]", m.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto")}>
+                <div key={i} className={cn("flex gap-2 max-w-[95%]", m.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto")}>
                   <div className={cn("w-6 h-6 rounded-full flex items-center justify-center shrink-0", m.role === 'user' ? "bg-accent" : "bg-primary")}>
                     {m.role === 'user' ? <div className="text-[10px]">U</div> : <Bot className="h-3.5 w-3.5" />}
                   </div>
-                  <div className={cn("rounded-lg p-2 text-xs leading-relaxed", m.role === 'user' ? "bg-accent/10 border border-accent/20" : "bg-muted/30 border border-white/5")}>
-                    {m.content}
+                  <div className={cn("rounded-lg p-2 text-[11px] leading-relaxed", m.role === 'user' ? "bg-accent/10 border border-accent/20" : "bg-muted/30 border border-white/5")}>
+                    <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
                   </div>
                 </div>
               ))}
@@ -125,7 +132,7 @@ export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: stri
                   <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   </div>
-                  <div className="bg-muted/30 rounded-lg p-2 text-xs border border-white/5">Caret AI is thinking...</div>
+                  <div className="bg-muted/30 rounded-lg p-2 text-[10px] border border-white/5">Caret AI is thinking...</div>
                 </div>
               )}
             </div>
@@ -134,7 +141,7 @@ export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: stri
             <div className="relative">
               <Textarea 
                 placeholder="Ask a coding question..."
-                className="min-h-[60px] max-h-[120px] bg-background border-white/5 resize-none text-xs pr-10"
+                className="min-h-[60px] max-h-[120px] bg-background border-white/5 resize-none text-[11px] pr-10"
                 value={chatPrompt}
                 onChange={(e) => setChatPrompt(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChat())}
@@ -151,7 +158,7 @@ export function AIPanels({ selectedText, onGeneratedCode }: { selectedText: stri
             <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Generate Code</h3>
             <Textarea 
               placeholder="e.g. Create a React hook for API calls..."
-              className="min-h-[120px] bg-background border-white/5 text-xs"
+              className="min-h-[120px] bg-background border-white/5 text-[11px]"
               value={genPrompt}
               onChange={(e) => setGenPrompt(e.target.value)}
             />
