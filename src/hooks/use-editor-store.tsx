@@ -54,6 +54,8 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const [nodes, setNodes] = useState<Record<string, FileNode>>({})
   const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
+  const [expandedFolders, setExpandedFolders] = useState<Record<string, boolean>>({})
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
     { type: 'output', content: 'Caret Shell Environment v1.0.0' },
     { type: 'output', content: 'Status: System Online. AI Ready.' }
@@ -77,35 +79,56 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const activeFile = useMemo(() => activeFileId ? nodes[activeFileId] : null, [activeFileId, nodes])
   const openFiles = useMemo(() => openTabs.map(id => nodes[id]).filter(Boolean), [openTabs, nodes])
 
+  const toggleFolder = useCallback((id: string) => {
+    setExpandedFolders(prev => ({ ...prev, [id]: !prev[id] }))
+  }, [])
+
   const selectFile = useCallback((id: string) => {
-    if (nodes[id]?.type === 'folder') return
-    setActiveFileId(id)
-    setOpenTabs(prev => {
-      if (prev.includes(id)) return prev
-      return [...prev, id]
-    })
-  }, [nodes])
+    const node = nodes[id]
+    if (!node) return
+    
+    setSelectedNodeId(id)
+    if (node.type === 'file') {
+      setActiveFileId(id)
+      setOpenTabs(prev => {
+        if (prev.includes(id)) return prev
+        return [...prev, id]
+      })
+    } else {
+      toggleFolder(id)
+    }
+  }, [nodes, toggleFolder])
 
   const createNode = useCallback((name: string, type: 'file' | 'folder' = 'file', parentId: string | null = null, content: string = '') => {
     const id = Math.random().toString(36).substring(7)
     const language = type === 'file' ? detectLanguage(name) : ''
+    
+    // Resolve path (simplified)
+    const parent = parentId ? nodes[parentId] : null
+    const path = parent ? `${parent.path}/${name}` : `/${name}`
+
     const newNode: FileNode = {
       id,
       name,
       content,
       language,
-      path: `/${name}`,
+      path,
       parentId,
       type
     }
 
     setNodes(prev => ({ ...prev, [id]: newNode }))
+    
+    if (parentId) {
+      setExpandedFolders(prev => ({ ...prev, [parentId]: true }))
+    }
+
     if (type === 'file') {
       setOpenTabs(prev => [...prev, id])
       setActiveFileId(id)
     }
     return id
-  }, [])
+  }, [nodes])
 
   const closeTab = useCallback((id: string) => {
     setOpenTabs(prev => {
@@ -128,13 +151,31 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const deleteNode = useCallback((id: string) => {
+    // Also delete children if it's a folder
     setNodes(prev => {
       const next = { ...prev }
-      delete next[id]
+      const toDelete = [id]
+      
+      // Recursive find children to delete
+      const findChildren = (pid: string) => {
+        Object.values(prev).forEach(node => {
+          if (node.parentId === pid) {
+            toDelete.push(node.id)
+            findChildren(node.id)
+          }
+        })
+      }
+      findChildren(id)
+      
+      toDelete.forEach(tid => delete next[tid])
       return next
     })
-    closeTab(id)
-  }, [closeTab])
+    
+    if (openTabs.includes(id)) {
+      closeTab(id)
+    }
+    if (selectedNodeId === id) setSelectedNodeId(null)
+  }, [openTabs, closeTab, selectedNodeId])
 
   const renameNode = useCallback((id: string, newName: string) => {
     setNodes(prev => {
@@ -158,18 +199,18 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
       case 'clear': setTerminalHistory([]); break
       case 'help': setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }]); break
       case 'ls':
-        const names = Object.values(nodes).map((f: any) => f.name).join('  ')
+        const names = Object.values(nodes).filter(n => !n.parentId).map(f => f.name).join('  ')
         setTerminalHistory(prev => [...prev, { type: 'output', content: names || '(empty workspace)' }])
         break
       case 'pwd': setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }]); break
-      case 'date': setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toLocaleString() }]); break
       default: setTerminalHistory(prev => [...prev, { type: 'error', content: `caret-sh: command not found: ${baseCmd}` }])
     }
   }, [nodes])
 
   const value = {
     nodes, files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
-    setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand,
+    selectedNodeId, setSelectedNodeId, expandedFolders,
+    setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand, toggleFolder,
     setIsSidebarOpen: (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val })),
     setIsTerminalOpen: (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val })),
     setIsAIPanelOpen: (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val })),
