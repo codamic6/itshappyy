@@ -28,11 +28,9 @@ export function EditorSidebar() {
   }, [isCreating])
 
   const handleCreate = () => {
-    if (!isCreating) return
     const trimmed = newFileName.trim()
     if (trimmed) {
       const id = store.createFile(trimmed)
-      // store.createFile already sets activeFileId, but we'll be explicit
       store.selectFile(id)
     }
     setIsCreating(false)
@@ -83,7 +81,7 @@ export function EditorSidebar() {
           </div>
           
           <div className="space-y-0.5 px-2">
-            <AnimatePresence initial={false}>
+            <AnimatePresence>
               {isCreating && (
                 <motion.div 
                   initial={{ height: 0, opacity: 0 }}
@@ -99,7 +97,9 @@ export function EditorSidebar() {
                     value={newFileName}
                     onChange={(e) => setNewFileName(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    onBlur={handleCreate}
+                    onBlur={() => {
+                      if (!newFileName.trim()) setIsCreating(false)
+                    }}
                   />
                 </motion.div>
               )}

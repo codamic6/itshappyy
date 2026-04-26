@@ -16,7 +16,6 @@ export interface TerminalLine {
   content: string
 }
 
-// Language detection helper defined outside to prevent re-creation
 const detectLanguage = (fileName: string) => {
   const ext = fileName.split('.').pop()?.toLowerCase() || ''
   const map: Record<string, string> = {
@@ -79,15 +78,17 @@ export function useEditorStore() {
       if (prev.includes(id)) return prev
       return [...prev, id]
     })
-    setActiveFileId(id) // Immediately set as active
+    setActiveFileId(id)
     return id
   }, [])
 
   const selectFile = useCallback((id: string) => {
-    if (!files[id]) return
-    setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
     setActiveFileId(id)
-  }, [files])
+    setOpenTabs(prev => {
+      if (prev.includes(id)) return prev
+      return [...prev, id]
+    })
+  }, [])
 
   const closeTab = useCallback((id: string) => {
     setOpenTabs(prev => {
@@ -159,8 +160,15 @@ export function useEditorStore() {
     }
   }, [files])
 
+  const setIsSidebarOpen = (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val }))
+  const setIsTerminalOpen = (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val }))
+  const setIsAIPanelOpen = (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val }))
+  const setIsSettingsOpen = (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val }))
+  const setFontSize = (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
+
   return {
     files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
-    setUi, createFile, selectFile, closeTab, updateFileContent, deleteFile, renameFile, executeCommand
+    setUi, createFile, selectFile, closeTab, updateFileContent, deleteFile, renameFile, executeCommand,
+    setIsSidebarOpen, setIsTerminalOpen, setIsAIPanelOpen, setIsSettingsOpen, setFontSize
   }
 }

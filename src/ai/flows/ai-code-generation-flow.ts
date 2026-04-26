@@ -44,6 +44,10 @@ const aiCodeGenerationFlow = ai.defineFlow(
   },
   async (input) => {
     try {
+      if (!process.env.GOOGLE_GENAI_API_KEY) {
+        throw new Error("GOOGLE_GENAI_API_KEY is not configured in the environment.");
+      }
+      
       const { output } = await codeGenPrompt(input);
       if (!output) {
         return { code: "// AI: Failed to generate code. Please try a more specific prompt." };
@@ -51,7 +55,7 @@ const aiCodeGenerationFlow = ai.defineFlow(
       return output;
     } catch (error: any) {
       console.error("Genkit Flow Error:", error);
-      throw new Error(error.message || "Failed to connect to AI service.");
+      throw new Error(error.message || "Failed to connect to AI service. Check your API configuration.");
     }
   }
 );
