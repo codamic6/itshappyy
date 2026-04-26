@@ -20,11 +20,11 @@ export default function CaretApp() {
   const [selectedText, setSelectedText] = useState('')
 
   const handleNewFile = () => {
-    const name = window.prompt("Enter file name (e.g. index.ts):")
-    if (name) store.createFile(name)
+    store.setIsSidebarOpen(true)
+    store.setIsCreatingFile(true)
   }
 
-  const showWelcome = store.openTabs.length === 0 && !store.activeFileId
+  const showWelcome = store.openTabs.length === 0 && !store.activeFileId && !store.isCreatingFile
 
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-[#0D0D0D] text-foreground font-body">
@@ -33,11 +33,7 @@ export default function CaretApp() {
       <div className="flex-1 flex overflow-hidden">
         {store.isSidebarOpen && (
           <EditorSidebar 
-            files={Object.values(store.files)} 
-            activeFileId={store.activeFileId || ''} 
-            onFileSelect={store.selectFile} 
             onNewFile={handleNewFile}
-            onDeleteFile={store.deleteFile}
           />
         )}
 
@@ -86,8 +82,13 @@ export default function CaretApp() {
                 fontSize={store.fontSize}
               />
             ) : (
-              <div className="flex-1 flex items-center justify-center text-muted-foreground text-[10px] uppercase tracking-[0.3em] font-bold">
-                No file selected
+              <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground text-[10px] uppercase tracking-[0.3em] font-bold space-y-4">
+                <div className="opacity-20 animate-pulse">
+                   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                   </svg>
+                </div>
+                <span>Select a file to start editing</span>
               </div>
             )}
             
@@ -103,12 +104,12 @@ export default function CaretApp() {
                 <TerminalIcon className="h-3 w-3" />
                 <span>Terminal</span>
               </button>
-              <span>Main*</span>
+              <span className="opacity-40">main*</span>
             </div>
             <div className="flex items-center gap-4">
               <span className="text-primary/80">{store.activeFile?.language || 'No File'}</span>
               <div className="flex items-center gap-1">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]" />
                 <span>AI READY</span>
               </div>
             </div>

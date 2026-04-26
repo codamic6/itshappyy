@@ -30,12 +30,19 @@ export function useEditorStore() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false)
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(true)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isCreatingFile, setIsCreatingFile] = useState(false)
   const [fontSize, setFontSize] = useState(13)
 
   const activeFile = activeFileId ? files[activeFileId] : null
   const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
 
   const createFile = useCallback((name: string, parentId: string | null = null) => {
+    if (!name.trim()) return null
+    
+    // Check for duplicates
+    const isDuplicate = Object.values(files).some(f => f.name.toLowerCase() === name.toLowerCase())
+    if (isDuplicate) return null
+
     const id = Math.random().toString(36).substring(7)
     const ext = name.split('.').pop() || 'ts'
     const languageMap: Record<string, string> = {
@@ -57,8 +64,9 @@ export function useEditorStore() {
     setFiles(prev => ({ ...prev, [id]: newNode }))
     setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
     setActiveFileId(id)
+    setIsCreatingFile(false)
     return id
-  }, [])
+  }, [files])
 
   const updateFileContent = useCallback((id: string, content: string) => {
     setFiles(prev => ({
@@ -136,11 +144,13 @@ export function useEditorStore() {
     isTerminalOpen,
     isAIPanelOpen,
     isSettingsOpen,
+    isCreatingFile,
     fontSize,
     setIsSidebarOpen,
     setIsTerminalOpen,
     setIsAIPanelOpen,
     setIsSettingsOpen,
+    setIsCreatingFile,
     setFontSize,
     createFile,
     updateFileContent,
