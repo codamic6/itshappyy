@@ -8,7 +8,7 @@ export interface FileNode {
   name: string
   content: string
   language: string
-  isOpen?: boolean
+  path: string
 }
 
 export interface TerminalLine {
@@ -21,13 +21,14 @@ export function useEditorStore() {
   const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
-    { type: 'output', content: 'Caret AI Integrated Terminal v1.0.0' }
+    { type: 'output', content: 'Caret Professional Terminal v1.0.0' },
+    { type: 'output', content: 'Ready for commands...' }
   ])
   
   const [ui, setUi] = useState({
-    sidebarWidth: 250,
+    sidebarWidth: 260,
     isSidebarOpen: true,
-    isTerminalOpen: true,
+    isTerminalOpen: false,
     isAIPanelOpen: true,
     isCommandPaletteOpen: false,
     isSettingsOpen: false,
@@ -35,16 +36,12 @@ export function useEditorStore() {
     activeView: 'explorer' as 'explorer' | 'search' | 'git' | 'extensions' | 'ai'
   })
 
-  const activeFile = activeFileId ? files[activeFileId] : null
+  const activeFile = useMemo(() => activeFileId ? files[activeFileId] : null, [activeFileId, files])
   const openFiles = useMemo(() => openTabs.map(id => files[id]).filter(Boolean), [openTabs, files])
 
-  const createFile = useCallback((name?: string) => {
-    const id = Math.random().toString(36).substring(7)
-    const finalName = name || `untitled-${Object.keys(files).length + 1}.js`
-    
-    // Improved language mapping based on extensions
-    const ext = finalName.split('.').pop()?.toLowerCase() || 'js'
-    const languageMap: Record<string, string> = {
+  const detectLanguage = (fileName: string) => {
+    const ext = fileName.split('.').pop()?.toLowerCase() || 'js'
+    const map: Record<string, string> = {
       'py': 'python',
       'js': 'javascript',
       'jsx': 'javascript',
@@ -55,32 +52,33 @@ export function useEditorStore() {
       'json': 'json',
       'md': 'markdown',
       'cpp': 'cpp',
-      'c': 'c',
-      'java': 'java',
       'go': 'go',
-      'rs': 'rust',
-      'php': 'php',
-      'sql': 'sql',
-      'sh': 'shell'
+      'rs': 'rust'
     }
+    return map[ext] || 'javascript'
+  }
 
+  const createFile = useCallback((name: string, content: string = '') => {
+    const id = Math.random().toString(36).substring(7)
     const newNode: FileNode = {
       id,
-      name: finalName,
-      content: '',
-      language: languageMap[ext] || 'javascript'
+      name,
+      content,
+      language: detectLanguage(name),
+      path: `/${name}`
     }
 
     setFiles(prev => ({ ...prev, [id]: newNode }))
     setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
     setActiveFileId(id)
     return id
-  }, [files])
+  }, [])
 
   const selectFile = useCallback((id: string) => {
+    if (!files[id]) return
     setOpenTabs(prev => prev.includes(id) ? prev : [...prev, id])
     setActiveFileId(id)
-  }, [])
+  }, [files])
 
   const closeTab = useCallback((id: string) => {
     setOpenTabs(prev => {
@@ -93,10 +91,13 @@ export function useEditorStore() {
   }, [activeFileId])
 
   const updateFileContent = useCallback((id: string, content: string) => {
-    setFiles(prev => ({
-      ...prev,
-      [id]: { ...prev[id], content }
-    }))
+    setFiles(prev => {
+      if (!prev[id]) return prev
+      return {
+        ...prev,
+        [id]: { ...prev[id], content }
+      }
+    })
   }, [])
 
   const deleteFile = useCallback((id: string) => {
@@ -113,47 +114,41 @@ export function useEditorStore() {
       if (!prev[id]) return prev
       return {
         ...prev,
-        [id]: { ...prev[id], name: newName }
+        [id]: { ...prev[id], name: newName, language: detectLanguage(newName) }
       }
     })
   }, [])
 
   const executeCommand = useCallback((input: string) => {
-    const cmd = input.trim().toLowerCase()
+    const cmd = input.trim()
+    if (!cmd) return
+    
     setTerminalHistory(prev => [...prev, { type: 'input', content: input }])
     
-    if (cmd === 'clear') {
-      setTerminalHistory([])
-    } else if (cmd === 'help') {
-      setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available commands: help, clear, date, pwd, echo [msg]' }])
-    } else if (cmd === 'date') {
-      setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toString() }])
-    } else if (cmd === 'pwd') {
-      setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }])
-    } else if (cmd.startsWith('echo ')) {
-      setTerminalHistory(prev => [...prev, { type: 'output', content: input.substring(5) }])
-    } else {
-      setTerminalHistory(prev => [...prev, { type: 'error', content: `Command not found: ${cmd}` }])
-    }
-  }, [])
+    const parts = cmd.toLowerCase().split(' ')
+    const baseCmd = parts[0]
 
-  // Listen for Global Keyboard Shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl+K for Command Palette
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        setUi(prev => ({ ...prev, isCommandPaletteOpen: !prev.isCommandPaletteOpen }))
-      }
-      // Ctrl+N for New File
-      if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
-        e.preventDefault()
-        createFile()
-      }
+    switch (baseCmd) {
+      case 'clear':
+        setTerminalHistory([])
+        break
+      case 'help':
+        setTerminalHistory(prev => [...prev, { type: 'output', content: 'Commands: help, clear, date, pwd, ls, echo [text]' }])
+        break
+      case 'ls':
+        const fileNames = Object.values(files).map(f => f.name).join('  ')
+        setTerminalHistory(prev => [...prev, { type: 'output', content: fileNames || '(empty workspace)' }])
+        break
+      case 'pwd':
+        setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }])
+        break
+      case 'date':
+        setTerminalHistory(prev => [...prev, { type: 'output', content: new Date().toLocaleString() }])
+        break
+      default:
+        setTerminalHistory(prev => [...prev, { type: 'error', content: `zsh: command not found: ${baseCmd}` }])
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [createFile])
+  }, [files])
 
   return {
     files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,

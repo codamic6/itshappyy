@@ -1,10 +1,11 @@
 
 "use client"
 
+import { useEffect, useRef } from "react"
 import Editor from "@monaco-editor/react"
-import { motion } from 'framer-motion'
-import { FileCode, X } from 'lucide-react'
+import { FileCode, X, Plus } from 'lucide-react'
 import { cn } from "@/lib/utils"
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface CodeEditorProps {
   content: string
@@ -18,27 +19,39 @@ interface CodeEditorProps {
 }
 
 export function CodeEditor({ content, language, fontSize, onChange, openFiles, activeFileId, onTabClick, onTabClose }: CodeEditorProps) {
+  const editorRef = useRef<any>(null)
+
+  // Ensure editor focuses when file changes
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.focus()
+    }
+  }, [activeFileId])
+
   return (
     <div className="flex-1 flex flex-col bg-[#0D1117] overflow-hidden">
       {/* Tab Bar */}
-      <div className="h-9 bg-[#0A0D12] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1">
+      <div className="h-10 bg-[#0A0D12] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1 shadow-inner">
         {openFiles.map((file) => (
           <div
             key={file.id}
             className={cn(
-              "h-full min-w-[120px] flex items-center justify-between px-3 text-[11px] cursor-pointer group transition-all border-r border-white/5",
+              "h-full min-w-[140px] flex items-center justify-between px-3 text-[11px] cursor-pointer group transition-all relative border-r border-white/5",
               activeFileId === file.id 
-                ? "bg-[#0D1117] text-primary border-t-2 border-t-primary" 
-                : "text-muted-foreground hover:bg-white/5"
+                ? "bg-[#0D1117] text-primary" 
+                : "text-muted-foreground hover:bg-white/[0.03]"
             )}
             onClick={() => onTabClick(file.id)}
           >
+            {activeFileId === file.id && (
+              <motion.div layoutId="activeTab" className="absolute top-0 left-0 right-0 h-[2px] bg-primary shadow-[0_0_10px_rgba(124,58,237,0.5)]" />
+            )}
             <div className="flex items-center gap-2 truncate">
-              <FileCode className={cn("h-3 w-3", activeFileId === file.id ? "text-primary" : "text-muted-foreground")} />
-              <span className="truncate">{file.name}</span>
+              <FileCode className={cn("h-3.5 w-3.5", activeFileId === file.id ? "text-primary" : "text-muted-foreground/50")} />
+              <span className={cn("truncate font-medium", activeFileId === file.id && "font-bold")}>{file.name}</span>
             </div>
             <button 
-              className="opacity-0 group-hover:opacity-100 p-0.5 hover:bg-white/10 rounded transition-all ml-2"
+              className="opacity-0 group-hover:opacity-100 p-1 hover:bg-white/10 rounded-md transition-all ml-2"
               onClick={(e) => {
                 e.stopPropagation()
                 onTabClose(file.id)
@@ -51,32 +64,49 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       </div>
 
       {/* Monaco Container */}
-      <div className="flex-1 relative animate-in fade-in duration-500">
-        <Editor
-          height="100%"
-          language={language}
-          value={content}
-          theme="vs-dark"
-          options={{
-            fontSize,
-            minimap: { enabled: true },
-            smoothScrolling: true,
-            cursorBlinking: "expand",
-            fontFamily: "'JetBrains Mono', 'Source Code Pro', monospace",
-            lineHeight: 22,
-            padding: { top: 20 },
-            bracketPairColorization: { enabled: true },
-            automaticLayout: true,
-            scrollbar: {
-              vertical: 'visible',
-              horizontal: 'visible',
-              useShadows: false,
-              verticalScrollbarSize: 10,
-              horizontalScrollbarSize: 10
-            }
-          }}
-          onChange={(val) => onChange(val || "")}
-        />
+      <div className="flex-1 relative">
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeFileId}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="w-full h-full"
+          >
+            <Editor
+              height="100%"
+              language={language}
+              value={content}
+              theme="vs-dark"
+              onMount={(editor) => {
+                editorRef.current = editor
+              }}
+              options={{
+                fontSize,
+                minimap: { enabled: true, scale: 0.75, renderCharacters: false },
+                smoothScrolling: true,
+                cursorBlinking: "expand",
+                cursorSmoothCaretAnimation: "on",
+                fontFamily: "'JetBrains Mono', 'Source Code Pro', monospace",
+                lineHeight: 24,
+                padding: { top: 16 },
+                bracketPairColorization: { enabled: true },
+                automaticLayout: true,
+                roundedSelection: true,
+                scrollBeyondLastLine: false,
+                scrollbar: {
+                  vertical: 'visible',
+                  horizontal: 'visible',
+                  useShadows: false,
+                  verticalScrollbarSize: 8,
+                  horizontalScrollbarSize: 8
+                }
+              }}
+              onChange={(val) => onChange(val || "")}
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
