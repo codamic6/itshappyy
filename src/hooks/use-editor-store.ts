@@ -13,25 +13,21 @@ export interface FileItem {
 const INITIAL_FILES: FileItem[] = [
   {
     id: '1',
-    name: 'welcome.ts',
-    content: 'export function welcome() {\n  console.log("Welcome to DevSphere AI!");\n  // Highlight this code and ask for an explanation!\n}',
+    name: 'main.ts',
+    content: '// CARET Editor\nexport function start() {\n  console.log("Welcome to CARET!");\n}',
     language: 'typescript'
-  },
-  {
-    id: '2',
-    name: 'styles.css',
-    content: 'body {\n  background-color: #1C2528;\n  color: #73D7F7;\n  font-family: "Source Code Pro", monospace;\n}',
-    language: 'css'
   }
 ]
 
 export function useEditorStore() {
   const [files, setFiles] = useState<FileItem[]>(INITIAL_FILES)
-  const [activeFileId, setActiveFileId] = useState<string>(INITIAL_FILES[0].id)
+  const [activeFileId, setActiveFileId] = useState<string | null>(null) // Start with null for welcome screen
+  const [isTerminalOpen, setIsTerminalOpen] = useState(true)
 
-  const activeFile = files.find(f => f.id === activeFileId) || files[0]
+  const activeFile = files.find(f => f.id === activeFileId) || null
 
   const updateActiveFileContent = useCallback((newContent: string) => {
+    if (!activeFileId) return
     setFiles(prev => prev.map(f => f.id === activeFileId ? { ...f, content: newContent } : f))
   }, [activeFileId])
 
@@ -39,7 +35,7 @@ export function useEditorStore() {
     const id = Math.random().toString(36).substring(7)
     const newFile = {
       id,
-      name: `new-file-${id.slice(0, 3)}.ts`,
+      name: `untitled-${id.slice(0, 3)}.ts`,
       content: '',
       language: 'typescript'
     }
@@ -47,12 +43,28 @@ export function useEditorStore() {
     setActiveFileId(id)
   }, [])
 
+  const openFile = (id: string) => {
+    setActiveFileId(id)
+  }
+
+  const closeFile = (id: string) => {
+    const remaining = files.filter(f => f.id !== id)
+    setFiles(remaining)
+    if (activeFileId === id) {
+      setActiveFileId(remaining.length > 0 ? remaining[0].id : null)
+    }
+  }
+
   return {
     files,
     activeFile,
     activeFileId,
     setActiveFileId,
     updateActiveFileContent,
-    createNewFile
+    createNewFile,
+    openFile,
+    closeFile,
+    isTerminalOpen,
+    setIsTerminalOpen
   }
 }

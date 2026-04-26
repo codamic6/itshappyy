@@ -5,48 +5,26 @@
 
 @layer base {
   :root {
-    --background: 210 10% 98%;
-    --foreground: 220 20% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
     --primary: 195 89% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 195 10% 90%;
-    --secondary-foreground: 195 89% 30%;
-    --muted: 195 10% 95%;
-    --muted-foreground: 220 10% 45%;
-    --accent: 246 33% 45%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 195 10% 90%;
-    --input: 195 10% 90%;
-    --ring: 195 89% 55%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 195 18% 13%;
-    --foreground: 195 10% 95%;
-    --card: 195 18% 10%;
-    --card-foreground: 195 10% 95%;
-    --popover: 195 18% 10%;
-    --popover-foreground: 195 10% 95%;
-    --primary: 195 89% 71%;
-    --primary-foreground: 195 18% 10%;
-    --secondary: 195 18% 18%;
-    --secondary-foreground: 195 10% 95%;
-    --muted: 195 18% 18%;
-    --muted-foreground: 195 10% 65%;
-    --accent: 246 33% 45%;
-    --accent-foreground: 0 0% 100%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 195 18% 20%;
-    --input: 195 18% 20%;
-    --ring: 195 89% 71%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
   }
 }
 
@@ -66,7 +44,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  @apply bg-[#0c0c0e];
 }
 
 ::-webkit-scrollbar-thumb {
@@ -75,4 +53,8 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-muted-foreground/40;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

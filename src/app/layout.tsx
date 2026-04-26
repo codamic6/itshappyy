@@ -3,8 +3,8 @@ import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'DevSphere AI | Intelligent Code Editor',
-  description: 'A feature-rich code editing canvas powered by generative AI.',
+  title: 'CARET | Next-Gen AI Code Editor',
+  description: 'A professional, high-performance code editor powered by generative AI.',
 };
 
 export default function RootLayout({
