@@ -1,6 +1,7 @@
+
 "use client"
 
-import { FileCode, Plus, FolderOpen, Settings, Zap, BookOpen, Search, Menu, ChevronDown, ChevronRight, GitBranch, LayoutGrid, Trash2 } from "lucide-react"
+import { FileCode, Plus, LayoutGrid, Search, GitBranch, Zap, Settings, ChevronDown, Trash2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -17,48 +18,41 @@ interface SidebarProps {
 
 export function EditorSidebar({ files, activeFileId, onFileSelect, onNewFile, onDeleteFile }: SidebarProps) {
   return (
-    <div className="flex h-full">
-      {/* Activity Bar (Slim Left) */}
-      <div className="w-12 bg-[#0A0A0A] border-r flex flex-col items-center py-4 gap-4">
+    <div className="flex h-full border-r bg-[#0A0A0A]">
+      <div className="w-12 bg-black/40 flex flex-col items-center py-4 gap-4 border-r border-white/5">
         <TooltipProvider>
           <ActivityIcon icon={<LayoutGrid className="h-5 w-5" />} active tooltip="Explorer" />
           <ActivityIcon icon={<Search className="h-5 w-5" />} tooltip="Search" />
           <ActivityIcon icon={<GitBranch className="h-5 w-5" />} tooltip="Source Control" />
           <ActivityIcon icon={<Zap className="h-5 w-5" />} tooltip="Extensions" />
-          <div className="mt-auto flex flex-col gap-4">
+          <div className="mt-auto">
             <ActivityIcon icon={<Settings className="h-5 w-5" />} tooltip="Settings" />
           </div>
         </TooltipProvider>
       </div>
 
-      {/* Explorer Panel */}
-      <div className="w-60 border-r bg-[#111111] flex flex-col h-full overflow-hidden">
-        <div className="p-3 border-b flex items-center justify-between">
+      <div className="w-60 flex flex-col h-full overflow-hidden bg-[#0D0D0D]">
+        <div className="p-3 border-b border-white/5 flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Explorer</span>
-          <div className="flex gap-1">
-            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={onNewFile}>
-              <Plus className="h-3.5 w-3.5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="h-6 w-6">
-              <FolderOpen className="h-3.5 w-3.5" />
-            </Button>
-          </div>
+          <Button variant="ghost" size="icon" className="h-6 w-6 hover:bg-white/5" onClick={onNewFile}>
+            <Plus className="h-3.5 w-3.5" />
+          </Button>
         </div>
 
         <ScrollArea className="flex-1">
           <div className="py-2">
-            <div className="flex items-center gap-1 px-3 py-1.5 text-[11px] font-bold text-foreground/80 group cursor-pointer hover:bg-white/5 rounded-sm transition-colors mx-1">
+            <div className="flex items-center gap-1 px-3 py-1.5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest group cursor-pointer hover:bg-white/5 rounded mx-1 transition-colors">
               <ChevronDown className="h-3 w-3" />
-              <span>PROJECT-WORKSPACE</span>
+              <span>Workspace</span>
             </div>
             
             <div className="mt-1 space-y-0.5">
               {files.length === 0 ? (
-                <div className="px-4 py-8 text-center space-y-2">
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest">No Files</p>
-                  <Button variant="link" size="sm" className="h-auto p-0 text-[10px] text-primary" onClick={onNewFile}>
-                    Create your first file
-                  </Button>
+                <div className="px-6 py-10 text-center space-y-3">
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mx-auto opacity-40">
+                    <FileCode className="h-4 w-4" />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground/60 uppercase tracking-widest font-medium">No files created</p>
                 </div>
               ) : (
                 files.map((file) => (
