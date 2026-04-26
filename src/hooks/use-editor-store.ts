@@ -1,7 +1,7 @@
 
 "use client"
 
-import { useState, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react'
 
 export interface FileNode {
   id: string
@@ -40,7 +40,9 @@ const detectLanguage = (fileName: string) => {
   return map[ext] || 'plaintext'
 }
 
-export function useEditorStore() {
+const EditorContext = createContext<any>(null)
+
+export function EditorProvider({ children }: { children: React.ReactNode }) {
   const [files, setFiles] = useState<Record<string, FileNode>>({})
   const [openTabs, setOpenTabs] = useState<string[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
@@ -166,9 +168,19 @@ export function useEditorStore() {
   const setIsSettingsOpen = (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val }))
   const setFontSize = (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
 
-  return {
+  const value = {
     files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
     setUi, createFile, selectFile, closeTab, updateFileContent, deleteFile, renameFile, executeCommand,
     setIsSidebarOpen, setIsTerminalOpen, setIsAIPanelOpen, setIsSettingsOpen, setFontSize
   }
+
+  return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>
+}
+
+export function useEditorStore() {
+  const context = useContext(EditorContext)
+  if (!context) {
+    throw new Error('useEditorStore must be used within an EditorProvider')
+  }
+  return context
 }
