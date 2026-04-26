@@ -1,136 +1,131 @@
 
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import { MenuBar } from '@/components/editor/menu-bar';
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ActivityBar } from '@/components/editor/activity-bar';
 import { EditorSidebar } from '@/components/editor/sidebar';
 import { CodeEditor } from '@/components/editor/code-editor';
 import { AIPanels } from '@/components/editor/ai-panels';
 import { Terminal } from '@/components/editor/terminal';
 import { WelcomeScreen } from '@/components/editor/welcome-screen';
-import { SettingsModal } from '@/components/editor/settings-modal';
+import { CommandPalette } from '@/components/editor/command-palette';
 import { useEditorStore } from '@/hooks/use-editor-store';
 import { Toaster } from '@/components/ui/toaster';
-import { X, Code2 } from 'lucide-react';
+import { Code2, Sparkles, Terminal as TerminalIcon, PanelLeft, PanelRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function App() {
   const store = useEditorStore();
-  const [selectedText, setSelectedText] = useState('');
-
-  // Auto-detect empty state
-  const noFilesOpen = store.openTabs.length === 0;
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#0D0D0D] text-foreground overflow-hidden font-body">
-      {/* Top Header */}
-      <MenuBar onNewFile={() => store.setIsCreatingFile(true)} />
+    <div className="flex h-screen w-screen bg-[#0A0D12] text-foreground overflow-hidden font-body">
+      {/* Activity Bar (Fixed Left) */}
+      <ActivityBar 
+        activeView={store.ui.activeView} 
+        onViewChange={(view) => store.setUi({ ...store.ui, activeView: view, isSidebarOpen: true })} 
+      />
 
-      <div className="flex flex-1 overflow-hidden relative">
-        {/* Left Sidebar */}
-        {store.isSidebarOpen && (
-          <div className="h-full border-r border-white/5 bg-[#0A0A0A]">
-            <EditorSidebar onNewFile={() => store.setIsCreatingFile(true)} />
-          </div>
-        )}
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Main Sidebar (Explorer/Search etc) */}
+        <AnimatePresence mode="wait">
+          {store.ui.isSidebarOpen && (
+            <motion.div 
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 250, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              className="h-full border-r border-white/5 bg-[#0D1117] z-40"
+            >
+              <EditorSidebar onNewFile={() => store.createFile()} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Main Editor Area */}
-        <div className="flex-1 flex flex-col min-w-0 bg-[#0D0D0D] relative">
-          {noFilesOpen ? (
+        {/* Main Canvas */}
+        <div className="flex-1 flex flex-col min-w-0 bg-[#0D1117] relative">
+          {!store.activeFileId ? (
             <WelcomeScreen onNewFile={() => store.createFile()} />
           ) : (
             <>
-              {/* Tab Bar */}
-              <div className="h-9 bg-[#0A0A0A] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-2 gap-0.5">
-                {store.openFiles.map((file) => (
-                  <div
-                    key={file.id}
-                    className={cn(
-                      "h-full min-w-[120px] max-w-[200px] flex items-center justify-between px-3 text-[11px] cursor-pointer border-r border-white/5 group transition-all",
-                      store.activeFileId === file.id 
-                        ? "bg-[#0D0D0D] text-primary border-t-2 border-t-primary" 
-                        : "text-muted-foreground hover:bg-white/5"
-                    )}
-                    onClick={() => store.selectFile(file.id)}
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      <Code2 className="h-3 w-3 shrink-0" />
-                      <span className="truncate">{file.name}</span>
-                    </div>
-                    <button 
-                      className="opacity-0 group-hover:opacity-100 p-0.5 hover:bg-white/10 rounded transition-all"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        store.closeTab(file.id);
-                      }}
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-
-              {/* Code Canvas */}
-              <div className="flex-1 flex flex-col overflow-hidden">
-                {store.activeFile && (
-                  <CodeEditor 
-                    content={store.activeFile.content || ''}
-                    language={store.activeFile.language || 'typescript'}
-                    fontSize={store.fontSize}
-                    onChange={(val) => store.updateFileContent(store.activeFileId!, val)}
-                    onSelectionChange={setSelectedText}
-                  />
-                )}
-              </div>
-
+              <CodeEditor 
+                content={store.activeFile?.content || ''}
+                language={store.activeFile?.language || 'javascript'}
+                fontSize={store.ui.fontSize}
+                onChange={(val) => store.updateFileContent(store.activeFileId!, val)}
+                openFiles={store.openFiles}
+                activeFileId={store.activeFileId}
+                onTabClick={store.selectFile}
+                onTabClose={store.closeTab}
+              />
+              
               {/* Bottom Terminal */}
-              {store.isTerminalOpen && <Terminal />}
+              <AnimatePresence>
+                {store.ui.isTerminalOpen && (
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: 256 }}
+                    exit={{ height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <Terminal 
+                      history={store.terminalHistory} 
+                      onExecute={store.executeCommand}
+                      onClose={() => store.setUi({ ...store.ui, isTerminalOpen: false })}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </>
           )}
 
           {/* Status Bar */}
-          <div className="h-6 bg-[#0A0A0A] border-t border-white/5 flex items-center px-4 justify-between text-[10px] text-muted-foreground uppercase tracking-widest font-bold z-30">
+          <div className="h-6 bg-[#0A0D12] border-t border-white/5 flex items-center px-4 justify-between text-[9px] font-bold text-muted-foreground/50 uppercase tracking-[0.2em] z-50">
             <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5 hover:text-foreground cursor-pointer transition-colors" onClick={() => store.setIsTerminalOpen(!store.isTerminalOpen)}>
-                Terminal
-              </span>
-              <span>UTF-8</span>
+              <button 
+                className={cn("flex items-center gap-1.5 hover:text-primary transition-colors", store.ui.isTerminalOpen && "text-primary")}
+                onClick={() => store.setUi({ ...store.ui, isTerminalOpen: !store.ui.isTerminalOpen })}
+              >
+                <TerminalIcon className="h-3 w-3" /> Terminal
+              </button>
+              <span className="flex items-center gap-1.5"><GitBranch className="h-3 w-3" /> main*</span>
             </div>
             <div className="flex items-center gap-4">
               {store.activeFile && <span className="text-primary">{store.activeFile.language}</span>}
-              <span className="hover:text-primary transition-colors cursor-pointer">AI: Connected</span>
+              <div className="flex items-center gap-1.5 text-primary">
+                <Sparkles className="h-3 w-3" /> AI READY
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Right AI Assistant Panel */}
-        {store.isAIPanelOpen && (
-          <div className="h-full border-l border-white/5">
-            <AIPanels 
-              selectedText={selectedText}
-              activeFileContent={store.activeFile?.content}
-              onGeneratedCode={(code) => {
-                if (store.activeFileId) {
-                  const currentContent = store.activeFile?.content || '';
-                  store.updateFileContent(store.activeFileId, currentContent + "\n" + code);
-                } else {
-                  const newId = store.createFile();
-                  if (newId) store.updateFileContent(newId, code);
-                }
-              }}
-            />
-          </div>
-        )}
+        {/* AI Assistant Sidebar */}
+        <AnimatePresence>
+          {store.ui.isAIPanelOpen && (
+            <motion.div 
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 320, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              className="h-full border-l border-white/5 bg-[#0D1117] z-40"
+            >
+              <AIPanels 
+                selectedText=""
+                activeFileContent={store.activeFile?.content}
+                onGeneratedCode={(code) => {
+                  if (store.activeFileId) store.updateFileContent(store.activeFileId, code)
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      <SettingsModal 
-        isOpen={store.isSettingsOpen}
-        onClose={() => store.setIsSettingsOpen(false)}
-        fontSize={store.fontSize}
-        onFontSizeChange={(val) => store.setFontSize(val)}
+      {/* Overlays */}
+      <CommandPalette 
+        isOpen={store.ui.isCommandPaletteOpen} 
+        onClose={() => store.setUi({ ...store.ui, isCommandPaletteOpen: false })} 
       />
 
       <Toaster />
     </div>
-  );
+  )
 }
