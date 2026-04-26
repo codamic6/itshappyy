@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from 'react'
-import { Sparkles, HelpCircle, Code2, Loader2, Send, Bot, MessageSquare } from 'lucide-react'
+import { Sparkles, HelpCircle, Code2, Loader2, Send, Bot, MessageSquare, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -27,7 +27,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
   const [chatPrompt, setChatPrompt] = useState('')
   const [genPrompt, setGenPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hello! I'm Caret AI. How can I help with your code today?" }
+    { role: 'assistant', content: "Hello! I'm Caret AI. I'm connected to Gemini 2.5. How can I assist your coding today?" }
   ])
   const [isBusy, setIsBusy] = useState(false)
   const [explanation, setExplanation] = useState('')
@@ -38,11 +38,6 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight
   }, [messages])
 
-  const isCodingTask = (text: string) => {
-    const codeKeywords = ['code', 'function', 'build', 'create', 'write', 'fix', 'debug', 'how', 'component', 'script', 'react', 'typescript', 'js', 'py']
-    return codeKeywords.some(k => text.toLowerCase().includes(k))
-  }
-
   const handleChat = async () => {
     if (!chatPrompt.trim()) return
     const userMsg = chatPrompt.trim()
@@ -50,20 +45,14 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
     setChatPrompt('')
     setIsBusy(true)
 
-    if (!isCodingTask(userMsg)) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "I am specialized in coding tasks. Please describe a coding problem or task you'd like help with." }])
-      setIsBusy(false)
-      return
-    }
-
     try {
-      const context = activeFileContent ? `Current file context:\n${activeFileContent}` : ""
+      const context = activeFileContent ? `\n\nContext from active file:\n\`\`\`\n${activeFileContent}\n\`\`\`` : ""
       const result = await aiCodeGeneration({ 
-        description: `As a coding assistant, answer this: ${userMsg}. ${context}` 
+        description: `As a professional coding expert, answer this: ${userMsg}. ${context}` 
       })
       setMessages(prev => [...prev, { role: 'assistant', content: result.code }])
     } catch (err) {
-      toast({ variant: 'destructive', title: "Chat error" })
+      toast({ variant: 'destructive', title: "Gemini connection failed" })
     } finally {
       setIsBusy(false)
     }
@@ -76,7 +65,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
       const result = await aiCodeGeneration({ description: genPrompt })
       onGeneratedCode(result.code)
       setGenPrompt('')
-      toast({ title: "Code generated" })
+      toast({ title: "Code generated and inserted" })
     } catch (err) {
       toast({ variant: 'destructive', title: "Generation failed" })
     } finally {
@@ -86,7 +75,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
 
   const handleExplain = async () => {
     if (!selectedText) {
-      toast({ title: "No code selected" })
+      toast({ title: "Please select code in the editor first" })
       return
     }
     setIsBusy(true)
@@ -101,84 +90,99 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
   }
 
   return (
-    <div className="w-80 border-l bg-[#0D0D0D] flex flex-col h-full overflow-hidden shadow-2xl">
-      <div className="p-4 border-b flex items-center gap-2 bg-card/20">
-        <Sparkles className="h-4 w-4 text-primary" />
-        <span className="text-xs font-bold tracking-widest text-primary">CARET AI</span>
+    <div className="w-80 flex flex-col h-full overflow-hidden bg-[#0A0A0A] shadow-2xl animate-in slide-in-from-right duration-300">
+      <div className="p-4 border-b border-white/5 flex items-center justify-between bg-black/40">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 rounded bg-primary flex items-center justify-center animate-pulse">
+            <Zap className="h-3 w-3 text-white" />
+          </div>
+          <span className="text-[10px] font-black tracking-widest text-primary uppercase">Caret AI Assistant</span>
+        </div>
       </div>
 
       <Tabs defaultValue="chat" className="flex-1 flex flex-col overflow-hidden">
-        <TabsList className="w-full bg-transparent p-1 h-10 border-b border-white/5">
-          <TabsTrigger value="chat" className="flex-1 text-xs gap-1.5 cursor-pointer"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
-          <TabsTrigger value="gen" className="flex-1 text-xs gap-1.5 cursor-pointer"><Code2 className="h-3 w-3" />Build</TabsTrigger>
-          <TabsTrigger value="help" className="flex-1 text-xs gap-1.5 cursor-pointer"><HelpCircle className="h-3 w-3" />Help</TabsTrigger>
+        <TabsList className="w-full bg-transparent p-1 h-10 border-b border-white/5 gap-1">
+          <TabsTrigger value="chat" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter cursor-pointer data-[state=active]:bg-primary/20"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
+          <TabsTrigger value="gen" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter cursor-pointer data-[state=active]:bg-primary/20"><Code2 className="h-3 w-3" />Build</TabsTrigger>
+          <TabsTrigger value="help" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter cursor-pointer data-[state=active]:bg-primary/20"><HelpCircle className="h-3 w-3" />Logic</TabsTrigger>
         </TabsList>
 
         <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0">
           <ScrollArea className="flex-1 p-4" ref={scrollRef}>
             <div className="space-y-4">
               {messages.map((m, i) => (
-                <div key={i} className={cn("flex gap-2 max-w-[95%]", m.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto")}>
-                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center shrink-0", m.role === 'user' ? "bg-accent" : "bg-primary")}>
-                    {m.role === 'user' ? <div className="text-[10px]">U</div> : <Bot className="h-3.5 w-3.5" />}
+                <div key={i} className={cn("flex gap-2 max-w-[95%] animate-in fade-in slide-in-from-bottom-2", m.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto")}>
+                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-lg", m.role === 'user' ? "bg-accent" : "bg-primary")}>
+                    {m.role === 'user' ? <div className="text-[10px] font-bold">U</div> : <Bot className="h-3.5 w-3.5" />}
                   </div>
-                  <div className={cn("rounded-lg p-2 text-[11px] leading-relaxed", m.role === 'user' ? "bg-accent/10 border border-accent/20" : "bg-muted/30 border border-white/5")}>
+                  <div className={cn("rounded-2xl p-3 text-[11px] leading-relaxed shadow-sm", m.role === 'user' ? "bg-accent/10 border border-accent/20 text-accent-foreground" : "bg-muted/30 border border-white/5")}>
                     <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
                   </div>
                 </div>
               ))}
               {isBusy && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 animate-pulse">
                   <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   </div>
-                  <div className="bg-muted/30 rounded-lg p-2 text-[10px] border border-white/5">Caret AI is thinking...</div>
+                  <div className="bg-muted/30 rounded-2xl p-3 text-[10px] border border-white/5 italic opacity-50">Caret AI is processing...</div>
                 </div>
               )}
             </div>
           </ScrollArea>
-          <div className="p-4 border-t bg-black/20">
-            <div className="relative">
+          <div className="p-4 border-t border-white/5 bg-black/40">
+            <div className="relative group">
               <Textarea 
-                placeholder="Ask a coding question..."
-                className="min-h-[60px] max-h-[120px] bg-background border-white/5 resize-none text-[11px] pr-10"
+                placeholder="Ask anything about coding..."
+                className="min-h-[70px] max-h-[150px] bg-background border-white/10 resize-none text-[11px] pr-10 focus:border-primary/50 transition-all rounded-xl shadow-inner"
                 value={chatPrompt}
                 onChange={(e) => setChatPrompt(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChat())}
               />
-              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-7 w-7 text-primary" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
+              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-8 w-8 text-primary hover:bg-primary/10 transition-colors" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
                 <Send className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="gen" className="flex-1 p-4 space-y-4 m-0">
-          <div className="space-y-2">
-            <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Generate Code</h3>
+        <TabsContent value="gen" className="flex-1 p-5 space-y-6 m-0 overflow-y-auto">
+          <div className="space-y-4 animate-in fade-in duration-500">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Generate Module</h3>
+            </div>
             <Textarea 
-              placeholder="e.g. Create a React hook for API calls..."
-              className="min-h-[120px] bg-background border-white/5 text-[11px]"
+              placeholder="e.g. 'Create a React dashboard component with charts'..."
+              className="min-h-[150px] bg-background border-white/10 text-[11px] rounded-xl"
               value={genPrompt}
               onChange={(e) => setGenPrompt(e.target.value)}
             />
-            <Button className="w-full h-9 text-xs gap-2" onClick={handleGenerate} disabled={isBusy || !genPrompt.trim()}>
+            <Button className="w-full h-10 text-[11px] font-bold uppercase tracking-widest gap-2 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(124,58,237,0.3)]" onClick={handleGenerate} disabled={isBusy || !genPrompt.trim()}>
               {isBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-              Build Module
+              Build with AI
             </Button>
+            <p className="text-[9px] text-center text-muted-foreground italic">Code will be appended to your active file.</p>
           </div>
         </TabsContent>
 
-        <TabsContent value="help" className="flex-1 p-4 space-y-4 m-0 overflow-y-auto">
-          <div className="space-y-3">
-            <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Logic Analysis</h3>
-            <Button variant="outline" className="w-full h-9 text-xs border-primary/20 hover:bg-primary/5 gap-2" onClick={handleExplain} disabled={isBusy}>
-              {isBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <HelpCircle className="h-4 w-4" />}
-              Explain Selected Code
-            </Button>
+        <TabsContent value="help" className="flex-1 p-5 space-y-6 m-0 overflow-y-auto">
+          <div className="space-y-4 animate-in fade-in duration-500">
+            <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em]">Analyze Logic</h3>
+            <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 space-y-3">
+              <p className="text-[10px] text-muted-foreground leading-relaxed">Highlight a piece of code in the editor and click the button below to get a deep dive explanation of its functionality.</p>
+              <Button variant="outline" className="w-full h-10 text-[11px] font-bold uppercase tracking-widest border-primary/20 hover:bg-primary/10 gap-2" onClick={handleExplain} disabled={isBusy}>
+                {isBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : <HelpCircle className="h-4 w-4" />}
+                Explain Selection
+              </Button>
+            </div>
             {explanation && (
-              <div className="bg-muted/20 rounded-md p-3 border border-white/5">
-                <p className="text-[11px] leading-relaxed whitespace-pre-wrap">{explanation}</p>
+              <div className="bg-muted/10 rounded-xl p-4 border border-white/5 animate-in slide-in-from-top-2">
+                <div className="flex items-center gap-2 mb-3 border-b border-white/5 pb-2">
+                  <Bot className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">AI Analysis</span>
+                </div>
+                <p className="text-[11px] leading-relaxed whitespace-pre-wrap opacity-80">{explanation}</p>
               </div>
             )}
           </div>

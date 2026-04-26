@@ -1,119 +1,136 @@
 
 "use client"
 
-import React, { useState } from 'react';
-import Editor from '@monaco-editor/react';
-import { Send, Sparkles, Terminal, Code2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MenuBar } from '@/components/editor/menu-bar';
+import { EditorSidebar } from '@/components/editor/sidebar';
+import { CodeEditor } from '@/components/editor/code-editor';
+import { AIPanels } from '@/components/editor/ai-panels';
+import { Terminal } from '@/components/editor/terminal';
+import { WelcomeScreen } from '@/components/editor/welcome-screen';
+import { SettingsModal } from '@/components/editor/settings-modal';
+import { useEditorStore } from '@/hooks/use-editor-store';
+import { Toaster } from '@/components/ui/toaster';
+import { X, Code2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function App() {
-  const [code, setCode] = useState('// Start coding here...\nfunction helloWorld() {\n  console.log("Hello CARET!");\n}');
-  const [prompt, setPrompt] = useState('');
-  const [chatHistory, setChatHistory] = useState<{role: 'user' | 'ai', text: string}[]>([]);
+  const store = useEditorStore();
+  const [selectedText, setSelectedText] = useState('');
 
-  // Mock function to handle AI Chat
-  const handleAIChat = () => {
-    if (!prompt.trim()) return;
-
-    const userPrompt = prompt;
-    setChatHistory(prev => [...prev, { role: 'user', text: userPrompt }]);
-    setPrompt('');
-
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = `/* AI: ${userPrompt} */\n`;
-      setCode(prevCode => prevCode + "\n" + aiResponse);
-      setChatHistory(prev => [...prev, { role: 'ai', text: `Generated code for: "${userPrompt}" and appended to editor.` }]);
-    }, 500);
-  };
+  // Auto-detect empty state
+  const noFilesOpen = store.openTabs.length === 0;
 
   return (
-    <div className="flex h-screen w-screen bg-[#0D0D0D] text-gray-200 overflow-hidden font-sans">
-      {/* 70% Editor Area */}
-      <div className="w-[70%] flex flex-col border-r border-gray-800">
-        <div className="h-10 bg-[#111] border-b border-gray-800 flex items-center px-4 gap-2">
-          <Code2 className="h-4 w-4 text-blue-400" />
-          <span className="text-xs font-medium tracking-tight">main.js — Caret Editor</span>
-        </div>
-        <div className="flex-1 overflow-hidden">
-          <Editor
-            height="100%"
-            defaultLanguage="javascript"
-            theme="vs-dark"
-            value={code}
-            onChange={(value) => setCode(value || '')}
-            options={{
-              fontSize: 14,
-              fontFamily: "'JetBrains Mono', 'Source Code Pro', monospace",
-              minimap: { enabled: false },
-              padding: { top: 16 },
-              cursorBlinking: "smooth",
-              smoothScrolling: true,
-              contextmenu: true,
-            }}
-          />
-        </div>
-        <div className="h-8 bg-[#111] border-t border-gray-800 flex items-center px-4 justify-between text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5"><Terminal className="h-3 w-3" /> Terminal</span>
-            <span>UTF-8</span>
+    <div className="flex flex-col h-screen w-screen bg-[#0D0D0D] text-foreground overflow-hidden font-body">
+      {/* Top Header */}
+      <MenuBar onNewFile={() => store.setIsCreatingFile(true)} />
+
+      <div className="flex flex-1 overflow-hidden relative">
+        {/* Left Sidebar */}
+        {store.isSidebarOpen && (
+          <div className="h-full border-r border-white/5 bg-[#0A0A0A]">
+            <EditorSidebar onNewFile={() => store.setIsCreatingFile(true)} />
           </div>
-          <div className="text-blue-400/80">JavaScript</div>
-        </div>
-      </div>
+        )}
 
-      {/* 30% AI Chat Sidebar */}
-      <div className="w-[30%] flex flex-col bg-[#111]">
-        <div className="p-4 border-b border-gray-800 flex items-center gap-2 bg-[#151515]">
-          <Sparkles className="h-4 w-4 text-purple-500" />
-          <h2 className="text-sm font-bold tracking-widest uppercase">AI Assistant</h2>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {chatHistory.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center opacity-30 space-y-4 p-6">
-              <Sparkles className="h-12 w-12" />
-              <p className="text-xs">Ask me to generate functions, explain logic, or build components.</p>
-            </div>
+        {/* Main Editor Area */}
+        <div className="flex-1 flex flex-col min-w-0 bg-[#0D0D0D] relative">
+          {noFilesOpen ? (
+            <WelcomeScreen onNewFile={() => store.createFile()} />
           ) : (
-            chatHistory.map((msg, i) => (
-              <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className={`max-w-[90%] p-3 rounded-xl text-xs leading-relaxed ${
-                  msg.role === 'user' 
-                    ? 'bg-blue-600/10 border border-blue-500/20 text-blue-100' 
-                    : 'bg-gray-800 border border-gray-700 text-gray-300'
-                }`}>
-                  {msg.text}
-                </div>
+            <>
+              {/* Tab Bar */}
+              <div className="h-9 bg-[#0A0A0A] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-2 gap-0.5">
+                {store.openFiles.map((file) => (
+                  <div
+                    key={file.id}
+                    className={cn(
+                      "h-full min-w-[120px] max-w-[200px] flex items-center justify-between px-3 text-[11px] cursor-pointer border-r border-white/5 group transition-all",
+                      store.activeFileId === file.id 
+                        ? "bg-[#0D0D0D] text-primary border-t-2 border-t-primary" 
+                        : "text-muted-foreground hover:bg-white/5"
+                    )}
+                    onClick={() => store.selectFile(file.id)}
+                  >
+                    <div className="flex items-center gap-2 truncate">
+                      <Code2 className="h-3 w-3 shrink-0" />
+                      <span className="truncate">{file.name}</span>
+                    </div>
+                    <button 
+                      className="opacity-0 group-hover:opacity-100 p-0.5 hover:bg-white/10 rounded transition-all"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        store.closeTab(file.id);
+                      }}
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))
+
+              {/* Code Canvas */}
+              <div className="flex-1 flex flex-col overflow-hidden">
+                {store.activeFile && (
+                  <CodeEditor 
+                    content={store.activeFile.content || ''}
+                    language={store.activeFile.language || 'typescript'}
+                    fontSize={store.fontSize}
+                    onChange={(val) => store.updateFileContent(store.activeFileId!, val)}
+                    onSelectionChange={setSelectedText}
+                  />
+                )}
+              </div>
+
+              {/* Bottom Terminal */}
+              {store.isTerminalOpen && <Terminal />}
+            </>
           )}
+
+          {/* Status Bar */}
+          <div className="h-6 bg-[#0A0A0A] border-t border-white/5 flex items-center px-4 justify-between text-[10px] text-muted-foreground uppercase tracking-widest font-bold z-30">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5 hover:text-foreground cursor-pointer transition-colors" onClick={() => store.setIsTerminalOpen(!store.isTerminalOpen)}>
+                Terminal
+              </span>
+              <span>UTF-8</span>
+            </div>
+            <div className="flex items-center gap-4">
+              {store.activeFile && <span className="text-primary">{store.activeFile.language}</span>}
+              <span className="hover:text-primary transition-colors cursor-pointer">AI: Connected</span>
+            </div>
+          </div>
         </div>
 
-        <div className="p-4 bg-[#151515] border-t border-gray-800">
-          <div className="relative group">
-            <textarea
-              className="w-full bg-[#0D0D0D] border border-gray-700 rounded-lg p-3 pr-12 text-xs focus:outline-none focus:border-purple-500 transition-colors resize-none min-h-[80px]"
-              placeholder="Describe what you want to build..."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleAIChat();
+        {/* Right AI Assistant Panel */}
+        {store.isAIPanelOpen && (
+          <div className="h-full border-l border-white/5">
+            <AIPanels 
+              selectedText={selectedText}
+              activeFileContent={store.activeFile?.content}
+              onGeneratedCode={(code) => {
+                if (store.activeFileId) {
+                  const currentContent = store.activeFile?.content || '';
+                  store.updateFileContent(store.activeFileId, currentContent + "\n" + code);
+                } else {
+                  const newId = store.createFile();
+                  if (newId) store.updateFileContent(newId, code);
                 }
               }}
             />
-            <button
-              onClick={handleAIChat}
-              disabled={!prompt.trim()}
-              className="absolute right-3 bottom-3 p-1.5 rounded-md bg-purple-600 text-white hover:bg-purple-500 disabled:opacity-30 disabled:hover:bg-purple-600 transition-all shadow-lg"
-            >
-              <Send className="h-4 w-4" />
-            </button>
           </div>
-          <p className="text-[9px] text-gray-500 mt-2 text-center italic">Press Enter to generate</p>
-        </div>
+        )}
       </div>
+
+      <SettingsModal 
+        isOpen={store.isSettingsOpen}
+        onClose={() => store.setIsSettingsOpen(false)}
+        fontSize={store.fontSize}
+        onFontSizeChange={(val) => store.setFontSize(val)}
+      />
+
+      <Toaster />
     </div>
   );
 }

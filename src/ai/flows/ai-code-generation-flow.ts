@@ -1,19 +1,14 @@
+
 'use server';
 /**
  * @fileOverview A Genkit flow for generating code snippets or entire functions based on natural language prompts.
- *
- * - aiCodeGeneration - A function that handles the AI code generation process.
- * - AICodeGenerationInput - The input type for the aiCodeGeneration function.
- * - AICodeGenerationOutput - The return type for the aiCodeGeneration function.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'zod';
 
 const AICodeGenerationInputSchema = z.object({
-  description: z
-    .string()
-    .describe('A natural language description of the code to generate.'),
+  description: z.string().describe('A natural language description of the code to generate.'),
 });
 export type AICodeGenerationInput = z.infer<typeof AICodeGenerationInputSchema>;
 
@@ -22,23 +17,17 @@ const AICodeGenerationOutputSchema = z.object({
 });
 export type AICodeGenerationOutput = z.infer<typeof AICodeGenerationOutputSchema>;
 
-export async function aiCodeGeneration(
-  input: AICodeGenerationInput
-): Promise<AICodeGenerationOutput> {
-  return aiCodeGenerationFlow(input);
-}
-
-const prompt = ai.definePrompt({
+const codeGenPrompt = ai.definePrompt({
   name: 'aiCodeGenerationPrompt',
-  input: {schema: AICodeGenerationInputSchema},
-  output: {schema: AICodeGenerationOutputSchema},
+  input: { schema: AICodeGenerationInputSchema },
+  output: { schema: AICodeGenerationOutputSchema },
   prompt: `You are an expert code generation assistant. Your task is to generate clean, efficient, and well-structured code based on the user's description.
 
-Generate the code that matches the following description:
+If the description is not related to coding, return a polite message asking for a coding-related task.
 
 Description: {{{description}}}
 
-Only provide the code, do not include any additional explanations or text outside of the code block. If the code is for a specific language, use a fenced code block with the language specified.`,
+Output ONLY the raw code or a concise explanation if it's a question. No markdown blocks if possible, just the content.`,
 });
 
 const aiCodeGenerationFlow = ai.defineFlow(
@@ -47,8 +36,12 @@ const aiCodeGenerationFlow = ai.defineFlow(
     inputSchema: AICodeGenerationInputSchema,
     outputSchema: AICodeGenerationOutputSchema,
   },
-  async input => {
-    const {output} = await prompt(input);
+  async (input) => {
+    const { output } = await codeGenPrompt(input);
     return output!;
   }
 );
+
+export async function aiCodeGeneration(input: AICodeGenerationInput): Promise<AICodeGenerationOutput> {
+  return aiCodeGenerationFlow(input);
+}
