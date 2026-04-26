@@ -1,29 +1,28 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 0 0% 9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 195 89% 55%;
+    --primary: 263 70% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 3.7% 15.9%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 263 70% 50%;
     --radius: 0.5rem;
   }
 }
@@ -37,18 +36,18 @@
   }
 }
 
-/* Custom scrollbar for IDE feel */
+/* Scrollbar styling for IDE feel */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-[#0c0c0e];
+  @apply bg-[#0D0D0D];
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/20 rounded-full;
+  @apply bg-muted-foreground/20 rounded-sm;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -57,4 +56,13 @@
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes ghost-text-animation {
+  from { opacity: 0.3; }
+  to { opacity: 0.5; }
+}
+
+.ghost-text {
+  animation: ghost-text-animation 1.5s infinite alternate;
 }
