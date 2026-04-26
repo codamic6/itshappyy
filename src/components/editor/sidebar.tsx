@@ -6,7 +6,7 @@ import { FileCode, Plus, ChevronDown, Trash2, FilePlus, FolderPlus, Search } fro
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useEditorStore } from "@/hooks/use-editor-store"
+import { useEditorStore, detectLanguage } from "@/hooks/use-editor-store"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -17,7 +17,7 @@ export function EditorSidebar() {
   const [searchQuery, setSearchQuery] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const files = Object.values(store.files).filter(f => 
+  const files = Object.values(store.files).filter((f: any) => 
     f.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
@@ -98,7 +98,11 @@ export function EditorSidebar() {
                     onChange={(e) => setNewFileName(e.target.value)}
                     onKeyDown={handleKeyDown}
                     onBlur={() => {
-                      if (!newFileName.trim()) setIsCreating(false)
+                      if (!newFileName.trim()) {
+                        setIsCreating(false)
+                      } else {
+                        handleCreate()
+                      }
                     }}
                   />
                 </motion.div>
@@ -106,7 +110,7 @@ export function EditorSidebar() {
             </AnimatePresence>
 
             {files.length > 0 ? (
-              files.map((file) => (
+              files.map((file: any) => (
                 <div
                   key={file.id}
                   className={cn(

@@ -16,7 +16,7 @@ export interface TerminalLine {
   content: string
 }
 
-const detectLanguage = (fileName: string) => {
+export const detectLanguage = (fileName: string) => {
   const ext = fileName.split('.').pop()?.toLowerCase() || ''
   const map: Record<string, string> = {
     'py': 'python',
@@ -26,16 +26,29 @@ const detectLanguage = (fileName: string) => {
     'tsx': 'typescript',
     'html': 'html',
     'css': 'css',
+    'scss': 'scss',
+    'less': 'less',
     'json': 'json',
     'md': 'markdown',
     'cpp': 'cpp',
+    'cxx': 'cpp',
+    'h': 'cpp',
+    'hpp': 'cpp',
     'go': 'go',
     'rs': 'rust',
     'java': 'java',
     'c': 'c',
     'sh': 'shell',
+    'bash': 'shell',
     'php': 'php',
-    'sql': 'sql'
+    'sql': 'sql',
+    'yaml': 'yaml',
+    'yml': 'yaml',
+    'xml': 'xml',
+    'rb': 'ruby',
+    'cs': 'csharp',
+    'swift': 'swift',
+    'kt': 'kotlin'
   }
   return map[ext] || 'plaintext'
 }
@@ -75,16 +88,16 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
 
   const createFile = useCallback((name: string, content: string = '') => {
     const id = Math.random().toString(36).substring(7)
+    const language = detectLanguage(name)
     const newNode: FileNode = {
       id,
       name,
       content,
-      language: detectLanguage(name),
+      language,
       path: `/${name}`
     }
 
     setFiles(prev => ({ ...prev, [id]: newNode }))
-    // Open the tab and select it immediately
     setOpenTabs(prev => {
       if (prev.includes(id)) return prev
       return [...prev, id]
@@ -125,9 +138,10 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const renameFile = useCallback((id: string, newName: string) => {
     setFiles(prev => {
       if (!prev[id]) return prev
+      const language = detectLanguage(newName)
       return {
         ...prev,
-        [id]: { ...prev[id], name: newName, language: detectLanguage(newName) }
+        [id]: { ...prev[id], name: newName, language }
       }
     })
   }, [])
@@ -149,7 +163,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }])
         break
       case 'ls':
-        const fileNames = Object.values(files).map(f => f.name).join('  ')
+        const fileNames = Object.values(files).map((f: any) => f.name).join('  ')
         setTerminalHistory(prev => [...prev, { type: 'output', content: fileNames || '(empty workspace)' }])
         break
       case 'pwd':
