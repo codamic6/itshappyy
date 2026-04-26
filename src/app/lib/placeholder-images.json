@@ -1,0 +1,11 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "app-logo",
+      "description": "DevSphere AI professional logo",
+      "imageUrl": "https://picsum.photos/seed/devsphere/200/200",
+      "imageHint": "technology logo"
+    }
+  ]
+}
