@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useEffect } from 'react';
@@ -12,25 +11,30 @@ import { WelcomeScreen } from '@/components/editor/welcome-screen';
 import { CommandPalette } from '@/components/editor/command-palette';
 import { useEditorStore } from '@/hooks/use-editor-store';
 import { Toaster } from '@/components/ui/toaster';
+import { useToast } from '@/hooks/use-toast';
 import { Sparkles, Terminal as TerminalIcon, GitBranch, MousePointer2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MenuBar } from '@/components/editor/menu-bar';
 
 export default function App() {
   const store = useEditorStore();
+  const { toast } = useToast();
 
   const handleNewFile = () => {
     store.setIsSidebarOpen(true);
     store.setUi({ ...store.ui, activeView: 'explorer' });
     const id = store.createNode(`untitled-${Object.keys(store.files).length + 1}.js`, 'file');
     store.selectFile(id);
+    toast({ title: "New File Created", description: "Start coding now!" });
   };
 
   // Global Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey || e.metaKey) {
-        switch (e.key.toLowerCase()) {
+        const key = e.key.toLowerCase();
+        
+        switch (key) {
           case 'b':
             e.preventDefault();
             store.setIsSidebarOpen(!store.ui.isSidebarOpen);
@@ -45,11 +49,19 @@ export default function App() {
             break;
           case 'k':
             e.preventDefault();
-            store.setIsCommandPaletteOpen(!store.ui.isCommandPaletteOpen);
+            store.setIsCommandPaletteOpen(true);
             break;
           case 'n':
             e.preventDefault();
             handleNewFile();
+            break;
+          case 'p':
+            e.preventDefault();
+            store.setUi({ ...store.ui, isCommandPaletteOpen: true });
+            break;
+          case 's':
+            e.preventDefault();
+            toast({ title: "Saved", description: store.activeFile?.name || "Workspace saved" });
             break;
         }
       }
@@ -57,7 +69,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [store.ui, store.setIsSidebarOpen, store.setIsAIPanelOpen, store.setIsTerminalOpen, store.setIsCommandPaletteOpen]);
+  }, [store.ui, store.activeFile, store.setIsSidebarOpen, store.setIsAIPanelOpen, store.setIsTerminalOpen, store.setIsCommandPaletteOpen, handleNewFile]);
 
   return (
     <div className="flex h-screen w-screen bg-[#0A0D12] text-foreground overflow-hidden font-body selection:bg-primary/30 selection:text-white">
