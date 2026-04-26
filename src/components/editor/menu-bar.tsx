@@ -1,7 +1,8 @@
 
 "use client"
 
-import { Command, Play, Github } from 'lucide-react'
+import { useRef } from 'react'
+import { Command, Play, Github, FileUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Menubar,
@@ -13,6 +14,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { useEditorStore } from '@/hooks/use-editor-store'
+import { useToast } from '@/hooks/use-toast'
 
 interface MenuBarProps {
   onNewFile: () => void
@@ -20,9 +22,43 @@ interface MenuBarProps {
 
 export function MenuBar({ onNewFile }: MenuBarProps) {
   const store = useEditorStore()
+  const { toast } = useToast()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleOpenFileClick = () => {
+    fileInputRef.current?.click()
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const content = event.target?.result as string
+      const id = store.createNode(file.name, 'file', null, content)
+      store.selectFile(id)
+      toast({
+        title: "File Opened",
+        description: `Successfully loaded ${file.name}`,
+      })
+    }
+    reader.readAsText(file)
+    
+    // Reset input so the same file can be opened again if needed
+    e.target.value = ''
+  }
 
   return (
     <header className="h-10 border-b flex items-center justify-between px-4 bg-[#0A0A0A] z-50">
+      {/* Hidden File Input */}
+      <input 
+        type="file" 
+        ref={fileInputRef} 
+        className="hidden" 
+        onChange={handleFileChange}
+      />
+
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <div className="w-5 h-5 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold text-[10px] shadow-[0_0_10px_rgba(124,58,237,0.3)]">C</div>
@@ -34,7 +70,7 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
             <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">File</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
               <MenubarItem onClick={onNewFile}>New File <MenubarShortcut>Ctrl+N</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={() => alert("Simulating Open File picker...")}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={handleOpenFileClick}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
               <MenubarSeparator className="bg-white/5" />
               <MenubarItem disabled={!store.activeFileId}>Save <MenubarShortcut>Ctrl+S</MenubarShortcut></MenubarItem>
               <MenubarItem disabled={!store.activeFileId}>Save As...</MenubarItem>
@@ -56,7 +92,7 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
               <MenubarItem onClick={() => {
                 if (store.activeFileId) {
                   const name = window.prompt("New name:", store.activeFile?.name)
-                  if (name) store.renameFile(store.activeFileId, name)
+                  if (name) store.renameNode(store.activeFileId, name)
                 }
               }} disabled={!store.activeFileId}>Rename</MenubarItem>
             </MenubarContent>
@@ -65,14 +101,14 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
           <MenubarMenu>
             <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">View</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
-              <MenubarItem onClick={() => store.setIsSidebarOpen(!store.isSidebarOpen)}>
-                {store.isSidebarOpen ? "Hide Explorer" : "Show Explorer"}
+              <MenubarItem onClick={() => store.setIsSidebarOpen(!store.ui.isSidebarOpen)}>
+                {store.ui.isSidebarOpen ? "Hide Explorer" : "Show Explorer"}
               </MenubarItem>
-              <MenubarItem onClick={() => store.setIsTerminalOpen(!store.isTerminalOpen)}>
-                {store.isTerminalOpen ? "Hide Terminal" : "Show Terminal"}
+              <MenubarItem onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}>
+                {store.ui.isTerminalOpen ? "Hide Terminal" : "Show Terminal"}
               </MenubarItem>
-              <MenubarItem onClick={() => store.setIsAIPanelOpen(!store.isAIPanelOpen)}>
-                {store.isAIPanelOpen ? "Hide AI Assistant" : "Show AI Assistant"}
+              <MenubarItem onClick={() => store.setIsAIPanelOpen(!store.ui.isAIPanelOpen)}>
+                {store.ui.isAIPanelOpen ? "Hide AI Assistant" : "Show AI Assistant"}
               </MenubarItem>
               <MenubarSeparator className="bg-white/5" />
               <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>Settings</MenubarItem>
