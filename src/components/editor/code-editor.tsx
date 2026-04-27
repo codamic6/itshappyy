@@ -7,6 +7,8 @@ import { X } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from 'framer-motion'
 import { FileIcon } from "./file-icon"
+import { useFirestore } from "@/firebase"
+import { collection, onSnapshot, query, where } from "firebase/firestore"
 
 interface CodeEditorProps {
   content: string
@@ -21,6 +23,42 @@ interface CodeEditorProps {
 
 export function CodeEditor({ content, language, fontSize, onChange, openFiles, activeFileId, onTabClick, onTabClose }: CodeEditorProps) {
   const editorRef = useRef<any>(null)
+  const monacoRef = useRef<any>(null)
+  const firestore = useFirestore()
+
+  // The API Bridge: Safely execute dynamic code with monaco and editor instances
+  const applyPlugin = (code: string) => {
+    if (!monacoRef.current || !editorRef.current) return
+
+    try {
+      const pluginFn = new Function('monaco', 'editor', code)
+      pluginFn(monacoRef.current, editorRef.current)
+      console.log("Caret Extension Applied Successfully")
+    } catch (error) {
+      console.error("Caret Extension Execution Failed:", error)
+    }
+  }
+
+  // Execution Loop: Listen to Firestore and apply extensions live
+  useEffect(() => {
+    if (!firestore) return
+
+    const extensionsRef = collection(firestore, 'caret_extensions')
+    const q = query(extensionsRef, where('isEnabled', '==', true))
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added" || change.type === "modified") {
+          const extensionData = change.doc.data()
+          if (extensionData.code) {
+            applyPlugin(extensionData.code)
+          }
+        }
+      })
+    })
+
+    return () => unsubscribe()
+  }, [firestore])
 
   useEffect(() => {
     if (editorRef.current) {
@@ -79,8 +117,10 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
               language={language}
               value={content}
               theme="vs-dark"
-              onMount={(editor) => {
+              onMount={(editor, monaco) => {
                 editorRef.current = editor
+                monacoRef.current = monaco
+                // Apply existing extensions once on mount
               }}
               options={{
                 fontSize,

@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Plus, ChevronDown, ChevronRight, Trash2, FilePlus, FolderPlus, Search, MoreVertical, Edit2, Folder, FolderOpen, GitBranch, Blocks, History, Package } from "lucide-react"
+import { Plus, ChevronDown, ChevronRight, Trash2, FilePlus, FolderPlus, Search, MoreVertical, Edit2, Folder, FolderOpen, GitBranch, Blocks, History, Package, Zap } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -10,6 +10,8 @@ import { useEditorStore } from "@/hooks/use-editor-store"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { motion, AnimatePresence } from "framer-motion"
 import { FileIcon } from "./file-icon"
+import { useCollection, useFirestore, useMemoFirebase } from "@/firebase"
+import { collection, query } from "firebase/firestore"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -246,39 +248,53 @@ function SourceControlView() {
 }
 
 function ExtensionsView() {
-  const extensions = [
-    { name: "Caret Python AI", desc: "Advanced Python logic", author: "Caret Team", installed: true },
-    { name: "Tailwind IntelliSense", desc: "Auto-completion for Tailwind", author: "Tailwind Labs", installed: true },
-    { name: "GitLens Lite", desc: "Visualize code authorship", author: "GitKraken", installed: false },
-    { name: "Prettier", desc: "Opinionated code formatter", author: "Prettier", installed: true },
-  ]
+  const firestore = useFirestore()
+  const extensionsQuery = useMemoFirebase(() => {
+    if (!firestore) return null
+    return query(collection(firestore, 'caret_extensions'))
+  }, [firestore])
+  
+  const { data: liveExtensions, isLoading } = useCollection(extensionsQuery)
 
   return (
     <div className="flex flex-col h-full">
       <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Extensions</span>
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Live Extensions</span>
       </div>
       <div className="p-4 space-y-4">
-        <input 
-          className="w-full bg-white/[0.03] border border-white/5 rounded-md py-1.5 px-3 text-[11px] focus:outline-none focus:border-primary/30"
-          placeholder="Search extensions..."
-        />
-        <div className="space-y-3">
-          {extensions.map((ext, i) => (
-            <div key={i} className="p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group border border-transparent hover:border-white/5">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-md bg-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-                  <Package className="h-4 w-4" />
+        <div className="text-[9px] text-muted-foreground/50 italic mb-2">Connected to Firestore Live Extension System</div>
+        {isLoading ? (
+          <div className="flex items-center justify-center py-10">
+            <span className="text-[10px] animate-pulse">Loading live plugins...</span>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {liveExtensions?.map((ext: any) => (
+              <div key={ext.id} className="p-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-primary/30 transition-all group cursor-default">
+                <div className="flex items-start gap-3">
+                  <div className={cn(
+                    "w-8 h-8 rounded-md flex items-center justify-center transition-colors",
+                    ext.isEnabled ? "bg-primary/20 text-primary" : "bg-muted/20 text-muted-foreground"
+                  )}>
+                    <Zap className="h-4 w-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="text-xs font-bold text-foreground truncate">{ext.name}</h4>
+                      {ext.isEnabled && <Badge className="bg-green-500/10 text-green-500 border-green-500/20 text-[8px] h-4">LIVE</Badge>}
+                    </div>
+                    <p className="text-[10px] text-muted-foreground mt-1 line-clamp-2">{ext.description}</p>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-xs font-bold text-foreground truncate">{ext.name}</h4>
-                  <p className="text-[10px] text-muted-foreground truncate">{ext.author}</p>
-                </div>
-                {!ext.installed && <Button size="sm" variant="ghost" className="h-6 text-[9px] uppercase font-bold text-primary">Install</Button>}
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+            {(!liveExtensions || liveExtensions.length === 0) && (
+              <div className="text-[10px] text-muted-foreground/40 text-center py-10">
+                No extensions found in Firestore. Add code to <code className="bg-white/5 px-1">caret_extensions</code> collection.
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
