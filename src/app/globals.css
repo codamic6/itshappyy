@@ -6,22 +6,22 @@
   :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 2%;
+    --card: 0 0% 0%;
     --card-foreground: 0 0% 100%;
-    --popover: 0 0% 2%;
+    --popover: 0 0% 0%;
     --popover-foreground: 0 0% 100%;
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 5%;
+    --secondary: 0 0% 2%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 7%;
-    --muted-foreground: 0 0% 50%;
-    --accent: 0 0% 10%;
+    --muted: 0 0% 5%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 5%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 0% 20%;
+    --destructive: 0 0% 15%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 10%;
-    --input: 0 0% 10%;
+    --border: 0 0% 5%;
+    --input: 0 0% 5%;
     --ring: 0 0% 100%;
     --radius: 0.25rem;
   }
@@ -29,17 +29,17 @@
 
 @layer base {
   * {
-    @apply border-border/40;
+    @apply border-white/5;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased selection:bg-white/20 selection:text-white;
+    @apply bg-black text-foreground font-body antialiased selection:bg-white/20 selection:text-white;
   }
 }
 
 /* 2099 Crystal Shining Effects */
 .crystal-panel {
-  @apply bg-black/60 backdrop-blur-xl border-white/5;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  @apply bg-black backdrop-blur-3xl border-white/5;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .shining-border {
@@ -50,13 +50,13 @@
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.03);
   pointer-events: none;
   transition: border-color 0.3s ease;
 }
 
 .shining-border:hover::after {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Monaco Pure Dark Theme */
@@ -64,10 +64,19 @@
   background-color: #000000 !important;
 }
 
+/* Futuristic Resizer Handles */
+.resizer-h {
+  @apply w-[2px] cursor-col-resize hover:bg-white/20 transition-colors z-50;
+}
+
+.resizer-v {
+  @apply h-[2px] cursor-row-resize hover:bg-white/20 transition-colors z-50;
+}
+
 /* Futuristic Scrollbars */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -75,12 +84,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/5 rounded-full hover:bg-white/20 transition-colors;
+  @apply bg-white/10 rounded-full hover:bg-white/30 transition-colors;
 }
 
 @keyframes glow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.02); }
 }
 
 .active-glow {
@@ -91,17 +100,17 @@
   content: '';
   position: absolute;
   inset: -2px;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  animation: glow 2s infinite ease-in-out;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: glow 3s infinite ease-in-out;
   pointer-events: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 .font-future {
   font-family: 'Source Code Pro', monospace;
   letter-spacing: 0.15em;
   font-weight: 700;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
