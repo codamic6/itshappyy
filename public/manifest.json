@@ -1,11 +1,11 @@
 {
   "name": "CARET AI Code Editor",
   "short_name": "CARET",
-  "description": "Professional AI-Powered Code Editor",
+  "description": "A professional, high-performance AI-powered code editor.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0D12",
-  "theme_color": "#263 70% 50%",
+  "theme_color": "#7C3AED",
   "icons": [
     {
       "src": "https://picsum.photos/seed/caret/192/192",
