@@ -1,6 +1,4 @@
-// Minimal Service Worker for PWA compliance
-const CACHE_NAME = 'caret-cache-v1';
-
+// Simple Service Worker for PWA Installation Requirements
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
@@ -10,6 +8,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Pass-through fetch
+  // Pass-through fetch handler is enough for installation
   event.respondWith(fetch(event.request));
 });
