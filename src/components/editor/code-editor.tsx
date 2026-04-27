@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -28,10 +27,9 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
   const firestore = useFirestore()
   const { user } = useUser()
   const { toast } = useToast()
-  const [theme, setTheme] = useState('vs-dark')
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // VS Code API Compatibility Layer (Mock)
+  // VS Code API Compatibility Layer
   const createVSCodeMock = (editor: any, monaco: any) => {
     return {
       window: {
@@ -47,8 +45,6 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       },
       commands: {
         registerCommand: (id: string, callback: any) => {
-          console.log(`[Caret] Extension registered command: ${id}`);
-          // Simple binding to a dummy key for now
           editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, callback);
         }
       },
@@ -75,8 +71,6 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       },
       activeFileId
     };
-    
-    // Mock require for extensions that expect CommonJS
     (window as any).require = (mod: string) => {
       if (mod === 'vscode') return vscode;
       return {};
@@ -85,18 +79,12 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
 
   const applyPlugin = (ext: any) => {
     if (!monacoRef.current || !editorRef.current) return
-    
     try {
-      console.log(`[Caret] Initializing extension: ${ext.name}`);
-      
-      // 1. Check if it's a Theme (JSON-based)
       if (ext.type === 'theme' && ext.themeData) {
         monacoRef.current.editor.defineTheme(ext.id, ext.themeData);
         monacoRef.current.editor.setTheme(ext.id);
         return;
       }
-
-      // 2. Execute JavaScript Logic
       if (ext.code) {
         const vscode = (window as any).caret.vscode;
         const pluginFn = new Function('monaco', 'editor', 'caret', 'vscode', 'require', ext.code);
@@ -104,20 +92,13 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       }
     } catch (error) {
       console.error(`[Caret] Extension "${ext.name}" execution failed:`, error);
-      toast({ 
-        variant: "destructive", 
-        title: "Extension Failed", 
-        description: `Error loading ${ext.name}. Check console for details.` 
-      });
     }
   }
 
-  // Live Extension Loop
   useEffect(() => {
     if (!firestore) return
     const extensionsRef = collection(firestore, 'caret_extensions')
     const q = query(extensionsRef, where('isEnabled', '==', true))
-
     const unsubscribe = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if ((change.type === "added" || change.type === "modified") && monacoRef.current) {
@@ -125,64 +106,42 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
         }
       })
     })
+    return () => unsubscribe()
+  }, [firestore, monacoRef.current])
 
-    let userUnsubscribe: any = null
-    if (user) {
-      const userExtRef = collection(firestore, 'users', user.uid, 'user_extensions')
-      userUnsubscribe = onSnapshot(userExtRef, (snapshot) => {
-        snapshot.docs.forEach(doc => applyPlugin({ id: doc.id, ...doc.data() }))
-      })
-    }
-
-    return () => {
-      unsubscribe()
-      if (userUnsubscribe) userUnsubscribe()
-    }
-  }, [firestore, user, monacoRef.current])
-
-  // Auto-Save to Firestore
   useEffect(() => {
     if (!activeFileId || !user || !firestore) return
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current)
-
     saveTimeoutRef.current = setTimeout(() => {
       const fileRef = doc(firestore, 'users', user.uid, 'files', activeFileId)
-      setDoc(fileRef, {
-        content,
-        updatedAt: serverTimestamp()
-      }, { merge: true }).catch(() => {})
+      setDoc(fileRef, { content, updatedAt: serverTimestamp() }, { merge: true }).catch(() => {})
     }, 2000)
-
-    return () => {
-      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current)
-    }
+    return () => { if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current) }
   }, [content, activeFileId, user, firestore])
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0D1117] overflow-hidden">
-      <div className="h-10 bg-[#0A0D12] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1 shadow-inner">
+    <div className="flex-1 flex flex-col bg-black overflow-hidden relative">
+      {/* Tabs */}
+      <div className="h-10 bg-[#050505] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1 relative z-10">
         {openFiles.map((file) => (
           <div
             key={file.id}
             className={cn(
-              "h-full min-w-[140px] flex items-center justify-between px-3 text-[11px] cursor-pointer group transition-all relative border-r border-white/5",
-              activeFileId === file.id ? "bg-[#0D1117] text-primary" : "text-muted-foreground hover:bg-white/[0.03]"
+              "h-full min-w-[140px] flex items-center justify-between px-3 text-[10px] cursor-pointer group transition-all relative border-r border-white/5",
+              activeFileId === file.id ? "bg-black text-white" : "text-white/40 hover:bg-white/[0.02] hover:text-white/60"
             )}
             onClick={() => onTabClick(file.id)}
           >
             {activeFileId === file.id && (
-              <motion.div layoutId="activeTab" className="absolute top-0 left-0 right-0 h-[2px] bg-primary shadow-[0_0_10px_rgba(124,58,237,0.5)]" />
+              <motion.div layoutId="activeTabGlow" className="absolute bottom-0 left-0 right-0 h-[1px] bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
             )}
             <div className="flex items-center gap-2 truncate">
-              <FileIcon fileName={file.name} className="h-3.5 w-3.5" />
-              <span className={cn("truncate font-medium", activeFileId === file.id && "font-bold")}>{file.name}</span>
+              <FileIcon fileName={file.name} className="h-3 w-3" />
+              <span className={cn("truncate font-future tracking-wider", activeFileId === file.id && "text-white")}>{file.name.toUpperCase()}</span>
             </div>
             <button 
-              className="opacity-0 group-hover:opacity-100 p-1 hover:bg-white/10 rounded-md transition-all ml-2"
-              onClick={(e) => {
-                e.stopPropagation()
-                onTabClose(file.id)
-              }}
+              className="opacity-0 group-hover:opacity-100 p-1 hover:bg-white/10 rounded-full transition-all ml-2"
+              onClick={(e) => { e.stopPropagation(); onTabClose(file.id); }}
             >
               <X className="h-3 w-3" />
             </button>
@@ -190,36 +149,60 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
         ))}
       </div>
 
-      <div className="flex-1 relative">
+      {/* Editor Surface */}
+      <div className="flex-1 relative bg-black">
         <AnimatePresence mode="wait">
-          <motion.div key={activeFileId} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1 }} className="w-full h-full">
+          <motion.div 
+            key={activeFileId} 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            transition={{ duration: 0.2 }} 
+            className="w-full h-full"
+          >
             <Editor
               height="100%"
               language={language}
               value={content}
-              theme={theme}
+              theme="hc-black" // Using High Contrast for pure black
               onMount={(editor, monaco) => {
                 editorRef.current = editor
                 monacoRef.current = monaco
                 setupCaretAPI(editor, monaco)
+                
+                // Pure Black Background Override
+                monaco.editor.defineTheme('caret-2099', {
+                  base: 'vs-dark',
+                  inherit: true,
+                  rules: [],
+                  colors: {
+                    'editor.background': '#000000',
+                    'editor.lineHighlightBackground': '#080808',
+                    'editorCursor.foreground': '#FFFFFF',
+                    'editor.selectionBackground': '#FFFFFF22',
+                  }
+                });
+                monaco.editor.setTheme('caret-2099');
                 editor.focus()
               }}
               options={{
                 fontSize,
-                minimap: { enabled: true, autohide: true },
+                minimap: { enabled: true, autohide: true, scale: 0.5 },
                 smoothScrolling: true,
                 cursorBlinking: "smooth",
                 cursorSmoothCaretAnimation: "on",
                 fontFamily: "'Source Code Pro', monospace",
                 bracketPairColorization: { enabled: true },
-                padding: { top: 10 },
+                padding: { top: 20 },
                 lineNumbers: "on",
-                renderWhitespace: "selection",
+                renderWhitespace: "none",
                 scrollbar: {
-                  verticalScrollbarSize: 8,
-                  horizontalScrollbarSize: 8,
+                  verticalScrollbarSize: 4,
+                  horizontalScrollbarSize: 4,
+                  useShadows: false,
                 },
                 automaticLayout: true,
+                letterSpacing: 0.5,
               }}
               onChange={(val) => onChange(val || "")}
             />

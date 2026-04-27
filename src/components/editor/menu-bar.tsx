@@ -1,8 +1,7 @@
-
 "use client"
 
 import { useRef, useState, useEffect } from 'react'
-import { Command, Play, Github, Info, Keyboard, Download } from 'lucide-react'
+import { Command, Play, Github, Info, Keyboard, Download, Box } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Menubar,
@@ -39,152 +38,94 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
   }, [])
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) {
-      toast({
-        title: "Installation Status",
-        description: "Please check your browser address bar for the install icon.",
-      })
-      return
-    }
+    if (!deferredPrompt) return
     deferredPrompt.prompt()
-    const { outcome } = await deferredPrompt.userChoice
-    if (outcome === 'accepted') {
-      setDeferredPrompt(null)
-      toast({ title: "Success", description: "CARET IDE installed." })
-    }
-  }
-
-  const handleOpenFileClick = () => {
-    fileInputRef.current?.click()
-  }
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    const reader = new FileReader()
-    reader.onload = (event) => {
-      const content = event.target?.result as string
-      const id = store.createNode(file.name, 'file', null, content)
-      store.selectFile(id)
-      toast({ title: "File Opened", description: file.name })
-    }
-    reader.readAsText(file)
-    e.target.value = ''
+    await deferredPrompt.userChoice
   }
 
   return (
-    <header className="h-10 border-b flex items-center justify-between px-4 bg-black z-50">
-      <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} />
+    <header className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-black z-50 crystal-panel">
+      <input type="file" ref={fileInputRef} className="hidden" onChange={(e) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        const r = new FileReader();
+        r.onload = (ev) => {
+          const id = store.createNode(file.name, 'file', null, ev.target?.result as string);
+          store.selectFile(id);
+        }
+        r.readAsText(file);
+      }} />
 
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <div className="relative w-5 h-5">
-            <Image 
-              src="/logo.png" 
-              alt="Caret Logo" 
-              fill 
-              className="object-contain"
-            />
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3">
+          <div className="relative w-4 h-4 opacity-80">
+            <Image src="/logo.png" alt="Caret Logo" fill className="object-contain" />
           </div>
-          <span className="font-bold text-[11px] tracking-[0.2em] text-white">CARET</span>
+          <span className="text-[10px] font-future text-white tracking-[0.3em]">CARET.2099</span>
         </div>
         
-        <Menubar className="border-none bg-transparent shadow-none h-auto p-0 gap-1">
+        <Menubar className="border-none bg-transparent shadow-none h-auto p-0 gap-2">
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[10px] uppercase font-bold px-2 hover:bg-white/5 cursor-pointer text-muted-foreground hover:text-white transition-colors">File</MenubarTrigger>
-            <MenubarContent className="bg-black border-white/10">
-              <MenubarItem onClick={onNewFile}>New File <MenubarShortcut>Ctrl+N</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={handleOpenFileClick}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/30 hover:text-white transition-all uppercase">SYSTEM</MenubarTrigger>
+            <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+              <MenubarItem onClick={onNewFile}>NEW DATA <MenubarShortcut>CTRL+N</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => fileInputRef.current?.click()}>IMPORT <MenubarShortcut>CTRL+O</MenubarShortcut></MenubarItem>
               <MenubarSeparator className="bg-white/5" />
-              <MenubarItem onClick={handleInstallClick} className="font-bold">
-                <Download className="h-3 w-3 mr-2" /> Install IDE
-              </MenubarItem>
+              <MenubarItem onClick={handleInstallClick}>INSTALL HARDWARE</MenubarItem>
               <MenubarSeparator className="bg-white/5" />
-              <MenubarItem onClick={() => toast({ title: "Saved", description: store.activeFile?.name })} disabled={!store.activeFileId}>Save <MenubarShortcut>Ctrl+S</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => toast({ title: "SAVED" })} disabled={!store.activeFileId}>SYNC <MenubarShortcut>CTRL+S</MenubarShortcut></MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[10px] uppercase font-bold px-2 hover:bg-white/5 cursor-pointer text-muted-foreground hover:text-white transition-colors">View</MenubarTrigger>
-            <MenubarContent className="bg-black border-white/10">
-              <MenubarItem onClick={() => store.setIsSidebarOpen(!store.ui.isSidebarOpen)}>Toggle Sidebar <MenubarShortcut>Ctrl+B</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}>Toggle Terminal <MenubarShortcut>Ctrl+J</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>Preferences</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-
-          <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[10px] uppercase font-bold px-2 hover:bg-white/5 cursor-pointer text-muted-foreground hover:text-white transition-colors">Help</MenubarTrigger>
-            <MenubarContent className="bg-black border-white/10">
-              <MenubarItem onClick={() => setIsAboutOpen(true)}>About</MenubarItem>
-              <MenubarItem onClick={() => store.setIsShortcutsOpen(true)}>Shortcuts <MenubarShortcut>Ctrl+D</MenubarShortcut></MenubarItem>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/30 hover:text-white transition-all uppercase">VISUALS</MenubarTrigger>
+            <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+              <MenubarItem onClick={() => store.setIsSidebarOpen(!store.ui.isSidebarOpen)}>TOGGLE SIDEBAR <MenubarShortcut>CTRL+B</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}>TOGGLE TERMINAL <MenubarShortcut>CTRL+J</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>CALIBRATION</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
       </div>
 
-      <div className="flex-1 max-w-sm mx-4 hidden md:block">
+      <div className="flex-1 max-w-sm mx-8">
         <div 
-          className="h-7 bg-white/[0.03] border border-white/5 rounded px-3 flex items-center justify-between text-[10px] text-muted-foreground cursor-pointer hover:bg-white/5 transition-all"
+          className="h-6 bg-white/[0.02] border border-white/5 rounded-sm px-4 flex items-center justify-between text-[8px] font-future text-white/20 cursor-pointer hover:bg-white/5 transition-all"
           onClick={() => store.setIsCommandPaletteOpen(true)}
         >
-          <span className="truncate">{store.activeFile?.name || 'Quick Search'}</span>
-          <div className="flex items-center gap-1 opacity-50">
-            <Command className="h-3 w-3" />
+          <span className="truncate">{store.activeFile?.name || 'SEARCH COMMANDS...'}</span>
+          <div className="flex items-center gap-1 opacity-40">
+            <Command className="h-2.5 w-2.5" />
             <span>P</span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-white" onClick={() => toast({ title: "Build", description: "Running..." })}>
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="icon" className="h-7 w-7 text-white/20 hover:text-white" onClick={() => toast({ title: "INITIATING BUILD..." })}>
           <Play className="h-3 w-3" />
         </Button>
         <div className="w-[1px] h-3 bg-white/10" />
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-white" onClick={() => window.open('https://github', '_blank')}>
-          <Github className="h-3 w-3" />
+        <Button variant="ghost" size="icon" className="h-7 w-7 text-white/20 hover:text-white" onClick={() => setIsAboutOpen(true)}>
+          <Info className="h-3 w-3" />
         </Button>
       </div>
 
       <Dialog open={isAboutOpen} onOpenChange={setIsAboutOpen}>
-        <DialogContent className="bg-black border-white/10 text-foreground">
+        <DialogContent className="bg-black border-white/10 text-white crystal-panel max-w-xs">
           <DialogHeader>
-            <DialogTitle className="text-white flex items-center gap-3">
-              <Image src="/logo.png" alt="Logo" width={24} height={24} />
-              CARET IDE
+            <DialogTitle className="text-[10px] font-future tracking-[0.4em] flex items-center gap-4">
+              <Image src="/logo.png" alt="Logo" width={16} height={16} />
+              CARET 2099
             </DialogTitle>
-            <DialogDescription className="text-muted-foreground pt-2">
-              Version 1.1.0<br />
-              High-performance monochromatic environment.
+            <DialogDescription className="text-white/40 text-[9px] font-future pt-4 leading-relaxed uppercase tracking-wider">
+              CORE OS v1.1.0<br />
+              MONOCHROMATIC CRYSTAL ENVIRONMENT.<br />
+              HARDWARE STATUS: OPTIMAL.
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
-
-      <Dialog open={store.ui.isShortcutsOpen} onOpenChange={store.setIsShortcutsOpen}>
-        <DialogContent className="bg-black border-white/10 text-foreground max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="text-[10px] font-black uppercase tracking-[0.3em] text-white">Shortcuts</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-3 py-2">
-            <ShortcutRow label="Explorer" shortcut="Ctrl + B" />
-            <ShortcutRow label="AI Panel" shortcut="Ctrl + I" />
-            <ShortcutRow label="Terminal" shortcut="Ctrl + J" />
-            <ShortcutRow label="Command Palette" shortcut="Ctrl + K" />
-            <ShortcutRow label="Save" shortcut="Ctrl + S" />
-          </div>
-        </DialogContent>
-      </Dialog>
     </header>
-  )
-}
-
-function ShortcutRow({ label, shortcut }: { label: string, shortcut: string }) {
-  return (
-    <div className="flex items-center justify-between text-[10px] border-b border-white/5 pb-2">
-      <span className="text-muted-foreground uppercase font-bold">{label}</span>
-      <kbd className="bg-white/5 px-2 py-0.5 rounded border border-white/10 font-mono text-white">{shortcut}</kbd>
-    </div>
   )
 }
