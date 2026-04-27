@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useEffect } from 'react';
@@ -15,6 +16,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Sparkles, Terminal as TerminalIcon, GitBranch, MousePointer2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MenuBar } from '@/components/editor/menu-bar';
+import { SettingsModal } from '@/components/editor/settings-modal';
 
 export default function App() {
   const store = useEditorStore();
@@ -57,7 +59,7 @@ export default function App() {
             break;
           case 'p':
             e.preventDefault();
-            store.setUi({ ...store.ui, isCommandPaletteOpen: true });
+            store.setIsCommandPaletteOpen(true);
             break;
           case 's':
             e.preventDefault();
@@ -197,6 +199,13 @@ export default function App() {
       <CommandPalette 
         isOpen={store.ui.isCommandPaletteOpen} 
         onClose={() => store.setIsCommandPaletteOpen(false)} 
+      />
+
+      <SettingsModal 
+        isOpen={store.ui.isSettingsOpen} 
+        onClose={() => store.setIsSettingsOpen(false)}
+        fontSize={store.ui.fontSize}
+        onFontSizeChange={store.setFontSize}
       />
 
       <Toaster />
