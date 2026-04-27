@@ -1,23 +1,23 @@
-
 {
   "name": "CARET AI Code Editor",
   "short_name": "CARET",
-  "description": "Next-Gen AI Powered Professional Code Editor",
+  "description": "Professional high-performance AI code editor.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A0D12",
   "theme_color": "#7C3AED",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/caret/192/192",
+      "src": "https://picsum.photos/seed/caret-icon/192/192",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://picsum.photos/seed/caret/512/512",
+      "src": "https://picsum.photos/seed/caret-icon/512/512",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

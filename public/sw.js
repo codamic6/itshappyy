@@ -1,5 +1,6 @@
-
 // Minimal Service Worker for PWA compliance
+const CACHE_NAME = 'caret-cache-v1';
+
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
@@ -9,6 +10,6 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Simple pass-through for online-only IDE
+  // Pass-through fetch
   event.respondWith(fetch(event.request));
 });

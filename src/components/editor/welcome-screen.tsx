@@ -1,8 +1,7 @@
-
 "use client"
 
 import { useState, useEffect } from 'react'
-import { FilePlus, FolderOpen, Code, Sparkles, Command, Github, Globe, Download } from 'lucide-react'
+import { FilePlus, Download, Sparkles, Command, Github, Globe } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
@@ -28,7 +27,7 @@ export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
     if (!deferredPrompt) {
       toast({
         title: "Installation Status",
-        description: "App is already installed or your browser doesn't support automatic installation here.",
+        description: "Browser is still verifying installation compatibility. If on Chrome/Edge, check the address bar icon.",
       })
       return
     }
@@ -39,7 +38,6 @@ export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center bg-[#0D1117] p-8 overflow-y-auto relative">
-      {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div 

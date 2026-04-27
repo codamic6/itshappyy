@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useRef, useState, useEffect } from 'react'
@@ -40,8 +39,8 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
   const handleInstallClick = async () => {
     if (!deferredPrompt) {
       toast({
-        title: "PWA Installation",
-        description: "The app might already be installed, or your browser doesn't support installation from this URL.",
+        title: "Installation Status",
+        description: "The installation prompt is not yet available. Please wait a few seconds or try a different browser like Chrome/Edge.",
       })
       return
     }
