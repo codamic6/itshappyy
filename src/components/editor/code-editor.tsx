@@ -31,11 +31,41 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
   const [theme, setTheme] = useState('vs-dark')
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Caret API Bridge: Expose functionality to extensions
+  // VS Code API Compatibility Layer (Mock)
+  const createVSCodeMock = (editor: any, monaco: any) => {
+    return {
+      window: {
+        showInformationMessage: (msg: string) => toast({ title: "Extension Info", description: msg }),
+        showErrorMessage: (msg: string) => toast({ variant: "destructive", title: "Extension Error", description: msg }),
+        activeTextEditor: {
+          document: {
+            getText: () => editor.getValue(),
+            languageId: language
+          },
+          selection: editor.getSelection()
+        }
+      },
+      commands: {
+        registerCommand: (id: string, callback: any) => {
+          console.log(`[Caret] Extension registered command: ${id}`);
+          // Simple binding to a dummy key for now
+          editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyP, callback);
+        }
+      },
+      languages: {
+        registerCompletionItemProvider: (lang: string, provider: any) => {
+          monaco.languages.registerCompletionItemProvider(lang, provider);
+        }
+      }
+    }
+  }
+
   const setupCaretAPI = (editor: any, monaco: any) => {
+    const vscode = createVSCodeMock(editor, monaco);
     (window as any).caret = {
       editor,
       monaco,
+      vscode,
       insertText: (text: string) => {
         const selection = editor.getSelection()
         editor.executeEdits('', [{ range: selection, text }])
@@ -44,16 +74,41 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
         toast({ title, description })
       },
       activeFileId
-    }
+    };
+    
+    // Mock require for extensions that expect CommonJS
+    (window as any).require = (mod: string) => {
+      if (mod === 'vscode') return vscode;
+      return {};
+    };
   }
 
-  const applyPlugin = (code: string) => {
+  const applyPlugin = (ext: any) => {
     if (!monacoRef.current || !editorRef.current) return
+    
     try {
-      const pluginFn = new Function('monaco', 'editor', 'caret', code)
-      pluginFn(monacoRef.current, editorRef.current, (window as any).caret)
+      console.log(`[Caret] Initializing extension: ${ext.name}`);
+      
+      // 1. Check if it's a Theme (JSON-based)
+      if (ext.type === 'theme' && ext.themeData) {
+        monacoRef.current.editor.defineTheme(ext.id, ext.themeData);
+        monacoRef.current.editor.setTheme(ext.id);
+        return;
+      }
+
+      // 2. Execute JavaScript Logic
+      if (ext.code) {
+        const vscode = (window as any).caret.vscode;
+        const pluginFn = new Function('monaco', 'editor', 'caret', 'vscode', 'require', ext.code);
+        pluginFn(monacoRef.current, editorRef.current, (window as any).caret, vscode, (window as any).require);
+      }
     } catch (error) {
-      console.error("Extension Execution Failed:", error)
+      console.error(`[Caret] Extension "${ext.name}" execution failed:`, error);
+      toast({ 
+        variant: "destructive", 
+        title: "Extension Failed", 
+        description: `Error loading ${ext.name}. Check console for details.` 
+      });
     }
   }
 
@@ -66,17 +121,16 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
     const unsubscribe = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if ((change.type === "added" || change.type === "modified") && monacoRef.current) {
-          applyPlugin(change.doc.data().code)
+          applyPlugin({ id: change.doc.id, ...change.doc.data() })
         }
       })
     })
 
-    // Also listen to user-specific extensions
     let userUnsubscribe: any = null
     if (user) {
       const userExtRef = collection(firestore, 'users', user.uid, 'user_extensions')
       userUnsubscribe = onSnapshot(userExtRef, (snapshot) => {
-        snapshot.docs.forEach(doc => applyPlugin(doc.data().code))
+        snapshot.docs.forEach(doc => applyPlugin({ id: doc.id, ...doc.data() }))
       })
     }
 
@@ -89,7 +143,6 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
   // Auto-Save to Firestore
   useEffect(() => {
     if (!activeFileId || !user || !firestore) return
-
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current)
 
     saveTimeoutRef.current = setTimeout(() => {
@@ -97,9 +150,7 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       setDoc(fileRef, {
         content,
         updatedAt: serverTimestamp()
-      }, { merge: true }).catch(() => {
-        // Silent fail for auto-save permissions if not setup
-      })
+      }, { merge: true }).catch(() => {})
     }, 2000)
 
     return () => {
