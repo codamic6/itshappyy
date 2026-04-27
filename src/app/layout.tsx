@@ -1,7 +1,7 @@
-
 import type {Metadata} from 'next';
 import './globals.css';
 import { EditorProvider } from '@/hooks/use-editor-store';
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 export const metadata: Metadata = {
   title: 'CARET | Next-Gen AI Code Editor',
@@ -21,9 +21,11 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
-        <EditorProvider>
-          {children}
-        </EditorProvider>
+        <FirebaseClientProvider>
+          <EditorProvider>
+            {children}
+          </EditorProvider>
+        </FirebaseClientProvider>
       </body>
     </html>
   );
