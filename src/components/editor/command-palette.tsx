@@ -3,8 +3,11 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Command, Zap, FileCode, MessageSquare } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Search, Command, Zap, FileCode, MessageSquare, Clock } from 'lucide-react'
+import { useEditorStore } from '@/hooks/use-editor-store'
+import { FileIcon } from './file-icon'
+import { aiCodeGeneration } from '@/ai/flows/ai-code-generation-flow'
+import { useToast } from '@/hooks/use-toast'
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -12,11 +15,39 @@ interface CommandPaletteProps {
 }
 
 export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
+  const store = useEditorStore()
+  const { toast } = useToast()
   const [search, setSearch] = useState('')
 
   useEffect(() => {
     if (isOpen) setSearch('')
   }, [isOpen])
+
+  const handleGenerateComponent = async () => {
+    onClose()
+    toast({ title: "AI Generation", description: "Generating base React component..." })
+    try {
+      const res = await aiCodeGeneration({ description: "Create a modern, responsive React component with Tailwind CSS." })
+      const id = store.createNode('GeneratedComponent.tsx', 'file', null, res.code)
+      store.selectFile(id)
+    } catch (err) {
+      toast({ variant: 'destructive', title: "Generation Failed" })
+    }
+  }
+
+  const handleCreateFile = () => {
+    onClose()
+    store.setIsSidebarOpen(true)
+    store.setActiveView('explorer')
+    // Handled by user in sidebar usually, but we could trigger an input here if we wanted
+    toast({ title: "New File", description: "Use the explorer to name your new file." })
+  }
+
+  const handleAskAI = () => {
+    onClose()
+    store.setIsAIPanelOpen(true)
+    toast({ title: "Caret AI", description: "Ready for your questions." })
+  }
 
   if (!isOpen) return null
 
@@ -49,13 +80,47 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
             />
           </div>
           
-          <div className="p-2 max-h-[400px] overflow-y-auto">
-            <CommandItem icon={<Zap className="text-yellow-400" />} title="Generate React Component" shortcut="⌘ G" />
-            <CommandItem icon={<FileCode className="text-blue-400" />} title="Create New File" shortcut="⌘ N" />
-            <CommandItem icon={<MessageSquare className="text-primary" />} title="Ask AI about Selection" shortcut="⌘ L" />
-            <div className="px-3 py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-2 border-t border-white/5">Recently Used</div>
-            <CommandItem icon={<FileCode />} title="App.tsx" />
-            <CommandItem icon={<FileCode />} title="globals.css" />
+          <div className="p-2 max-h-[400px] overflow-y-auto no-scrollbar">
+            <div className="px-3 py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Actions</div>
+            <CommandItem 
+              icon={<Zap className="text-yellow-400" />} 
+              title="Generate React Component" 
+              shortcut="⌘ G" 
+              onClick={handleGenerateComponent}
+            />
+            <CommandItem 
+              icon={<FileCode className="text-blue-400" />} 
+              title="Create New File" 
+              shortcut="⌘ N" 
+              onClick={handleCreateFile}
+            />
+            <CommandItem 
+              icon={<MessageSquare className="text-primary" />} 
+              title="Ask AI about Selection" 
+              shortcut="⌘ L" 
+              onClick={handleAskAI}
+            />
+            
+            {store.recentlyOpened.length > 0 && (
+              <>
+                <div className="px-3 py-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-2 border-t border-white/5">Recently Used</div>
+                {store.recentlyOpened.map((id: string) => {
+                  const node = store.nodes[id]
+                  if (!node) return null
+                  return (
+                    <CommandItem 
+                      key={id}
+                      icon={<FileIcon fileName={node.name} />} 
+                      title={node.name} 
+                      onClick={() => {
+                        store.selectFile(id)
+                        onClose()
+                      }}
+                    />
+                  )
+                })}
+              </>
+            )}
           </div>
           
           <div className="px-4 py-2 border-t border-white/5 flex items-center justify-between text-[10px] text-muted-foreground bg-black/20">
@@ -63,7 +128,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
               <span><kbd className="bg-white/5 px-1 rounded mr-1">↑↓</kbd> to navigate</span>
               <span><kbd className="bg-white/5 px-1 rounded mr-1">Enter</kbd> to select</span>
             </div>
-            <span>Caret AI v1.0</span>
+            <span>Caret AI v1.0.0</span>
           </div>
         </motion.div>
       </div>
@@ -71,9 +136,12 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
   )
 }
 
-function CommandItem({ icon, title, shortcut }: any) {
+function CommandItem({ icon, title, shortcut, onClick }: any) {
   return (
-    <div className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-white/5 cursor-pointer transition-colors group">
+    <div 
+      className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-white/5 cursor-pointer transition-colors group"
+      onClick={onClick}
+    >
       <div className="flex items-center gap-3">
         <div className="text-muted-foreground group-hover:text-primary transition-colors">
           {icon}

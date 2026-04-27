@@ -4,6 +4,7 @@
 import { Files, Search, GitBranch, Blocks, Bot, Settings, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { useEditorStore } from '@/hooks/use-editor-store'
 
 interface ActivityBarProps {
   activeView: string
@@ -11,6 +12,8 @@ interface ActivityBarProps {
 }
 
 export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
+  const store = useEditorStore()
+
   return (
     <div className="w-[60px] bg-[#0A0D12] border-r border-white/5 flex flex-col items-center py-4 gap-4 z-50">
       <TooltipProvider>
@@ -42,12 +45,16 @@ export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
           icon={<Bot className="h-5 w-5" />} 
           active={activeView === 'ai'} 
           onClick={() => onViewChange('ai')}
-          label="Caret AI"
+          label="AI Logic"
         />
         
         <div className="mt-auto flex flex-col gap-4">
           <ActivityIcon icon={<User className="h-5 w-5" />} label="Account" />
-          <ActivityIcon icon={<Settings className="h-5 w-5" />} label="Settings" />
+          <ActivityIcon 
+            icon={<Settings className="h-5 w-5" />} 
+            label="Settings" 
+            onClick={() => store.setIsSettingsOpen(true)}
+          />
         </div>
       </TooltipProvider>
     </div>

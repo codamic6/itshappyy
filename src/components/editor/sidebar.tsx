@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Plus, ChevronDown, ChevronRight, Trash2, FilePlus, FolderPlus, Search, MoreVertical, Edit2, Folder, FolderOpen } from "lucide-react"
+import { Plus, ChevronDown, ChevronRight, Trash2, FilePlus, FolderPlus, Search, MoreVertical, Edit2, Folder, FolderOpen, GitBranch, Blocks, History, Package } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -16,8 +16,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Badge } from "@/components/ui/badge"
 
 export function EditorSidebar() {
+  const store = useEditorStore()
+  const activeView = store.ui.activeView
+
+  return (
+    <div className="w-full flex flex-col h-full bg-[#0D1117] select-none border-r border-white/5">
+      {activeView === 'explorer' && <ExplorerView />}
+      {activeView === 'search' && <SearchView />}
+      {activeView === 'git' && <SourceControlView />}
+      {activeView === 'extensions' && <ExtensionsView />}
+      {activeView === 'ai' && <AILogicView />}
+    </div>
+  )
+}
+
+function ExplorerView() {
   const store = useEditorStore()
   const [newName, setNewName] = useState("")
   const [isCreating, setIsCreating] = useState<{ type: 'file' | 'folder', parentId: string | null } | null>(null)
@@ -72,10 +88,7 @@ export function EditorSidebar() {
   }
 
   return (
-    <div 
-      className="w-full flex flex-col h-full bg-[#0D1117] select-none border-r border-white/5"
-      onClick={() => store.setSelectedNodeId(null)}
-    >
+    <>
       <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Explorer</span>
         <div className="flex items-center gap-1">
@@ -102,7 +115,7 @@ export function EditorSidebar() {
         </div>
       </div>
 
-      <div className="px-3 py-2" onClick={(e) => e.stopPropagation()}>
+      <div className="px-3 py-2">
         <div className="relative group">
           <Search className="absolute left-2 top-1.5 h-3.5 w-3.5 text-muted-foreground/40 group-focus-within:text-primary transition-colors" />
           <input 
@@ -115,7 +128,7 @@ export function EditorSidebar() {
         </div>
       </div>
 
-      <ScrollArea className="flex-1" onClick={(e) => e.stopPropagation()}>
+      <ScrollArea className="flex-1">
         <div className="py-2">
           <div 
             className="flex items-center gap-1 px-3 py-1.5 text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1 cursor-pointer hover:bg-white/5 transition-colors"
@@ -148,35 +161,135 @@ export function EditorSidebar() {
                   </div>
                 )}
 
-                {rootNodes.length > 0 ? (
-                  rootNodes.map((node: any) => (
-                    <TreeNode 
-                      key={node.id} 
-                      node={node} 
-                      depth={0} 
-                      isCreating={isCreating} 
-                      startCreation={startCreation}
-                      newName={newName}
-                      setNewName={setNewName}
-                      handleKeyDown={handleKeyDown}
-                      handleCreate={handleCreate}
-                      inputRef={inputRef}
-                    />
-                  ))
-                ) : !isCreating && (
-                  <div className="px-4 py-8 flex flex-col items-center justify-center text-center opacity-40">
-                    <FileIcon fileName="unknown" className="h-8 w-8 mb-2" />
-                    <p className="text-[10px] font-bold uppercase tracking-widest">Workspace is empty</p>
-                    <Button variant="ghost" className="mt-4 text-[10px] uppercase font-bold text-primary" onClick={() => startCreation('file', null)}>
-                      Create File
-                    </Button>
-                  </div>
-                )}
+                {rootNodes.map((node: any) => (
+                  <TreeNode 
+                    key={node.id} 
+                    node={node} 
+                    depth={0} 
+                    isCreating={isCreating} 
+                    startCreation={startCreation}
+                    newName={newName}
+                    setNewName={setNewName}
+                    handleKeyDown={handleKeyDown}
+                    handleCreate={handleCreate}
+                    inputRef={inputRef}
+                  />
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </ScrollArea>
+    </>
+  )
+}
+
+function SearchView() {
+  return (
+    <div className="p-4 flex flex-col gap-4">
+      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 mb-2">Global Search</span>
+      <div className="relative group">
+        <Search className="absolute left-2 top-2 h-4 w-4 text-muted-foreground/40" />
+        <input 
+          autoFocus
+          className="w-full bg-white/[0.03] border border-white/5 rounded-md py-2 pl-8 pr-2 text-xs focus:outline-none focus:border-primary/30"
+          placeholder="Search in files..."
+        />
+      </div>
+      <div className="text-[10px] text-muted-foreground opacity-40 text-center py-20">
+        No results found. Start typing to search.
+      </div>
+    </div>
+  )
+}
+
+function SourceControlView() {
+  const store = useEditorStore()
+  const modifiedFiles = Object.values(store.files).filter((f: any) => f.updatedAt > Date.now() - 600000)
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Source Control</span>
+        <TooltipProvider>
+          <ActionIcon icon={<History className="h-4 w-4" />} label="View History" />
+        </TooltipProvider>
+      </div>
+      <div className="p-4 space-y-4">
+        <div className="relative">
+          <textarea 
+            className="w-full bg-white/[0.03] border border-white/5 rounded-md p-2 text-xs min-h-[80px] focus:outline-none focus:border-primary/30"
+            placeholder="Message (Ctrl+Enter to commit)"
+          />
+          <Button className="w-full mt-2 bg-primary h-8 text-[11px] font-bold uppercase tracking-widest">Commit</Button>
+        </div>
+        
+        <div className="space-y-1">
+          <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-40">Changes</span>
+          {modifiedFiles.length > 0 ? (
+            modifiedFiles.map((f: any) => (
+              <div key={f.id} className="flex items-center justify-between px-2 py-1.5 hover:bg-white/5 rounded-md group cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <FileIcon fileName={f.name} className="h-3.5 w-3.5" />
+                  <span className="text-xs text-muted-foreground">{f.name}</span>
+                </div>
+                <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-[9px]">M</Badge>
+              </div>
+            ))
+          ) : (
+            <div className="text-[10px] text-muted-foreground opacity-40 text-center py-10">No staged changes</div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ExtensionsView() {
+  const extensions = [
+    { name: "Caret Python AI", desc: "Advanced Python logic", author: "Caret Team", installed: true },
+    { name: "Tailwind IntelliSense", desc: "Auto-completion for Tailwind", author: "Tailwind Labs", installed: true },
+    { name: "GitLens Lite", desc: "Visualize code authorship", author: "GitKraken", installed: false },
+    { name: "Prettier", desc: "Opinionated code formatter", author: "Prettier", installed: true },
+  ]
+
+  return (
+    <div className="flex flex-col h-full">
+      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
+        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Extensions</span>
+      </div>
+      <div className="p-4 space-y-4">
+        <input 
+          className="w-full bg-white/[0.03] border border-white/5 rounded-md py-1.5 px-3 text-[11px] focus:outline-none focus:border-primary/30"
+          placeholder="Search extensions..."
+        />
+        <div className="space-y-3">
+          {extensions.map((ext, i) => (
+            <div key={i} className="p-2 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group border border-transparent hover:border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-md bg-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+                  <Package className="h-4 w-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-xs font-bold text-foreground truncate">{ext.name}</h4>
+                  <p className="text-[10px] text-muted-foreground truncate">{ext.author}</p>
+                </div>
+                {!ext.installed && <Button size="sm" variant="ghost" className="h-6 text-[9px] uppercase font-bold text-primary">Install</Button>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function AILogicView() {
+  return (
+    <div className="p-4 text-center py-20 opacity-40">
+      <Blocks className="h-10 w-10 mx-auto mb-4 text-primary" />
+      <span className="text-[10px] font-black uppercase tracking-[0.2em]">AI Intelligence Active</span>
+      <p className="text-[11px] mt-2">Open the right panel for full AI assistant features.</p>
     </div>
   )
 }
@@ -194,11 +307,6 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
       return a.type === 'folder' ? -1 : 1
     })
 
-  const handleToggle = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    store.selectFile(node.id)
-  }
-
   return (
     <div className="flex flex-col">
       <div
@@ -208,7 +316,7 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
           isActive && "font-bold"
         )}
         style={{ paddingLeft: `${(depth * 12) + 8}px` }}
-        onClick={handleToggle}
+        onClick={() => store.selectFile(node.id)}
       >
         {node.type === 'folder' && (
           isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />

@@ -26,7 +26,6 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
   const { toast } = useToast()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
-  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false)
 
   const handleOpenFileClick = () => {
     fileInputRef.current?.click()
@@ -47,7 +46,6 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
       })
     }
     reader.readAsText(file)
-    
     e.target.value = ''
   }
 
@@ -115,7 +113,7 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
             <MenubarTrigger className="h-7 text-[11px] font-medium px-2 hover:bg-white/5 cursor-pointer">Help</MenubarTrigger>
             <MenubarContent className="bg-[#111] border-white/5">
               <MenubarItem onClick={() => setIsAboutOpen(true)}><Info className="h-3 w-3 mr-2" /> About Caret</MenubarItem>
-              <MenubarItem onClick={() => setIsShortcutsOpen(true)}><Keyboard className="h-3 w-3 mr-2" /> Shortcuts <MenubarShortcut>Ctrl+K</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => store.setIsShortcutsOpen(true)}><Keyboard className="h-3 w-3 mr-2" /> Shortcuts <MenubarShortcut>Ctrl+D</MenubarShortcut></MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
@@ -162,7 +160,7 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
       </Dialog>
 
       {/* Shortcuts Dialog */}
-      <Dialog open={isShortcutsOpen} onOpenChange={setIsShortcutsOpen}>
+      <Dialog open={store.ui.isShortcutsOpen} onOpenChange={store.setIsShortcutsOpen}>
         <DialogContent className="bg-[#111] border-white/5 text-foreground max-w-md">
           <DialogHeader>
             <DialogTitle className="text-[14px] font-bold uppercase tracking-widest text-primary">Keyboard Shortcuts</DialogTitle>
@@ -173,7 +171,7 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
             <ShortcutRow label="Toggle Terminal" shortcut="Ctrl + J" />
             <ShortcutRow label="Command Palette" shortcut="Ctrl + K / Ctrl + P" />
             <ShortcutRow label="New File" shortcut="Ctrl + N" />
-            <ShortcutRow label="Open File" shortcut="Ctrl + O" />
+            <ShortcutRow label="Shortcuts List" shortcut="Ctrl + D" />
             <ShortcutRow label="Save File" shortcut="Ctrl + S" />
           </div>
         </DialogContent>

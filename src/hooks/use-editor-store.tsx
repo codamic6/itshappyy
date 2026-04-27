@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { createContext, useContext, useState, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react'
 
 export interface FileNode {
   id: string
@@ -11,6 +11,7 @@ export interface FileNode {
   path: string
   parentId: string | null
   type: 'file' | 'folder'
+  updatedAt: number
 }
 
 export interface TerminalLine {
@@ -56,6 +57,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
   const [expandedFolders, setExpandedFolders] = useState<Record<string, boolean>>({})
+  const [recentlyOpened, setRecentlyOpened] = useState<string[]>([])
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([
     { type: 'output', content: 'Caret Shell Environment v1.0.0' },
     { type: 'output', content: 'Status: System Online. AI Ready.' }
@@ -68,6 +70,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     isAIPanelOpen: true,
     isCommandPaletteOpen: false,
     isSettingsOpen: false,
+    isShortcutsOpen: false,
     fontSize: 14,
     activeView: 'explorer' as 'explorer' | 'search' | 'git' | 'extensions' | 'ai'
   })
@@ -94,6 +97,11 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         if (prev.includes(id)) return prev
         return [...prev, id]
       })
+      // Update recently opened
+      setRecentlyOpened(prev => {
+        const filtered = prev.filter(rid => rid !== id)
+        return [id, ...filtered].slice(0, 5)
+      })
     } else {
       toggleFolder(id)
     }
@@ -113,7 +121,8 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
       language,
       path,
       parentId,
-      type
+      type,
+      updatedAt: Date.now()
     }
 
     setNodes(prev => ({ ...prev, [id]: newNode }))
@@ -129,6 +138,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
       })
       setActiveFileId(id)
       setSelectedNodeId(id)
+      setRecentlyOpened(prev => [id, ...prev.filter(rid => rid !== id)].slice(0, 5))
     } else {
       setSelectedNodeId(id)
     }
@@ -150,7 +160,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
       if (!prev[id] || prev[id].type !== 'file') return prev
       return {
         ...prev,
-        [id]: { ...prev[id], content }
+        [id]: { ...prev[id], content, updatedAt: Date.now() }
       }
     })
   }, [])
@@ -159,7 +169,6 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     setNodes(prev => {
       const next = { ...prev }
       const toDelete = [id]
-      
       const findChildren = (pid: string) => {
         Object.values(prev).forEach(node => {
           if (node.parentId === pid) {
@@ -169,12 +178,12 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         })
       }
       findChildren(id)
-      
       toDelete.forEach(tid => delete next[tid])
       return next
     })
     
     setOpenTabs(prev => prev.filter(tid => tid !== id))
+    setRecentlyOpened(prev => prev.filter(rid => rid !== id))
     if (activeFileId === id) setActiveFileId(null)
     if (selectedNodeId === id) setSelectedNodeId(null)
   }, [activeFileId, selectedNodeId])
@@ -209,21 +218,18 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     }
   }, [nodes])
 
-  const setIsSidebarOpen = (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val }))
-  const setIsTerminalOpen = (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val }))
-  const setIsAIPanelOpen = (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val }))
-  const setIsCommandPaletteOpen = (val: boolean) => setUi(prev => ({ ...prev, isCommandPaletteOpen: val }))
-
   const value = {
     nodes, files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
-    selectedNodeId, setSelectedNodeId, expandedFolders,
+    selectedNodeId, setSelectedNodeId, expandedFolders, recentlyOpened,
     setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand, toggleFolder,
-    setIsSidebarOpen,
-    setIsTerminalOpen,
-    setIsAIPanelOpen,
-    setIsCommandPaletteOpen,
+    setIsSidebarOpen: (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val })),
+    setIsTerminalOpen: (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val })),
+    setIsAIPanelOpen: (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val })),
+    setIsCommandPaletteOpen: (val: boolean) => setUi(prev => ({ ...prev, isCommandPaletteOpen: val })),
     setIsSettingsOpen: (val: boolean) => setUi(prev => ({ ...prev, isSettingsOpen: val })),
-    setFontSize: (val: number) => setUi(prev => ({ ...prev, fontSize: val }))
+    setIsShortcutsOpen: (val: boolean) => setUi(prev => ({ ...prev, isShortcutsOpen: val })),
+    setFontSize: (val: number) => setUi(prev => ({ ...prev, fontSize: val })),
+    setActiveView: (view: any) => setUi(prev => ({ ...prev, activeView: view }))
   }
 
   return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>

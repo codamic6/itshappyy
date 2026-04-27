@@ -24,7 +24,7 @@ export default function App() {
 
   const handleNewFile = () => {
     store.setIsSidebarOpen(true);
-    store.setUi({ ...store.ui, activeView: 'explorer' });
+    store.setActiveView('explorer');
     const id = store.createNode(`untitled-${Object.keys(store.files).length + 1}.js`, 'file');
     store.selectFile(id);
     toast({ title: "New File Created", description: "Start coding now!" });
@@ -50,6 +50,7 @@ export default function App() {
             store.setIsTerminalOpen(!store.ui.isTerminalOpen);
             break;
           case 'k':
+          case 'p':
             e.preventDefault();
             store.setIsCommandPaletteOpen(true);
             break;
@@ -57,9 +58,9 @@ export default function App() {
             e.preventDefault();
             handleNewFile();
             break;
-          case 'p':
+          case 'd':
             e.preventDefault();
-            store.setIsCommandPaletteOpen(true);
+            store.setIsShortcutsOpen(true);
             break;
           case 's':
             e.preventDefault();
@@ -71,7 +72,7 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [store.ui, store.activeFile, store.setIsSidebarOpen, store.setIsAIPanelOpen, store.setIsTerminalOpen, store.setIsCommandPaletteOpen, handleNewFile]);
+  }, [store.ui, store.activeFile, handleNewFile]);
 
   return (
     <div className="flex h-screen w-screen bg-[#0A0D12] text-foreground overflow-hidden font-body selection:bg-primary/30 selection:text-white">
@@ -82,7 +83,8 @@ export default function App() {
           if (store.ui.activeView === view && store.ui.isSidebarOpen) {
             store.setIsSidebarOpen(false);
           } else {
-            store.setUi({ ...store.ui, activeView: view, isSidebarOpen: true });
+            store.setActiveView(view);
+            store.setIsSidebarOpen(true);
           }
         }} 
       />
@@ -92,7 +94,7 @@ export default function App() {
         <MenuBar onNewFile={handleNewFile} />
 
         <div className="flex-1 flex overflow-hidden">
-          {/* 3. Main Sidebar (Explorer) */}
+          {/* 3. Main Sidebar (Explorer, Git, etc.) */}
           <AnimatePresence mode="wait">
             {store.ui.isSidebarOpen && (
               <motion.div 
@@ -145,7 +147,7 @@ export default function App() {
               </div>
             )}
 
-            {/* 6. Professional Status Bar */}
+            {/* 6. Status Bar */}
             <div className="h-7 bg-[#0A0D12] border-t border-white/5 flex items-center px-4 justify-between text-[10px] font-bold text-muted-foreground/40 uppercase tracking-[0.2em] z-50">
               <div className="flex items-center gap-5">
                 <button 
