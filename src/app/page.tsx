@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useEffect } from 'react';
@@ -25,7 +24,7 @@ export default function App() {
   const handleNewFile = () => {
     store.setIsSidebarOpen(true);
     store.setActiveView('explorer');
-    const id = store.createNode(`untitled-${Object.keys(store.files).length + 1}.js`, 'file');
+    const id = store.createNode(`untitled-${Object.keys(store.nodes || {}).length + 1}.js`, 'file');
     store.selectFile(id);
     toast({ title: "New File Created", description: "Start coding now!" });
   };
