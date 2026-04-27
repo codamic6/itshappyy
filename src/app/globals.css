@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-body antialiased select-none;
+    @apply bg-[#0C0C0E] text-foreground font-body antialiased select-none;
   }
   .monaco-editor, .selectable-text {
     @apply select-text;
@@ -58,8 +58,8 @@
 }
 
 .font-future {
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.05em;
+  @apply font-headline;
+  letter-spacing: 0.08em;
   font-weight: 500;
 }
 
@@ -69,8 +69,8 @@
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -78,15 +78,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+  @apply bg-white/5 rounded-full hover:bg-white/10 transition-colors;
 }
 
 .resizer-h {
-  @apply w-[2px] cursor-col-resize hover:bg-white/30 transition-colors z-50;
+  @apply w-[1px] cursor-col-resize hover:bg-white/20 transition-colors z-50;
 }
 
 .resizer-v {
-  @apply h-[2px] cursor-row-resize hover:bg-white/30 transition-colors z-50;
+  @apply h-[1px] cursor-row-resize hover:bg-white/20 transition-colors z-50;
 }
 
 .no-scrollbar::-webkit-scrollbar {

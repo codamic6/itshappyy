@@ -120,27 +120,27 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
   }, [content, activeFileId, user, firestore])
 
   return (
-    <div className="flex-1 flex flex-col bg-black overflow-hidden relative">
+    <div className="flex-1 flex flex-col bg-[#0C0C0E] overflow-hidden relative">
       {/* Tabs */}
-      <div className="h-10 bg-[#050505] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1 relative z-10">
+      <div className="h-10 bg-[#0A0A0A] border-b border-white/5 flex items-center overflow-x-auto no-scrollbar px-1 relative z-10">
         {openFiles.map((file) => (
           <div
             key={file.id}
             className={cn(
               "h-full min-w-[140px] flex items-center justify-between px-3 text-[10px] cursor-pointer group transition-all relative border-r border-white/5",
-              activeFileId === file.id ? "bg-black text-white" : "text-white/40 hover:bg-white/[0.02] hover:text-white/60"
+              activeFileId === file.id ? "bg-[#0C0C0E] text-white" : "text-white/30 hover:bg-white/[0.02] hover:text-white/50"
             )}
             onClick={() => onTabClick(file.id)}
           >
             {activeFileId === file.id && (
-              <motion.div layoutId="activeTabGlow" className="absolute bottom-0 left-0 right-0 h-[1px] bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]" />
+              <motion.div layoutId="activeTabGlow" className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/20" />
             )}
             <div className="flex items-center gap-2 truncate">
               <FileIcon fileName={file.name} className="h-3 w-3" />
-              <span className={cn("truncate font-future tracking-wider", activeFileId === file.id && "text-white")}>{file.name.toUpperCase()}</span>
+              <span className={cn("truncate font-headline tracking-widest", activeFileId === file.id && "text-white")}>{file.name.toUpperCase()}</span>
             </div>
             <button 
-              className="opacity-0 group-hover:opacity-100 p-1 hover:bg-white/10 rounded-full transition-all ml-2"
+              className="opacity-0 group-hover:opacity-100 p-1 hover:bg-white/5 rounded-full transition-all ml-2"
               onClick={(e) => { e.stopPropagation(); onTabClose(file.id); }}
             >
               <X className="h-3 w-3" />
@@ -150,39 +150,38 @@ export function CodeEditor({ content, language, fontSize, onChange, openFiles, a
       </div>
 
       {/* Editor Surface */}
-      <div className="flex-1 relative bg-black">
+      <div className="flex-1 relative bg-[#0C0C0E]">
         <AnimatePresence mode="wait">
           <motion.div 
             key={activeFileId} 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
             exit={{ opacity: 0 }} 
-            transition={{ duration: 0.2 }} 
+            transition={{ duration: 0.1 }} 
             className="w-full h-full"
           >
             <Editor
               height="100%"
               language={language}
               value={content}
-              theme="hc-black" // Using High Contrast for pure black
+              theme="hc-black"
               onMount={(editor, monaco) => {
                 editorRef.current = editor
                 monacoRef.current = monaco
                 setupCaretAPI(editor, monaco)
                 
-                // Pure Black Background Override
-                monaco.editor.defineTheme('caret-2099', {
+                monaco.editor.defineTheme('caret-professional', {
                   base: 'vs-dark',
                   inherit: true,
                   rules: [],
                   colors: {
-                    'editor.background': '#000000',
-                    'editor.lineHighlightBackground': '#080808',
+                    'editor.background': '#0C0C0E',
+                    'editor.lineHighlightBackground': '#111114',
                     'editorCursor.foreground': '#FFFFFF',
-                    'editor.selectionBackground': '#FFFFFF22',
+                    'editor.selectionBackground': '#FFFFFF10',
                   }
                 });
-                monaco.editor.setTheme('caret-2099');
+                monaco.editor.setTheme('caret-professional');
                 editor.focus()
               }}
               options={{

@@ -58,7 +58,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode, onC
   }
 
   return (
-    <div className="w-full flex flex-col h-full overflow-hidden bg-black border-l border-white/5">
+    <div className="w-full flex flex-col h-full overflow-hidden bg-[#0C0C0E] border-l border-white/5">
       <div className="p-4 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
         <div className="flex items-center gap-2">
           <Zap className="h-3 w-3 text-white opacity-40" />
@@ -80,7 +80,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode, onC
           <TabsTrigger value="gen" className="flex-1 text-[9px] uppercase font-black tracking-widest data-[state=active]:bg-white/[0.03]">Build</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0 bg-black">
+        <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0 bg-[#0C0C0E]">
           <ScrollArea className="flex-1 p-4" ref={scrollRef}>
             <div className="space-y-6 pb-4">
               {messages.map((m, i) => (
@@ -88,7 +88,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode, onC
                   <div className={cn("text-[8px] font-black tracking-widest uppercase opacity-30", m.role === 'user' ? "text-right" : "text-left")}>
                     {m.role === 'user' ? 'USER' : 'ASSISTANT'}
                   </div>
-                  <div className={cn("rounded-lg p-3 text-[11px] leading-relaxed border", m.role === 'user' ? "bg-white/[0.03] border-white/10" : "bg-black border-white/5")}>
+                  <div className={cn("rounded-lg p-3 text-[11px] leading-relaxed border", m.role === 'user' ? "bg-white/[0.03] border-white/10" : "bg-[#0A0A0A] border-white/5")}>
                     <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode, onC
             <div className="relative">
               <Textarea 
                 placeholder="INPUT COMMAND..."
-                className="min-h-[60px] max-h-[120px] bg-black border-white/10 text-[10px] font-bold uppercase tracking-widest rounded-lg focus-visible:ring-1 focus-visible:ring-white/20"
+                className="min-h-[60px] max-h-[120px] bg-[#0A0A0A] border-white/5 text-[10px] font-bold uppercase tracking-widest rounded-lg focus-visible:ring-1 focus-visible:ring-white/10"
                 value={chatPrompt}
                 onChange={(e) => setChatPrompt(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChat())}
@@ -112,10 +112,10 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode, onC
           </div>
         </TabsContent>
 
-        <TabsContent value="gen" className="flex-1 p-5 m-0 space-y-4 bg-black">
+        <TabsContent value="gen" className="flex-1 p-5 m-0 space-y-4 bg-[#0C0C0E]">
           <Textarea 
             placeholder="DESCRIBE COMPONENT..."
-            className="min-h-[120px] bg-black border-white/10 text-[10px] font-bold tracking-widest rounded-lg"
+            className="min-h-[120px] bg-[#0A0A0A] border-white/5 text-[10px] font-bold tracking-widest rounded-lg"
             value={genPrompt}
             onChange={(e) => setGenPrompt(e.target.value)}
           />

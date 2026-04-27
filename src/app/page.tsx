@@ -63,7 +63,7 @@ export default function App() {
     store.setActiveView('explorer');
     const id = store.createNode(`untitled-${Object.keys(store.nodes || {}).length + 1}.js`, 'file');
     store.selectFile(id);
-    toast({ title: "New File Created" });
+    toast({ title: "New Node Created" });
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function App() {
   }, [store.ui, store.activeFile, handleNewFile]);
 
   return (
-    <div className="flex h-screen w-screen bg-black text-foreground overflow-hidden font-body">
+    <div className="flex h-screen w-screen bg-[#0C0C0E] text-foreground overflow-hidden font-body select-none">
       <ActivityBar 
         activeView={store.ui.activeView} 
         onViewChange={(view) => {
@@ -106,7 +106,7 @@ export default function App() {
                 animate={{ width: sidebarWidth, opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="h-full border-r border-white/5 bg-black z-40 overflow-hidden relative flex"
+                className="h-full border-r border-white/5 bg-[#0C0C0E] z-40 overflow-hidden relative flex"
               >
                 <div className="flex-1 overflow-hidden">
                   <EditorSidebar />
@@ -119,7 +119,7 @@ export default function App() {
             )}
           </AnimatePresence>
 
-          <div className="flex-1 flex flex-col min-w-0 bg-black relative">
+          <div className="flex-1 flex flex-col min-w-0 bg-[#0C0C0E] relative">
             {!store.activeFileId && store.openTabs.length === 0 ? (
               <WelcomeScreen onNewFile={handleNewFile} />
             ) : (
@@ -142,7 +142,7 @@ export default function App() {
                       animate={{ height: terminalHeight }}
                       exit={{ height: 0 }}
                       transition={{ type: 'spring', damping: 25 }}
-                      className="overflow-hidden bg-black flex flex-col"
+                      className="overflow-hidden bg-[#0C0C0E] flex flex-col"
                     >
                       <div 
                         className="resizer-v" 
@@ -159,13 +159,13 @@ export default function App() {
               </div>
             )}
 
-            <div className="h-7 bg-black border-t border-white/5 flex items-center px-4 justify-between text-[9px] font-future text-white/30 uppercase tracking-widest z-50">
+            <div className="h-7 bg-[#0C0C0E] border-t border-white/5 flex items-center px-4 justify-between text-[9px] font-headline text-white/20 uppercase tracking-[0.3em] z-50">
               <div className="flex items-center gap-5">
                 <button 
-                  className={cn("flex items-center gap-2 hover:text-white transition-colors", store.ui.isTerminalOpen && "text-white")}
+                  className={cn("flex items-center gap-2 hover:text-white transition-colors", store.ui.isTerminalOpen && "text-white/60")}
                   onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}
                 >
-                  <TerminalIcon className="h-3 w-3" /> Terminal
+                  <TerminalIcon className="h-3 w-3" /> Shell
                 </button>
                 <div className="flex items-center gap-2">
                   <GitBranch className="h-3 w-3" /> main*
@@ -176,9 +176,9 @@ export default function App() {
                   <MousePointer2 className="h-3 w-3" /> Ln 1, Col 1
                 </div>
                 {store.activeFile && (
-                  <div className="text-white/60">{store.activeFile.language.toUpperCase()}</div>
+                  <div className="text-white/40">{store.activeFile.language.toUpperCase()}</div>
                 )}
-                <div className="flex items-center gap-2 text-white">
+                <div className="flex items-center gap-2 text-white/60">
                   <Sparkles className="h-3 w-3 animate-pulse" /> AI READY
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function App() {
                 animate={{ width: aiPanelWidth, opacity: 1 }}
                 exit={{ width: 0, opacity: 0 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="h-full border-l border-white/5 bg-black z-40 overflow-hidden relative flex"
+                className="h-full border-l border-white/5 bg-[#0C0C0E] z-40 overflow-hidden relative flex"
               >
                 <div 
                   className="resizer-h" 

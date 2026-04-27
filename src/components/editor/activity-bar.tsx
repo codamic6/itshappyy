@@ -16,7 +16,7 @@ export function ActivityBar({ activeView, onViewChange, side = 'left' }: Activit
 
   return (
     <div className={cn(
-      "w-[50px] bg-black flex flex-col items-center py-4 gap-4 z-50 relative",
+      "w-[50px] bg-[#0C0C0E] flex flex-col items-center py-4 gap-4 z-50 relative",
       side === 'left' ? "border-r border-white/5" : "border-l border-white/5"
     )}>
       <TooltipProvider delayDuration={0}>
@@ -81,12 +81,12 @@ function ActivityIcon({ icon, active, onClick, label }: any) {
           )}
         >
           {active && (
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-6 bg-white shadow-[0_0_10px_white]" />
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[1px] h-6 bg-white/40 shadow-[0_0_8px_white]" />
           )}
           {icon}
         </button>
       </TooltipTrigger>
-      <TooltipContent side="right" className="bg-black border-white/10 text-[9px] font-future uppercase tracking-widest p-2">
+      <TooltipContent side="right" className="bg-[#111] border-white/10 text-[9px] font-future uppercase tracking-widest p-2">
         {label}
       </TooltipContent>
     </Tooltip>

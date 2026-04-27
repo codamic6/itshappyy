@@ -22,7 +22,7 @@ export function EditorSidebar() {
   const activeView = store.ui.activeView
 
   return (
-    <div className="w-full flex flex-col h-full bg-[#050505] select-none border-r border-white/5 crystal-panel">
+    <div className="w-full flex flex-col h-full bg-[#0C0C0E] select-none border-r border-white/5 crystal-panel">
       {activeView === 'explorer' && <ExplorerView />}
       {activeView === 'search' && <SearchView />}
       {activeView === 'git' && <SourceControlView />}
@@ -172,7 +172,7 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
         <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
           <DropdownMenu>
             <DropdownMenuTrigger asChild><button className="p-1 hover:text-white" onClick={(e) => e.stopPropagation()}><MoreVertical className="h-2.5 w-2.5" /></button></DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+            <DropdownMenuContent align="end" className="bg-[#0C0C0E] border-white/10 text-[9px] font-future uppercase p-1">
               {node.type === 'folder' && (
                 <><DropdownMenuItem onClick={() => startCreation('file', node.id)} className="gap-2">NEW DATA</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="gap-2">NEW NODE</DropdownMenuItem></>
@@ -202,7 +202,7 @@ function ActionIcon({ icon, onClick, label }: any) {
   return (
     <Tooltip>
       <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-6 w-6 text-white/20 hover:text-white" onClick={onClick}>{icon}</Button></TooltipTrigger>
-      <TooltipContent side="bottom" className="text-[8px] font-future bg-black border-white/10 p-2 uppercase tracking-widest">{label}</TooltipContent>
+      <TooltipContent side="bottom" className="text-[8px] font-future bg-[#111] border-white/10 p-2 uppercase tracking-widest">{label}</TooltipContent>
     </Tooltip>
   )
 }
