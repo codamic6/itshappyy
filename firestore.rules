@@ -1,0 +1,97 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * CARET IDE Live Extension System - Security Rules
+     * 
+     * CORE PHILOSOPHY:
+     * This ruleset implements a "Public Read, Admin Write" model for the extension system. 
+     * It prioritizes high availability for clients (IDE users) to fetch and execute 
+     * live code while strictly locking down the ability to modify that code to 
+     * authenticated administrators.
+     * 
+     * DATA STRUCTURE:
+     * - /caret_extensions/{extensionId}: Flat collection containing extension metadata and source code.
+     * - /roles_admin/{uid}: Lookup collection used to verify administrative privileges.
+     * 
+     * KEY SECURITY DECISIONS:
+     * - Read Access: All authenticated users (including anonymous users) can list and get 
+     *   extensions. This is required for the IDE to load plugins immediately on startup.
+     * - Write Access: Only users whose UID exists in the `/roles_admin` collection are 
+     *   permitted to create, modify, or delete extensions.
+     * - Integrity: We enforce that the `id` field within the document matches the 
+     *   Firestore Document ID during creation and remains immutable during updates.
+     * - Prototyping Flexibility: We do not enforce strict schema or data types for 
+     *   fields like `code` or `name` to allow rapid iteration of extension features.
+     */
+
+    // --- Helper Functions ---
+
+    /**
+     * @description Checks if the user is authenticated with any provider (Password or Anonymous).
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Checks if the authenticated user has an entry in the administrative roles collection.
+     * @principle Roles-Based Access Control (RBAC) via Lookup.
+     */
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
+    }
+
+    /**
+     * @description Combined check for admin status and document existence for destructive operations.
+     */
+    function isExistingAdmin() {
+      return isAdmin() && resource != null;
+    }
+
+    // --- Collection Rules ---
+
+    /**
+     * @description Rules for the CaretExtension collection. 
+     * Extensions contain executable JavaScript and must be strictly protected from unauthorized modification.
+     * @path /caret_extensions/{extensionId}
+     * @allow (get, list) if the user is signed in.
+     * @allow (create) if the user is an admin and the internal ID matches the path.
+     * @deny (create, update, delete) if the user is not found in /roles_admin.
+     * @principle Structural Segregation: Centralized code storage with global read and restricted write.
+     */
+    match /caret_extensions/{extensionId} {
+      
+      // Allow all IDE users to read extensions to enable the Execution Loop.
+      allow get, list: if isSignedIn();
+
+      // Only designated administrators can create new extensions.
+      // We enforce that the 'id' field in the data matches the document ID for relational integrity.
+      allow create: if isAdmin() && request.resource.data.id == extensionId;
+
+      // Only designated administrators can update existing extensions.
+      // We ensure the document exists and the 'id' remains immutable.
+      allow update: if isExistingAdmin() && request.resource.data.id == resource.data.id;
+
+      // Only designated administrators can remove extensions.
+      allow delete: if isExistingAdmin();
+    }
+
+    /**
+     * @description Verification collection for administrative roles.
+     * @path /roles_admin/{uid}
+     * @allow (get) for authenticated users to verify their own or others' admin status.
+     * @deny (write) via Firestore rules; admin assignment should happen via Admin SDK or Cloud Functions.
+     */
+    match /roles_admin/{uid} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if false;
+    }
+
+    // Default deny for any unmatched paths.
+    match /{path=**} {
+      allow read, write: if false;
+    }
+  }
+}

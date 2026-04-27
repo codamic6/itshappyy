@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "CaretExtension": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "CaretExtension",
+      "type": "object",
+      "description": "Represents a dynamic extension that can be loaded and executed within the DevSphere AI code editor to enhance its functionality. These extensions are intended to be live-loaded from a data source.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the CaretExtension entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "A human-readable name for the extension."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief explanation of what the extension does or its purpose."
+        },
+        "code": {
+          "type": "string",
+          "description": "The JavaScript code snippet that defines the extension's logic, intended for direct execution within the Monaco Editor environment. This code will be passed to a new Function() constructor."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "A flag indicating whether the extension is currently active and should be loaded by the IDE."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "The date and time when the extension was initially created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "The date and time when the extension was last modified.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "code",
+        "isEnabled",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/caret_extensions",
+        "definition": {
+          "entityName": "CaretExtension",
+          "schema": {
+            "$ref": "#/backend/entities/CaretExtension"
+          },
+          "description": "Stores dynamic code extensions that are loaded and executed live within the DevSphere AI code editor. Documents in this collection are globally accessible for reading by all users of the IDE to enable live-loading, and strictly restricted for writing, updating, or deleting to designated administrators. No denormalized authorization fields are required within these documents as access is controlled at the collection level."
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure for the Live Extension System is designed to prioritize Authorization Independence, Structural Segregation, and support Query as a Process (QAPs).\n\n**Authorization Independence:** The `caret_extensions` collection is a top-level collection, meaning documents within it do not rely on parent documents for authorization context. For read access, all authenticated users (and potentially anonymous users, depending on the app's overall authentication strategy) are granted permission to read any document in this collection. This permission is based solely on the `request.auth.uid` status, not on data within the document itself or any other related document via `get()` calls. For write, update, or delete operations, authorization will be managed by checking the `request.auth.uid` against a separate, dedicated administrative roles collection (e.g., `/roles_admin/{uid}`), ensuring that the authorization logic for modifications is also independent and does not require reading data from the `CaretExtension` document itself or its hierarchy.\n\n**Structural Segregation:** All `CaretExtension` documents are stored in a single, dedicated collection `/caret_extensions`. This approach mandates that all documents within this collection share the exact same security requirements: readable by all IDE users and writable only by authorized administrators. This homogeneous security posture simplifies Firestore rules significantly, as there's no need to differentiate access based on document content or user-specific relationships within this collection. If different access patterns were required (e.g., user-specific extensions vs. global extensions), separate collections would be created to segregate data by security posture.\n\n**QAPs (Rules are not Filters):** By granting broad read access (e.g., `allow read: if request.auth != null;` for authenticated users) to the entire `/caret_extensions` collection, the design ensures that Firestore rules do not act as filters. Clients can query the `caret_extensions` collection without their queries being rejected due to fine-grained, content-based rule filtering. For example, a client-side query like `db.collection('caret_extensions').where('isEnabled', '==', true).get()` will be fully supported because the security rules permit reading all documents in the collection. The `isEnabled` field then serves as a client-side filter for the application logic, allowing the IDE to load only active extensions, without placing that filtering burden on the security rules. This makes the system more robust and easier to debug, as security decisions are cleanly separated from application-level data filtering."
+  }
+}
