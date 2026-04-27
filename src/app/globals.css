@@ -4,46 +4,45 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 90%;
-    --card: 0 0% 0%;
-    --card-foreground: 0 0% 100%;
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 2%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 5%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 5%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 0% 15%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 5%;
-    --input: 0 0% 5%;
-    --ring: 0 0% 100%;
-    --radius: 0.25rem;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-white/5;
+    @apply border-border;
   }
   body {
-    @apply bg-black text-foreground font-body antialiased select-none;
+    @apply bg-background text-foreground font-body antialiased select-none;
   }
-  /* Allow selection ONLY in the code editor */
   .monaco-editor, .selectable-text {
     @apply select-text;
   }
 }
 
-/* 2099 Crystal Shining Effects */
+/* Advanced Crystal Workstation Styles */
 .crystal-panel {
-  @apply bg-black backdrop-blur-3xl border-white/5;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  @apply bg-[#0C0C0E] border-white/5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .shining-border {
@@ -54,65 +53,40 @@
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  pointer-events: none;
-  transition: border-color 0.3s ease;
-}
-
-.shining-border:hover::after {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Monaco Pure Dark Theme */
-.monaco-editor, .monaco-editor .margin, .monaco-editor-background {
-  background-color: #000000 !important;
-}
-
-/* Futuristic Resizer Handles */
-.resizer-h {
-  @apply w-[2px] cursor-col-resize hover:bg-white/20 transition-colors z-50;
-}
-
-.resizer-v {
-  @apply h-[2px] cursor-row-resize hover:bg-white/20 transition-colors z-50;
-}
-
-/* Futuristic Scrollbars */
-::-webkit-scrollbar {
-  width: 3px;
-  height: 3px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full hover:bg-white/30 transition-colors;
-}
-
-@keyframes glow {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.02); }
-}
-
-.active-glow {
-  position: relative;
-}
-
-.active-glow::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-  animation: glow 3s infinite ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   pointer-events: none;
 }
 
 .font-future {
-  font-family: 'Source Code Pro', monospace;
-  letter-spacing: 0.1em;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.05em;
   font-weight: 500;
+}
+
+.font-code {
+  font-family: 'Source Code Pro', monospace;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
+
+.resizer-h {
+  @apply w-[2px] cursor-col-resize hover:bg-white/30 transition-colors z-50;
+}
+
+.resizer-v {
+  @apply h-[2px] cursor-row-resize hover:bg-white/30 transition-colors z-50;
 }
 
 .no-scrollbar::-webkit-scrollbar {
