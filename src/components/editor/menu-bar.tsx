@@ -1,8 +1,8 @@
 
 "use client"
 
-import { useRef, useState } from 'react'
-import { Command, Play, Github, Info, Keyboard } from 'lucide-react'
+import { useRef, useState, useEffect } from 'react'
+import { Command, Play, Github, Info, Keyboard, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Menubar,
@@ -26,6 +26,32 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
   const { toast } = useToast()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+    }
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+  }, [])
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) {
+      toast({
+        title: "PWA Installation",
+        description: "The app might already be installed, or your browser doesn't support installation from this URL.",
+      })
+      return
+    }
+    deferredPrompt.prompt()
+    const { outcome } = await deferredPrompt.userChoice
+    if (outcome === 'accepted') {
+      setDeferredPrompt(null)
+      toast({ title: "Success", description: "CARET is being installed to your system." })
+    }
+  }
 
   const handleOpenFileClick = () => {
     fileInputRef.current?.click()
@@ -70,6 +96,10 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
             <MenubarContent className="bg-[#111] border-white/5">
               <MenubarItem onClick={onNewFile}>New File <MenubarShortcut>Ctrl+N</MenubarShortcut></MenubarItem>
               <MenubarItem onClick={handleOpenFileClick}>Open File <MenubarShortcut>Ctrl+O</MenubarShortcut></MenubarItem>
+              <MenubarSeparator className="bg-white/5" />
+              <MenubarItem onClick={handleInstallClick} className="text-primary font-bold">
+                <Download className="h-3 w-3 mr-2" /> Install Desktop IDE
+              </MenubarItem>
               <MenubarSeparator className="bg-white/5" />
               <MenubarItem onClick={() => toast({ title: "Saved", description: store.activeFile?.name || "Workspace saved" })} disabled={!store.activeFileId}>Save <MenubarShortcut>Ctrl+S</MenubarShortcut></MenubarItem>
               <MenubarSeparator className="bg-white/5" />

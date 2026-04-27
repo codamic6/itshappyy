@@ -1,15 +1,42 @@
 
 "use client"
 
-import { FilePlus, FolderOpen, Code, Sparkles, Command, Github, Globe } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { FilePlus, FolderOpen, Code, Sparkles, Command, Github, Globe, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/hooks/use-toast'
 
 interface WelcomeScreenProps {
   onNewFile: () => void
 }
 
 export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
+  const { toast } = useToast()
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+    }
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+  }, [])
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) {
+      toast({
+        title: "Installation Status",
+        description: "App is already installed or your browser doesn't support automatic installation here.",
+      })
+      return
+    }
+    deferredPrompt.prompt()
+    const { outcome } = await deferredPrompt.userChoice
+    if (outcome === 'accepted') setDeferredPrompt(null)
+  }
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center bg-[#0D1117] p-8 overflow-y-auto relative">
       {/* Background Decor */}
@@ -44,7 +71,7 @@ export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30 mb-4">Start</h2>
             <div className="grid gap-3">
               <WelcomeAction icon={<FilePlus className="h-4 w-4" />} title="New File" shortcut="Ctrl+N" onClick={onNewFile} />
-              <WelcomeAction icon={<FolderOpen className="h-4 w-4" />} title="Open Folder" shortcut="Ctrl+O" />
+              <WelcomeAction icon={<Download className="h-4 w-4 text-primary" />} title="Install Desktop App" shortcut="PWA" onClick={handleInstallClick} />
               <WelcomeAction icon={<Command className="h-4 w-4" />} title="Command Palette" shortcut="Ctrl+K" />
             </div>
           </div>
