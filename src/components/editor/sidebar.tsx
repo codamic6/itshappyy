@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
+import { ExtensionSidebar } from "./extension-sidebar"
 
 export function EditorSidebar() {
   const store = useEditorStore()
@@ -29,7 +30,7 @@ export function EditorSidebar() {
       {activeView === 'explorer' && <ExplorerView />}
       {activeView === 'search' && <SearchView />}
       {activeView === 'git' && <SourceControlView />}
-      {activeView === 'extensions' && <ExtensionsView />}
+      {activeView === 'extensions' && <ExtensionSidebar />}
       {activeView === 'ai' && <AILogicView />}
     </div>
   )
@@ -119,11 +120,11 @@ function ExplorerView() {
 
       <div className="px-3 py-2">
         <div className="relative group">
-          <Search className="absolute left-2 top-1.5 h-3.5 w-3.5 text-muted-foreground/40 group-focus-within:text-primary transition-colors" />
+          <Search className="absolute left-2 top-1.5 h-3.5 w-3.5 text-muted-foreground/40" />
           <input 
             type="text"
             placeholder="Search files..."
-            className="w-full bg-white/[0.03] border border-white/5 rounded-md py-1.5 pl-8 pr-2 text-[11px] focus:outline-none focus:border-primary/30 transition-all"
+            className="w-full bg-white/[0.03] border border-white/5 rounded-md py-1.5 pl-8 pr-2 text-[11px] focus:outline-none focus:border-primary/30"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -142,12 +143,7 @@ function ExplorerView() {
           
           <AnimatePresence>
             {!isWorkspaceCollapsed && (
-              <motion.div 
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="px-2 overflow-hidden"
-              >
+              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="px-2 overflow-hidden">
                 {isCreating && !isCreating.parentId && (
                   <div className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1">
                     {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
@@ -162,20 +158,8 @@ function ExplorerView() {
                     />
                   </div>
                 )}
-
                 {rootNodes.map((node: any) => (
-                  <TreeNode 
-                    key={node.id} 
-                    node={node} 
-                    depth={0} 
-                    isCreating={isCreating} 
-                    startCreation={startCreation}
-                    newName={newName}
-                    setNewName={setNewName}
-                    handleKeyDown={handleKeyDown}
-                    handleCreate={handleCreate}
-                    inputRef={inputRef}
-                  />
+                  <TreeNode key={node.id} node={node} depth={0} isCreating={isCreating} startCreation={startCreation} newName={newName} setNewName={setNewName} handleKeyDown={handleKeyDown} handleCreate={handleCreate} inputRef={inputRef} />
                 ))}
               </motion.div>
             )}
@@ -192,109 +176,22 @@ function SearchView() {
       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 mb-2">Global Search</span>
       <div className="relative group">
         <Search className="absolute left-2 top-2 h-4 w-4 text-muted-foreground/40" />
-        <input 
-          autoFocus
-          className="w-full bg-white/[0.03] border border-white/5 rounded-md py-2 pl-8 pr-2 text-xs focus:outline-none focus:border-primary/30"
-          placeholder="Search in files..."
-        />
+        <input autoFocus className="w-full bg-white/[0.03] border border-white/5 rounded-md py-2 pl-8 pr-2 text-xs focus:outline-none focus:border-primary/30" placeholder="Search in files..." />
       </div>
-      <div className="text-[10px] text-muted-foreground opacity-40 text-center py-20">
-        No results found. Start typing to search.
-      </div>
+      <div className="text-[10px] text-muted-foreground opacity-40 text-center py-20">No results found.</div>
     </div>
   )
 }
 
 function SourceControlView() {
-  const store = useEditorStore()
-  const modifiedFiles = Object.values(store.files).filter((f: any) => f.updatedAt > Date.now() - 600000)
-
   return (
     <div className="flex flex-col h-full">
       <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Source Control</span>
-        <TooltipProvider>
-          <ActionIcon icon={<History className="h-4 w-4" />} label="View History" />
-        </TooltipProvider>
       </div>
-      <div className="p-4 space-y-4">
-        <div className="relative">
-          <textarea 
-            className="w-full bg-white/[0.03] border border-white/5 rounded-md p-2 text-xs min-h-[80px] focus:outline-none focus:border-primary/30"
-            placeholder="Message (Ctrl+Enter to commit)"
-          />
-          <Button className="w-full mt-2 bg-primary h-8 text-[11px] font-bold uppercase tracking-widest">Commit</Button>
-        </div>
-        
-        <div className="space-y-1">
-          <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-40">Changes</span>
-          {modifiedFiles.length > 0 ? (
-            modifiedFiles.map((f: any) => (
-              <div key={f.id} className="flex items-center justify-between px-2 py-1.5 hover:bg-white/5 rounded-md group cursor-pointer">
-                <div className="flex items-center gap-2">
-                  <FileIcon fileName={f.name} className="h-3.5 w-3.5" />
-                  <span className="text-xs text-muted-foreground">{f.name}</span>
-                </div>
-                <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20 text-[9px]">M</Badge>
-              </div>
-            ))
-          ) : (
-            <div className="text-[10px] text-muted-foreground opacity-40 text-center py-10">No staged changes</div>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ExtensionsView() {
-  const firestore = useFirestore()
-  const extensionsQuery = useMemoFirebase(() => {
-    if (!firestore) return null
-    return query(collection(firestore, 'caret_extensions'))
-  }, [firestore])
-  
-  const { data: liveExtensions, isLoading } = useCollection(extensionsQuery)
-
-  return (
-    <div className="flex flex-col h-full">
-      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Live Extensions</span>
-      </div>
-      <div className="p-4 space-y-4">
-        <div className="text-[9px] text-muted-foreground/50 italic mb-2">Connected to Firestore Live Extension System</div>
-        {isLoading ? (
-          <div className="flex items-center justify-center py-10">
-            <span className="text-[10px] animate-pulse">Loading live plugins...</span>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {liveExtensions?.map((ext: any) => (
-              <div key={ext.id} className="p-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-primary/30 transition-all group cursor-default">
-                <div className="flex items-start gap-3">
-                  <div className={cn(
-                    "w-8 h-8 rounded-md flex items-center justify-center transition-colors",
-                    ext.isEnabled ? "bg-primary/20 text-primary" : "bg-muted/20 text-muted-foreground"
-                  )}>
-                    <Zap className="h-4 w-4" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <h4 className="text-xs font-bold text-foreground truncate">{ext.name}</h4>
-                      {ext.isEnabled && <Badge className="bg-green-500/10 text-green-500 border-green-500/20 text-[8px] h-4">LIVE</Badge>}
-                    </div>
-                    <p className="text-[10px] text-muted-foreground mt-1 line-clamp-2">{ext.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-            {(!liveExtensions || liveExtensions.length === 0) && (
-              <div className="text-[10px] text-muted-foreground/40 text-center py-10">
-                No extensions found in Firestore. Add code to <code className="bg-white/5 px-1">caret_extensions</code> collection.
-              </div>
-            )}
-          </div>
-        )}
+      <div className="p-4 text-center py-20 opacity-30">
+        <GitBranch className="h-10 w-10 mx-auto mb-4" />
+        <span className="text-[10px] font-bold uppercase tracking-widest">Connect to GitHub</span>
       </div>
     </div>
   )
@@ -303,9 +200,8 @@ function ExtensionsView() {
 function AILogicView() {
   return (
     <div className="p-4 text-center py-20 opacity-40">
-      <Blocks className="h-10 w-10 mx-auto mb-4 text-primary" />
+      <Zap className="h-10 w-10 mx-auto mb-4 text-primary" />
       <span className="text-[10px] font-black uppercase tracking-[0.2em]">AI Intelligence Active</span>
-      <p className="text-[11px] mt-2">Open the right panel for full AI assistant features.</p>
     </div>
   )
 }
@@ -334,86 +230,37 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
         style={{ paddingLeft: `${(depth * 12) + 8}px` }}
         onClick={() => store.selectFile(node.id)}
       >
-        {node.type === 'folder' && (
-          isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />
-        )}
-        {node.type === 'file' ? (
-          <FileIcon fileName={node.name} className="h-4 w-4 shrink-0" />
-        ) : (
-          isExpanded ? <FolderOpen className="h-4 w-4 shrink-0 text-primary/70" /> : <Folder className="h-4 w-4 shrink-0 text-primary/70" />
-        )}
+        {node.type === 'folder' && (isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />)}
+        {node.type === 'file' ? <FileIcon fileName={node.name} className="h-4 w-4 shrink-0" /> : (isExpanded ? <FolderOpen className="h-4 w-4 shrink-0 text-primary/70" /> : <Folder className="h-4 w-4 shrink-0 text-primary/70" />)}
         <span className="truncate flex-1">{node.name}</span>
-        
         <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="p-1 hover:text-white transition-colors" onClick={(e) => e.stopPropagation()}>
-                <MoreVertical className="h-3 w-3" />
-              </button>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild><button className="p-1 hover:text-white" onClick={(e) => e.stopPropagation()}><MoreVertical className="h-3 w-3" /></button></DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-[#111] border-white/10">
               {node.type === 'folder' && (
-                <>
-                  <DropdownMenuItem onClick={() => startCreation('file', node.id)} className="text-xs gap-2">
-                    <FilePlus className="h-3 w-3" /> New File
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="text-xs gap-2">
-                    <FolderPlus className="h-3 w-3" /> New Folder
-                  </DropdownMenuItem>
-                </>
+                <><DropdownMenuItem onClick={() => startCreation('file', node.id)} className="text-xs gap-2"><FilePlus className="h-3 w-3" /> New File</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="text-xs gap-2"><FolderPlus className="h-3 w-3" /> New Folder</DropdownMenuItem></>
               )}
               <DropdownMenuItem onClick={() => {
                 const name = window.prompt("Rename to:", node.name)
                 if (name) store.renameNode(node.id, name)
-              }} className="text-xs gap-2">
-                <Edit2 className="h-3 w-3" /> Rename
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => store.deleteNode(node.id)} className="text-xs gap-2 text-destructive focus:text-destructive">
-                <Trash2 className="h-3 w-3" /> Delete
-              </DropdownMenuItem>
+              }} className="text-xs gap-2"><Edit2 className="h-3 w-3" /> Rename</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => store.deleteNode(node.id)} className="text-xs gap-2 text-destructive"> <Trash2 className="h-3 w-3" /> Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
-
       {node.type === 'folder' && isExpanded && (
         <div className="flex flex-col">
           <AnimatePresence>
             {isCreating && isCreating.parentId === node.id && (
-              <motion.div 
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                className="py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden"
-                style={{ marginLeft: `${(depth + 1) * 12 + 8}px`, marginRight: '8px' }}
-              >
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden" style={{ marginLeft: `${(depth + 1) * 12 + 8}px`, marginRight: '8px' }}>
                 {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
-                <input
-                  ref={inputRef}
-                  className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
-                  placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"}
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  onBlur={handleCreate}
-                />
+                <input ref={inputRef} className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0" placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"} value={newName} onChange={(e) => setNewName(e.target.value)} onKeyDown={handleKeyDown} onBlur={handleCreate} />
               </motion.div>
             )}
           </AnimatePresence>
-          {children.map((child: any) => (
-            <TreeNode 
-              key={child.id} 
-              node={child} 
-              depth={depth + 1} 
-              isCreating={isCreating} 
-              startCreation={startCreation}
-              newName={newName}
-              setNewName={setNewName}
-              handleKeyDown={handleKeyDown}
-              handleCreate={handleCreate}
-              inputRef={inputRef}
-            />
-          ))}
+          {children.map((child: any) => <TreeNode key={child.id} node={child} depth={depth + 1} isCreating={isCreating} startCreation={startCreation} newName={newName} setNewName={setNewName} handleKeyDown={handleKeyDown} handleCreate={handleCreate} inputRef={inputRef} />)}
         </div>
       )}
     </div>
@@ -423,11 +270,7 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
 function ActionIcon({ icon, onClick, label }: any) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-white/5 hover:text-primary" onClick={onClick}>
-          {icon}
-        </Button>
-      </TooltipTrigger>
+      <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-white/5 hover:text-primary" onClick={onClick}>{icon}</Button></TooltipTrigger>
       <TooltipContent side="bottom" className="text-[10px] bg-black border-white/10">{label}</TooltipContent>
     </Tooltip>
   )

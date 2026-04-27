@@ -64,7 +64,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   ])
   
   const [ui, setUi] = useState({
-    sidebarWidth: 260,
+    sidebarWidth: 280,
     isSidebarOpen: true,
     isTerminalOpen: false,
     isAIPanelOpen: true,
@@ -72,6 +72,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     isSettingsOpen: false,
     isShortcutsOpen: false,
     fontSize: 14,
+    theme: 'vs-dark',
     activeView: 'explorer' as 'explorer' | 'search' | 'git' | 'extensions' | 'ai'
   })
 
@@ -97,7 +98,6 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         if (prev.includes(id)) return prev
         return [...prev, id]
       })
-      // Update recently opened
       setRecentlyOpened(prev => {
         const filtered = prev.filter(rid => rid !== id)
         return [id, ...filtered].slice(0, 5)
@@ -137,9 +137,6 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
         return [...prev, id]
       })
       setActiveFileId(id)
-      setSelectedNodeId(id)
-      setRecentlyOpened(prev => [id, ...prev.filter(rid => rid !== id)].slice(0, 5))
-    } else {
       setSelectedNodeId(id)
     }
     return id
@@ -199,6 +196,8 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
+  const setTheme = (theme: string) => setUi(prev => ({ ...prev, theme }))
+
   const executeCommand = useCallback((input: string) => {
     const cmd = input.trim()
     if (!cmd) return
@@ -208,12 +207,11 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
 
     switch (baseCmd) {
       case 'clear': setTerminalHistory([]); break
-      case 'help': setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls, echo [text]' }]); break
+      case 'help': setTerminalHistory(prev => [...prev, { type: 'output', content: 'Available: help, clear, date, pwd, ls' }]); break
       case 'ls':
         const names = Object.values(nodes).filter(n => !n.parentId).map(f => f.name).join('  ')
         setTerminalHistory(prev => [...prev, { type: 'output', content: names || '(empty workspace)' }])
         break
-      case 'pwd': setTerminalHistory(prev => [...prev, { type: 'output', content: '/home/caret/workspace' }]); break
       default: setTerminalHistory(prev => [...prev, { type: 'error', content: `caret-sh: command not found: ${baseCmd}` }])
     }
   }, [nodes])
@@ -221,7 +219,7 @@ export function EditorProvider({ children }: { children: React.ReactNode }) {
   const value = {
     nodes, files, openTabs, activeFileId, activeFile, openFiles, terminalHistory, ui,
     selectedNodeId, setSelectedNodeId, expandedFolders, recentlyOpened,
-    setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand, toggleFolder,
+    setUi, createNode, selectFile, closeTab, updateFileContent, deleteNode, renameNode, executeCommand, toggleFolder, setTheme,
     setIsSidebarOpen: (val: boolean) => setUi(prev => ({ ...prev, isSidebarOpen: val })),
     setIsTerminalOpen: (val: boolean) => setUi(prev => ({ ...prev, isTerminalOpen: val })),
     setIsAIPanelOpen: (val: boolean) => setUi(prev => ({ ...prev, isAIPanelOpen: val })),
