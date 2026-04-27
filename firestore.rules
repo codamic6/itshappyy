@@ -3,13 +3,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * CARET IDE Live Extension System - Security Rules
+     * CARET IDE - Global & User Security Rules
      * 
-     * CORE PHILOSOPHY:
-     * This ruleset implements a "Public Read, Admin Write" model for the extension system. 
-     * It prioritizes high availability for clients (IDE users) to fetch and execute 
-     * live code while strictly locking down the ability to modify that code to 
-     * authenticated administrators.
+     * 1. caret_extensions: Publicly readable, admin writable.
+     * 2. users/{userId}: Private user space for extensions and files.
      */
 
     // --- Helper Functions ---
@@ -18,33 +15,36 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
     function isAdmin() {
       return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
     }
 
-    function isExistingAdmin() {
-      return isAdmin() && resource != null;
-    }
-
-    // --- Collection Rules ---
-
+    // --- Global Extensions ---
     match /caret_extensions/{extensionId} {
+      // Allow everyone to read global plugins for the IDE to function.
+      allow read: if true;
       
-      // Allow ALL users to read extensions so the IDE works immediately on load.
-      // This solves the 'Missing or insufficient permissions' error on startup.
-      allow get, list: if true;
-
-      // Only designated administrators can create/modify extensions.
-      allow create: if isAdmin() && request.resource.data.id == extensionId;
-      allow update: if isExistingAdmin() && request.resource.data.id == resource.data.id;
-      allow delete: if isExistingAdmin();
+      // Only admins can modify the global marketplace.
+      allow write: if isAdmin();
     }
 
+    // --- User Private Space (Files & Extensions) ---
+    match /users/{userId}/{document=**} {
+      // Users have full control over their own workspace and installed extensions.
+      allow read, write: if isOwner(userId);
+    }
+
+    // --- Admin Roles ---
     match /roles_admin/{uid} {
-      allow get, list: if isSignedIn();
-      allow create, update, delete: if false;
+      allow read: if isSignedIn();
+      allow write: if false;
     }
 
+    // Default Deny
     match /{path=**} {
       allow read, write: if false;
     }
