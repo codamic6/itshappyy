@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from 'react'
@@ -5,6 +6,7 @@ import { FilePlus, Download, Sparkles, Command, Github, Globe } from 'lucide-rea
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
+import Image from 'next/image'
 
 interface WelcomeScreenProps {
   onNewFile: () => void
@@ -26,8 +28,8 @@ export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
   const handleInstallClick = async () => {
     if (!deferredPrompt) {
       toast({
-        title: "Installation Status",
-        description: "Browser is still verifying installation compatibility. If on Chrome/Edge, check the address bar icon.",
+        title: "Installation",
+        description: "Check your browser address bar for the install button.",
       })
       return
     }
@@ -37,71 +39,67 @@ export function WelcomeScreen({ onNewFile }: WelcomeScreenProps) {
   }
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center bg-[#0D1117] p-8 overflow-y-auto relative">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="flex-1 flex flex-col items-center justify-center bg-black p-8 overflow-y-auto relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10"
       >
-        <div className="flex flex-col justify-center space-y-10">
-          <div className="space-y-4">
-            <div className="flex items-center gap-5">
+        <div className="flex flex-col justify-center space-y-12">
+          <div className="space-y-6">
+            <div className="flex items-center gap-6">
               <motion.div 
-                whileHover={{ rotate: 5, scale: 1.05 }}
-                className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-black text-3xl shadow-[0_0_40px_rgba(124,58,237,0.3)]"
+                whileHover={{ scale: 1.05 }}
+                className="relative w-20 h-20"
               >
-                C
+                <Image 
+                  src="/logo.png" 
+                  alt="Caret Logo" 
+                  fill 
+                  className="object-contain"
+                />
               </motion.div>
               <div>
-                <h1 className="text-5xl font-bold tracking-tighter text-white">Caret</h1>
-                <p className="text-primary font-black tracking-[0.3em] text-[10px] uppercase">Pro AI Code Editor</p>
+                <h1 className="text-4xl font-bold tracking-tight text-white uppercase">Caret</h1>
+                <p className="text-muted-foreground font-black tracking-[0.4em] text-[10px] uppercase opacity-40">Pro Edition</p>
               </div>
             </div>
-            <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-              Experience the next generation of software development with real-time AI context and professional-grade editing tools.
+            <p className="text-muted-foreground/60 text-[13px] max-w-xs leading-relaxed font-medium">
+              A high-performance, monochromatic development environment built for precision and speed.
             </p>
           </div>
 
-          <div className="space-y-3">
-            <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30 mb-4">Start</h2>
-            <div className="grid gap-3">
+          <div className="space-y-4">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20">Workspace</h2>
+            <div className="grid gap-2">
               <WelcomeAction icon={<FilePlus className="h-4 w-4" />} title="New File" shortcut="Ctrl+N" onClick={onNewFile} />
-              <WelcomeAction icon={<Download className="h-4 w-4 text-primary" />} title="Install Desktop App" shortcut="PWA" onClick={handleInstallClick} />
+              <WelcomeAction icon={<Download className="h-4 w-4" />} title="Install Desktop" shortcut="PWA" onClick={handleInstallClick} />
               <WelcomeAction icon={<Command className="h-4 w-4" />} title="Command Palette" shortcut="Ctrl+K" />
             </div>
           </div>
         </div>
 
         <div className="flex flex-col justify-center">
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-8 backdrop-blur-sm shadow-2xl relative group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-            
-            <div className="flex items-center gap-3 text-primary">
-              <Sparkles className="h-5 w-5" />
-              <h3 className="font-bold text-lg tracking-tight">AI Intelligence</h3>
+          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 space-y-10 backdrop-blur-md">
+            <div className="flex items-center gap-3 text-white">
+              <Sparkles className="h-4 w-4 opacity-40" />
+              <h3 className="font-bold text-sm uppercase tracking-widest">Intelligence</h3>
             </div>
             
-            <ul className="space-y-5">
-              <FeatureItem title="Context-Aware Chat" desc="Ask questions about your entire codebase effortlessly." />
-              <FeatureItem title="Code Generation" desc="Build complex modules from simple natural language prompts." />
-              <FeatureItem title="Deep Logic Analysis" desc="Understand obscure code with high-level AI reasoning." />
+            <ul className="space-y-6">
+              <FeatureItem title="Contextual Assistant" desc="Deep integration with Gemini for code analysis." />
+              <FeatureItem title="Live Extensions" desc="Dynamic code execution via Firestore sync." />
+              <FeatureItem title="Zero Latency" desc="Optimized Monaco engine for smooth editing." />
             </ul>
 
-            <div className="pt-4 border-t border-white/5 flex items-center gap-4">
-              <Button variant="ghost" size="sm" className="text-[10px] uppercase font-bold tracking-widest gap-2 opacity-50 hover:opacity-100">
-                <Github className="h-3.5 w-3.5" /> Source
-              </Button>
-              <Button variant="ghost" size="sm" className="text-[10px] uppercase font-bold tracking-widest gap-2 opacity-50 hover:opacity-100">
-                <Globe className="h-3.5 w-3.5" /> Community
-              </Button>
+            <div className="pt-6 border-t border-white/5 flex items-center gap-6">
+              <button className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground hover:text-white transition-colors">Github</button>
+              <button className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground hover:text-white transition-colors">Docs</button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -112,24 +110,24 @@ function WelcomeAction({ icon, title, shortcut, onClick }: any) {
   return (
     <button 
       onClick={onClick}
-      className="flex items-center justify-between w-full p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-primary/30 transition-all group"
+      className="flex items-center justify-between w-full p-3 rounded-lg bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/20 transition-all group"
     >
       <div className="flex items-center gap-4">
-        <div className="p-2 rounded-lg bg-white/[0.03] text-primary group-hover:bg-primary/20 group-hover:scale-110 transition-all">
+        <div className="text-muted-foreground group-hover:text-white transition-colors">
           {icon}
         </div>
-        <span className="text-sm font-medium group-hover:text-white transition-colors">{title}</span>
+        <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-white">{title}</span>
       </div>
-      <kbd className="text-[9px] font-bold text-muted-foreground/30 bg-white/[0.03] border border-white/5 rounded px-2 py-1 uppercase">{shortcut}</kbd>
+      <span className="text-[9px] font-bold text-white/10 group-hover:text-white/30 transition-colors">{shortcut}</span>
     </button>
   )
 }
 
 function FeatureItem({ title, desc }: any) {
   return (
-    <li className="space-y-1">
-      <h4 className="text-[13px] font-bold text-foreground/90">{title}</h4>
-      <p className="text-[11px] text-muted-foreground leading-relaxed">{desc}</p>
+    <li className="space-y-1.5">
+      <h4 className="text-[11px] font-black uppercase tracking-widest text-white/80">{title}</h4>
+      <p className="text-[11px] text-muted-foreground/50 leading-relaxed font-medium">{desc}</p>
     </li>
   )
 }

@@ -17,17 +17,11 @@ interface Message {
   content: string
 }
 
-interface AIPanelsProps {
-  selectedText: string
-  activeFileContent?: string
-  onGeneratedCode: (code: string) => void
-}
-
 export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: AIPanelsProps) {
   const [chatPrompt, setChatPrompt] = useState('')
   const [genPrompt, setGenPrompt] = useState('')
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hello! I'm Caret AI. I'm connected to Gemini. How can I help you build today?" }
+    { role: 'assistant', content: "SYSTEM READY. HOW CAN I ASSIST IN YOUR DEVELOPMENT?" }
   ])
   const [isBusy, setIsBusy] = useState(false)
   const [explanation, setExplanation] = useState('')
@@ -49,132 +43,76 @@ export function AIPanels({ selectedText, activeFileContent, onGeneratedCode }: A
     setIsBusy(true)
 
     try {
-      const context = activeFileContent ? `\n\nActive File Code:\n\`\`\`\n${activeFileContent}\n\`\`\`` : ""
-      const result = await aiCodeGeneration({ 
-        description: `User Question: ${userMsg}${context}\n\nPlease provide a clear, technical response.` 
-      })
+      const context = activeFileContent ? `\n\nCode Context:\n\`\`\`\n${activeFileContent}\n\`\`\`` : ""
+      const result = await aiCodeGeneration({ description: `${userMsg}${context}` })
       setMessages(prev => [...prev, { role: 'assistant', content: result.code }])
     } catch (err: any) {
-      toast({ variant: 'destructive', title: "AI Connection Error", description: "Please check your configuration or try again." })
-      setMessages(prev => [...prev, { role: 'assistant', content: "I encountered an error. Please ensure your environment is configured correctly." }])
-    } finally {
-      setIsBusy(false)
-    }
-  }
-
-  const handleGenerate = async () => {
-    if (!genPrompt.trim() || isBusy) return
-    setIsBusy(true)
-    try {
-      const result = await aiCodeGeneration({ description: genPrompt })
-      onGeneratedCode(result.code)
-      setGenPrompt('')
-      toast({ title: "Success!", description: "AI code has been generated and updated." })
-    } catch (err) {
-      toast({ variant: 'destructive', title: "Generation failed", description: "Try a more specific prompt." })
-    } finally {
-      setIsBusy(false)
-    }
-  }
-
-  const handleExplain = async () => {
-    if (!selectedText || isBusy) {
-      toast({ title: "No selection", description: "Highlight some code first!" })
-      return
-    }
-    setIsBusy(true)
-    try {
-      const result = await aiCodeExplanation({ code: selectedText })
-      setExplanation(result.explanation)
-    } catch (err) {
-      toast({ variant: 'destructive', title: "Analysis failed" })
+      toast({ variant: 'destructive', title: "AI Error" })
     } finally {
       setIsBusy(false)
     }
   }
 
   return (
-    <div className="w-80 flex flex-col h-full overflow-hidden bg-[#0A0A0A] border-l border-white/5 shadow-2xl">
-      <div className="p-4 border-b border-white/5 flex items-center justify-between bg-black/40">
+    <div className="w-80 flex flex-col h-full overflow-hidden bg-black border-l border-white/5">
+      <div className="p-4 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
         <div className="flex items-center gap-2">
-          <div className="w-5 h-5 rounded bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(124,58,237,0.4)]">
-            <Zap className="h-3 w-3 text-white" />
-          </div>
-          <span className="text-[10px] font-black tracking-widest text-primary uppercase">Caret AI Assistant</span>
+          <Zap className="h-3 w-3 text-white opacity-40" />
+          <span className="text-[9px] font-black tracking-[0.3em] text-white/60 uppercase">Caret Intelligence</span>
         </div>
-        <button onClick={() => setMessages([{ role: 'assistant', content: "Chat cleared." }])} className="p-1 hover:text-white text-muted-foreground/40 transition-colors">
-          <Trash2 className="h-3.5 w-3.5" />
+        <button onClick={() => setMessages([{ role: 'assistant', content: "CLEARED." }])} className="p-1 hover:text-white text-muted-foreground/30 transition-colors">
+          <Trash2 className="h-3 w-3" />
         </button>
       </div>
 
       <Tabs defaultValue="chat" className="flex-1 flex flex-col overflow-hidden">
-        <TabsList className="w-full bg-transparent p-1 h-10 border-b border-white/5 gap-1 rounded-none">
-          <TabsTrigger value="chat" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><MessageSquare className="h-3 w-3" />Chat</TabsTrigger>
-          <TabsTrigger value="gen" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><Code2 className="h-3 w-3" />Build</TabsTrigger>
-          <TabsTrigger value="help" className="flex-1 text-[10px] gap-1.5 uppercase font-bold tracking-tighter"><HelpCircle className="h-3 w-3" />Logic</TabsTrigger>
+        <TabsList className="w-full bg-transparent p-0 h-9 border-b border-white/5 gap-0 rounded-none">
+          <TabsTrigger value="chat" className="flex-1 text-[9px] uppercase font-black tracking-widest border-r border-white/5">Chat</TabsTrigger>
+          <TabsTrigger value="gen" className="flex-1 text-[9px] uppercase font-black tracking-widest">Build</TabsTrigger>
         </TabsList>
 
         <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0">
           <ScrollArea className="flex-1 p-4" ref={scrollRef}>
-            <div className="space-y-4 pb-4">
+            <div className="space-y-6 pb-4">
               {messages.map((m, i) => (
-                <div key={i} className={cn("flex gap-2 max-w-[95%] animate-in fade-in slide-in-from-bottom-2", m.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto")}>
-                  <div className={cn("w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-lg", m.role === 'user' ? "bg-accent" : "bg-primary")}>
-                    {m.role === 'user' ? <div className="text-[10px] font-bold">U</div> : <Bot className="h-3.5 w-3.5" />}
+                <div key={i} className={cn("flex flex-col gap-2 max-w-[90%]", m.role === 'user' ? "ml-auto items-end" : "mr-auto items-start")}>
+                  <div className={cn("text-[8px] font-black tracking-widest uppercase opacity-30", m.role === 'user' ? "text-right" : "text-left")}>
+                    {m.role === 'user' ? 'USER' : 'ASSISTANT'}
                   </div>
-                  <div className={cn("rounded-2xl p-3 text-[11px] leading-relaxed", m.role === 'user' ? "bg-accent/10 border border-accent/20" : "bg-muted/30 border border-white/5")}>
+                  <div className={cn("rounded-lg p-3 text-[11px] leading-relaxed border", m.role === 'user' ? "bg-white/[0.03] border-white/10" : "bg-black border-white/5")}>
                     <pre className="whitespace-pre-wrap font-sans">{m.content}</pre>
                   </div>
                 </div>
               ))}
-              {isBusy && (
-                <div className="flex gap-2 animate-pulse">
-                  <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0">
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  </div>
-                  <div className="bg-muted/30 rounded-2xl p-3 text-[10px] border border-white/5">Thinking...</div>
-                </div>
-              )}
+              {isBusy && <Loader2 className="h-4 w-4 animate-spin opacity-20 mx-auto" />}
             </div>
           </ScrollArea>
-          <div className="p-4 border-t border-white/5 bg-black/40">
+          <div className="p-4 border-t border-white/5 bg-white/[0.01]">
             <div className="relative">
               <Textarea 
-                placeholder="Ask Caret AI..."
-                className="min-h-[70px] max-h-[150px] bg-background border-white/10 text-[11px] pr-10 rounded-xl"
+                placeholder="INPUT COMMAND..."
+                className="min-h-[60px] max-h-[120px] bg-transparent border-white/10 text-[10px] font-bold uppercase tracking-widest rounded-lg"
                 value={chatPrompt}
                 onChange={(e) => setChatPrompt(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleChat())}
               />
-              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-8 w-8 text-primary" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
-                <Send className="h-4 w-4" />
+              <Button size="icon" variant="ghost" className="absolute right-2 bottom-2 h-7 w-7 text-white/40 hover:text-white" onClick={handleChat} disabled={isBusy || !chatPrompt.trim()}>
+                <Send className="h-3.5 w-3.5" />
               </Button>
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="gen" className="flex-1 p-5 space-y-4 m-0">
+        <TabsContent value="gen" className="flex-1 p-5 m-0 space-y-4">
           <Textarea 
-            placeholder="Describe the code you want to generate..."
-            className="min-h-[150px] bg-background border-white/10 text-[11px] rounded-xl"
+            placeholder="DESCRIBE COMPONENT..."
+            className="min-h-[120px] bg-transparent border-white/10 text-[10px] font-bold tracking-widest rounded-lg"
             value={genPrompt}
             onChange={(e) => setGenPrompt(e.target.value)}
           />
-          <Button className="w-full bg-primary font-bold uppercase tracking-widest text-[11px]" onClick={handleGenerate} disabled={isBusy || !genPrompt.trim()}>
-            {isBusy ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Sparkles className="h-4 w-4 mr-2" />}
-            Generate Code
+          <Button className="w-full bg-white text-black hover:bg-white/90 font-black uppercase tracking-[0.3em] text-[10px]" onClick={handleChat} disabled={isBusy}>
+            GENERATE
           </Button>
-        </TabsContent>
-
-        <TabsContent value="help" className="flex-1 p-5 space-y-4 m-0">
-          <Button variant="outline" className="w-full border-primary/20 hover:bg-primary/10 font-bold uppercase text-[11px]" onClick={handleExplain} disabled={isBusy}>
-            Analyze Selection
-          </Button>
-          {explanation && (
-            <div className="bg-muted/10 rounded-xl p-4 border border-white/5 text-[11px] leading-relaxed opacity-80 animate-in slide-in-from-top-2">
-              {explanation}
-            </div>
-          )}
         </TabsContent>
       </Tabs>
     </div>

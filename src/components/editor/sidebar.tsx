@@ -26,7 +26,7 @@ export function EditorSidebar() {
   const activeView = store.ui.activeView
 
   return (
-    <div className="w-full flex flex-col h-full bg-[#0D1117] select-none border-r border-white/5">
+    <div className="w-full flex flex-col h-full bg-[#050505] select-none border-r border-white/5">
       {activeView === 'explorer' && <ExplorerView />}
       {activeView === 'search' && <SearchView />}
       {activeView === 'git' && <SourceControlView />}
@@ -92,12 +92,12 @@ function ExplorerView() {
 
   return (
     <>
-      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Explorer</span>
+      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/40">
+        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-muted-foreground/50">Explorer</span>
         <div className="flex items-center gap-1">
           <TooltipProvider>
             <ActionIcon 
-              icon={<FilePlus className="h-4 w-4" />} 
+              icon={<FilePlus className="h-3.5 w-3.5" />} 
               onClick={(e: any) => {
                 e.stopPropagation();
                 const parentId = store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null;
@@ -106,7 +106,7 @@ function ExplorerView() {
               label="New File" 
             />
             <ActionIcon 
-              icon={<FolderPlus className="h-4 w-4" />} 
+              icon={<FolderPlus className="h-3.5 w-3.5" />} 
               onClick={(e: any) => {
                 e.stopPropagation();
                 const parentId = store.selectedNodeId && store.nodes[store.selectedNodeId]?.type === 'folder' ? store.selectedNodeId : null;
@@ -118,13 +118,13 @@ function ExplorerView() {
         </div>
       </div>
 
-      <div className="px-3 py-2">
+      <div className="px-3 py-3">
         <div className="relative group">
-          <Search className="absolute left-2 top-1.5 h-3.5 w-3.5 text-muted-foreground/40" />
+          <Search className="absolute left-2.5 top-2 h-3 w-3 text-muted-foreground/30" />
           <input 
             type="text"
-            placeholder="Search files..."
-            className="w-full bg-white/[0.03] border border-white/5 rounded-md py-1.5 pl-8 pr-2 text-[11px] focus:outline-none focus:border-primary/30"
+            placeholder="Search..."
+            className="w-full bg-white/[0.03] border border-white/5 rounded py-1.5 pl-8 pr-2 text-[10px] uppercase font-bold tracking-widest focus:outline-none focus:border-white/20 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -134,23 +134,23 @@ function ExplorerView() {
       <ScrollArea className="flex-1">
         <div className="py-2">
           <div 
-            className="flex items-center gap-1 px-3 py-1.5 text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-1 cursor-pointer hover:bg-white/5 transition-colors"
+            className="flex items-center gap-1 px-4 py-1.5 text-[9px] font-black text-white/40 uppercase tracking-[0.4em] mb-1 cursor-pointer hover:text-white transition-colors"
             onClick={() => setIsWorkspaceCollapsed(!isWorkspaceCollapsed)}
           >
-            {isWorkspaceCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+            {isWorkspaceCollapsed ? <ChevronRight className="h-2.5 w-2.5" /> : <ChevronDown className="h-2.5 w-2.5" />}
             <span>Workspace</span>
           </div>
           
           <AnimatePresence>
             {!isWorkspaceCollapsed && (
-              <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="px-2 overflow-hidden">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="px-2 overflow-hidden">
                 {isCreating && !isCreating.parentId && (
-                  <div className="px-2 py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1">
-                    {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
+                  <div className="px-3 py-1.5 flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded mb-1">
+                    {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-3.5 w-3.5 shrink-0" /> : <Folder className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
                     <input
                       ref={inputRef}
-                      className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0 placeholder:text-muted-foreground/40"
-                      placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"}
+                      className="flex-1 bg-transparent border-none outline-none text-[10px] font-bold text-foreground p-0 placeholder:text-muted-foreground/20"
+                      placeholder={isCreating.type === 'file' ? "FILE.EXT" : "FOLDER"}
                       value={newName}
                       onChange={(e) => setNewName(e.target.value)}
                       onKeyDown={handleKeyDown}
@@ -173,35 +173,29 @@ function ExplorerView() {
 function SearchView() {
   return (
     <div className="p-4 flex flex-col gap-4">
-      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 mb-2">Global Search</span>
+      <span className="text-[9px] font-black uppercase tracking-[0.4em] text-muted-foreground/50">Search</span>
       <div className="relative group">
-        <Search className="absolute left-2 top-2 h-4 w-4 text-muted-foreground/40" />
-        <input autoFocus className="w-full bg-white/[0.03] border border-white/5 rounded-md py-2 pl-8 pr-2 text-xs focus:outline-none focus:border-primary/30" placeholder="Search in files..." />
+        <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground/30" />
+        <input autoFocus className="w-full bg-white/[0.03] border border-white/5 rounded py-2 pl-8 pr-2 text-[10px] font-bold tracking-widest focus:outline-none focus:border-white/20" placeholder="SEARCH WORKSPACE..." />
       </div>
-      <div className="text-[10px] text-muted-foreground opacity-40 text-center py-20">No results found.</div>
     </div>
   )
 }
 
 function SourceControlView() {
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-3 h-12 flex items-center justify-between border-b border-white/5 bg-black/20">
-        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">Source Control</span>
-      </div>
-      <div className="p-4 text-center py-20 opacity-30">
-        <GitBranch className="h-10 w-10 mx-auto mb-4" />
-        <span className="text-[10px] font-bold uppercase tracking-widest">Connect to GitHub</span>
-      </div>
+    <div className="flex flex-col h-full items-center justify-center p-8 opacity-20">
+      <GitBranch className="h-12 w-12 mb-4" />
+      <span className="text-[9px] font-black uppercase tracking-[0.4em] text-center">Git Not Connected</span>
     </div>
   )
 }
 
 function AILogicView() {
   return (
-    <div className="p-4 text-center py-20 opacity-40">
-      <Zap className="h-10 w-10 mx-auto mb-4 text-primary" />
-      <span className="text-[10px] font-black uppercase tracking-[0.2em]">AI Intelligence Active</span>
+    <div className="p-4 text-center py-20 opacity-20">
+      <Zap className="h-10 w-10 mx-auto mb-4 text-white" />
+      <span className="text-[9px] font-black uppercase tracking-[0.4em]">Intelligence Active</span>
     </div>
   )
 }
@@ -223,29 +217,25 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
     <div className="flex flex-col">
       <div
         className={cn(
-          "group flex items-center gap-2 px-2 py-1.5 text-xs cursor-pointer transition-all rounded-md relative",
-          isSelected ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-white/5",
-          isActive && "font-bold"
+          "group flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold cursor-pointer transition-all rounded relative border border-transparent",
+          isSelected ? "bg-white/[0.05] border-white/5 text-white" : "text-muted-foreground/60 hover:text-white hover:bg-white/[0.02]",
+          isActive && "text-white"
         )}
-        style={{ paddingLeft: `${(depth * 12) + 8}px` }}
+        style={{ paddingLeft: `${(depth * 12) + 12}px` }}
         onClick={() => store.selectFile(node.id)}
       >
-        {node.type === 'folder' && (isExpanded ? <ChevronDown className="h-3 w-3 shrink-0" /> : <ChevronRight className="h-3 w-3 shrink-0" />)}
-        {node.type === 'file' ? <FileIcon fileName={node.name} className="h-4 w-4 shrink-0" /> : (isExpanded ? <FolderOpen className="h-4 w-4 shrink-0 text-primary/70" /> : <Folder className="h-4 w-4 shrink-0 text-primary/70" />)}
-        <span className="truncate flex-1">{node.name}</span>
+        {node.type === 'folder' && (isExpanded ? <ChevronDown className="h-2.5 w-2.5 shrink-0 opacity-40" /> : <ChevronRight className="h-2.5 w-2.5 shrink-0 opacity-40" />)}
+        {node.type === 'file' ? <FileIcon fileName={node.name} className="h-3 w-3 shrink-0" /> : (isExpanded ? <FolderOpen className="h-3 w-3 shrink-0 opacity-60" /> : <Folder className="h-3 w-3 shrink-0 opacity-60" />)}
+        <span className="truncate flex-1 tracking-tight">{node.name.toUpperCase()}</span>
         <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild><button className="p-1 hover:text-white" onClick={(e) => e.stopPropagation()}><MoreVertical className="h-3 w-3" /></button></DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-[#111] border-white/10">
+            <DropdownMenuTrigger asChild><button className="p-1 hover:text-white" onClick={(e) => e.stopPropagation()}><MoreVertical className="h-2.5 w-2.5" /></button></DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-black border-white/10">
               {node.type === 'folder' && (
-                <><DropdownMenuItem onClick={() => startCreation('file', node.id)} className="text-xs gap-2"><FilePlus className="h-3 w-3" /> New File</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="text-xs gap-2"><FolderPlus className="h-3 w-3" /> New Folder</DropdownMenuItem></>
+                <><DropdownMenuItem onClick={() => startCreation('file', node.id)} className="text-[10px] font-bold gap-2">NEW FILE</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => startCreation('folder', node.id)} className="text-[10px] font-bold gap-2">NEW FOLDER</DropdownMenuItem></>
               )}
-              <DropdownMenuItem onClick={() => {
-                const name = window.prompt("Rename to:", node.name)
-                if (name) store.renameNode(node.id, name)
-              }} className="text-xs gap-2"><Edit2 className="h-3 w-3" /> Rename</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => store.deleteNode(node.id)} className="text-xs gap-2 text-destructive"> <Trash2 className="h-3 w-3" /> Delete</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => store.deleteNode(node.id)} className="text-[10px] font-bold gap-2 text-white/40">DELETE</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -254,9 +244,8 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
         <div className="flex flex-col">
           <AnimatePresence>
             {isCreating && isCreating.parentId === node.id && (
-              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="py-1.5 flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-md mb-1 overflow-hidden" style={{ marginLeft: `${(depth + 1) * 12 + 8}px`, marginRight: '8px' }}>
-                {isCreating.type === 'file' ? <FileIcon fileName={newName} className="h-4 w-4 shrink-0" /> : <Folder className="h-4 w-4 shrink-0 text-primary" />}
-                <input ref={inputRef} className="flex-1 bg-transparent border-none outline-none text-xs text-foreground p-0" placeholder={isCreating.type === 'file' ? "file.ext" : "folder name"} value={newName} onChange={(e) => setNewName(e.target.value)} onKeyDown={handleKeyDown} onBlur={handleCreate} />
+              <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="py-1.5 flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded mb-1 overflow-hidden" style={{ marginLeft: `${(depth + 1) * 12 + 12}px`, marginRight: '8px' }}>
+                <input ref={inputRef} className="flex-1 bg-transparent border-none outline-none text-[10px] font-bold text-foreground p-0" placeholder="..." value={newName} onChange={(e) => setNewName(e.target.value)} onKeyDown={handleKeyDown} onBlur={handleCreate} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -270,8 +259,8 @@ function TreeNode({ node, depth, isCreating, startCreation, newName, setNewName,
 function ActionIcon({ icon, onClick, label }: any) {
   return (
     <Tooltip>
-      <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-white/5 hover:text-primary" onClick={onClick}>{icon}</Button></TooltipTrigger>
-      <TooltipContent side="bottom" className="text-[10px] bg-black border-white/10">{label}</TooltipContent>
+      <TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-white" onClick={onClick}>{icon}</Button></TooltipTrigger>
+      <TooltipContent side="bottom" className="text-[9px] font-bold bg-black border-white/10 uppercase tracking-widest">{label}</TooltipContent>
     </Tooltip>
   )
 }

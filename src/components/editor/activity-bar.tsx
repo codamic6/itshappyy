@@ -15,7 +15,7 @@ export function ActivityBar({ activeView, onViewChange }: ActivityBarProps) {
   const store = useEditorStore()
 
   return (
-    <div className="w-[60px] bg-[#0A0D12] border-r border-white/5 flex flex-col items-center py-4 gap-4 z-50">
+    <div className="w-[60px] bg-black border-r border-white/5 flex flex-col items-center py-4 gap-4 z-50">
       <TooltipProvider>
         <ActivityIcon 
           icon={<Files className="h-5 w-5" />} 
@@ -69,14 +69,14 @@ function ActivityIcon({ icon, active, onClick, label }: any) {
           onClick={onClick}
           className={cn(
             "p-3 rounded-lg transition-all relative group",
-            active ? "text-primary" : "text-muted-foreground hover:text-foreground"
+            active ? "text-white" : "text-muted-foreground hover:text-white"
           )}
         >
-          {active && <div className="absolute left-[-15px] top-2 bottom-2 w-1 bg-primary rounded-full shadow-[0_0_10px_rgba(124,58,237,0.5)]" />}
+          {active && <div className="absolute left-[-15px] top-3 bottom-3 w-[2px] bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.4)]" />}
           {icon}
         </button>
       </TooltipTrigger>
-      <TooltipContent side="right" className="bg-[#111] border-white/10 text-xs">
+      <TooltipContent side="right" className="bg-black border-white/10 text-[10px] font-bold uppercase tracking-widest">
         {label}
       </TooltipContent>
     </Tooltip>
