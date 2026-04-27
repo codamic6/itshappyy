@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from 'react'
-import { Command, Play, Github, Info, Keyboard, Download, Box } from 'lucide-react'
+import { Command, Play, Info, Search, Terminal as TerminalIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Menubar,
@@ -26,25 +26,9 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
   const { toast } = useToast()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
-
-  useEffect(() => {
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault()
-      setDeferredPrompt(e)
-    }
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-  }, [])
-
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return
-    deferredPrompt.prompt()
-    await deferredPrompt.userChoice
-  }
 
   return (
-    <header className="h-10 border-b border-white/5 flex items-center justify-between px-6 bg-black z-50 crystal-panel">
+    <header className="h-10 border-b border-white/5 flex items-center justify-between px-4 bg-black z-50">
       <input type="file" ref={fileInputRef} className="hidden" onChange={(e) => {
         const file = e.target.files?.[0]
         if (!file) return
@@ -56,72 +40,95 @@ export function MenuBar({ onNewFile }: MenuBarProps) {
         r.readAsText(file);
       }} />
 
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-3">
-          <div className="relative w-4 h-4 opacity-80">
-            <Image src="/logo.png" alt="Caret Logo" fill className="object-contain" />
-          </div>
-          <span className="text-[10px] font-future text-white tracking-[0.3em]">CARET.2099</span>
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 pr-4 border-r border-white/5">
+          <Image src="/logo.png" alt="CARET" width={14} height={14} className="opacity-80" />
+          <span className="text-[10px] font-future text-white tracking-[0.2em] font-bold">CARET</span>
         </div>
         
-        <Menubar className="border-none bg-transparent shadow-none h-auto p-0 gap-2">
+        <Menubar className="border-none bg-transparent shadow-none h-auto p-0 gap-1">
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/30 hover:text-white transition-all uppercase">SYSTEM</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/40 hover:text-white transition-all uppercase">SYSTEM</MenubarTrigger>
             <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
-              <MenubarItem onClick={onNewFile}>NEW DATA <MenubarShortcut>CTRL+N</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={onNewFile}>NEW FILE <MenubarShortcut>CTRL+N</MenubarShortcut></MenubarItem>
               <MenubarItem onClick={() => fileInputRef.current?.click()}>IMPORT <MenubarShortcut>CTRL+O</MenubarShortcut></MenubarItem>
-              <MenubarSeparator className="bg-white/5" />
-              <MenubarItem onClick={handleInstallClick}>INSTALL HARDWARE</MenubarItem>
               <MenubarSeparator className="bg-white/5" />
               <MenubarItem onClick={() => toast({ title: "SAVED" })} disabled={!store.activeFileId}>SYNC <MenubarShortcut>CTRL+S</MenubarShortcut></MenubarItem>
             </MenubarContent>
           </MenubarMenu>
 
           <MenubarMenu>
-            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/30 hover:text-white transition-all uppercase">VISUALS</MenubarTrigger>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/40 hover:text-white transition-all uppercase">EDIT</MenubarTrigger>
+            <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+              <MenubarItem>UNDO <MenubarShortcut>CTRL+Z</MenubarShortcut></MenubarItem>
+              <MenubarItem>REDO <MenubarShortcut>CTRL+Y</MenubarShortcut></MenubarItem>
+              <MenubarSeparator className="bg-white/5" />
+              <MenubarItem>CUT <MenubarShortcut>CTRL+X</MenubarShortcut></MenubarItem>
+              <MenubarItem>COPY <MenubarShortcut>CTRL+C</MenubarShortcut></MenubarItem>
+              <MenubarItem>PASTE <MenubarShortcut>CTRL+V</MenubarShortcut></MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/40 hover:text-white transition-all uppercase">VISUALS</MenubarTrigger>
             <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
               <MenubarItem onClick={() => store.setIsSidebarOpen(!store.ui.isSidebarOpen)}>TOGGLE SIDEBAR <MenubarShortcut>CTRL+B</MenubarShortcut></MenubarItem>
               <MenubarItem onClick={() => store.setIsTerminalOpen(!store.ui.isTerminalOpen)}>TOGGLE TERMINAL <MenubarShortcut>CTRL+J</MenubarShortcut></MenubarItem>
-              <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>CALIBRATION</MenubarItem>
+              <MenubarItem onClick={() => store.setIsAIPanelOpen(!store.ui.isAIPanelOpen)}>TOGGLE AI PANEL <MenubarShortcut>CTRL+I</MenubarShortcut></MenubarItem>
+              <MenubarItem onClick={() => store.setIsSettingsOpen(true)}>PREFERENCES</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/40 hover:text-white transition-all uppercase">INTELLIGENCE</MenubarTrigger>
+            <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+              <MenubarItem onClick={() => store.setIsAIPanelOpen(true)}>ASK AI <MenubarShortcut>CTRL+I</MenubarShortcut></MenubarItem>
+              <MenubarItem>EXPLAIN CODE</MenubarItem>
+              <MenubarItem>FIX ERRORS</MenubarItem>
+            </MenubarContent>
+          </MenubarMenu>
+
+          <MenubarMenu>
+            <MenubarTrigger className="h-7 text-[8px] font-future px-2 hover:bg-white/5 cursor-pointer text-white/40 hover:text-white transition-all uppercase">HELP</MenubarTrigger>
+            <MenubarContent className="bg-black border-white/10 text-[9px] font-future uppercase p-1">
+              <MenubarItem onClick={() => setIsAboutOpen(true)}>ABOUT CARET</MenubarItem>
+              <MenubarItem>DOCUMENTATION</MenubarItem>
+              <MenubarItem>KEYBOARD SHORTCUTS</MenubarItem>
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
       </div>
 
-      <div className="flex-1 max-w-sm mx-8">
+      <div className="flex-1 max-w-xs mx-4">
         <div 
-          className="h-6 bg-white/[0.02] border border-white/5 rounded-sm px-4 flex items-center justify-between text-[8px] font-future text-white/20 cursor-pointer hover:bg-white/5 transition-all"
+          className="h-6 bg-white/[0.02] border border-white/5 rounded px-3 flex items-center justify-between text-[8px] font-future text-white/20 cursor-pointer hover:bg-white/5 transition-all"
           onClick={() => store.setIsCommandPaletteOpen(true)}
         >
           <span className="truncate">{store.activeFile?.name || 'SEARCH COMMANDS...'}</span>
-          <div className="flex items-center gap-1 opacity-40">
+          <div className="flex items-center gap-1 opacity-20">
             <Command className="h-2.5 w-2.5" />
             <span>P</span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-white/20 hover:text-white" onClick={() => toast({ title: "INITIATING BUILD..." })}>
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="icon" className="h-7 w-7 text-white/30 hover:text-white" onClick={() => toast({ title: "INITIATING BUILD..." })}>
           <Play className="h-3 w-3" />
-        </Button>
-        <div className="w-[1px] h-3 bg-white/10" />
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-white/20 hover:text-white" onClick={() => setIsAboutOpen(true)}>
-          <Info className="h-3 w-3" />
         </Button>
       </div>
 
       <Dialog open={isAboutOpen} onOpenChange={setIsAboutOpen}>
         <DialogContent className="bg-black border-white/10 text-white crystal-panel max-w-xs">
           <DialogHeader>
-            <DialogTitle className="text-[10px] font-future tracking-[0.4em] flex items-center gap-4">
+            <DialogTitle className="text-[10px] font-future tracking-[0.2em] flex items-center gap-4">
               <Image src="/logo.png" alt="Logo" width={16} height={16} />
-              CARET 2099
+              CARET IDE
             </DialogTitle>
-            <DialogDescription className="text-white/40 text-[9px] font-future pt-4 leading-relaxed uppercase tracking-wider">
-              CORE OS v1.1.0<br />
-              MONOCHROMATIC CRYSTAL ENVIRONMENT.<br />
-              HARDWARE STATUS: OPTIMAL.
+            <DialogDescription className="text-white/40 text-[9px] font-future pt-4 leading-relaxed uppercase">
+              PROFESSIONAL WORKSTATION v1.2.0<br />
+              PURE BLACK MONOCHROMATIC ENGINE.<br />
+              DESIGNED FOR SPEED AND PRECISION.
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

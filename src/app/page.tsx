@@ -12,7 +12,7 @@ import { CommandPalette } from '@/components/editor/command-palette';
 import { useEditorStore } from '@/hooks/use-editor-store';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/hooks/use-toast';
-import { Sparkles, Terminal as TerminalIcon, GitBranch, MousePointer2, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { Sparkles, Terminal as TerminalIcon, GitBranch, MousePointer2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { MenuBar } from '@/components/editor/menu-bar';
 import { SettingsModal } from '@/components/editor/settings-modal';
@@ -36,7 +36,7 @@ export default function App() {
         setSidebarWidth(Math.max(150, Math.min(600, e.clientX - 50)));
       }
       if (isResizingAI.current) {
-        setAiPanelWidth(Math.max(200, Math.min(800, window.innerWidth - e.clientX)));
+        setAiPanelWidth(Math.max(200, Math.min(800, window.innerWidth - e.clientX - 50)));
       }
       if (isResizingTerminal.current) {
         setTerminalHeight(Math.max(100, Math.min(800, window.innerHeight - e.clientY - 28)));
@@ -63,7 +63,7 @@ export default function App() {
     store.setActiveView('explorer');
     const id = store.createNode(`untitled-${Object.keys(store.nodes || {}).length + 1}.js`, 'file');
     store.selectFile(id);
-    toast({ title: "New File Created", description: "Start coding now!" });
+    toast({ title: "New File Created" });
   };
 
   useEffect(() => {
@@ -77,8 +77,7 @@ export default function App() {
           case 'k':
           case 'p': e.preventDefault(); store.setIsCommandPaletteOpen(true); break;
           case 'n': e.preventDefault(); handleNewFile(); break;
-          case 'd': e.preventDefault(); store.setIsShortcutsOpen(true); break;
-          case 's': e.preventDefault(); toast({ title: "Saved", description: store.activeFile?.name || "Workspace saved" }); break;
+          case 's': e.preventDefault(); toast({ title: "SYNCED" }); break;
         }
       }
     };
@@ -87,16 +86,12 @@ export default function App() {
   }, [store.ui, store.activeFile, handleNewFile]);
 
   return (
-    <div className="flex h-screen w-screen bg-black text-foreground overflow-hidden font-body selection:bg-white/20 selection:text-white">
+    <div className="flex h-screen w-screen bg-black text-foreground overflow-hidden font-body">
       <ActivityBar 
         activeView={store.ui.activeView} 
         onViewChange={(view) => {
-          if (store.ui.activeView === view && store.ui.isSidebarOpen) {
-            store.setIsSidebarOpen(false);
-          } else {
-            store.setActiveView(view);
-            store.setIsSidebarOpen(true);
-          }
+          store.setActiveView(view);
+          store.setIsSidebarOpen(true);
         }} 
       />
 
@@ -164,7 +159,7 @@ export default function App() {
               </div>
             )}
 
-            <div className="h-7 bg-black border-t border-white/5 flex items-center px-4 justify-between text-[10px] font-bold text-muted-foreground/40 uppercase tracking-[0.2em] z-50">
+            <div className="h-7 bg-black border-t border-white/5 flex items-center px-4 justify-between text-[9px] font-future text-white/30 uppercase tracking-widest z-50">
               <div className="flex items-center gap-5">
                 <button 
                   className={cn("flex items-center gap-2 hover:text-white transition-colors", store.ui.isTerminalOpen && "text-white")}
@@ -172,7 +167,7 @@ export default function App() {
                 >
                   <TerminalIcon className="h-3 w-3" /> Terminal
                 </button>
-                <div className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors">
+                <div className="flex items-center gap-2">
                   <GitBranch className="h-3 w-3" /> main*
                 </div>
               </div>
@@ -181,7 +176,7 @@ export default function App() {
                   <MousePointer2 className="h-3 w-3" /> Ln 1, Col 1
                 </div>
                 {store.activeFile && (
-                  <div className="text-white/60 font-black">{store.activeFile.language}</div>
+                  <div className="text-white/60">{store.activeFile.language.toUpperCase()}</div>
                 )}
                 <div className="flex items-center gap-2 text-white">
                   <Sparkles className="h-3 w-3 animate-pulse" /> AI READY
@@ -216,6 +211,15 @@ export default function App() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          <ActivityBar 
+            activeView={store.ui.activeView} 
+            onViewChange={(view) => {
+              store.setActiveView(view);
+              store.setIsAIPanelOpen(true);
+            }} 
+            side="right"
+          />
         </div>
       </div>
 
