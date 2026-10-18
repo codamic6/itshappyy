@@ -1,94 +1,20 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-    --radius: 0.5rem;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+    --border: 0 0% 15%;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-[#0C0C0E] text-foreground font-body antialiased select-none;
-  }
-  .monaco-editor, .selectable-text {
-    @apply select-text;
-  }
-}
-
-/* Advanced Crystal Workstation Styles */
-.crystal-panel {
-  @apply bg-[#0C0C0E] border-white/5;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.shining-border {
-  position: relative;
-}
-
-.shining-border::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-}
-
-.font-future {
-  @apply font-headline;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-}
-
-.font-code {
-  font-family: 'Source Code Pro', monospace;
-}
-
-/* Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-white/5 rounded-full hover:bg-white/10 transition-colors;
-}
-
-.resizer-h {
-  @apply w-[1px] cursor-col-resize hover:bg-white/20 transition-colors z-50;
-}
-
-.resizer-v {
-  @apply h-[1px] cursor-row-resize hover:bg-white/20 transition-colors z-50;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+body {
+  @apply bg-background text-foreground;
 }
