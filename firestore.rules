@@ -1,52 +1,16 @@
+
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    /**
-     * CARET IDE - Global & User Security Rules
-     * 
-     * 1. caret_extensions: Publicly readable, admin writable.
-     * 2. users/{userId}: Private user space for extensions and files.
-     */
-
-    // --- Helper Functions ---
-
-    function isSignedIn() {
-      return request.auth != null;
+    // Allow users to read and write only their own data
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
-
-    function isOwner(userId) {
-      return isSignedIn() && request.auth.uid == userId;
-    }
-
-    function isAdmin() {
-      return isSignedIn() && exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
-    }
-
-    // --- Global Extensions ---
+    
+    // Global extensions for the editor (if needed)
     match /caret_extensions/{extensionId} {
-      // Allow everyone to read global plugins for the IDE to function.
       allow read: if true;
-      
-      // Only admins can modify the global marketplace.
-      allow write: if isAdmin();
-    }
-
-    // --- User Private Space (Files & Extensions) ---
-    match /users/{userId}/{document=**} {
-      // Users have full control over their own workspace and installed extensions.
-      allow read, write: if isOwner(userId);
-    }
-
-    // --- Admin Roles ---
-    match /roles_admin/{uid} {
-      allow read: if isSignedIn();
-      allow write: if false;
-    }
-
-    // Default Deny
-    match /{path=**} {
-      allow read, write: if false;
+      allow write: if false; // Only admin via console
     }
   }
 }
