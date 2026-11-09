@@ -2,18 +2,26 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle, Rocket, Layers } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 import placeholderData from '@/app/lib/placeholder-images.json'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
 
 export default function PortfolioPage() {
   const images = placeholderData.placeholderImages;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
@@ -45,6 +53,31 @@ export default function PortfolioPage() {
     { name: 'Facebook', href: '#facebook' },
     { name: 'Sheikh Waleed', href: '#sheikh-waleed' },
     { name: 'Contact', href: '#contact' },
+  ];
+
+  const projects = [
+    {
+      id: 1,
+      title: "HappyChat",
+      category: "WhatsApp Alternative",
+      icon: <MessageSquare className="h-5 w-5" />,
+      imgSrc: images[1]?.imageUrl,
+      description: "A high-speed messaging ecosystem built for global connectivity and security.",
+      longDescription: "HappyChat is a revolutionary messaging platform designed to provide a secure and ultra-fast alternative to mainstream apps. It features end-to-end encryption, real-time message synchronization across devices, and a custom-built socket architecture for zero-latency communication.",
+      stack: ['Next.js', 'Firebase', 'Socket.io', 'Tailwind'],
+      link: "#"
+    },
+    {
+      id: 2,
+      title: "HappyLinks",
+      category: "Linktree Alternative",
+      icon: <LinkIcon className="h-5 w-5" />,
+      imgSrc: images[2]?.imageUrl,
+      description: "Premium identity aggregator for creators and global media brands.",
+      longDescription: "HappyLinks provides a centralized hub for digital identities. Designed specifically for high-reach content creators, it offers deep analytics, customizable themes, and seamless integration with all major social media platforms to maximize audience conversion.",
+      stack: ['React', 'PostgreSQL', 'Tailwind', 'Node.js'],
+      link: "#"
+    }
   ];
 
   return (
@@ -123,7 +156,7 @@ export default function PortfolioPage() {
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-base font-medium text-foreground hover:text-primary tracking-tight uppercase transition-colors"
+                      className="text-[12px] font-bold text-foreground hover:text-primary tracking-[0.1em] uppercase transition-colors"
                     >
                       {link.name}
                     </a>
@@ -151,23 +184,23 @@ export default function PortfolioPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-32 overflow-hidden pt-40">
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 overflow-hidden py-20">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-6xl text-center w-full relative z-10"
         >
-          <div className="space-y-4">
+          <div className="space-y-2">
             <motion.span 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-lg md:text-2xl font-light text-muted-foreground tracking-widest uppercase block"
+              className="text-lg md:text-xl font-light text-muted-foreground tracking-widest uppercase block"
             >
               I&apos;m a
             </motion.span>
             
-            <div className="h-[140px] sm:h-[200px] md:h-[260px] flex items-center justify-center overflow-visible">
+            <div className="h-[120px] sm:h-[180px] md:h-[220px] flex items-center justify-center overflow-visible">
               <AnimatePresence mode="wait">
                 <motion.h1 
                   key={roles[roleIndex]}
@@ -175,7 +208,7 @@ export default function PortfolioPage() {
                   animate={{ y: 0, opacity: 1, rotateX: 0 }}
                   exit={{ y: -40, opacity: 0, rotateX: 20 }}
                   transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic py-4"
+                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic py-4 overflow-visible px-4"
                 >
                   {roles[roleIndex]}
                 </motion.h1>
@@ -186,13 +219,13 @@ export default function PortfolioPage() {
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
-            transition={{ delay: 1 }}
-            className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-12"
+            transition={{ delay: 0.6 }}
+            className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-6"
           >
             Engineering scalable digital ecosystems and managing global media brands with millions of followers.
           </motion.p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-16">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:scale-105 active:scale-95 font-black text-[11px] tracking-[0.4em] h-16 uppercase shadow-2xl transition-all">
               EXPLORE WORK
             </Button>
@@ -223,10 +256,67 @@ export default function PortfolioPage() {
       <section id="projects" className="py-32 px-6 max-w-7xl mx-auto w-full">
         <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase mb-24">Engineering</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <ProjectCard title="HappyChat" category="WhatsApp Alternative" icon={<MessageSquare className="h-5 w-5" />} imgSrc={images[1]?.imageUrl} description="A high-speed messaging ecosystem built for global connectivity." stack={['Next.js', 'Firebase', 'Socket.io']} />
-          <ProjectCard title="HappyLinks" category="Linktree Alternative" icon={<LinkIcon className="h-5 w-5" />} imgSrc={images[2]?.imageUrl} description="Premium identity aggregator for creators and global media brands." stack={['React', 'PostgreSQL', 'Tailwind']} />
+          {projects.map((project) => (
+            <ProjectCard 
+              key={project.id} 
+              {...project} 
+              onClick={() => setSelectedProject(project)}
+            />
+          ))}
         </div>
       </section>
+
+      {/* Project Details Modal */}
+      <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white/95 backdrop-blur-xl border-primary/10 rounded-[3rem]">
+          {selectedProject && (
+            <div className="flex flex-col">
+              <div className="relative aspect-video w-full">
+                <Image 
+                  src={selectedProject.imgSrc} 
+                  alt={selectedProject.title} 
+                  fill 
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                <div className="absolute bottom-8 left-8">
+                  <span className="px-4 py-2 rounded-full glass-white text-[10px] font-black text-primary uppercase tracking-widest border border-white/20">
+                    {selectedProject.category}
+                  </span>
+                  <h3 className="text-4xl md:text-6xl font-black text-white mt-4 uppercase tracking-tighter">
+                    {selectedProject.title}
+                  </h3>
+                </div>
+              </div>
+              <div className="p-10 space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                  <div className="md:col-span-2 space-y-4">
+                    <h4 className="text-xs font-black text-primary tracking-[0.3em] uppercase">Overview</h4>
+                    <p className="text-muted-foreground text-lg font-medium leading-relaxed">
+                      {selectedProject.longDescription}
+                    </p>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="space-y-4">
+                      <h4 className="text-xs font-black text-primary tracking-[0.3em] uppercase">Technologies</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.stack.map((s: string) => (
+                          <span key={s} className="px-3 py-1 rounded-lg bg-primary/5 text-[10px] font-bold text-primary uppercase border border-primary/10">
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <Button className="w-full rounded-full bg-primary text-white font-black tracking-widest text-xs h-14 uppercase shadow-xl">
+                      VIEW LIVE PROJECT <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* YouTube Section */}
       <section id="youtube" className="py-32 bg-[#1A1A1A] w-full text-white overflow-hidden">
@@ -339,7 +429,7 @@ export default function PortfolioPage() {
 
       {/* Footer (Long) */}
       <footer className="py-24 px-6 border-t border-primary/5 bg-white w-full relative">
-        <div className="max-w-7xl auto">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
               <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
@@ -405,9 +495,12 @@ function StatCard({ icon, label, handle, count, color, href }: any) {
   )
 }
 
-function ProjectCard({ title, category, icon, imgSrc, description, stack }: any) {
+function ProjectCard({ title, category, icon, imgSrc, description, stack, onClick }: any) {
   return (
-    <Card className="luxury-card rounded-[3rem] group cursor-pointer w-full bg-white border-primary/5 hover:border-primary/20">
+    <Card 
+      className="luxury-card rounded-[3rem] group cursor-pointer w-full bg-white border-primary/5 hover:border-primary/20"
+      onClick={onClick}
+    >
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         <Image src={imgSrc || "https://picsum.photos/seed/default/600/400"} alt={title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -417,12 +510,16 @@ function ProjectCard({ title, category, icon, imgSrc, description, stack }: any)
         </div>
       </div>
       <CardContent className="p-10 space-y-6">
-        <h4 className="text-3xl font-black group-hover:text-primary transition-colors uppercase tracking-tight">{title}</h4>
+        <div className="flex items-center justify-between">
+          <h4 className="text-3xl font-black group-hover:text-primary transition-colors uppercase tracking-tight">{title}</h4>
+          <Rocket className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+        </div>
         <p className="text-sm text-muted-foreground leading-relaxed font-medium opacity-70 uppercase tracking-tight">{description}</p>
         <div className="flex flex-wrap gap-2">
-          {stack.map((item: string) => (
+          {stack.slice(0, 3).map((item: string) => (
             <span key={item} className="px-3 py-1 rounded-lg bg-primary/5 text-[9px] font-bold text-primary uppercase tracking-widest font-mono border border-primary/10">{item}</span>
           ))}
+          {stack.length > 3 && <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">+{stack.length - 3} MORE</span>}
         </div>
       </CardContent>
     </Card>
