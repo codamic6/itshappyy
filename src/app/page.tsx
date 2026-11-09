@@ -150,8 +150,8 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section (Advanced Dynamic Version) */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-20 overflow-hidden">
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-32 overflow-hidden pt-40">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ export default function PortfolioPage() {
               I&apos;m a
             </motion.span>
             
-            <div className="h-[120px] sm:h-[180px] md:h-[220px] flex items-center justify-center">
+            <div className="h-[140px] sm:h-[200px] md:h-[260px] flex items-center justify-center overflow-visible">
               <AnimatePresence mode="wait">
                 <motion.h1 
                   key={roles[roleIndex]}
@@ -175,7 +175,7 @@ export default function PortfolioPage() {
                   animate={{ y: 0, opacity: 1, rotateX: 0 }}
                   exit={{ y: -40, opacity: 0, rotateX: 20 }}
                   transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic"
+                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic py-4"
                 >
                   {roles[roleIndex]}
                 </motion.h1>
@@ -276,7 +276,7 @@ export default function PortfolioPage() {
             <div className="flex flex-col items-center md:items-end gap-2 relative z-10">
               <div className="flex items-center gap-4 text-[#1877F2]">
                 <Users className="h-10 w-10" />
-                <span className="text-7xl md:text-9xl font-black tracking-tighter">25M+</span>
+                <span className="text-7xl md:text-9xl font-black tracking-tighter">25K+</span>
               </div>
               <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Total Reach & Followers</span>
             </div>
@@ -284,7 +284,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Others Section (Insta/TikTok/Threads) */}
+      {/* Others Section */}
       <section className="py-32 bg-white w-full">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#833AB4] uppercase mb-20 text-center">Multi-Platform Reach</h2>
@@ -339,7 +339,7 @@ export default function PortfolioPage() {
 
       {/* Footer (Long) */}
       <footer className="py-24 px-6 border-t border-primary/5 bg-white w-full relative">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
               <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
@@ -379,7 +379,7 @@ export default function PortfolioPage() {
           </div>
           
           <div className="pt-20 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] font-black text-muted-foreground tracking-[0.5em] uppercase">
-            <div>&copy; 2024 ARSALAN GLOBAL ECOSYSTEMS.</div>
+            <div>&copy; 2026 ARSALAN GLOBAL ECOSYSTEMS.</div>
             <div className="flex gap-10">
               <span className="hover:text-primary cursor-pointer transition-colors">PRIVACY</span>
               <span className="hover:text-primary cursor-pointer transition-colors">TERMS</span>
