@@ -2,7 +2,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle, Rocket, Layers, BookOpen, Star, Trophy } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle, Rocket, Layers, BookOpen, Star, Trophy, Clock, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
@@ -50,8 +50,8 @@ export default function PortfolioPage() {
     { name: 'About', href: '#about' },
     { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
-    { name: 'YouTube', href: '#youtube' },
-    { name: 'Facebook', href: '#facebook' },
+    { name: 'Voices of Haram', href: '#youtube' },
+    { name: 'Community', href: '#facebook' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -62,8 +62,8 @@ export default function PortfolioPage() {
       category: "WhatsApp Alternative",
       icon: <MessageSquare className="h-5 w-5" />,
       imgSrc: images[1]?.imageUrl,
-      description: "A high-speed messaging ecosystem built for global connectivity and security.",
-      longDescription: "HappyChat is a revolutionary messaging platform designed to provide a secure and ultra-fast alternative to mainstream apps. It features end-to-end encryption, real-time message synchronization across devices, and a custom-built socket architecture for zero-latency communication.",
+      description: "A high-speed messaging ecosystem built for global connectivity.",
+      longDescription: "HappyChat is a revolutionary messaging platform designed to provide a secure and ultra-fast alternative to mainstream apps. It features end-to-end encryption and custom-built socket architecture.",
       stack: ['Next.js', 'Firebase', 'Socket.io', 'Tailwind'],
       link: "#"
     },
@@ -73,20 +73,26 @@ export default function PortfolioPage() {
       category: "Linktree Alternative",
       icon: <LinkIcon className="h-5 w-5" />,
       imgSrc: images[2]?.imageUrl,
-      description: "Premium identity aggregator for creators and global media brands.",
-      longDescription: "HappyLinks provides a centralized hub for digital identities. Designed specifically for high-reach content creators, it offers deep analytics, customizable themes, and seamless integration with all major social media platforms to maximize audience conversion.",
+      description: "Premium identity aggregator for massive global media brands.",
+      longDescription: "HappyLinks provides a centralized hub for digital identities. Designed specifically for high-reach content creators, it offers deep analytics and customizable themes.",
       stack: ['React', 'PostgreSQL', 'Tailwind', 'Node.js'],
       link: "#"
     }
   ];
 
   const educationTimeline = [
-    { year: "Current", title: "11th Grade - ICS", institution: "Punjab College Daewoo Road", details: "Exploring advanced computer science concepts and software logic." },
-    { year: "2024", title: "Class 10 Board", institution: "Faisalabad Board", details: "Achieved a massive 1165/1200 marks. (Roll No 484655)" },
-    { year: "2023", title: "Class 9 Board", institution: "Faisalabad Board", details: "3rd Position with 525/545 marks. (Roll No 190511)" },
-    { year: "Feb 2023", title: "Completion of Hifz", institution: "Independent Study", details: "Successfully completed Hifz-e-Quran on February 10, 2023." },
-    { year: "2021-2022", title: "Hifz Focus", institution: "Al-Faisal Grammar High School", details: "Took a sabbatical from formal schooling (Classes 6-7) to dedicate time to Hifz-e-Quran." },
-    { year: "Early Years", title: "Primary Schooling", institution: "Al-Faisal Grammar High School", details: "Consistent academic excellence: Prep (3rd), Class 1 (2nd), Class 2 (2nd), Class 3 (4th), Class 4 (2nd), Class 5 (2nd)." }
+    { year: "2025-Current", title: "11th Grade - ICS", institution: "Punjab College Daewoo Road", details: "Specializing in Computer Sciences and Software Logic." },
+    { year: "2025", title: "Class 10 Board - Matric", institution: "Faisalabad Board", details: "Massive Achievement: 1165/1200 marks. (Roll No 484655)" },
+    { year: "2024", title: "Class 9 Board", institution: "Faisalabad Board", details: "3rd Position in Faisalabad Board with 525/545 marks. (Roll No 190511)" },
+    { year: "Feb 2023", title: "Completion of Hifz-e-Quran", institution: "Independent Study", details: "Achieved record Hifz in 1 Year 9 Months. Record Revision (Duhrai) completed in just 1 Month (Normal: 6 months)." },
+    { year: "2021-2022", title: "Hifz Focus", institution: "Al-Faisal Grammar School", details: "Dedicated sabbatical for intensive Hifz-e-Quran study." },
+    { year: "2020", title: "Class 5", institution: "Al-Faisal Grammar School", details: "2nd Position with Academic Excellence." },
+    { year: "2019", title: "Class 4", institution: "Al-Faisal Grammar School", details: "2nd Position - Consistent High Performer." },
+    { year: "2018", title: "Class 3", institution: "Al-Faisal Grammar School", details: "4th Position - Strong competitive standing." },
+    { year: "2017", title: "Class 2", institution: "Al-Faisal Grammar School", details: "2nd Position - Continued excellence." },
+    { year: "2016", title: "Class 1", institution: "Al-Faisal Grammar School", details: "2nd Position - Early academic promise." },
+    { year: "2015", title: "Prep", institution: "Al-Faisal Grammar School", details: "3rd Position - Foundation of success." },
+    { year: "2014", title: "Nursery", institution: "Al-Faisal Grammar School", details: "The beginning of the educational journey." }
   ];
 
   return (
@@ -159,30 +165,21 @@ export default function PortfolioPage() {
               </div>
 
               <div className="flex-1 p-8 space-y-10 overflow-y-auto">
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                   {navLinks.map((link) => (
                     <a 
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-[11px] font-medium text-foreground hover:text-primary tracking-[0.1em] uppercase transition-colors"
+                      className="text-[10px] font-medium text-foreground hover:text-primary tracking-[0.1em] uppercase transition-colors"
                     >
                       {link.name}
                     </a>
                   ))}
                 </div>
-                <div className="h-px bg-primary/10" />
-                <div className="space-y-4">
-                  <span className="text-[9px] font-bold tracking-[0.2em] text-muted-foreground uppercase">Social Channels</span>
-                  <div className="flex gap-4">
-                    <SocialLink icon={<Github />} href="https://github.com/arsalan" />
-                    <SocialLink icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
-                    <SocialLink icon={<Mail />} href="mailto:contact@voicesofharam.com" />
-                  </div>
-                </div>
               </div>
 
-              <div className="p-8 border-t border-primary/5 bg-primary/5">
+              <div className="p-8 border-t border-primary/5 bg-primary/5 mt-auto">
                 <Button className="w-full rounded-full py-6 bg-primary text-white font-bold text-[10px] tracking-[0.2em] uppercase">
                   START A PROJECT
                 </Button>
@@ -193,7 +190,7 @@ export default function PortfolioPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 overflow-hidden py-32">
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 overflow-hidden py-20">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -209,7 +206,7 @@ export default function PortfolioPage() {
               I&apos;m a
             </motion.span>
             
-            <div className="h-[100px] sm:h-[140px] md:h-[180px] flex items-center justify-center overflow-visible">
+            <div className="h-[80px] sm:h-[120px] md:h-[160px] flex items-center justify-center overflow-visible">
               <AnimatePresence mode="wait">
                 <motion.h1 
                   key={roles[roleIndex]}
@@ -231,7 +228,7 @@ export default function PortfolioPage() {
             transition={{ delay: 0.6 }}
             className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-2"
           >
-            Engineering scalable digital ecosystems and managing global media brands with millions of followers.
+            From Development to Content Creation. Scaling massive digital ecosystems since 2023.
           </motion.p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
@@ -251,9 +248,9 @@ export default function PortfolioPage() {
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-8">
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">The Journey</h2>
             <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
-              <p>My journey is a blend of spiritual dedication and technical ambition. I began my deep dive into the computer field in <span className="text-primary font-bold">2023</span>, driven by a vision to build scalable digital ecosystems while managing massive online communities.</p>
-              <p>On <span className="text-primary font-bold">February 10, 2023</span>, I achieved one of my life&apos;s most significant milestones by completing <span className="text-primary font-bold">Hifz-e-Quran</span>, a discipline that instilled in me the focus and memory required for complex software architecture.</p>
-              <p>As the founder of <span className="text-primary font-bold">Voices of Haram</span>, I now bridge the gap between engineering and massive audience engagement, reaching millions globally.</p>
+              <p>My journey is a testament to discipline and record-breaking focus. On <span className="text-primary font-bold">February 10, 2023</span>, I achieved the monumental milestone of <span className="text-primary font-bold">Hifz-e-Quran</span>, completing the entire Holy Book in just 1 Year and 9 Months.</p>
+              <p>Setting a new record at my Madrasa, I completed the <span className="text-primary font-bold">Duhrai (Revision)</span> in only 1 Month—a task that typically takes 6 months for most students. This same intensity is what I bring to the computer field, which I entered in 2023 with a vision for online dominance.</p>
+              <p>Founded on <span className="text-primary font-bold">June 14, 2025</span>, my brand <span className="text-primary font-bold">Voices of Haram</span> has scaled to global reach, bridging spiritual excellence with digital engineering.</p>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
@@ -363,13 +360,16 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10 mb-20">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#FF0000] to-[#CC0000] uppercase">YouTube</h2>
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-red-gradient uppercase">Voices of Haram</h2>
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-black text-xs tracking-widest uppercase">
-                Voices of Haram @VoicesOfHaram
+                Established 14 June 2025
               </div>
+              <p className="text-white/60 text-lg font-medium max-w-xl">
+                Global Recitation Network: Week Schedule, Recitation, Jummah Khutbah, Ramadan Taraweeh, Duas, Tahajjud, and Qiyam-ul-Layl.
+              </p>
             </div>
             <div className="flex flex-col items-center md:items-end gap-2">
-              <span className="text-6xl md:text-8xl font-black tracking-tighter text-white">30K+</span>
+              <span className="text-6xl md:text-8xl font-black tracking-tighter text-[#FF0000]">30K+</span>
               <span className="text-[10px] font-black tracking-[0.5em] text-white/40 uppercase">Subscribers</span>
               <Button asChild className="mt-4 bg-[#FF0000] text-white hover:bg-[#CC0000] rounded-full px-10 h-14 font-black tracking-[0.3em] text-[10px]">
                 <a href="https://youtube.com/@VoicesOfHaram" target="_blank">SUBSCRIBE NOW</a>
@@ -399,8 +399,8 @@ export default function PortfolioPage() {
               <Facebook className="w-96 h-96 text-[#1877F2]" />
             </div>
             <div className="space-y-6 relative z-10 text-center md:text-left">
-              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#1877F2] to-[#054ada] uppercase">Facebook</h2>
-              <p className="text-xl font-bold text-muted-foreground uppercase tracking-widest">Global Community Presence</p>
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-blue-gradient uppercase">Community</h2>
+              <p className="text-xl font-bold text-muted-foreground uppercase tracking-widest">Join our 25,000+ Strong Facebook Presence</p>
               <Button asChild className="bg-[#1877F2] text-white hover:bg-[#1565C0] rounded-full px-12 h-16 font-black tracking-widest text-xs uppercase shadow-xl shadow-blue-500/20">
                 <a href="https://facebook.com/voicesofharam.official" target="_blank">VIEW PAGE</a>
               </Button>
@@ -410,7 +410,7 @@ export default function PortfolioPage() {
                 <Users className="h-10 w-10" />
                 <span className="text-7xl md:text-9xl font-black tracking-tighter">25K+</span>
               </div>
-              <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Followers</span>
+              <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Active Followers</span>
             </div>
           </div>
         </div>
@@ -419,7 +419,7 @@ export default function PortfolioPage() {
       {/* Others Section */}
       <section className="py-32 bg-white w-full">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#C13584] uppercase mb-20 text-center">Multi-Platform Reach</h2>
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-pink-gradient uppercase mb-20 text-center">Platform Analytics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <StatCard icon={<Instagram />} label="Instagram" handle="@voicesofharam.official" count="1K+" color="text-[#E1306C]" href="https://instagram.com/voicesofharam.official" />
             <StatCard icon={<TrendingUp />} label="TikTok" handle="@voicesofharam.official" count="600+" color="text-[#C13584]" href="https://tiktok.com/@voicesofharam.official" />
@@ -432,7 +432,7 @@ export default function PortfolioPage() {
       <section id="sheikh-waleed" className="py-32 bg-primary/5 w-full border-y border-primary/10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center text-center space-y-12">
-            <h2 className="text-5xl md:text-[100px] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#F56040] uppercase leading-none">Sheikh Waleed <br/> Al-Shamsan</h2>
+            <h2 className="text-5xl md:text-[100px] font-black tracking-tighter text-sheikh-gradient uppercase leading-none">Sheikh Waleed <br/> Al-Shamsan</h2>
             <div className="relative">
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] shadow-2xl">
                 <div className="w-full h-full rounded-full border-8 border-white overflow-hidden relative">
@@ -461,7 +461,7 @@ export default function PortfolioPage() {
             <Send className="w-64 h-64 text-primary" />
           </div>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Get In Touch</h2>
-          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Whether it&apos;s for engineering or brand strategy, let&apos;s build something massive together.</p>
+          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Collaborate on software architecture or brand strategy.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white h-16 font-black tracking-widest uppercase shadow-2xl transition-transform hover:scale-105">SEND MESSAGE</Button>
             <Button size="lg" variant="outline" className="rounded-full px-12 h-16 font-black tracking-widest uppercase border-primary/20 hover:bg-primary/5">EMAIL ARSALAN</Button>
@@ -469,9 +469,9 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Footer (Long) */}
+      {/* Footer */}
       <footer className="py-24 px-6 border-t border-primary/5 bg-white w-full relative">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
               <span className="text-2xl font-bold tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
@@ -500,11 +500,11 @@ export default function PortfolioPage() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-xs font-black tracking-[0.3em] uppercase">Availability</h4>
+              <h4 className="text-xs font-black tracking-[0.3em] uppercase">Status</h4>
               <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10">
                 <div className="flex items-center gap-2 text-primary font-black text-[10px] tracking-widest uppercase">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  Currently Accepting Projects
+                  Accepting Projects
                 </div>
               </div>
             </div>
@@ -557,12 +557,6 @@ function ProjectCard({ title, category, icon, imgSrc, description, stack, onClic
           <Rocket className="h-5 w-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed font-medium opacity-70 uppercase tracking-tight">{description}</p>
-        <div className="flex flex-wrap gap-2">
-          {stack.slice(0, 3).map((item: string) => (
-            <span key={item} className="px-3 py-1 rounded-lg bg-primary/5 text-[9px] font-bold text-primary uppercase tracking-widest font-mono border border-primary/10">{item}</span>
-          ))}
-          {stack.length > 3 && <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">+{stack.length - 3} MORE</span>}
-        </div>
       </CardContent>
     </Card>
   )
