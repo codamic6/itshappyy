@@ -32,7 +32,7 @@
     --input: 161 20% 90%;
     --ring: 161 94% 13%;
     
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
@@ -45,11 +45,19 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-tap-highlight-color: transparent;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter font-black tracking-tighter uppercase;
+  }
+  
+  p {
+    @apply font-inter font-medium leading-relaxed;
+  }
 }
 
 /* Glassy White Effect */
 .glass-white {
-  @apply bg-white/80 backdrop-blur-xl border border-black/5 shadow-sm;
+  @apply bg-white/70 backdrop-blur-2xl border border-white/20 shadow-xl;
 }
 
 /* Glassy Green Effect */
@@ -63,16 +71,12 @@
 }
 
 .luxury-card {
-  @apply bg-white border border-black/5 hover:border-primary/20 transition-all duration-500 overflow-hidden relative shadow-sm hover:shadow-xl hover:shadow-primary/5;
+  @apply bg-white border border-black/5 hover:border-primary/20 transition-all duration-500 overflow-hidden relative shadow-sm hover:shadow-2xl hover:shadow-primary/10;
 }
 
-.luxury-card::before {
-  content: '';
-  @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500;
-}
-
-.luxury-card:hover::before {
-  @apply opacity-100;
+/* Animated Bubbles Background */
+.bubble {
+  @apply absolute rounded-full bg-primary/5 blur-3xl pointer-events-none;
 }
 
 /* Custom scrollbar */
@@ -83,5 +87,14 @@
   @apply bg-white;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/10 rounded-full hover:bg-primary/20 transition-colors;
+  @apply bg-primary/20 rounded-full hover:bg-primary/30 transition-colors;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

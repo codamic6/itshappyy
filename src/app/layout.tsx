@@ -1,9 +1,10 @@
 import './globals.css';
-import { Inter, Syncopate, JetBrains_Mono } from 'next/font/google';
+import { Inter, Syncopate } from 'next/font/google';
 
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '900'],
 });
 
 const syncopate = Syncopate({
@@ -12,14 +13,9 @@ const syncopate = Syncopate({
   variable: '--font-syncopate',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-});
-
 export const metadata = {
-  title: 'ARSALAN | Software Architect',
-  description: 'Full-Stack Developer & Digital Ecosystem Architect.',
+  title: 'ARSALAN | Software Architect & Digital Creator',
+  description: 'Full-Stack Developer, App Creator and Brand Ecosystem Architect.',
 };
 
 export default function RootLayout({
@@ -28,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={`${inter.variable} ${syncopate.variable} ${jetbrainsMono.variable} font-inter bg-black text-white antialiased overflow-x-hidden`}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.variable} ${syncopate.variable} font-inter bg-white text-foreground antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>
