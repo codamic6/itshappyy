@@ -1,11 +1,25 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Inter, Syncopate, JetBrains_Mono } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const syncopate = Syncopate({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-syncopate',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+});
 
 export const metadata = {
-  title: 'CARET | Luxury Portfolio',
-  description: 'Futuristic Black & Gold portfolio showcasing high-end digital architecture.',
+  title: 'CARET | Professional Architect',
+  description: 'Global Digital Ecosystem Architect & Full-Stack Developer.',
 };
 
 export default function RootLayout({
@@ -15,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-black text-white antialiased`}>
+      <body className={`${inter.variable} ${syncopate.variable} ${jetbrainsMono.variable} font-inter bg-black text-white antialiased`}>
         {children}
       </body>
     </html>
