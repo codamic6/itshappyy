@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
@@ -15,6 +16,17 @@ export default function PortfolioPage() {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
+
+  // Dynamic Role Logic
+  const roles = ["Developer", "Content Creator", "Graphic Designer"];
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > lastScrollY.current ? "down" : "up";
@@ -138,31 +150,51 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-20">
+      {/* Hero Section (Advanced Dynamic Version) */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-20 overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-6xl text-center space-y-10 w-full"
+          className="max-w-6xl text-center w-full relative z-10"
         >
-          <div className="inline-flex items-center gap-2 px-8 py-3 rounded-full glass-green text-[10px] font-black text-primary tracking-[0.4em] uppercase mx-auto border border-primary/10">
-            <Sparkles className="h-3 w-3 animate-pulse" />
-            Software Architect & Digital Ecosystem Builder
+          <div className="space-y-4">
+            <motion.span 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-lg md:text-2xl font-light text-muted-foreground tracking-widest uppercase block"
+            >
+              I&apos;m a
+            </motion.span>
+            
+            <div className="h-[120px] sm:h-[180px] md:h-[220px] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.h1 
+                  key={roles[roleIndex]}
+                  initial={{ y: 40, opacity: 0, rotateX: -20 }}
+                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                  exit={{ y: -40, opacity: 0, rotateX: 20 }}
+                  transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic"
+                >
+                  {roles[roleIndex]}
+                </motion.h1>
+              </AnimatePresence>
+            </div>
           </div>
           
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-black tracking-tighter leading-[0.9] text-green-gradient uppercase">
-            FROM <span className="text-primary italic">DEVELOPMENT</span> <br />
-            TO CONTENT CREATION.
-          </h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            transition={{ delay: 1 }}
+            className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-12"
+          >
+            Engineering scalable digital ecosystems and managing global media brands with millions of followers.
+          </motion.p>
           
-          <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed uppercase tracking-tight opacity-70">
-            Engineering scalable platforms like <span className="text-primary font-bold">HappyChat</span> and managing global media ecosystems with millions of followers.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-16">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:scale-105 active:scale-95 font-black text-[11px] tracking-[0.4em] h-16 uppercase shadow-2xl transition-all">
-              VIEW PROJECTS
+              EXPLORE WORK
             </Button>
             <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 glass-white hover:scale-105 active:scale-95 font-black text-[11px] tracking-[0.4em] h-16 text-primary uppercase transition-all">
               GET IN TOUCH
@@ -297,7 +329,7 @@ export default function PortfolioPage() {
             <Send className="w-64 h-64 text-primary" />
           </div>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Get In Touch</h2>
-          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Whether it's for engineering or brand strategy, let's build something massive together.</p>
+          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Whether it&apos;s for engineering or brand strategy, let&apos;s build something massive together.</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white h-16 font-black tracking-widest uppercase shadow-2xl transition-transform hover:scale-105">SEND MESSAGE</Button>
             <Button size="lg" variant="outline" className="rounded-full px-12 h-16 font-black tracking-widest uppercase border-primary/20 hover:bg-primary/5">EMAIL ARSALAN</Button>
@@ -319,7 +351,7 @@ export default function PortfolioPage() {
             <div className="space-y-6">
               <h4 className="text-xs font-black tracking-[0.3em] uppercase">Ecosystems</h4>
               <ul className="space-y-3 text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase">
-                <li><a href="https://voicesofharam.com" className="hover:text-primary transition-colors">Voices of Haram</a></li>
+                <li><a href="https://youtube.com/@VoicesOfHaram" className="hover:text-primary transition-colors">Voices of Haram</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">HappyChat App</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">HappyLinks App</a></li>
               </ul>
