@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 161 94% 5%;
     
-    --card: 0 0% 3%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 99%;
+    --card-foreground: 161 94% 5%;
     
-    --popover: 0 0% 2%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 161 94% 5%;
     
-    --primary: 45 65% 52%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 161 94% 13%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 45 65% 52%;
+    --secondary: 161 30% 96%;
+    --secondary-foreground: 161 94% 13%;
     
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 161 10% 94%;
+    --muted-foreground: 161 10% 40%;
     
-    --accent: 45 65% 52%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 161 94% 13%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 10%;
-    --ring: 45 65% 52%;
+    --border: 161 20% 90%;
+    --input: 161 20% 90%;
+    --ring: 161 94% 13%;
     
-    --radius: 1rem;
+    --radius: 0.75rem;
   }
 }
 
@@ -41,29 +41,29 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-tap-highlight-color: transparent;
   }
 }
 
-/* Glassy Black Effect */
-.glass-black {
-  @apply bg-black/60 backdrop-blur-xl border border-white/5;
+/* Glassy White Effect */
+.glass-white {
+  @apply bg-white/80 backdrop-blur-xl border border-black/5 shadow-sm;
 }
 
-/* Glassy Gold Effect */
-.glass-gold {
-  @apply bg-primary/10 backdrop-blur-md border border-primary/20 shadow-[0_0_20px_rgba(212,175,55,0.1)];
+/* Glassy Green Effect */
+.glass-green {
+  @apply bg-primary/5 backdrop-blur-md border border-primary/10;
 }
 
-/* Golden Gradient Text */
-.text-gold-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#D4AF37] to-[#B8860B];
+/* Dark Green Gradient Text */
+.text-green-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857];
 }
 
 .luxury-card {
-  @apply bg-[#050505] border border-white/5 hover:border-primary/40 transition-all duration-500 overflow-hidden relative;
+  @apply bg-white border border-black/5 hover:border-primary/20 transition-all duration-500 overflow-hidden relative shadow-sm hover:shadow-xl hover:shadow-primary/5;
 }
 
 .luxury-card::before {
@@ -80,13 +80,8 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-black;
+  @apply bg-white;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
-}
-
-/* Prevent horizontal overflow strictly */
-.overflow-x-hidden {
-  overflow-x: hidden;
+  @apply bg-primary/10 rounded-full hover:bg-primary/20 transition-colors;
 }
