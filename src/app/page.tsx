@@ -52,7 +52,7 @@ export default function PortfolioPage() {
       >
         <div className="max-w-6xl w-full glass-white h-20 px-8 flex items-center justify-between rounded-[2rem] border border-primary/10 pointer-events-auto shadow-2xl shadow-black/5">
           <div className="flex items-center">
-            <span className="text-2xl font-black tracking-[0.3em] font-syncopate text-green-gradient uppercase cursor-pointer">ARSALAN</span>
+            <span className="text-2xl font-black tracking-[0.2em] font-syne text-green-gradient uppercase cursor-pointer">ARSALAN</span>
           </div>
           
           <div className="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
@@ -110,7 +110,7 @@ export default function PortfolioPage() {
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-2xl font-bold text-foreground hover:text-primary tracking-tight uppercase transition-colors"
+                      className="text-lg font-bold text-foreground hover:text-primary tracking-tight uppercase transition-colors"
                     >
                       {link.name}
                     </a>
@@ -138,7 +138,7 @@ export default function PortfolioPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 pt-32 pb-20">
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 py-20">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -328,7 +328,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
-              <span className="text-2xl font-black tracking-[0.4em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
+              <span className="text-2xl font-black tracking-[0.2em] font-syne text-green-gradient uppercase">ARSALAN</span>
               <p className="text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase leading-loose">
                 Architecting digital futures.<br />From code to community, we lead the global presence of world-class brands.
               </p>

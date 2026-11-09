@@ -1,5 +1,5 @@
 import './globals.css';
-import { Inter, Syncopate } from 'next/font/google';
+import { Inter, Syncopate, Syne } from 'next/font/google';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,6 +11,12 @@ const syncopate = Syncopate({
   weight: ['400', '700'],
   subsets: ['latin'],
   variable: '--font-syncopate',
+});
+
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-syne',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata = {
@@ -25,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${syncopate.variable} font-inter bg-white text-foreground antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${syncopate.variable} ${syne.variable} font-inter bg-white text-foreground antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>
