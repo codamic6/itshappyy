@@ -15,7 +15,7 @@ export default function PortfolioPage() {
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
-  // Smart Navbar Scroll Logic
+  // Smart Navbar Scroll Logic: Detached & Floating
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > lastScrollY.current ? "down" : "up";
     if (direction === "down" && latest > 150) {
@@ -45,23 +45,23 @@ export default function PortfolioPage() {
       
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden -z-10">
-        <div className="bubble w-[600px] h-[600px] -top-20 -left-20 animate-float" style={{ animationDelay: '0s' }} />
-        <div className="bubble w-[500px] h-[500px] top-[40%] -right-20 animate-float" style={{ animationDelay: '2s' }} />
-        <div className="bubble w-[400px] h-[400px] -bottom-20 left-[20%] animate-float" style={{ animationDelay: '4s' }} />
+        <div className="bubble w-[600px] h-[600px] -top-20 -left-20 animate-float opacity-40" style={{ animationDelay: '0s' }} />
+        <div className="bubble w-[500px] h-[500px] top-[40%] -right-20 animate-float opacity-30" style={{ animationDelay: '2s' }} />
+        <div className="bubble w-[400px] h-[400px] -bottom-20 left-[20%] animate-float opacity-50" style={{ animationDelay: '4s' }} />
       </div>
 
       {/* Detached Smart Navigation */}
       <motion.nav 
-        animate={{ y: isNavVisible ? 0 : -100, opacity: isNavVisible ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed top-4 left-4 right-4 z-50 flex items-center justify-center pointer-events-none"
+        animate={{ y: isNavVisible ? 0 : -120, opacity: isNavVisible ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-6 left-6 right-6 z-50 flex items-center justify-center pointer-events-none"
       >
-        <div className="max-w-7xl w-full glass-white h-16 md:h-18 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 pointer-events-auto">
-          <div className="flex items-center gap-2">
-            <span className="text-lg md:text-xl font-black tracking-[0.3em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
+        <div className="max-w-6xl w-full glass-white h-20 px-8 flex items-center justify-between rounded-[2rem] border border-primary/10 pointer-events-auto shadow-2xl shadow-black/5">
+          <div className="flex items-center">
+            <span className="text-xl font-black tracking-[0.4em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
           </div>
           
-          <div className="hidden md:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
             {navLinks.map((link) => (
               <a key={link.name} href={link.href} className="hover:text-primary transition-colors cursor-pointer">
                 {link.name}
@@ -70,13 +70,13 @@ export default function PortfolioPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button className="hidden sm:flex rounded-full px-6 bg-primary text-white hover:bg-primary/90 font-black text-[10px] tracking-[0.2em] uppercase shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
-              WORK WITH ME
+            <Button className="hidden sm:flex rounded-full px-8 bg-primary text-white hover:bg-primary/90 font-black text-[10px] tracking-[0.2em] h-12 uppercase shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+              CONNECT
             </Button>
             
             <button 
               onClick={() => setIsMenuOpen(true)}
-              className="md:hidden p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"
+              className="md:hidden p-3 text-primary hover:bg-primary/5 rounded-full transition-colors"
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -84,7 +84,7 @@ export default function PortfolioPage() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Drawer (Restructured) */}
+      {/* Mobile Menu Drawer (Restructured & Fixed) */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -93,7 +93,7 @@ export default function PortfolioPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/30 backdrop-blur-md z-[60] md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-md z-[60] md:hidden"
             />
             <motion.div 
               initial={{ x: '100%' }}
@@ -102,24 +102,24 @@ export default function PortfolioPage() {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed right-0 top-0 h-full w-[80%] bg-white z-[70] border-l border-primary/10 flex flex-col shadow-2xl overflow-hidden"
             >
-              <div className="p-8 flex items-center justify-between border-b border-primary/5">
-                <span className="text-xs font-black tracking-[0.3em] text-green-gradient uppercase">MENU</span>
+              <div className="p-10 flex items-center justify-between border-b border-primary/5">
+                <span className="text-[10px] font-black tracking-[0.3em] text-green-gradient uppercase">DIRECTORY</span>
                 <button 
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-primary hover:bg-primary/5 rounded-full transition-colors"
+                  className="p-3 text-primary hover:bg-primary/5 rounded-full transition-colors"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-7 w-7" />
                 </button>
               </div>
 
-              <div className="flex-1 p-8 space-y-10 overflow-y-auto">
-                <div className="flex flex-col gap-6">
+              <div className="flex-1 p-10 space-y-12 overflow-y-auto">
+                <div className="flex flex-col gap-8">
                   {navLinks.map((link) => (
                     <a 
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-3xl font-black text-foreground hover:text-primary tracking-tight uppercase transition-colors"
+                      className="text-4xl font-black text-foreground hover:text-primary tracking-tighter uppercase transition-colors"
                     >
                       {link.name}
                     </a>
@@ -128,9 +128,9 @@ export default function PortfolioPage() {
                 
                 <div className="h-px bg-primary/10" />
                 
-                <div className="space-y-4">
-                  <span className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">Social Channels</span>
-                  <div className="flex gap-4">
+                <div className="space-y-6">
+                  <span className="text-[10px] font-black tracking-[0.3em] text-muted-foreground uppercase">Social Channels</span>
+                  <div className="flex gap-5">
                     <SocialLink icon={<Github />} href="#" />
                     <SocialLink icon={<Instagram />} href="#" />
                     <SocialLink icon={<Mail />} href="#" />
@@ -138,9 +138,9 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              <div className="p-8 border-t border-primary/5 bg-primary/5">
-                <Button className="w-full rounded-full py-7 bg-primary text-white hover:bg-primary/90 font-black text-xs tracking-[0.3em] uppercase shadow-xl shadow-primary/20">
-                  LET'S CONNECT
+              <div className="p-10 border-t border-primary/5 bg-primary/5">
+                <Button className="w-full rounded-full py-8 bg-primary text-white hover:bg-primary/90 font-black text-xs tracking-[0.3em] uppercase shadow-2xl shadow-primary/20">
+                  LET'S START A PROJECT
                 </Button>
               </div>
             </motion.div>
@@ -148,27 +148,27 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section (Locked Fit) */}
-      <section className="h-screen max-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 pt-16 md:pt-24">
+      {/* Hero Section (Flexible Height) */}
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 pt-32 pb-20 overflow-hidden">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="max-w-6xl text-center space-y-6 md:space-y-10 w-full"
+          className="max-w-6xl text-center space-y-10 w-full"
         >
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass-green text-[9px] md:text-[11px] font-black text-primary tracking-[0.4em] uppercase mx-auto border border-primary/10"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full glass-green text-[10px] font-black text-primary tracking-[0.4em] uppercase mx-auto border border-primary/10"
           >
             <Sparkles className="h-3 w-3 animate-pulse" />
             Software Architect & Digital Ecosystem Builder
           </motion.div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] font-black tracking-tighter leading-[0.9] text-green-gradient uppercase w-full max-w-5xl mx-auto break-words">
+          <h1 className="text-5xl sm:text-7xl md:text-9xl lg:text-[120px] font-black tracking-tighter leading-[0.85] text-green-gradient uppercase w-full max-w-5xl mx-auto">
             FROM <br className="hidden sm:block" />
-            <span className="text-primary italic tracking-tight underline decoration-primary/20">DEVELOPMENT</span> <br />
+            <span className="text-primary italic tracking-tight underline decoration-primary/10">DEVELOPMENT</span> <br />
             TO CREATION.
           </h1>
           
@@ -176,16 +176,16 @@ export default function PortfolioPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-xs md:text-xl text-muted-foreground max-w-2xl mx-auto font-black leading-relaxed px-4 break-words opacity-70"
+            className="text-base md:text-2xl text-muted-foreground max-w-3xl mx-auto font-black leading-relaxed px-4 opacity-70 uppercase tracking-tight"
           >
             Engineering scalable platforms like <span className="text-primary underline">HappyChat</span> and managing global media ecosystems with millions of followers.
           </motion.p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button size="lg" className="rounded-full px-10 bg-primary text-white hover:bg-primary/90 font-black text-[10px] tracking-[0.4em] h-14 uppercase shadow-2xl shadow-primary/30 transition-all hover:scale-105">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-10">
+            <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:bg-primary/90 font-black text-[11px] tracking-[0.4em] h-16 uppercase shadow-2xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
               VIEW CASE STUDIES
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-10 border-primary/20 glass-white hover:bg-primary/5 font-black text-[10px] tracking-[0.4em] h-14 text-primary uppercase transition-all hover:scale-105">
+            <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 glass-white hover:bg-primary/5 font-black text-[11px] tracking-[0.4em] h-16 text-primary uppercase transition-all hover:scale-105 active:scale-95">
               GET IN TOUCH
             </Button>
           </div>
@@ -193,16 +193,16 @@ export default function PortfolioPage() {
       </section>
 
       {/* Engineering Section */}
-      <section id="apps" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full relative">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 gap-8">
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-green-gradient uppercase">Engineering</h2>
-            <p className="text-muted-foreground text-sm max-w-md font-black uppercase tracking-widest opacity-60">High-performance tools for the digital age.</p>
+      <section id="apps" className="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full relative">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 gap-10">
+          <div className="space-y-6">
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Engineering</h2>
+            <p className="text-muted-foreground text-[10px] max-w-md font-black uppercase tracking-[0.4em] opacity-60">High-performance tools for the digital age.</p>
           </div>
-          <div className="h-px flex-1 bg-primary/10 mx-12 hidden md:block" />
+          <div className="h-px flex-1 bg-primary/10 mx-16 hidden md:block" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <ProjectCard 
             title="HappyChat" 
             category="Communication Architecture"
@@ -225,21 +225,21 @@ export default function PortfolioPage() {
       </section>
 
       {/* Strategy Section */}
-      <section id="brands" className="py-24 md:py-32 bg-secondary/50 border-y border-primary/5 w-full relative">
+      <section id="brands" className="py-32 bg-secondary/30 border-y border-primary/5 w-full relative">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-8">
-            <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-green-gradient uppercase">Strategy</h2>
-              <p className="text-muted-foreground text-sm max-w-md font-black uppercase tracking-widest opacity-60">Managing massive global ecosystems reaching millions.</p>
+          <div className="flex flex-col md:flex-row items-center justify-between mb-24 gap-10">
+            <div className="space-y-6 text-center md:text-left">
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Strategy</h2>
+              <p className="text-muted-foreground text-[10px] max-w-md font-black uppercase tracking-[0.4em] opacity-60">Managing massive global ecosystems reaching millions.</p>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <SocialIcon icon={<Youtube />} />
               <SocialIcon icon={<Instagram />} />
               <SocialIcon icon={<Globe />} />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
              <ProjectCard 
               title="Voices of Haram" 
               category="Digital Ecosystem"
@@ -263,8 +263,8 @@ export default function PortfolioPage() {
       </section>
 
       {/* Expertise Section */}
-      <section id="about" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+      <section id="about" className="py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           <ExpertiseItem 
             icon={<Laptop className="h-10 w-10" />}
             title="Development"
@@ -284,21 +284,21 @@ export default function PortfolioPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 border-t border-primary/5 bg-white w-full relative">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <span className="text-xl font-black tracking-[0.4em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
-            <p className="text-[9px] font-black text-muted-foreground tracking-[0.3em] uppercase">Built to Lead. Engineered to Scale.</p>
+      <footer className="py-24 px-6 border-t border-primary/5 bg-white w-full relative">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
+          <div className="flex flex-col items-center md:items-start gap-6">
+            <span className="text-2xl font-black tracking-[0.5em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
+            <p className="text-[10px] font-black text-muted-foreground tracking-[0.4em] uppercase">Built to Lead. Engineered to Scale.</p>
           </div>
           
-          <div className="flex gap-8">
+          <div className="flex gap-10">
             <SocialLink icon={<Github />} href="#" />
             <SocialLink icon={<Instagram />} href="#" />
             <SocialLink icon={<Youtube />} href="#" />
             <SocialLink icon={<Mail />} href="#" />
           </div>
 
-          <div className="text-[9px] font-black text-muted-foreground tracking-[0.5em] uppercase font-mono text-center md:text-left">
+          <div className="text-[10px] font-black text-muted-foreground tracking-[0.6em] uppercase font-mono text-center md:text-left">
             &copy; 2024 / ENGINEERED_BY_ARSALAN
           </div>
         </div>
@@ -309,35 +309,35 @@ export default function PortfolioPage() {
 
 function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stack, stats }: any) {
   return (
-    <Card className="luxury-card rounded-[2rem] group cursor-pointer w-full bg-white border-primary/5 hover:border-primary/20">
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+    <Card className="luxury-card rounded-[3rem] group cursor-pointer w-full bg-white border-primary/5 hover:border-primary/20">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
         <Image 
           src={imgSrc || "https://picsum.photos/seed/default/600/400"} 
           alt={title} 
           fill 
-          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+          className="object-cover transition-transform duration-1000 group-hover:scale-105"
           data-ai-hint={imgHint}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
-        <div className="absolute bottom-6 left-6 flex items-center gap-4">
-          <div className="p-3 rounded-2xl bg-primary text-white shadow-2xl transition-transform group-hover:scale-110">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+        <div className="absolute bottom-8 left-8 flex items-center gap-5">
+          <div className="p-4 rounded-[1.5rem] bg-primary text-white shadow-2xl transition-transform group-hover:scale-110">
             {icon}
           </div>
-          <span className="px-4 py-2 rounded-full glass-white text-[9px] font-black text-primary uppercase tracking-[0.3em] border border-white/20">
+          <span className="px-6 py-2.5 rounded-full glass-white text-[10px] font-black text-primary uppercase tracking-[0.3em] border border-white/20">
             {category}
           </span>
         </div>
       </div>
-      <CardContent className="p-8 md:p-12 space-y-6">
-        <div className="space-y-4">
-          <h4 className="text-2xl md:text-4xl font-black group-hover:text-primary transition-colors uppercase tracking-tight">{title}</h4>
-          <p className="text-sm text-muted-foreground leading-relaxed font-black opacity-70">{description}</p>
+      <CardContent className="p-10 md:p-14 space-y-8">
+        <div className="space-y-6">
+          <h4 className="text-3xl md:text-5xl font-black group-hover:text-primary transition-colors uppercase tracking-tighter leading-none">{title}</h4>
+          <p className="text-base text-muted-foreground leading-relaxed font-black opacity-70 uppercase tracking-tight">{description}</p>
         </div>
 
         {stack && (
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap gap-3 pt-2">
             {stack.map((item: string) => (
-              <span key={item} className="px-3 py-1 rounded-lg bg-primary/5 border border-primary/10 text-[9px] font-black text-primary uppercase tracking-widest font-mono">
+              <span key={item} className="px-4 py-1.5 rounded-xl bg-primary/5 border border-primary/10 text-[10px] font-black text-primary uppercase tracking-widest font-mono">
                 {item}
               </span>
             ))}
@@ -345,13 +345,13 @@ function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stac
         )}
 
         {stats && (
-          <div className="text-[10px] font-black text-primary tracking-[0.3em] font-mono uppercase bg-primary/10 p-3 rounded-xl inline-block border border-primary/10">
+          <div className="text-[11px] font-black text-primary tracking-[0.3em] font-mono uppercase bg-primary/10 p-4 rounded-2xl inline-block border border-primary/10">
             {stats}
           </div>
         )}
 
-        <div className="pt-6 flex items-center gap-3 text-primary font-black text-[11px] tracking-[0.5em] uppercase group-hover:translate-x-4 transition-transform">
-          VIEW CASE STUDY <ChevronRight className="h-5 w-5" />
+        <div className="pt-8 flex items-center gap-4 text-primary font-black text-[12px] tracking-[0.5em] uppercase group-hover:translate-x-6 transition-transform">
+          VIEW CASE STUDY <ChevronRight className="h-6 w-6" />
         </div>
       </CardContent>
     </Card>
@@ -360,12 +360,12 @@ function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stac
 
 function ExpertiseItem({ icon, title, description }: any) {
   return (
-    <div className="space-y-6 group w-full p-8 rounded-[2.5rem] hover:bg-primary/5 transition-all duration-700 border border-transparent hover:border-primary/10">
-      <div className="w-20 h-20 rounded-3xl glass-green flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl border border-primary/10">
-        {React.cloneElement(icon as React.ReactElement, { className: "text-primary h-10 w-10 group-hover:text-white transition-colors" })}
+    <div className="space-y-8 group w-full p-10 rounded-[3rem] hover:bg-primary/5 transition-all duration-700 border border-transparent hover:border-primary/10">
+      <div className="w-24 h-24 rounded-[2rem] glass-green flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-2xl border border-primary/10">
+        {React.cloneElement(icon as React.ReactElement, { className: "text-primary h-12 w-12 group-hover:text-white transition-colors" })}
       </div>
-      <h3 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground uppercase tracking-[0.1em]">{title}</h3>
-      <p className="text-muted-foreground text-[12px] md:text-sm leading-relaxed font-black opacity-60">
+      <h3 className="text-3xl md:text-4xl font-black tracking-tighter text-foreground uppercase tracking-[0.1em]">{title}</h3>
+      <p className="text-muted-foreground text-[14px] leading-relaxed font-black opacity-60 uppercase tracking-tight">
         {description}
       </p>
     </div>
@@ -374,8 +374,8 @@ function ExpertiseItem({ icon, title, description }: any) {
 
 function SocialIcon({ icon }: any) {
   return (
-    <div className="p-4 rounded-full glass-white text-primary hover:scale-110 hover:bg-primary hover:text-white transition-all shadow-xl border border-primary/10 cursor-pointer">
-      {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
+    <div className="p-5 rounded-full glass-white text-primary hover:scale-110 hover:bg-primary hover:text-white transition-all shadow-2xl border border-primary/10 cursor-pointer">
+      {React.cloneElement(icon as React.ReactElement, { className: "h-7 w-7" })}
     </div>
   )
 }
@@ -384,9 +384,9 @@ function SocialLink({ icon, href }: any) {
   return (
     <a 
       href={href} 
-      className="w-12 h-12 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/20 hover:scale-110 transition-all duration-300 shadow-xl border border-primary/5"
+      className="w-14 h-14 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/20 hover:scale-110 transition-all duration-300 shadow-2xl border border-primary/5"
     >
-      {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5" })}
+      {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
     </a>
   )
 }
