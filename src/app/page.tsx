@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
@@ -28,9 +28,10 @@ export default function PortfolioPage() {
 
   const navLinks = [
     { name: 'About', href: '#about' },
-    { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
     { name: 'YouTube', href: '#youtube' },
+    { name: 'Facebook', href: '#facebook' },
+    { name: 'Sheikh Waleed', href: '#sheikh-waleed' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -39,9 +40,9 @@ export default function PortfolioPage() {
       
       {/* Animated Background Bubbles */}
       <div className="fixed inset-0 overflow-hidden -z-10">
-        <div className="bubble w-[600px] h-[600px] -top-20 -left-20 animate-float opacity-40" />
-        <div className="bubble w-[500px] h-[500px] top-[40%] -right-20 animate-float opacity-30" style={{ animationDelay: '2s' }} />
-        <div className="bubble w-[400px] h-[400px] -bottom-20 left-[20%] animate-float opacity-50" style={{ animationDelay: '4s' }} />
+        <div className="bubble w-[600px] h-[600px] -top-20 -left-20 animate-float opacity-30 bg-primary/10" />
+        <div className="bubble w-[500px] h-[500px] top-[40%] -right-20 animate-float opacity-20 bg-primary/5" style={{ animationDelay: '2s' }} />
+        <div className="bubble w-[400px] h-[400px] -bottom-20 left-[20%] animate-float opacity-30 bg-primary/10" style={{ animationDelay: '4s' }} />
       </div>
 
       {/* Floating Smart Navbar */}
@@ -52,7 +53,7 @@ export default function PortfolioPage() {
       >
         <div className="max-w-6xl w-full glass-white h-20 px-8 flex items-center justify-between rounded-[2rem] border border-primary/10 pointer-events-auto shadow-2xl shadow-black/5">
           <div className="flex items-center">
-            <span className="text-2xl font-black tracking-[0.2em] font-syne text-green-gradient uppercase cursor-pointer">ARSALAN</span>
+            <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase cursor-pointer">ARSALAN</span>
           </div>
           
           <div className="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
@@ -97,7 +98,7 @@ export default function PortfolioPage() {
               className="fixed right-0 top-0 h-full w-[80%] bg-white z-[70] border-l border-primary/10 flex flex-col shadow-2xl overflow-hidden"
             >
               <div className="p-8 flex items-center justify-between border-b border-primary/5">
-                <span className="text-[10px] font-black tracking-[0.3em] text-green-gradient uppercase">DIRECTORY</span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase">DIRECTORY</span>
                 <button onClick={() => setIsMenuOpen(false)} className="p-3 text-primary hover:bg-primary/5 rounded-full">
                   <X className="h-6 w-6" />
                 </button>
@@ -110,7 +111,7 @@ export default function PortfolioPage() {
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-lg font-bold text-foreground hover:text-primary tracking-tight uppercase transition-colors"
+                      className="text-base font-medium text-foreground hover:text-primary tracking-tight uppercase transition-colors"
                     >
                       {link.name}
                     </a>
@@ -118,17 +119,17 @@ export default function PortfolioPage() {
                 </div>
                 <div className="h-px bg-primary/10" />
                 <div className="space-y-4">
-                  <span className="text-[9px] font-black tracking-[0.2em] text-muted-foreground uppercase">Social Channels</span>
+                  <span className="text-[9px] font-bold tracking-[0.2em] text-muted-foreground uppercase">Social Channels</span>
                   <div className="flex gap-4">
-                    <SocialLink icon={<Github />} href="#" />
-                    <SocialLink icon={<Instagram />} href="#" />
-                    <SocialLink icon={<Mail />} href="#" />
+                    <SocialLink icon={<Github />} href="https://github.com/arsalan" />
+                    <SocialLink icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
+                    <SocialLink icon={<Mail />} href="mailto:contact@voicesofharam.com" />
                   </div>
                 </div>
               </div>
 
               <div className="p-8 border-t border-primary/5 bg-primary/5">
-                <Button className="w-full rounded-full py-6 bg-primary text-white font-black text-[10px] tracking-[0.2em] uppercase">
+                <Button className="w-full rounded-full py-6 bg-primary text-white font-bold text-[10px] tracking-[0.2em] uppercase">
                   START A PROJECT
                 </Button>
               </div>
@@ -150,10 +151,9 @@ export default function PortfolioPage() {
             Software Architect & Digital Ecosystem Builder
           </div>
           
-          <h1 className="text-6xl sm:text-8xl md:text-9xl lg:text-[130px] font-black tracking-tighter leading-[0.85] text-green-gradient uppercase">
-            FROM <br className="hidden sm:block" />
-            <span className="text-primary italic tracking-tight underline decoration-primary/10">DEVELOPMENT</span> <br />
-            TO CREATION.
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-black tracking-tighter leading-[0.9] text-green-gradient uppercase">
+            FROM <span className="text-primary italic">DEVELOPMENT</span> <br />
+            TO CONTENT CREATION.
           </h1>
           
           <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed uppercase tracking-tight opacity-70">
@@ -171,92 +171,55 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* About Me Section */}
+      {/* About Section */}
       <section id="about" className="py-32 px-6 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="space-y-8"
-          >
+          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-8">
             <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">About Me</h2>
             <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
-              <p>I am a Full-Stack Developer and Digital Brand Ecosystem Architect. My journey bridges the gap between complex engineering and massive audience reach.</p>
-              <p>Whether I'm building high-performance communication tools like HappyChat or managing million-follower platforms for global icons, my focus is always on scale and precision.</p>
-            </div>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <ExpertiseBadge icon={<Code2 className="h-4 w-4" />} text="Full-Stack Engineering" />
-              <ExpertiseBadge icon={<Globe className="h-4 w-4" />} text="Ecosystem Management" />
-              <ExpertiseBadge icon={<Brain className="h-4 w-4" />} text="Product Design" />
+              <p>I bridge the gap between complex software engineering and massive audience engagement. As the founder of <span className="text-primary font-bold">Voices of Haram</span>, I manage a digital brand that reaches millions globally.</p>
+              <p>My technical expertise lies in building real-time communication tools and brand aggregators, ensuring high performance under extreme scale.</p>
             </div>
           </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl"
-          >
-            <Image 
-              src="https://picsum.photos/seed/arsalan-profile/800/800" 
-              alt="Arsalan Profile" 
-              fill 
-              className="object-cover"
-              data-ai-hint="professional architect profile"
-            />
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl">
+            <Image src="https://picsum.photos/seed/arsalan-profile/800/800" alt="Arsalan Profile" fill className="object-cover" data-ai-hint="professional architect profile" />
           </motion.div>
-        </div>
-      </section>
-
-      {/* Education Section */}
-      <section id="education" className="py-32 bg-secondary/30 w-full relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase mb-20 text-center">Education</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <EducationCard year="2020 - 2024" degree="Computer Science" school="Tech University" desc="Specialized in Distributed Systems and Real-time Communication." />
-            <EducationCard year="2018 - 2020" degree="Software Engineering" school="Global Institute" desc="Foundations of software architecture and algorithmic design." />
-            <EducationCard year="2024 - Present" degree="Digital Strategy" school="Brand Masters" desc="Advanced management of digital ecosystems and audience growth." />
-          </div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section id="projects" className="py-32 px-6 max-w-7xl mx-auto w-full">
-        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase mb-24">Projects</h2>
+        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase mb-24">Engineering</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <ProjectCard 
-            title="HappyChat" 
-            category="WhatsApp Alternative"
-            icon={<MessageSquare className="h-5 w-5" />}
-            imgSrc={images[1]?.imageUrl}
-            description="A secure, high-speed messaging ecosystem built for global connectivity."
-            stack={['Next.js', 'Firebase', 'Socket.io']}
-          />
-          <ProjectCard 
-            title="HappyLinks" 
-            category="Linktree Alternative"
-            icon={<LinkIcon className="h-5 w-5" />}
-            imgSrc={images[2]?.imageUrl}
-            description="Premium identity aggregator for creators and global media brands."
-            stack={['React', 'PostgreSQL', 'Tailwind']}
-          />
+          <ProjectCard title="HappyChat" category="WhatsApp Alternative" icon={<MessageSquare className="h-5 w-5" />} imgSrc={images[1]?.imageUrl} description="A high-speed messaging ecosystem built for global connectivity." stack={['Next.js', 'Firebase', 'Socket.io']} />
+          <ProjectCard title="HappyLinks" category="Linktree Alternative" icon={<LinkIcon className="h-5 w-5" />} imgSrc={images[2]?.imageUrl} description="Premium identity aggregator for creators and global media brands." stack={['React', 'PostgreSQL', 'Tailwind']} />
         </div>
       </section>
 
-      {/* Social Sections - YouTube */}
-      <section id="youtube" className="py-32 bg-[#1A1A1A] w-full text-white">
+      {/* YouTube Section */}
+      <section id="youtube" className="py-32 bg-[#1A1A1A] w-full text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10 mb-20">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-red-gradient uppercase">YouTube</h2>
-              <p className="text-white/40 font-mono text-[10px] tracking-[0.5em] uppercase">Voices of Haram @VoicesOfHaram</p>
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#FF0000] to-[#991B1B] uppercase">YouTube</h2>
+              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-black text-xs tracking-widest uppercase">
+                Voices of Haram @VoicesOfHaram
+              </div>
             </div>
-            <Button className="bg-[#991B1B] text-white hover:bg-[#B91C1C] rounded-full px-10 h-16 font-black tracking-[0.3em] text-xs">SUBSCRIBE</Button>
+            <div className="flex flex-col items-center md:items-end gap-2">
+              <span className="text-6xl md:text-8xl font-black tracking-tighter text-white">30K+</span>
+              <span className="text-[10px] font-black tracking-[0.5em] text-white/40 uppercase">Subscribers</span>
+              <Button asChild className="mt-4 bg-[#FF0000] text-white hover:bg-[#CC0000] rounded-full px-10 h-14 font-black tracking-[0.3em] text-[10px]">
+                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">SUBSCRIBE NOW</a>
+              </Button>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1, 2, 3].map(i => (
-              <div key={i} className="aspect-video relative rounded-3xl overflow-hidden group cursor-pointer border border-white/10">
+              <div key={i} className="aspect-video relative rounded-3xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl">
                 <Image src={`https://picsum.photos/seed/yt-${i}/600/400`} alt="Video" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Youtube className="h-12 w-12 text-[#991B1B]" />
+                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <PlayCircle className="h-16 w-16 text-[#FF0000]" />
                 </div>
               </div>
             ))}
@@ -264,59 +227,78 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Social Sections - Facebook */}
-      <section className="py-32 bg-[#F0F2F5] w-full">
+      {/* Facebook Section */}
+      <section id="facebook" className="py-32 bg-[#F0F2F5] w-full">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-blue-gradient uppercase">Facebook</h2>
-            <div className="flex items-center gap-6">
-              <SocialIcon icon={<Facebook />} color="text-[#2563EB]" />
-              <div className="text-right">
-                <p className="font-black text-2xl text-[#2563EB]">1.2M+</p>
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Followers</p>
-              </div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-10 bg-white p-12 md:p-20 rounded-[4rem] shadow-xl border border-blue-100 relative overflow-hidden">
+            <div className="absolute -right-20 -top-20 opacity-[0.03]">
+              <Facebook className="w-96 h-96 text-[#1877F2]" />
             </div>
+            <div className="space-y-6 relative z-10 text-center md:text-left">
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#1877F2] to-[#054ada] uppercase">Facebook</h2>
+              <p className="text-xl font-bold text-muted-foreground uppercase tracking-widest">Global Community Presence</p>
+              <Button asChild className="bg-[#1877F2] text-white hover:bg-[#1565C0] rounded-full px-12 h-16 font-black tracking-widest text-xs uppercase shadow-xl shadow-blue-500/20">
+                <a href="https://facebook.com/voicesofharam.official" target="_blank">VIEW PAGE</a>
+              </Button>
+            </div>
+            <div className="flex flex-col items-center md:items-end gap-2 relative z-10">
+              <div className="flex items-center gap-4 text-[#1877F2]">
+                <Users className="h-10 w-10" />
+                <span className="text-7xl md:text-9xl font-black tracking-tighter">25M+</span>
+              </div>
+              <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Total Reach & Followers</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Others Section (Insta/TikTok/Threads) */}
+      <section className="py-32 bg-white w-full">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#833AB4] uppercase mb-20 text-center">Multi-Platform Reach</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <StatCard icon={<Instagram />} label="Instagram" handle="@voicesofharam.official" count="1K+" color="text-[#E1306C]" href="https://instagram.com/voicesofharam.official" />
+            <StatCard icon={<TrendingUp />} label="TikTok" handle="@voicesofharam.official" count="600+" color="text-[#000000]" href="https://tiktok.com/@voicesofharam.official" />
+            <StatCard icon={<Twitter />} label="Threads" handle="@voicesofharam.official" count="6.5K+" color="text-[#000000]" href="https://threads.net/@voicesofharam.official" />
           </div>
         </div>
       </section>
 
       {/* Sheikh Waleed Section */}
-      <section id="sheikh-waleed" className="py-32 bg-white w-full border-y border-pink-100">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-12">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-sheikh-gradient uppercase">Sheikh Waleed Al-Shamsan</h2>
-          <div className="flex flex-col items-center gap-6">
-            <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
-              <div className="w-full h-full rounded-full border-4 border-white overflow-hidden relative">
-                <Image src="https://picsum.photos/seed/waleed/200/200" alt="Sheikh Waleed" fill className="object-cover" />
+      <section id="sheikh-waleed" className="py-32 bg-primary/5 w-full border-y border-primary/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col items-center text-center space-y-12">
+            <h2 className="text-5xl md:text-[100px] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#F56040] uppercase leading-none">Sheikh Waleed <br/> Al-Shamsan</h2>
+            <div className="relative">
+              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] shadow-2xl">
+                <div className="w-full h-full rounded-full border-8 border-white overflow-hidden relative">
+                  <Image src="https://picsum.photos/seed/waleed-shamsan/400/400" alt="Sheikh Waleed" fill className="object-cover" />
+                </div>
+              </div>
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-8 py-3 rounded-full shadow-xl border border-pink-100 flex items-center gap-3">
+                <Instagram className="h-5 w-5 text-[#E1306C]" />
+                <span className="font-black text-lg">7,000+</span>
               </div>
             </div>
-            <p className="text-2xl font-bold tracking-tight">@sheikh_waleed_al_shamsan</p>
-            <Button variant="outline" className="rounded-full px-10 border-pink-200 text-pink-600 hover:bg-pink-50 font-black tracking-widest">FOLLOW ON INSTA</Button>
+            <div className="space-y-4">
+              <p className="text-2xl font-bold tracking-tight text-primary">@sheikh_waleed_al_shamsan</p>
+              <Button asChild variant="outline" className="rounded-full px-12 h-16 border-pink-200 text-pink-600 hover:bg-pink-50 font-black tracking-widest text-xs uppercase transition-all hover:scale-105">
+                <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PROFILE</a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Others Section */}
-      <section className="py-24 bg-black text-white w-full overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-pink-gradient uppercase mb-16">TikTok / Threads / Insta</h2>
-          <div className="flex flex-wrap justify-center gap-16 md:gap-32 opacity-50 grayscale hover:grayscale-0 transition-all">
-            <SocialIcon icon={<Twitter />} color="text-white" label="Threads" />
-            <SocialIcon icon={<Instagram />} color="text-white" label="Instagram" />
-            <SocialIcon icon={<Globe />} color="text-white" label="Web" />
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Me Section */}
+      {/* Contact Section */}
       <section id="contact" className="py-32 px-6 max-w-5xl mx-auto w-full">
         <div className="text-center space-y-12 bg-primary/5 p-16 rounded-[4rem] border border-primary/10 relative overflow-hidden">
           <div className="absolute top-0 right-0 p-10 opacity-5">
             <Send className="w-64 h-64 text-primary" />
           </div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Contact Me</h2>
-          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Let's discuss how we can build or manage your digital ecosystem.</p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">Get In Touch</h2>
+          <p className="text-xl font-medium text-muted-foreground max-w-2xl mx-auto">Whether it's for engineering or brand strategy, let's build something massive together.</p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white h-16 font-black tracking-widest uppercase shadow-2xl transition-transform hover:scale-105">SEND MESSAGE</Button>
             <Button size="lg" variant="outline" className="rounded-full px-12 h-16 font-black tracking-widest uppercase border-primary/20 hover:bg-primary/5">EMAIL ARSALAN</Button>
           </div>
@@ -328,53 +310,66 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
-              <span className="text-2xl font-black tracking-[0.2em] font-syne text-green-gradient uppercase">ARSALAN</span>
+              <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
               <p className="text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase leading-loose">
-                Architecting digital futures.<br />From code to community, we lead the global presence of world-class brands.
+                Software Architect & Digital Ecosystem Builder.<br />Engineering scalable futures for global icons.
               </p>
             </div>
             
-            <div className="space-y-6">
-              <h4 className="text-xs font-black tracking-[0.3em] uppercase">Core Navigation</h4>
-              <ul className="space-y-3 text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase">
-                <li><a href="#about" className="hover:text-primary transition-colors">About</a></li>
-                <li><a href="#projects" className="hover:text-primary transition-colors">Engineering</a></li>
-                <li><a href="#sheikh-waleed" className="hover:text-primary transition-colors">Digital Strategy</a></li>
-                <li><a href="#contact" className="hover:text-primary transition-colors">Work With Me</a></li>
-              </ul>
-            </div>
-
             <div className="space-y-6">
               <h4 className="text-xs font-black tracking-[0.3em] uppercase">Ecosystems</h4>
               <ul className="space-y-3 text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase">
                 <li><a href="https://voicesofharam.com" className="hover:text-primary transition-colors">Voices of Haram</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">HappyChat App</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">HappyLinks App</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Strategy Labs</a></li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h4 className="text-xs font-black tracking-[0.3em] uppercase">Connect</h4>
               <div className="flex gap-4">
-                <SocialLink icon={<Github />} href="#" />
-                <SocialLink icon={<Instagram />} href="#" />
-                <SocialLink icon={<Youtube />} href="#" />
-                <SocialLink icon={<Facebook />} href="#" />
+                <SocialLink icon={<Github />} href="https://github.com/arsalan" />
+                <SocialLink icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
+                <SocialLink icon={<Youtube />} href="https://youtube.com/@VoicesOfHaram" />
+                <SocialLink icon={<Facebook />} href="https://facebook.com/voicesofharam.official" />
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <h4 className="text-xs font-black tracking-[0.3em] uppercase">Availability</h4>
+              <div className="p-4 rounded-2xl bg-primary/5 border border-primary/10">
+                <div className="flex items-center gap-2 text-primary font-black text-[10px] tracking-widest uppercase">
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  Currently Accepting Projects
+                </div>
               </div>
             </div>
           </div>
           
           <div className="pt-20 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] font-black text-muted-foreground tracking-[0.5em] uppercase">
-            <div>&copy; 2024 ARSALAN GLOBAL ECOSYSTEMS. ALL RIGHTS RESERVED.</div>
+            <div>&copy; 2024 ARSALAN GLOBAL ECOSYSTEMS.</div>
             <div className="flex gap-10">
-              <span className="hover:text-primary cursor-pointer transition-colors">PRIVACY POLICY</span>
-              <span className="hover:text-primary cursor-pointer transition-colors">TERMS OF SERVICE</span>
+              <span className="hover:text-primary cursor-pointer transition-colors">PRIVACY</span>
+              <span className="hover:text-primary cursor-pointer transition-colors">TERMS</span>
             </div>
           </div>
         </div>
       </footer>
     </div>
+  )
+}
+
+function StatCard({ icon, label, handle, count, color, href }: any) {
+  return (
+    <a href={href} target="_blank" className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-4">
+      <div className={cn("p-6 rounded-full bg-primary/5 group-hover:scale-110 transition-transform", color)}>
+        {React.cloneElement(icon as React.ReactElement, { className: "h-10 w-10" })}
+      </div>
+      <h4 className="text-xl font-black uppercase tracking-widest">{label}</h4>
+      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{handle}</p>
+      <div className={cn("text-5xl font-black tracking-tighter", color)}>{count}</div>
+      <span className="text-[9px] font-black text-muted-foreground/30 uppercase tracking-[0.4em]">Followers</span>
+    </a>
   )
 }
 
@@ -402,41 +397,9 @@ function ProjectCard({ title, category, icon, imgSrc, description, stack }: any)
   )
 }
 
-function EducationCard({ year, degree, school, desc }: any) {
-  return (
-    <div className="p-10 rounded-[2.5rem] bg-white border border-primary/5 space-y-4 hover:shadow-2xl hover:shadow-primary/5 transition-all group">
-      <div className="text-[10px] font-black text-primary tracking-[0.3em] font-mono">{year}</div>
-      <h3 className="text-2xl font-black tracking-tight uppercase group-hover:text-primary transition-colors">{degree}</h3>
-      <div className="flex items-center gap-2 text-muted-foreground text-xs font-bold uppercase tracking-widest">
-        <MapPin className="h-3 w-3" /> {school}
-      </div>
-      <p className="text-sm text-muted-foreground leading-relaxed font-medium opacity-70">{desc}</p>
-    </div>
-  )
-}
-
-function ExpertiseBadge({ icon, text }: any) {
-  return (
-    <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-primary/5 border border-primary/10 text-primary font-black text-[10px] tracking-[0.2em] uppercase">
-      {icon} {text}
-    </div>
-  )
-}
-
-function SocialIcon({ icon, color, label }: any) {
-  return (
-    <div className="flex flex-col items-center gap-3 group cursor-pointer">
-      <div className={cn("p-6 rounded-full glass-white hover:scale-110 transition-all shadow-xl border border-primary/10", color)}>
-        {React.cloneElement(icon as React.ReactElement, { className: "h-8 w-8" })}
-      </div>
-      {label && <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-40">{label}</span>}
-    </div>
-  )
-}
-
 function SocialLink({ icon, href }: any) {
   return (
-    <a href={href} className="w-12 h-12 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-lg border border-primary/5">
+    <a href={href} target="_blank" className="w-12 h-12 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:scale-110 transition-all shadow-lg border border-primary/5">
       {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5" })}
     </a>
   )
