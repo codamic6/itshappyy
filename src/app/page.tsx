@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
@@ -15,7 +16,7 @@ export default function PortfolioPage() {
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
-  // Smart Navbar Scroll Logic: Detached & Floating
+  // Smart Navbar Scroll Logic: Floating & Hide/Show
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > lastScrollY.current ? "down" : "up";
     if (direction === "down" && latest > 150) {
@@ -58,6 +59,7 @@ export default function PortfolioPage() {
       >
         <div className="max-w-6xl w-full glass-white h-20 px-8 flex items-center justify-between rounded-[2rem] border border-primary/10 pointer-events-auto shadow-2xl shadow-black/5">
           <div className="flex items-center">
+            {/* Logo Font: HARLOS Inspired (Wide-Spaced Bold Tech) */}
             <span className="text-xl font-black tracking-[0.4em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
           </div>
           
@@ -84,7 +86,7 @@ export default function PortfolioPage() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Drawer (Restructured & Fixed) */}
+      {/* Mobile Menu Drawer (Smooth 80%) */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -148,7 +150,7 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section (Flexible Height) */}
+      {/* Hero Section (Flexible Height, Motion-Full) */}
       <section className="min-h-screen flex flex-col items-center justify-center relative px-6 pt-32 pb-20 overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
@@ -166,6 +168,7 @@ export default function PortfolioPage() {
             Software Architect & Digital Ecosystem Builder
           </motion.div>
           
+          {/* Main Heading: MADRID & XELGOS Inspired Mixture (Sharp, Condesned, Bold) */}
           <h1 className="text-5xl sm:text-7xl md:text-9xl lg:text-[120px] font-black tracking-tighter leading-[0.85] text-green-gradient uppercase w-full max-w-5xl mx-auto">
             FROM <br className="hidden sm:block" />
             <span className="text-primary italic tracking-tight underline decoration-primary/10">DEVELOPMENT</span> <br />
