@@ -1,13 +1,4 @@
-
-import type { Metadata } from 'next';
 import './globals.css';
-import { FirebaseClientProvider } from '@/firebase';
-import { Toaster } from '@/components/ui/toaster';
-
-export const metadata: Metadata = {
-  title: 'GradeMaster AI - Professional Grading Workstation',
-  description: 'AI-powered academic paper checking and grading system.',
-};
 
 export default function RootLayout({
   children,
@@ -15,12 +6,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-[#0C0C0E] text-white antialiased overflow-hidden">
-        <FirebaseClientProvider>
-          {children}
-          <Toaster />
-        </FirebaseClientProvider>
+    <html lang="en">
+      <body className="bg-black text-white antialiased">
+        {children}
       </body>
     </html>
   );

@@ -1,48 +1,7 @@
-
 {
-  "entities": {
-    "GradingSession": {
-      "title": "GradingSession",
-      "type": "object",
-      "description": "Represents an AI-powered paper checking session.",
-      "properties": {
-        "id": { "type": "string" },
-        "userId": { "type": "string" },
-        "paperImage": { "type": "string", "description": "Data URI of the paper image" },
-        "markingScheme": { "type": "string" },
-        "result": { "$ref": "#/backend/entities/GradingResult" },
-        "createdAt": { "type": "string", "format": "date-time" }
-      },
-      "required": ["id", "userId", "paperImage", "createdAt"]
-    },
-    "GradingResult": {
-      "title": "GradingResult",
-      "type": "object",
-      "properties": {
-        "score": { "type": "number" },
-        "totalMarks": { "type": "number" },
-        "feedback": { "type": "string" },
-        "corrections": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "question": { "type": "string" },
-              "issue": { "type": "string" },
-              "suggestion": { "type": "string" }
-            }
-          }
-        }
-      }
-    }
-  },
+  "entities": {},
   "auth": {
     "providers": ["anonymous"]
   },
-  "firestore": {
-    "/users/{userId}/sessions/{sessionId}": {
-      "schema": "#/backend/entities/GradingSession",
-      "description": "Stores individual paper checking sessions for each user."
-    }
-  }
+  "firestore": {}
 }
