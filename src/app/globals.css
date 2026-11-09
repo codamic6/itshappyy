@@ -4,39 +4,38 @@
 
 @layer base {
   :root {
-    /* Tech Slate Background: #0F1115 -> HSL(220, 17%, 7%) */
-    --background: 220 17% 7%;
-    /* Crisp Off-White: #EDEFF2 -> HSL(216, 12%, 94%) */
-    --foreground: 216 12% 94%;
+    /* Pure Black Background */
+    --background: 0 0% 0%;
+    /* Soft Off-White for text */
+    --foreground: 0 0% 98%;
     
-    --card: 220 17% 9%;
-    --card-foreground: 216 12% 94%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 220 17% 7%;
-    --popover-foreground: 216 12% 94%;
+    --popover: 0 0% 2%;
+    --popover-foreground: 0 0% 98%;
     
-    /* Cobalt Blue Accent: #5B8CFF -> HSL(222, 100%, 68%) */
-    --primary: 222 100% 68%;
-    --primary-foreground: 222 100% 10%;
+    /* Luxury Gold: #D4AF37 -> HSL(45, 65%, 52%) */
+    --primary: 45 65% 52%;
+    --primary-foreground: 0 0% 0%;
     
-    --secondary: 220 17% 15%;
-    --secondary-foreground: 216 12% 94%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 45 65% 52%;
     
-    --muted: 220 17% 15%;
-    /* Muted Gray: #8B929B -> HSL(213, 8%, 58%) */
-    --muted-foreground: 213 8% 58%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 222 100% 68%;
-    --accent-foreground: 216 12% 94%;
+    --accent: 45 65% 52%;
+    --accent-foreground: 0 0% 0%;
     
     --destructive: 0 84% 60%;
-    --destructive-foreground: 216 12% 94%;
+    --destructive-foreground: 0 0% 98%;
     
-    --border: 220 17% 15%;
-    --input: 220 17% 15%;
-    --ring: 222 100% 68%;
+    --border: 0 0% 15%;
+    --input: 0 0% 10%;
+    --ring: 45 65% 52%;
     
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 }
 
@@ -45,19 +44,40 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-.tech-card {
-  @apply bg-[#16191E] border border-white/5 hover:border-primary/30 transition-all duration-300;
+/* Glassy Black Effect */
+.glass-black {
+  @apply bg-black/40 backdrop-blur-xl border border-white/5;
 }
 
-.glass-nav {
-  @apply bg-[#0F1115]/80 backdrop-blur-lg border-b border-white/5;
+/* Glassy Gold Effect */
+.glass-gold {
+  @apply bg-primary/10 backdrop-blur-md border border-primary/20 shadow-[0_0_20px_rgba(212,175,55,0.1)];
 }
 
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-[#8B929B];
+/* Golden Gradient Text */
+.text-gold-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#D4AF37] to-[#B8860B];
+}
+
+/* Shining Gold Border Animation */
+.shining-gold-border {
+  @apply border border-primary/30 hover:border-primary transition-all duration-500 hover:shadow-[0_0_15px_rgba(212,175,55,0.2)];
+}
+
+.luxury-card {
+  @apply bg-[#050505] border border-white/5 hover:border-primary/40 transition-all duration-500 overflow-hidden relative;
+}
+
+.luxury-card::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500;
+}
+
+.luxury-card:hover::before {
+  @apply opacity-100;
 }

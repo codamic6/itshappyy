@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Portfolio | Product & Tech Design',
-  description: 'Zabardast aur modern portfolio showcasing tech-focused projects.',
+  title: 'CARET | Luxury Portfolio',
+  description: 'Futuristic Black & Gold portfolio showcasing high-end digital architecture.',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-[#0F1115] text-[#EDEFF2] antialiased`}>
+      <body className={`${inter.className} bg-black text-white antialiased`}>
         {children}
       </body>
     </html>
