@@ -47,7 +47,7 @@ export default function PortfolioPage() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button className="hidden sm:flex rounded-full px-6 bg-primary text-white hover:bg-primary/90 font-semibold text-[10px] tracking-[0.2em] font-inter uppercase">
+          <Button className="hidden sm:flex rounded-full px-6 bg-primary text-white hover:bg-primary/90 font-semibold text-[10px] tracking-[0.2em] font-inter uppercase shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95">
             CONTACT
           </Button>
           
@@ -99,7 +99,7 @@ export default function PortfolioPage() {
                   </a>
                 ))}
                 <div className="h-px bg-primary/5 my-4" />
-                <Button className="w-full rounded-full py-6 bg-primary text-white hover:bg-primary/90 font-bold text-xs tracking-[0.3em] font-inter uppercase">
+                <Button className="w-full rounded-full py-6 bg-primary text-white hover:bg-primary/90 font-bold text-xs tracking-[0.3em] font-inter uppercase shadow-xl shadow-primary/10">
                   GET IN TOUCH
                 </Button>
               </div>
@@ -113,7 +113,7 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section (h-screen) */}
+      {/* Hero Section (Strict h-screen Fit) */}
       <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 pt-20">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10" />
         
@@ -121,28 +121,30 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-6xl text-center space-y-12 w-full"
+          className="max-w-6xl text-center space-y-6 md:space-y-10 w-full"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass-green text-[10px] font-medium text-primary tracking-[0.4em] uppercase font-mono mx-auto max-w-fit border border-primary/10">
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass-green text-[9px] md:text-[10px] font-medium text-primary tracking-[0.3em] uppercase font-mono mx-auto max-w-fit border border-primary/10 mb-2">
             <Sparkles className="h-3 w-3 animate-pulse" />
             Software Architect & Digital Visionary
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-[0.1em] leading-[1.1] text-green-gradient font-syncopate uppercase w-full">
-            Engineering Code. <br /> 
-            Inspiring <span className="text-primary italic font-inter tracking-normal">Millions</span>.
+          {/* New Massive Bold Heading */}
+          <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-[-0.04em] leading-[0.9] text-green-gradient font-inter uppercase w-full">
+            BUILDING <br /> 
+            <span className="text-primary italic font-serif tracking-tight lowercase">exceptional</span> <br />
+            PRODUCTS.
           </h1>
           
-          <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed font-inter px-4">
-            Full-Stack Applications development aur massive digital platforms scaling ka tajurba. <br/>
-            From <span className="text-primary font-bold">HappyChat</span> to <span className="text-primary font-bold">Voices of Haram</span>.
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed font-inter px-4 opacity-80">
+            Full-stack development aur massive digital platforms scaling ka tajurba. <br className="hidden md:block" />
+            Creating functional ecosystems like <span className="text-primary font-bold">HappyChat</span> & <span className="text-primary font-bold">Voices of Haram</span>.
           </p>
           
-          <div className="pt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-            <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:bg-primary/90 font-bold text-[10px] tracking-[0.3em] h-16 font-inter uppercase w-full sm:w-auto shadow-lg shadow-primary/10">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <Button size="lg" className="rounded-full px-10 bg-primary text-white hover:bg-primary/90 font-bold text-[10px] tracking-[0.3em] h-14 font-inter uppercase shadow-xl shadow-primary/20 transition-transform hover:scale-105">
               VIEW MY WORK
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 bg-white hover:bg-primary/5 font-bold text-[10px] tracking-[0.3em] h-16 text-primary font-inter uppercase w-full sm:w-auto">
+            <Button size="lg" variant="outline" className="rounded-full px-10 border-primary/20 glass-white hover:bg-primary/5 font-bold text-[10px] tracking-[0.3em] h-14 text-primary font-inter uppercase transition-transform hover:scale-105">
               LET'S TALK
             </Button>
           </div>
@@ -150,10 +152,10 @@ export default function PortfolioPage() {
       </section>
 
       {/* Development Section */}
-      <section id="apps" className="py-32 md:py-40 px-6 md:px-12 max-w-7xl mx-auto w-full overflow-hidden">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 gap-8">
+      <section id="apps" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 md:mb-20 gap-8">
           <div className="space-y-4">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-green-gradient font-inter">Full Stack Development</h2>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-green-gradient font-inter uppercase">Full Stack Development</h2>
             <p className="text-muted-foreground text-sm max-w-md font-medium font-inter">Functional and scalable web & mobile applications designed for real-world impact.</p>
           </div>
           <div className="h-px flex-1 bg-primary/10 mx-12 hidden md:block" />
@@ -182,17 +184,17 @@ export default function PortfolioPage() {
       </section>
 
       {/* Brands Section */}
-      <section id="brands" className="py-32 md:py-40 bg-secondary/50 border-y border-primary/5 overflow-hidden w-full">
+      <section id="brands" className="py-24 md:py-32 bg-secondary/30 border-y border-primary/5 w-full">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-8">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-green-gradient font-inter">Digital Ecosystems</h2>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-green-gradient font-inter uppercase">Digital Ecosystems</h2>
               <p className="text-muted-foreground text-sm max-w-md font-medium font-inter">Building and managing massive global brands across multiple social platforms.</p>
             </div>
             <div className="flex gap-4">
-              <div className="p-3 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-sm"><Youtube className="h-5 w-5" /></div>
-              <div className="p-3 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-sm"><Instagram className="h-5 w-5" /></div>
-              <div className="p-3 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-sm"><Globe className="h-5 w-5" /></div>
+              <div className="p-4 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-lg border border-primary/10"><Youtube className="h-6 w-6" /></div>
+              <div className="p-4 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-lg border border-primary/10"><Instagram className="h-6 w-6" /></div>
+              <div className="p-4 rounded-full glass-white text-primary hover:scale-110 transition-transform shadow-lg border border-primary/10"><Globe className="h-6 w-6" /></div>
             </div>
           </div>
 
@@ -207,7 +209,7 @@ export default function PortfolioPage() {
               stats="3.5M+ Followers"
             />
             <ProjectCard 
-              title="Sheikh Waleed Al Shamsan" 
+              title="Sheikh Waleed" 
               category="Presence Management"
               icon={<Instagram className="h-5 w-5" />}
               imgSrc={images[4]?.imageUrl}
@@ -220,7 +222,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Expertise Section */}
-      <section id="about" className="py-32 md:py-40 px-6 md:px-12 max-w-7xl mx-auto w-full overflow-hidden">
+      <section id="about" className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20">
           <ExpertiseItem 
             icon={<Laptop className="h-8 w-8" />}
@@ -240,16 +242,6 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section id="connect" className="py-32 md:py-40 px-6 text-center relative overflow-hidden w-full bg-primary/5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] -z-10" />
-        <h2 className="text-3xl md:text-6xl font-bold tracking-tight text-green-gradient mb-8 font-inter uppercase">Ready to Scale?</h2>
-        <p className="text-muted-foreground text-base md:text-lg mb-12 max-w-xl mx-auto font-medium font-inter">Available for high-impact software projects and digital brand strategy.</p>
-        <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:bg-primary/90 font-bold text-[10px] tracking-[0.4em] h-16 shadow-2xl shadow-primary/10 font-inter uppercase w-full sm:w-auto">
-          GET IN TOUCH
-        </Button>
-      </section>
-
       {/* Footer */}
       <footer className="py-16 md:py-20 px-6 border-t border-primary/5 bg-white w-full">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
@@ -258,7 +250,7 @@ export default function PortfolioPage() {
             <span className="text-xs font-bold tracking-[0.3em] font-syncopate text-green-gradient uppercase">ARSALAN</span>
           </div>
           
-          <div className="flex gap-6 md:gap-8">
+          <div className="flex gap-8">
             <SocialLink icon={<Github />} href="#" />
             <SocialLink icon={<Instagram />} href="#" />
             <SocialLink icon={<Youtube />} href="#" />
@@ -266,7 +258,7 @@ export default function PortfolioPage() {
           </div>
 
           <div className="text-[9px] font-medium text-muted-foreground tracking-[0.4em] uppercase font-mono text-center md:text-left">
-            &copy; 2024 / ARCHITECT_OF_DIGITAL_WORLD
+            &copy; 2024 / DESIGNED_FOR_THE_FUTURE
           </div>
         </div>
       </footer>
@@ -276,35 +268,35 @@ export default function PortfolioPage() {
 
 function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stack, stats }: any) {
   return (
-    <Card className="luxury-card rounded-[1.5rem] group cursor-pointer w-full">
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+    <Card className="luxury-card rounded-[2rem] group cursor-pointer w-full border-primary/5 hover:border-primary/20 transition-all duration-700 bg-white">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         <Image 
           src={imgSrc || "https://picsum.photos/seed/default/600/400"} 
           alt={title} 
           fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
           data-ai-hint={imgHint}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
         <div className="absolute bottom-6 left-6 flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary text-white shadow-lg">
+          <div className="p-2.5 rounded-xl bg-primary text-white shadow-xl">
             {icon}
           </div>
-          <span className="px-3 py-1 rounded-full glass-white text-[9px] font-bold text-primary uppercase tracking-[0.2em] font-inter">
+          <span className="px-4 py-1.5 rounded-full glass-white text-[9px] font-black text-primary uppercase tracking-[0.2em] font-inter border border-white/20">
             {category}
           </span>
         </div>
       </div>
-      <CardContent className="p-6 md:p-8 space-y-6">
-        <div className="space-y-2">
-          <h4 className="text-xl md:text-2xl font-bold group-hover:text-primary transition-colors text-foreground tracking-tight font-inter">{title}</h4>
-          <p className="text-xs md:text-sm text-muted-foreground leading-relaxed font-medium font-inter">{description}</p>
+      <CardContent className="p-8 md:p-10 space-y-6">
+        <div className="space-y-3">
+          <h4 className="text-2xl md:text-3xl font-black group-hover:text-primary transition-colors text-foreground tracking-tight font-inter uppercase">{title}</h4>
+          <p className="text-sm text-muted-foreground leading-relaxed font-medium font-inter">{description}</p>
         </div>
 
         {stack && (
           <div className="flex flex-wrap gap-2">
             {stack.map((item: string) => (
-              <span key={item} className="px-2 py-1 rounded bg-primary/5 border border-primary/10 text-[8px] font-medium text-primary uppercase tracking-widest font-mono">
+              <span key={item} className="px-3 py-1 rounded-md bg-primary/5 border border-primary/10 text-[9px] font-bold text-primary uppercase tracking-widest font-mono">
                 {item}
               </span>
             ))}
@@ -312,13 +304,13 @@ function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stac
         )}
 
         {stats && (
-          <div className="text-[9px] font-bold text-primary tracking-[0.2em] font-mono uppercase">
+          <div className="text-[10px] font-black text-primary tracking-[0.2em] font-mono uppercase bg-primary/5 p-2 rounded-md inline-block">
             {stats}
           </div>
         )}
 
-        <div className="pt-2 flex items-center gap-2 text-primary font-bold text-[9px] tracking-[0.4em] uppercase group-hover:translate-x-2 transition-transform font-inter">
-          View Case Study <ChevronRight className="h-3 w-3" />
+        <div className="pt-4 flex items-center gap-2 text-primary font-black text-[10px] tracking-[0.4em] uppercase group-hover:translate-x-3 transition-transform font-inter">
+          View Case Study <ChevronRight className="h-4 w-4" />
         </div>
       </CardContent>
     </Card>
@@ -327,11 +319,11 @@ function ProjectCard({ title, category, icon, imgSrc, imgHint, description, stac
 
 function ExpertiseItem({ icon, title, description }: any) {
   return (
-    <div className="space-y-6 group w-full">
-      <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl glass-green flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-primary/10">
-        {React.cloneElement(icon as React.ReactElement, { className: "text-primary h-7 w-7 md:h-8 md:w-8 group-hover:text-white transition-colors" })}
+    <div className="space-y-6 group w-full p-6 rounded-3xl hover:bg-primary/5 transition-all duration-500">
+      <div className="w-16 h-16 rounded-2xl glass-green flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-700 shadow-xl border border-primary/10">
+        {React.cloneElement(icon as React.ReactElement, { className: "text-primary h-8 w-8 group-hover:text-white transition-colors" })}
       </div>
-      <h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground font-inter uppercase tracking-widest">{title}</h3>
+      <h3 className="text-xl md:text-2xl font-black tracking-tight text-foreground font-inter uppercase tracking-[0.1em]">{title}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed font-medium font-inter">
         {description}
       </p>
@@ -343,9 +335,9 @@ function SocialLink({ icon, href }: any) {
   return (
     <a 
       href={href} 
-      className="w-10 h-10 md:w-12 md:h-12 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/20 transition-all duration-300"
+      className="w-12 h-12 rounded-full glass-white flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/20 hover:scale-110 transition-all duration-300 shadow-lg border border-primary/5"
     >
-      {React.cloneElement(icon as React.ReactElement, { className: "h-4 w-4 md:h-5 w-5" })}
+      {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5" })}
     </a>
   )
 }
