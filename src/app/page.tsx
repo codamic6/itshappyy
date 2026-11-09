@@ -2,7 +2,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle, Rocket, Layers } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, Code2, MessageSquare, Link as LinkIcon, Youtube, Instagram, Globe, Award, Sparkles, Zap, ChevronRight, Laptop, Brain, Menu, X, Facebook, Twitter, GraduationCap, MapPin, Send, TrendingUp, Users, PlayCircle, Rocket, Layers, BookOpen, Star, Trophy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
@@ -48,10 +48,10 @@ export default function PortfolioPage() {
 
   const navLinks = [
     { name: 'About', href: '#about' },
+    { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
     { name: 'YouTube', href: '#youtube' },
     { name: 'Facebook', href: '#facebook' },
-    { name: 'Sheikh Waleed', href: '#sheikh-waleed' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -80,6 +80,15 @@ export default function PortfolioPage() {
     }
   ];
 
+  const educationTimeline = [
+    { year: "Current", title: "11th Grade - ICS", institution: "Punjab College Daewoo Road", details: "Exploring advanced computer science concepts and software logic." },
+    { year: "2024", title: "Class 10 Board", institution: "Faisalabad Board", details: "Achieved a massive 1165/1200 marks. (Roll No 484655)" },
+    { year: "2023", title: "Class 9 Board", institution: "Faisalabad Board", details: "3rd Position with 525/545 marks. (Roll No 190511)" },
+    { year: "Feb 2023", title: "Completion of Hifz", institution: "Independent Study", details: "Successfully completed Hifz-e-Quran on February 10, 2023." },
+    { year: "2021-2022", title: "Hifz Focus", institution: "Al-Faisal Grammar High School", details: "Took a sabbatical from formal schooling (Classes 6-7) to dedicate time to Hifz-e-Quran." },
+    { year: "Early Years", title: "Primary Schooling", institution: "Al-Faisal Grammar High School", details: "Consistent academic excellence: Prep (3rd), Class 1 (2nd), Class 2 (2nd), Class 3 (4th), Class 4 (2nd), Class 5 (2nd)." }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-primary/10 overflow-x-hidden w-full select-none text-foreground relative">
       
@@ -98,7 +107,7 @@ export default function PortfolioPage() {
       >
         <div className="max-w-6xl w-full glass-white h-20 px-8 flex items-center justify-between rounded-[2rem] border border-primary/10 pointer-events-auto shadow-2xl shadow-black/5">
           <div className="flex items-center">
-            <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase cursor-pointer">ARSALAN</span>
+            <span className="text-2xl font-bold tracking-tight font-syne text-green-gradient uppercase cursor-pointer">ARSALAN</span>
           </div>
           
           <div className="hidden md:flex gap-12 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">
@@ -156,7 +165,7 @@ export default function PortfolioPage() {
                       key={link.name} 
                       href={link.href} 
                       onClick={() => setIsMenuOpen(false)}
-                      className="text-[12px] font-bold text-foreground hover:text-primary tracking-[0.1em] uppercase transition-colors"
+                      className="text-[11px] font-medium text-foreground hover:text-primary tracking-[0.1em] uppercase transition-colors"
                     >
                       {link.name}
                     </a>
@@ -184,31 +193,31 @@ export default function PortfolioPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 overflow-hidden py-20">
+      <section className="min-h-screen flex flex-col items-center justify-center relative px-6 overflow-hidden py-32">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-6xl text-center w-full relative z-10"
         >
-          <div className="space-y-2">
+          <div className="space-y-0">
             <motion.span 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-lg md:text-xl font-light text-muted-foreground tracking-widest uppercase block"
+              className="text-lg md:text-xl font-light text-muted-foreground tracking-widest uppercase block mb-2"
             >
               I&apos;m a
             </motion.span>
             
-            <div className="h-[120px] sm:h-[180px] md:h-[220px] flex items-center justify-center overflow-visible">
+            <div className="h-[100px] sm:h-[140px] md:h-[180px] flex items-center justify-center overflow-visible">
               <AnimatePresence mode="wait">
                 <motion.h1 
                   key={roles[roleIndex]}
-                  initial={{ y: 40, opacity: 0, rotateX: -20 }}
-                  animate={{ y: 0, opacity: 1, rotateX: 0 }}
-                  exit={{ y: -40, opacity: 0, rotateX: 20 }}
-                  transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[140px] font-black tracking-tighter leading-none text-green-gradient uppercase italic py-4 overflow-visible px-4"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-black tracking-tighter leading-none text-green-gradient uppercase italic py-2 overflow-visible px-4"
                 >
                   {roles[roleIndex]}
                 </motion.h1>
@@ -220,12 +229,12 @@ export default function PortfolioPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.6 }}
             transition={{ delay: 0.6 }}
-            className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-6"
+            className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium leading-relaxed uppercase tracking-tight mt-2"
           >
             Engineering scalable digital ecosystems and managing global media brands with millions of followers.
           </motion.p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white hover:scale-105 active:scale-95 font-black text-[11px] tracking-[0.4em] h-16 uppercase shadow-2xl transition-all">
               EXPLORE WORK
             </Button>
@@ -240,15 +249,46 @@ export default function PortfolioPage() {
       <section id="about" className="py-32 px-6 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="space-y-8">
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">About Me</h2>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase">The Journey</h2>
             <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
-              <p>I bridge the gap between complex software engineering and massive audience engagement. As the founder of <span className="text-primary font-bold">Voices of Haram</span>, I manage a digital brand that reaches millions globally.</p>
-              <p>My technical expertise lies in building real-time communication tools and brand aggregators, ensuring high performance under extreme scale.</p>
+              <p>My journey is a blend of spiritual dedication and technical ambition. I began my deep dive into the computer field in <span className="text-primary font-bold">2023</span>, driven by a vision to build scalable digital ecosystems while managing massive online communities.</p>
+              <p>On <span className="text-primary font-bold">February 10, 2023</span>, I achieved one of my life&apos;s most significant milestones by completing <span className="text-primary font-bold">Hifz-e-Quran</span>, a discipline that instilled in me the focus and memory required for complex software architecture.</p>
+              <p>As the founder of <span className="text-primary font-bold">Voices of Haram</span>, I now bridge the gap between engineering and massive audience engagement, reaching millions globally.</p>
             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
             <Image src="https://picsum.photos/seed/arsalan-profile/800/800" alt="Arsalan Profile" fill className="object-cover" data-ai-hint="professional architect profile" />
           </motion.div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-32 px-6 max-w-7xl mx-auto w-full">
+        <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-green-gradient uppercase mb-24">Academic Record</h2>
+        <div className="grid grid-cols-1 gap-8">
+          {educationTimeline.map((item, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="group p-8 md:p-12 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all relative overflow-hidden"
+            >
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <span className="px-4 py-1 rounded-full bg-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">{item.year}</span>
+                    <Star className="h-4 w-4 text-primary animate-pulse" />
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-black tracking-tighter uppercase">{item.title}</h3>
+                  <p className="text-primary font-bold tracking-tight">{item.institution}</p>
+                </div>
+                <div className="max-w-md text-muted-foreground font-medium text-lg italic md:text-right">
+                  {item.details}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -323,7 +363,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-10 mb-20">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#FF0000] to-[#991B1B] uppercase">YouTube</h2>
+              <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#FF0000] to-[#CC0000] uppercase">YouTube</h2>
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-black text-xs tracking-widest uppercase">
                 Voices of Haram @VoicesOfHaram
               </div>
@@ -336,15 +376,17 @@ export default function PortfolioPage() {
               </Button>
             </div>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="aspect-video relative rounded-3xl overflow-hidden group cursor-pointer border border-white/10 shadow-2xl">
-                <Image src={`https://picsum.photos/seed/yt-${i}/600/400`} alt="Video" fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <PlayCircle className="h-16 w-16 text-[#FF0000]" />
-                </div>
-              </div>
-            ))}
+            <div className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+              <iframe className="w-full h-full" src="https://www.youtube.com/embed/VOA8Gc44ZIE" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            </div>
+            <div className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+              <iframe className="w-full h-full" src="https://www.youtube.com/embed/videoseries?list=PL5LTW_BwDVXJI_DVtF5CD80r5K9vx15wb" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            </div>
+            <div className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+              <iframe className="w-full h-full" src="https://www.youtube.com/embed/e5oHwAaDGSQ" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -368,7 +410,7 @@ export default function PortfolioPage() {
                 <Users className="h-10 w-10" />
                 <span className="text-7xl md:text-9xl font-black tracking-tighter">25K+</span>
               </div>
-              <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Total Reach & Followers</span>
+              <span className="text-xs font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Followers</span>
             </div>
           </div>
         </div>
@@ -377,11 +419,11 @@ export default function PortfolioPage() {
       {/* Others Section */}
       <section className="py-32 bg-white w-full">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#833AB4] uppercase mb-20 text-center">Multi-Platform Reach</h2>
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#E1306C] to-[#C13584] uppercase mb-20 text-center">Multi-Platform Reach</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <StatCard icon={<Instagram />} label="Instagram" handle="@voicesofharam.official" count="1K+" color="text-[#E1306C]" href="https://instagram.com/voicesofharam.official" />
-            <StatCard icon={<TrendingUp />} label="TikTok" handle="@voicesofharam.official" count="600+" color="text-[#000000]" href="https://tiktok.com/@voicesofharam.official" />
-            <StatCard icon={<Twitter />} label="Threads" handle="@voicesofharam.official" count="6.5K+" color="text-[#000000]" href="https://threads.net/@voicesofharam.official" />
+            <StatCard icon={<TrendingUp />} label="TikTok" handle="@voicesofharam.official" count="600+" color="text-[#C13584]" href="https://tiktok.com/@voicesofharam.official" />
+            <StatCard icon={<Twitter />} label="Threads" handle="@voicesofharam.official" count="6.5K+" color="text-[#E1306C]" href="https://threads.net/@voicesofharam.official" />
           </div>
         </div>
       </section>
@@ -432,7 +474,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-20">
             <div className="space-y-6">
-              <span className="text-2xl font-black tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
+              <span className="text-2xl font-bold tracking-tight font-syne text-green-gradient uppercase">ARSALAN</span>
               <p className="text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase leading-loose">
                 Software Architect & Digital Ecosystem Builder.<br />Engineering scalable futures for global icons.
               </p>
