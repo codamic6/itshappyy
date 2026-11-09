@@ -18,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'CARET | Professional Architect',
-  description: 'Global Digital Ecosystem Architect & Full-Stack Developer.',
+  title: 'ARSALAN | Software Architect',
+  description: 'Full-Stack Developer & Digital Ecosystem Architect.',
 };
 
 export default function RootLayout({
@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} ${syncopate.variable} ${jetbrainsMono.variable} font-inter bg-black text-white antialiased`}>
+    <html lang="en" className="dark scroll-smooth">
+      <body className={`${inter.variable} ${syncopate.variable} ${jetbrainsMono.variable} font-inter bg-black text-white antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>

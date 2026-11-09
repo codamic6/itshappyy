@@ -4,9 +4,7 @@
 
 @layer base {
   :root {
-    /* Pure Black Background */
     --background: 0 0% 0%;
-    /* Soft Off-White for text */
     --foreground: 0 0% 98%;
     
     --card: 0 0% 3%;
@@ -15,7 +13,6 @@
     --popover: 0 0% 2%;
     --popover-foreground: 0 0% 98%;
     
-    /* Luxury Gold: #D4AF37 -> HSL(45, 65%, 52%) */
     --primary: 45 65% 52%;
     --primary-foreground: 0 0% 0%;
     
@@ -46,12 +43,13 @@
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
 /* Glassy Black Effect */
 .glass-black {
-  @apply bg-black/40 backdrop-blur-xl border border-white/5;
+  @apply bg-black/60 backdrop-blur-xl border border-white/5;
 }
 
 /* Glassy Gold Effect */
@@ -62,11 +60,6 @@
 /* Golden Gradient Text */
 .text-gold-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#D4AF37] to-[#B8860B];
-}
-
-/* Shining Gold Border Animation */
-.shining-gold-border {
-  @apply border border-primary/30 hover:border-primary transition-all duration-500 hover:shadow-[0_0_15px_rgba(212,175,55,0.2)];
 }
 
 .luxury-card {
@@ -80,4 +73,20 @@
 
 .luxury-card:hover::before {
   @apply opacity-100;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+}
+
+/* Prevent horizontal overflow strictly */
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
