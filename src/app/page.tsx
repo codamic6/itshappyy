@@ -11,6 +11,8 @@ import { cn } from '@/lib/utils'
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog"
 
 export default function PortfolioPage() {
@@ -356,7 +358,7 @@ export default function PortfolioPage() {
             </div>
           </div>
           <div className="space-y-6">
-            <p className="text-xl md:text-3xl font-black tracking-tight text-primary uppercase">@sheikh_waleed_al_shamsan</p>
+            <p className="text-xl md:text-2xl lg:text-3xl font-black tracking-tight text-primary uppercase max-w-[90vw] mx-auto overflow-hidden text-ellipsis">@sheikh_waleed_al_shamsan</p>
             <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105">
               <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PROFILE</a>
             </Button>
@@ -428,6 +430,8 @@ export default function PortfolioPage() {
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem]">
+          <DialogTitle className="sr-only">{selectedProject?.title || "Project Details"}</DialogTitle>
+          <DialogDescription className="sr-only">Detailed view of {selectedProject?.title} including stack and description.</DialogDescription>
           {selectedProject && (
             <div className="flex flex-col">
               <div className="relative aspect-video w-full">
