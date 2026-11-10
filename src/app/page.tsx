@@ -268,7 +268,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Facebook Section */}
+      {/* Facebook Section - RECREATED & FIXED */}
       <section id="facebook" className="py-40 bg-[#F0F2F5]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-white p-12 md:p-32 rounded-[5rem] shadow-2xl border border-blue-50 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden">
