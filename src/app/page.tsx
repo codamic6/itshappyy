@@ -178,7 +178,7 @@ export default function PortfolioPage() {
               <motion.h1 
                 key={roles[roleIndex]}
                 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}
-                className="text-4xl md:text-[100px] lg:text-[140px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap"
+                className="text-4xl md:text-[100px] lg:text-[140px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap pr-12 md:pr-20"
               >
                 {roles[roleIndex]}
               </motion.h1>
@@ -286,7 +286,7 @@ export default function PortfolioPage() {
                <div className="flex flex-col items-center lg:items-end justify-center">
                  <div className="flex items-center gap-4 text-[#1877F2]">
                    <Users className="h-10 w-10 md:h-16 md:w-16" />
-                   <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
+                   <span className="text-6xl md:text-88 lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
                  </div>
                  <span className="text-[10px] font-black tracking-[0.4em] text-[#1877F2]/40 uppercase mt-4 text-center">ACTIVE FACEBOOK FOLLOWERS</span>
                </div>
