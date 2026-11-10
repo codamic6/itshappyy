@@ -45,7 +45,7 @@ export default function PortfolioPage() {
     { name: 'About', href: '#about' },
     { name: 'Education', href: '#education' },
     { name: 'Voices of Haram', href: '#youtube' },
-    { name: 'Community', href: '#facebook' },
+    { name: 'Hub', href: '#facebook' },
     { name: 'Reach', href: '#reach' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -212,7 +212,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Education Timeline - SMOOTHED ANIMATIONS */}
+      {/* Education Timeline */}
       <section id="education" className="py-40 bg-primary/[0.02] border-y border-primary/5">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-green-gradient uppercase mb-24 text-center md:text-left">Academic Peak</h2>
@@ -275,7 +275,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Facebook Section - REBORN UI */}
+      {/* Hub Section (Facebook Replaced) */}
       <section id="facebook" className="py-40 bg-[#F0F2F5] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 
@@ -284,7 +284,6 @@ export default function PortfolioPage() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="bg-white/90 backdrop-blur-3xl p-8 md:p-16 lg:p-24 rounded-[4rem] lg:rounded-[6rem] shadow-[0_50px_100px_-20px_rgba(24,119,242,0.15)] border border-[#1877F2]/10 overflow-hidden relative"
           >
-            {/* Animated community background pulse */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1877F2]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative">
@@ -292,8 +291,8 @@ export default function PortfolioPage() {
                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2] font-black text-[10px] tracking-[0.3em] uppercase">
                   Community Hub
                 </div>
-                <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-[#1877F2] via-[#0D47A1] to-[#01579B] uppercase leading-[0.85]">
-                  COMMUNITY
+                <h2 className="text-7xl md:text-[140px] lg:text-[180px] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-[#1877F2] via-[#0D47A1] to-[#01579B] uppercase leading-[0.8]">
+                  HUB
                 </h2>
                 <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium leading-relaxed max-w-lg mx-auto lg:mx-0">
                   A high-impact ecosystem of <span className="text-[#1877F2] font-black italic">25,000+</span> individuals united by spiritual and digital excellence.
