@@ -58,7 +58,7 @@ export default function PortfolioPage() {
       icon: <MessageSquare className="h-5 w-5" />,
       imgSrc: "https://picsum.photos/seed/chat/800/600",
       description: "Secure ultra-fast alternative to mainstream messaging apps.",
-      longDescription: "HappyChat is a high-speed messaging ecosystem built for global connectivity. It features end-to-end encryption and a custom-built socket architecture for zero-latency communication.",
+      longDescription: "HappyChat is a high-speed messaging ecosystem built for global connectivity. It features end-to-end encryption and a custom-built architecture for zero-latency communication.",
       stack: ['Next.js', 'Firebase', 'Socket.io', 'Tailwind'],
       link: "https://happychat.example.com"
     },
@@ -112,7 +112,7 @@ export default function PortfolioPage() {
         />
       </div>
 
-      {/* Detached Smart Navbar - CENTERED FIXED */}
+      {/* Detached Smart Navbar */}
       <motion.nav 
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: isNavVisible ? 0 : -120, x: "-50%", opacity: isNavVisible ? 1 : 0 }}
@@ -136,7 +136,7 @@ export default function PortfolioPage() {
         </div>
       </motion.nav>
 
-      {/* Mobile Sidebar - Enhanced Design */}
+      {/* Mobile Sidebar */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -166,7 +166,7 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section - Fixed Spacing & No Clipping */}
+      {/* Hero Section */}
       <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20">
         <motion.div 
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
@@ -212,7 +212,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Education Timeline */}
+      {/* Education Timeline - SMOOTHED ANIMATIONS */}
       <section id="education" className="py-40 bg-primary/[0.02] border-y border-primary/5">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-green-gradient uppercase mb-24 text-center md:text-left">Academic Peak</h2>
@@ -220,7 +220,14 @@ export default function PortfolioPage() {
             {educationTimeline.map((item, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}
+                initial={{ opacity: 0, y: 30 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: idx * 0.1,
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
                 className="group p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all"
               >
                 <span className="px-4 py-1 rounded-full bg-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">{item.year}</span>
@@ -268,7 +275,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Facebook Section - RECREATED & FIXED OVERFLOW */}
+      {/* Facebook Section */}
       <section id="facebook" className="py-40 bg-[#F0F2F5] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-white p-8 md:p-16 lg:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl border border-blue-50 relative overflow-hidden">
@@ -286,7 +293,7 @@ export default function PortfolioPage() {
                <div className="flex flex-col items-center lg:items-end justify-center">
                  <div className="flex items-center gap-4 text-[#1877F2]">
                    <Users className="h-10 w-10 md:h-16 md:w-16" />
-                   <span className="text-6xl md:text-88 lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
+                   <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
                  </div>
                  <span className="text-[10px] font-black tracking-[0.4em] text-[#1877F2]/40 uppercase mt-4 text-center">ACTIVE FACEBOOK FOLLOWERS</span>
                </div>
@@ -354,7 +361,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Footer Station - CLEAN REFINED */}
+      {/* Footer Station */}
       <footer className="py-40 bg-white border-t border-primary/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 lg:gap-24 mb-32">
