@@ -117,7 +117,11 @@ export default function PortfolioPage() {
       {/* Detached Smart Navbar */}
       <motion.nav 
         initial={{ y: -100, x: "-50%", opacity: 0 }}
-        animate={{ y: isNavVisible ? 0 : -120, x: "-50%", opacity: isNavVisible ? 1 : 0 }}
+        animate={{ 
+          y: (isNavVisible && !selectedProject) ? 0 : -120, 
+          x: "-50%", 
+          opacity: (isNavVisible && !selectedProject) ? 1 : 0 
+        }}
         className="fixed top-8 left-1/2 z-[100] w-[90%] max-w-5xl pointer-events-none"
       >
         <div className="glass-white h-20 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 shadow-2xl pointer-events-auto">
