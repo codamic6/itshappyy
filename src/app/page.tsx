@@ -275,30 +275,58 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Facebook Section */}
-      <section id="facebook" className="py-40 bg-[#F0F2F5] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-white p-8 md:p-16 lg:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl border border-blue-50 relative overflow-hidden">
-             <Facebook className="absolute -right-20 -top-20 w-[300px] h-[300px] md:w-[600px] md:h-[600px] text-[#1877F2]/5 -z-0 pointer-events-none" />
-             
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-               <div className="space-y-6 text-center lg:text-left">
-                 <h2 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#1877F2] to-[#0D47A1] uppercase leading-none">COMMUNITY</h2>
-                 <p className="text-lg md:text-2xl font-bold text-muted-foreground uppercase tracking-widest">25,000+ STRONG VOICES</p>
-                 <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-12 h-16 md:h-18 text-base md:text-lg font-black tracking-widest uppercase shadow-xl shadow-blue-500/20">
-                   <a href="https://facebook.com/voicesofharam.official" target="_blank">JOIN COMMUNITY</a>
-                 </Button>
-               </div>
-               
-               <div className="flex flex-col items-center lg:items-end justify-center">
-                 <div className="flex items-center gap-4 text-[#1877F2]">
-                   <Users className="h-10 w-10 md:h-16 md:w-16" />
-                   <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
-                 </div>
-                 <span className="text-[10px] font-black tracking-[0.4em] text-[#1877F2]/40 uppercase mt-4 text-center">ACTIVE FACEBOOK FOLLOWERS</span>
-               </div>
-             </div>
-          </div>
+      {/* Facebook Section - REBORN UI */}
+      <section id="facebook" className="py-40 bg-[#F0F2F5] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-white/90 backdrop-blur-3xl p-8 md:p-16 lg:p-24 rounded-[4rem] lg:rounded-[6rem] shadow-[0_50px_100px_-20px_rgba(24,119,242,0.15)] border border-[#1877F2]/10 overflow-hidden relative"
+          >
+            {/* Animated community background pulse */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1877F2]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative">
+              <div className="space-y-10 text-center lg:text-left">
+                <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2] font-black text-[10px] tracking-[0.3em] uppercase">
+                  Community Hub
+                </div>
+                <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-[#1877F2] via-[#0D47A1] to-[#01579B] uppercase leading-[0.85]">
+                  COMMUNITY
+                </h2>
+                <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium leading-relaxed max-w-lg mx-auto lg:mx-0">
+                  A high-impact ecosystem of <span className="text-[#1877F2] font-black italic">25,000+</span> individuals united by spiritual and digital excellence.
+                </p>
+                <div className="pt-6">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/30 transition-transform hover:scale-105 active:scale-95">
+                    <a href="https://facebook.com/voicesofharam.official" target="_blank">JOIN THE MOVEMENT</a>
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="flex flex-col items-center justify-center space-y-8">
+                <div className="relative group">
+                  <motion.div 
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-[#1877F2] to-[#4267B2] rounded-[3rem] rotate-12 flex items-center justify-center shadow-2xl relative z-10"
+                  >
+                    <Facebook className="text-white w-32 h-32 md:w-40 md:h-40 -rotate-12 group-hover:scale-110 transition-transform duration-500" />
+                  </motion.div>
+                  <div className="absolute -inset-4 bg-[#1877F2]/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity" />
+                </div>
+                
+                <div className="text-center space-y-2">
+                  <div className="flex items-center justify-center gap-4 text-[#1877F2]">
+                    <Users className="h-8 w-8 md:h-12 md:w-12" />
+                    <span className="text-7xl md:text-9xl font-black tracking-tighter leading-none">25K+</span>
+                  </div>
+                  <p className="text-[10px] font-black tracking-[0.5em] text-[#1877F2]/40 uppercase">Global Active Followers</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
