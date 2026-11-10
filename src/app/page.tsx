@@ -112,7 +112,7 @@ export default function PortfolioPage() {
         />
       </div>
 
-      {/* Detached Smart Navbar - FIXED Centering */}
+      {/* Detached Smart Navbar - CENTERED FIXED */}
       <motion.nav 
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: isNavVisible ? 0 : -120, x: "-50%", opacity: isNavVisible ? 1 : 0 }}
@@ -155,7 +155,7 @@ export default function PortfolioPage() {
               </div>
               <div className="flex-1 p-10 space-y-6 flex flex-col">
                 {navLinks.map((link) => (
-                  <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-sm font-bold tracking-tight text-foreground hover:text-primary transition-colors uppercase">{link.name}</a>
+                  <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-sm font-medium tracking-tight text-foreground hover:text-primary transition-colors uppercase">{link.name}</a>
                 ))}
                 <div className="mt-auto pt-10">
                   <Button className="w-full rounded-full py-6 bg-primary text-white font-black tracking-widest text-xs uppercase">START A PROJECT</Button>
@@ -172,24 +172,24 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           className="max-w-6xl w-full text-center space-y-4"
         >
-          <span className="text-xl font-medium text-muted-foreground tracking-[0.2em] uppercase">I&apos;m a</span>
-          <div className="h-[100px] md:h-[160px] flex items-center justify-center overflow-visible px-4">
+          <span className="text-sm font-medium text-muted-foreground tracking-[0.2em] uppercase">I&apos;m a</span>
+          <div className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center justify-center overflow-visible px-4">
             <AnimatePresence mode="wait">
               <motion.h1 
                 key={roles[roleIndex]}
                 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}
-                className="text-5xl md:text-[120px] lg:text-[140px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap"
+                className="text-4xl md:text-[100px] lg:text-[140px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap"
               >
                 {roles[roleIndex]}
               </motion.h1>
             </AnimatePresence>
           </div>
-          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto font-medium uppercase tracking-tight">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium uppercase tracking-tight">
             Engineering scalable futures & scaling digital ecosystems since 2023.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Button size="lg" className="rounded-full px-12 bg-primary text-white h-16 font-black tracking-widest text-xs uppercase shadow-2xl shadow-primary/20 transition-all hover:scale-105">EXPLORE WORK</Button>
-            <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-16 text-primary font-black tracking-widest text-xs uppercase transition-all hover:scale-105">GET IN TOUCH</Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+            <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl shadow-primary/20 transition-all hover:scale-105">EXPLORE WORK</Button>
+            <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">GET IN TOUCH</Button>
           </div>
         </motion.div>
       </section>
@@ -268,24 +268,28 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Facebook Section - RECREATED & FIXED */}
-      <section id="facebook" className="py-40 bg-[#F0F2F5]">
+      {/* Facebook Section - RECREATED & FIXED OVERFLOW */}
+      <section id="facebook" className="py-40 bg-[#F0F2F5] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-white p-12 md:p-32 rounded-[5rem] shadow-2xl border border-blue-50 flex flex-col lg:flex-row items-center justify-between gap-16 relative overflow-hidden">
-             <Facebook className="absolute -right-20 -top-20 w-[600px] h-[600px] text-[#1877F2]/5 -z-0" />
-             <div className="space-y-8 relative z-10 text-center lg:text-left">
-               <h2 className="text-6xl md:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#1877F2] to-[#0D47A1] uppercase">COMMUNITY</h2>
-               <p className="text-xl md:text-2xl font-bold text-muted-foreground uppercase tracking-widest">25,000+ STRONG VOICES</p>
-               <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-12 md:px-16 h-18 text-lg font-black tracking-widest uppercase shadow-xl shadow-blue-500/20">
-                 <a href="https://facebook.com/voicesofharam.official" target="_blank">JOIN COMMUNITY</a>
-               </Button>
-             </div>
-             <div className="flex flex-col items-center lg:items-end relative z-10">
-               <div className="flex items-center gap-6 text-[#1877F2]">
-                 <Users className="h-12 w-12 md:h-16 md:w-16" />
-                 <span className="text-7xl md:text-[140px] font-black tracking-tighter leading-none">25K+</span>
+          <div className="bg-white p-8 md:p-16 lg:p-24 rounded-[3rem] md:rounded-[5rem] shadow-2xl border border-blue-50 relative overflow-hidden">
+             <Facebook className="absolute -right-20 -top-20 w-[300px] h-[300px] md:w-[600px] md:h-[600px] text-[#1877F2]/5 -z-0 pointer-events-none" />
+             
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+               <div className="space-y-6 text-center lg:text-left">
+                 <h2 className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#1877F2] to-[#0D47A1] uppercase leading-none">COMMUNITY</h2>
+                 <p className="text-lg md:text-2xl font-bold text-muted-foreground uppercase tracking-widest">25,000+ STRONG VOICES</p>
+                 <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-12 h-16 md:h-18 text-base md:text-lg font-black tracking-widest uppercase shadow-xl shadow-blue-500/20">
+                   <a href="https://facebook.com/voicesofharam.official" target="_blank">JOIN COMMUNITY</a>
+                 </Button>
                </div>
-               <span className="text-[10px] font-black tracking-[0.5em] text-[#1877F2]/40 uppercase mt-4 text-center">ACTIVE FACEBOOK FOLLOWERS</span>
+               
+               <div className="flex flex-col items-center lg:items-end justify-center">
+                 <div className="flex items-center gap-4 text-[#1877F2]">
+                   <Users className="h-10 w-10 md:h-16 md:w-16" />
+                   <span className="text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter leading-none">25K+</span>
+                 </div>
+                 <span className="text-[10px] font-black tracking-[0.4em] text-[#1877F2]/40 uppercase mt-4 text-center">ACTIVE FACEBOOK FOLLOWERS</span>
+               </div>
              </div>
           </div>
         </div>
@@ -350,10 +354,10 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Footer Station */}
+      {/* Footer Station - CLEAN REFINED */}
       <footer className="py-40 bg-white border-t border-primary/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 lg:gap-24 mb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 lg:gap-24 mb-32">
             <div className="space-y-8">
               <span className="text-3xl font-black font-syne tracking-widest text-green-gradient uppercase">ARSALAN</span>
               <p className="text-[10px] font-bold text-muted-foreground tracking-[0.2em] uppercase leading-relaxed">
@@ -377,15 +381,6 @@ export default function PortfolioPage() {
                 <SocialLink icon={<Facebook />} href="https://facebook.com/voicesofharam.official" />
               </div>
             </div>
-            <div className="space-y-8">
-              <h4 className="text-[10px] font-black tracking-[0.4em] uppercase text-primary">STATUS</h4>
-              <div className="p-6 rounded-3xl bg-primary/5 border border-primary/10">
-                <div className="flex items-center gap-3 text-primary font-black text-[10px] tracking-widest uppercase">
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
-                  ACCEPTING PROJECTS 2026
-                </div>
-              </div>
-            </div>
           </div>
           <div className="pt-20 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-black text-muted-foreground tracking-[0.5em] uppercase text-center md:text-left">
             <span>&copy; 2026 ARSALAN GLOBAL ECOSYSTEMS. ALL RIGHTS RESERVED.</span>
@@ -399,7 +394,7 @@ export default function PortfolioPage() {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[4rem]">
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem]">
           {selectedProject && (
             <div className="flex flex-col">
               <div className="relative aspect-video w-full">
