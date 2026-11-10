@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export default function PortfolioPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,7 +60,7 @@ export default function PortfolioPage() {
       icon: <MessageSquare className="h-5 w-5" />,
       imgSrc: "https://picsum.photos/seed/chat/800/600",
       description: "Secure ultra-fast alternative to mainstream messaging apps.",
-      longDescription: "HappyChat is a high-speed messaging ecosystem built for global connectivity. It features end-to-end encryption and a custom-built architecture for zero-latency communication.",
+      longDescription: "HappyChat is a high-speed messaging ecosystem built for global connectivity. It features end-to-end encryption and a custom-built architecture for zero-latency communication. Designed to handle millions of real-time events, it bridges the gap between privacy and performance.",
       stack: ['Next.js', 'Firebase', 'Socket.io', 'Tailwind'],
       link: "https://happychat.example.com"
     },
@@ -70,7 +71,7 @@ export default function PortfolioPage() {
       icon: <LinkIcon className="h-5 w-5" />,
       imgSrc: "https://picsum.photos/seed/links/800/600",
       description: "Premium bio-link solution for massive global media brands.",
-      longDescription: "Designed for high-reach content creators, HappyLinks offers deep analytics, customizable themes, and a centralized hub for digital identities.",
+      longDescription: "Designed for high-reach content creators, HappyLinks offers deep analytics, customizable themes, and a centralized hub for digital identities. It integrates directly with major social platforms to provide a seamless user experience for fans.",
       stack: ['React', 'PostgreSQL', 'Tailwind', 'Node.js'],
       link: "https://happylinks.example.com"
     }
@@ -357,8 +358,8 @@ export default function PortfolioPage() {
               <span className="font-black text-lg md:text-2xl tracking-tighter">7,000+</span>
             </div>
           </div>
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl lg:text-3xl font-black tracking-tight text-primary uppercase max-w-[90vw] mx-auto overflow-hidden text-ellipsis">@sheikh_waleed_al_shamsan</p>
+          <div className="space-y-6 max-w-full px-4 overflow-hidden">
+            <p className="text-xl md:text-2xl lg:text-3xl font-black tracking-tight text-primary uppercase break-all">@sheikh_waleed_al_shamsan</p>
             <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105">
               <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PROFILE</a>
             </Button>
@@ -429,12 +430,12 @@ export default function PortfolioPage() {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem]">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 overflow-y-auto bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem] custom-scrollbar">
           <DialogTitle className="sr-only">{selectedProject?.title || "Project Details"}</DialogTitle>
           <DialogDescription className="sr-only">Detailed view of {selectedProject?.title} including stack and description.</DialogDescription>
           {selectedProject && (
-            <div className="flex flex-col">
-              <div className="relative aspect-video w-full">
+            <div className="flex flex-col min-h-full">
+              <div className="relative aspect-video w-full shrink-0">
                 <Image src={selectedProject.imgSrc} alt={selectedProject.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12">
@@ -442,7 +443,7 @@ export default function PortfolioPage() {
                   <h3 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">{selectedProject.title}</h3>
                 </div>
               </div>
-              <div className="p-8 md:p-16 space-y-12">
+              <div className="p-8 md:p-16 space-y-12 shrink-0">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
                   <div className="lg:col-span-2 space-y-6">
                     <h4 className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">Architecture Overview</h4>
