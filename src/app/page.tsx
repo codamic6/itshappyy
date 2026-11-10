@@ -281,7 +281,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* FB Hub Section (New UI) */}
+      {/* FB Hub Section (Rebuilt UI) */}
       <section id="facebook" className="py-40 bg-[#F0F2F5] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 
@@ -434,11 +434,11 @@ export default function PortfolioPage() {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 overflow-y-auto bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem] custom-scrollbar">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-3xl">
           <DialogTitle className="sr-only">{selectedProject?.title || "Project Details"}</DialogTitle>
           <DialogDescription className="sr-only">Detailed view of {selectedProject?.title} including stack and description.</DialogDescription>
           {selectedProject && (
-            <div className="flex flex-col min-h-full">
+            <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
               <div className="relative aspect-video w-full shrink-0">
                 <Image src={selectedProject.imgSrc} alt={selectedProject.title} fill className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />

@@ -55,14 +55,18 @@
   @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857];
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+/* Custom Rounded Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
 }
-::-webkit-scrollbar-track {
-  @apply bg-white;
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
 }
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full border-2 border-transparent bg-clip-content;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/40;
 }
 
 @keyframes float {
