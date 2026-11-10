@@ -45,7 +45,6 @@ export default function PortfolioPage() {
     { name: 'About', href: '#about' },
     { name: 'Education', href: '#education' },
     { name: 'Voices of Haram', href: '#youtube' },
-    { name: 'Hub', href: '#facebook' },
     { name: 'Reach', href: '#reach' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -275,7 +274,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Hub Section (Facebook Replaced) */}
+      {/* FB Hub Section (New UI) */}
       <section id="facebook" className="py-40 bg-[#F0F2F5] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 
@@ -292,14 +291,14 @@ export default function PortfolioPage() {
                   Community Hub
                 </div>
                 <h2 className="text-7xl md:text-[140px] lg:text-[180px] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-[#1877F2] via-[#0D47A1] to-[#01579B] uppercase leading-[0.8]">
-                  HUB
+                  FB
                 </h2>
                 <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium leading-relaxed max-w-lg mx-auto lg:mx-0">
                   A high-impact ecosystem of <span className="text-[#1877F2] font-black italic">25,000+</span> individuals united by spiritual and digital excellence.
                 </p>
-                <div className="pt-6">
-                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/30 transition-transform hover:scale-105 active:scale-95">
-                    <a href="https://facebook.com/voicesofharam.official" target="_blank">JOIN THE MOVEMENT</a>
+                <div className="pt-6 flex justify-center lg:justify-start">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/30 transition-transform hover:scale-105 active:scale-95 w-fit">
+                    <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
                 </div>
               </div>
@@ -351,13 +350,13 @@ export default function PortfolioPage() {
                 <Image src="https://picsum.photos/seed/waleed/600/600" alt="Sheikh Waleed" fill className="object-cover" />
               </div>
             </div>
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white px-8 md:px-10 py-4 rounded-full shadow-2xl border border-pink-100 flex items-center gap-4">
-              <Instagram className="h-5 w-5 md:h-6 md:w-6 text-[#E1306C]" />
-              <span className="font-black text-xl md:text-2xl tracking-tighter">7,000+</span>
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white px-4 md:px-10 py-3 md:py-4 rounded-full shadow-2xl border border-pink-100 flex items-center gap-3 md:gap-4 whitespace-nowrap">
+              <Instagram className="h-4 w-4 md:h-6 md:w-6 text-[#E1306C]" />
+              <span className="font-black text-lg md:text-2xl tracking-tighter">7,000+</span>
             </div>
           </div>
           <div className="space-y-6">
-            <p className="text-2xl md:text-3xl font-black tracking-tight text-primary uppercase">@sheikh_waleed_al_shamsan</p>
+            <p className="text-xl md:text-3xl font-black tracking-tight text-primary uppercase">@sheikh_waleed_al_shamsan</p>
             <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105">
               <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PROFILE</a>
             </Button>
