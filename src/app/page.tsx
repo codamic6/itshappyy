@@ -139,7 +139,7 @@ export default function PortfolioPage() {
               <h3 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">Global <br/> Reach</h3>
               <p className="text-muted-foreground text-xl font-medium">Established 14 June 2025. Bridging engineering with spiritual tradition.</p>
               <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl shadow-red-500/20">
-                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">LAUNCH CHANNEL</a>
+                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
               </Button>
             </div>
             <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-black">
@@ -178,9 +178,9 @@ export default function PortfolioPage() {
              </div>
           </div>
           <div className="space-y-6">
-            <p className="text-lg md:text-2xl font-black tracking-widest text-primary uppercase break-all px-6">@sheikh_waleed_al_shamsan</p>
+            <p className="text-lg md:text-2xl font-black tracking-widest text-primary uppercase break-all px-6 max-w-[90vw] mx-auto overflow-hidden whitespace-nowrap overflow-ellipsis">@sheikh_waleed_al_shamsan</p>
             <Link href="/social-media">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW STRATEGY</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
             </Link>
           </div>
         </div>

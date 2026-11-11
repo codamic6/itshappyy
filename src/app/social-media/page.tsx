@@ -34,7 +34,7 @@ export default function SocialMediaPage() {
                 A premier digital ecosystem dedicated to global recitations and spiritual content. We bridge high-end engineering with sacred tradition to reach millions across the globe.
               </p>
               
-              <div className="grid grid-cols-2 gap-10">
+              <div className="grid grid-cols-2 gap-10 text-center lg:text-left">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
                   <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
@@ -45,9 +45,11 @@ export default function SocialMediaPage() {
                 </div>
               </div>
 
-              <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-red-500/20 w-full sm:w-fit">
-                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">LAUNCH CHANNEL</a>
-              </Button>
+              <div className="flex justify-center lg:justify-start">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-red-500/20 w-fit">
+                  <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
+                </Button>
+              </div>
             </div>
 
             <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-red-50 bg-black group">
@@ -63,7 +65,7 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* FB Hub Detailed */}
+        {/* FB Detailed */}
         <section className="max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -74,7 +76,7 @@ export default function SocialMediaPage() {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
-                <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2] font-black text-[10px] tracking-[0.3em] uppercase">
+                <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2] font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                   Digital Hub
                 </div>
                 <h2 className="text-[120px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
@@ -88,7 +90,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <StatBox icon={<Users />} label="Members" count="25K+" />
                 <StatBox icon={<Send />} label="Weekly Posts" count="100+" />
                 <StatBox icon={<TrendingUp />} label="Engagement" count="High" />
@@ -116,15 +118,17 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             </div>
-            <div className="space-y-10">
-              <div className="inline-flex items-center gap-4 px-6 md:px-10 py-4 rounded-full bg-white shadow-2xl border border-pink-100 max-w-full mx-auto overflow-hidden">
+            <div className="space-y-10 px-4">
+              <div className="inline-flex items-center gap-4 px-6 md:px-10 py-4 rounded-full bg-white shadow-2xl border border-pink-100 max-w-full mx-auto">
                 <Instagram className="h-6 md:h-8 w-6 md:w-8 text-[#E1306C] shrink-0" />
                 <span className="text-xl md:text-3xl font-black tracking-tighter truncate">7,000+ Followers</span>
               </div>
-              <p className="text-sm md:text-3xl font-black tracking-widest text-primary uppercase break-all px-4">@sheikh_waleed_al_shamsan</p>
-              <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105">
-                <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW STRATEGY</a>
-              </Button>
+              <p className="text-lg md:text-3xl font-black tracking-widest text-primary uppercase break-all max-w-full overflow-hidden">@sheikh_waleed_al_shamsan</p>
+              <div className="flex justify-center">
+                <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105 w-fit">
+                  <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">VISIT</a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -135,11 +139,11 @@ export default function SocialMediaPage() {
 
 function StatBox({ icon, label, count }: any) {
   return (
-    <div className="p-8 rounded-[2.5rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4">
-      <div className="text-[#1877F2]">{React.cloneElement(icon, { className: "h-8 w-8" })}</div>
+    <div className="p-6 md:p-8 rounded-[2.5rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4">
+      <div className="text-[#1877F2]">{React.cloneElement(icon, { className: "h-6 w-6 md:h-8 md:w-8" })}</div>
       <div className="space-y-1">
-        <h4 className="text-2xl font-black tracking-tighter">{count}</h4>
-        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">{label}</p>
+        <h4 className="text-xl md:text-2xl font-black tracking-tighter">{count}</h4>
+        <p className="text-[7px] md:text-[8px] font-bold text-muted-foreground uppercase tracking-widest">{label}</p>
       </div>
     </div>
   )
@@ -147,15 +151,15 @@ function StatBox({ icon, label, count }: any) {
 
 function ReachCard({ icon, label, handle, count, color, href }: any) {
   return (
-    <a href={href} target="_blank" className="p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-6">
-      <div className={cn("p-8 rounded-full bg-primary/5 group-hover:scale-110 transition-transform", color)}>
-        {React.cloneElement(icon as React.ReactElement, { className: "h-12 w-12" })}
+    <a href={href} target="_blank" className="p-10 md:p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-6">
+      <div className={cn("p-6 md:p-8 rounded-full bg-primary/5 group-hover:scale-110 transition-transform", color)}>
+        {React.cloneElement(icon as React.ReactElement, { className: "h-10 w-10 md:h-12 md:w-12" })}
       </div>
       <div className="space-y-2">
-        <h4 className="text-2xl font-black uppercase tracking-widest">{label}</h4>
-        <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{handle}</p>
+        <h4 className="text-xl md:text-2xl font-black uppercase tracking-widest">{label}</h4>
+        <p className="text-[8px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{handle}</p>
       </div>
-      <div className={cn("text-7xl font-black tracking-tighter", color)}>{count}</div>
+      <div className={cn("text-6xl md:text-7xl font-black tracking-tighter", color)}>{count}</div>
     </a>
   )
 }
