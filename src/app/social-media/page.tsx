@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -20,46 +21,44 @@ export default function SocialMediaPage() {
           <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
         </div>
 
-        {/* Voices of Haram Detailed */}
-        <section className="bg-[#1A1A1A] text-white py-40 overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FF0000]/5 rounded-full blur-[120px] -mr-96 -mt-96" />
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div className="space-y-10">
-                <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-[#FF0000]/10 border border-[#FF0000]/20 text-[#FF0000] font-black text-xs tracking-widest uppercase">
-                  ESTABLISHED 14 JUNE 2025
-                </div>
-                <h2 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">Voices of <br/> Haram</h2>
-                <p className="text-white/60 text-xl leading-relaxed font-medium">
-                  A massive digital ecosystem dedicated to global recitations, Jumuah Khutbah, and spiritual content. Bridging performance and tradition.
-                </p>
-                <div className="flex items-center gap-10">
-                  <div className="text-center lg:text-left">
-                    <span className="text-6xl font-black tracking-tighter text-[#FF0000]">30K+</span>
-                    <p className="text-[10px] font-black tracking-widest text-white/40 uppercase mt-2">SUBSCRIBERS</p>
-                  </div>
-                  <div className="text-center lg:text-left">
-                    <span className="text-6xl font-black tracking-tighter text-[#FF0000]">5M+</span>
-                    <p className="text-[10px] font-black tracking-widest text-white/40 uppercase mt-2">IMPRESSIONS</p>
-                  </div>
-                </div>
-                <Button asChild className="bg-[#FF0000] hover:bg-[#CC0000] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-red-500/20">
-                  <a href="https://youtube.com/@VoicesOfHaram" target="_blank">JOIN THE MOVEMENT</a>
-                </Button>
+        {/* Voices of Haram Detailed - RECREATED */}
+        <section className="py-20 max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-10 order-2 lg:order-none">
+              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase">
+                <Youtube className="h-4 w-4" />
+                ESTABLISHED 14 JUNE 2025
               </div>
-              <div className="grid grid-cols-1 gap-6">
-                <div className="aspect-video bg-black rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
-                  <iframe className="w-full h-full" src="https://www.youtube.com/embed/VOA8Gc44ZIE" title="VOH Main" frameBorder="0" allowFullScreen></iframe>
+              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">Voices of <br/> Haram</h2>
+              <p className="text-muted-foreground text-xl leading-relaxed font-medium max-w-xl">
+                A premier digital ecosystem dedicated to global recitations and spiritual content. We bridge high-end engineering with sacred tradition to reach millions across the globe.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-10">
+                <div className="space-y-1">
+                  <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
                 </div>
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="aspect-square bg-black rounded-[2rem] overflow-hidden border border-white/10">
-                    <Image src="https://picsum.photos/seed/voh-1/600/600" alt="VOH" fill className="object-cover opacity-50" />
-                  </div>
-                  <div className="aspect-square bg-black rounded-[2rem] overflow-hidden border border-white/10">
-                    <Image src="https://picsum.photos/seed/voh-2/600/600" alt="VOH" fill className="object-cover opacity-50" />
-                  </div>
+                <div className="space-y-1">
+                  <span className="text-5xl font-black tracking-tighter text-red-600">5M+</span>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Impressions</p>
                 </div>
               </div>
+
+              <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-red-500/20 w-full sm:w-fit">
+                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">LAUNCH CHANNEL</a>
+              </Button>
+            </div>
+
+            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-red-50 bg-black group">
+              <iframe 
+                className="w-full h-full" 
+                src="https://www.youtube.com/embed/VOA8Gc44ZIE" 
+                title="VOH Main" 
+                frameBorder="0" 
+                allowFullScreen
+              ></iframe>
+              <div className="absolute inset-0 pointer-events-none border-[12px] border-white/5 rounded-[3rem]" />
             </div>
           </div>
         </section>
@@ -82,9 +81,11 @@ export default function SocialMediaPage() {
                 <p className="text-2xl text-muted-foreground/80 font-medium max-w-md mx-auto lg:mx-0">
                   A spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> individuals united through technology.
                 </p>
-                <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/20 w-fit mx-auto lg:mx-0">
-                  <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT HUB</a>
-                </Button>
+                <div className="flex justify-center lg:justify-start">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/20 w-fit">
+                    <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
+                  </Button>
+                </div>
               </div>
               
               <div className="grid grid-cols-2 gap-6">
@@ -116,11 +117,11 @@ export default function SocialMediaPage() {
               </div>
             </div>
             <div className="space-y-10">
-              <div className="inline-flex items-center gap-4 px-10 py-4 rounded-full bg-white shadow-2xl border border-pink-100">
-                <Instagram className="h-8 w-8 text-[#E1306C]" />
-                <span className="text-3xl font-black tracking-tighter">7,000+ Followers</span>
+              <div className="inline-flex items-center gap-4 px-6 md:px-10 py-4 rounded-full bg-white shadow-2xl border border-pink-100 max-w-full mx-auto overflow-hidden">
+                <Instagram className="h-6 md:h-8 w-6 md:w-8 text-[#E1306C] shrink-0" />
+                <span className="text-xl md:text-3xl font-black tracking-tighter truncate">7,000+ Followers</span>
               </div>
-              <p className="text-xl md:text-3xl font-black tracking-widest text-primary uppercase">@sheikh_waleed_al_shamsan</p>
+              <p className="text-sm md:text-3xl font-black tracking-widest text-primary uppercase break-all px-4">@sheikh_waleed_al_shamsan</p>
               <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105">
                 <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW STRATEGY</a>
               </Button>
