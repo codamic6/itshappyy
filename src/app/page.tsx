@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -55,34 +56,30 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* Landing Summaries */}
+      {/* Landing Summaries - Now Static as requested */}
       <section className="py-20 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <SummaryCard 
           title="THE IDENTITY" 
           desc="Built on extreme discipline. Record-breaking Hifz-e-Quran and digital excellence."
-          href="/about"
         />
         <SummaryCard 
           title="ACADEMIC PEAK" 
           desc="Distinguished academic record with 1st positions and board honors."
-          href="/education"
         />
         <SummaryCard 
           title="ARCHITECTURES" 
           desc="Scalable software ecosystems bridging performance with global reach."
-          href="/projects"
         />
       </section>
     </div>
   )
 }
 
-function SummaryCard({ title, desc, href }: any) {
+function SummaryCard({ title, desc }: { title: string; desc: string }) {
   return (
-    <Link href={href} className="group block p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl">
+    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl cursor-default">
       <h3 className="text-2xl font-black tracking-widest text-primary uppercase mb-4">{title}</h3>
-      <p className="text-muted-foreground font-medium text-sm leading-relaxed mb-6">{desc}</p>
-      <span className="text-[10px] font-black tracking-widest text-primary uppercase group-hover:underline">LEARN MORE →</span>
-    </Link>
+      <p className="text-muted-foreground font-medium text-sm leading-relaxed">{desc}</p>
+    </div>
   )
 }
