@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
@@ -434,41 +433,43 @@ export default function PortfolioPage() {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-3xl">
+        <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] p-0 bg-white/95 backdrop-blur-2xl border-primary/10 rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-3xl flex flex-col">
           <DialogTitle className="sr-only">{selectedProject?.title || "Project Details"}</DialogTitle>
           <DialogDescription className="sr-only">Detailed view of {selectedProject?.title} including stack and description.</DialogDescription>
           {selectedProject && (
-            <div className="flex flex-col h-full overflow-y-auto custom-scrollbar">
-              <div className="relative aspect-video w-full shrink-0">
-                <Image src={selectedProject.imgSrc} alt={selectedProject.title} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12">
-                  <span className="px-6 py-2 glass-white rounded-full text-xs font-black text-primary uppercase tracking-widest mb-4 inline-block">{selectedProject.category}</span>
-                  <h3 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">{selectedProject.title}</h3>
-                </div>
-              </div>
-              <div className="p-8 md:p-16 space-y-12 shrink-0">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-                  <div className="lg:col-span-2 space-y-6">
-                    <h4 className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">Architecture Overview</h4>
-                    <p className="text-lg md:text-xl text-muted-foreground font-medium leading-relaxed">{selectedProject.longDescription}</p>
+            <ScrollArea className="flex-1 w-full custom-scrollbar">
+              <div className="flex flex-col">
+                <div className="relative aspect-video w-full shrink-0">
+                  <Image src={selectedProject.imgSrc} alt={selectedProject.title} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12">
+                    <span className="px-6 py-2 glass-white rounded-full text-xs font-black text-primary uppercase tracking-widest mb-4 inline-block">{selectedProject.category}</span>
+                    <h3 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">{selectedProject.title}</h3>
                   </div>
-                  <div className="space-y-10">
-                    <div className="space-y-6">
-                      <h4 className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">Tech Stack</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.stack.map((s: string) => (
-                          <span key={s} className="px-4 py-2 rounded-xl bg-primary/5 text-[9px] font-bold text-primary uppercase border border-primary/10">{s}</span>
-                        ))}
-                      </div>
+                </div>
+                <div className="p-8 md:p-16 space-y-12">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                    <div className="lg:col-span-2 space-y-6">
+                      <h4 className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">Architecture Overview</h4>
+                      <p className="text-lg md:text-xl text-muted-foreground font-medium leading-relaxed">{selectedProject.longDescription}</p>
                     </div>
-                    <Button asChild className="w-full h-16 rounded-full bg-primary text-white font-black tracking-widest text-xs uppercase shadow-2xl transition-transform hover:scale-105">
-                      <a href={selectedProject.link} target="_blank">LAUNCH PROJECT <ExternalLink className="ml-2 h-4 w-4" /></a>
-                    </Button>
+                    <div className="space-y-10">
+                      <div className="space-y-6">
+                        <h4 className="text-[10px] font-black text-primary tracking-[0.4em] uppercase">Tech Stack</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProject.stack.map((s: string) => (
+                            <span key={s} className="px-4 py-2 rounded-xl bg-primary/5 text-[9px] font-bold text-primary uppercase border border-primary/10">{s}</span>
+                          ))}
+                        </div>
+                      </div>
+                      <Button asChild className="w-full h-16 rounded-full bg-primary text-white font-black tracking-widest text-xs uppercase shadow-2xl transition-transform hover:scale-105">
+                        <a href={selectedProject.link} target="_blank">LAUNCH PROJECT <ExternalLink className="ml-2 h-4 w-4" /></a>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollArea>
           )}
         </DialogContent>
       </Dialog>
