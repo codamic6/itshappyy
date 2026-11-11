@@ -22,17 +22,6 @@ export default function PortfolioPage() {
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
 
-  // Dynamic Role Logic
-  const roles = ["Developer", "Content Creator", "Graphic Designer"];
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > lastScrollY.current ? "down" : "up";
     if (direction === "down" && latest > 150) {
@@ -121,7 +110,7 @@ export default function PortfolioPage() {
           x: "-50%", 
           opacity: (isNavVisible && !selectedProject) ? 1 : 0 
         }}
-        className="fixed top-8 left-1/2 z-[100] w-[90%] max-w-5xl pointer-events-none"
+        className="fixed top-8 left-1/2 z-[100] w-[90%] max-w-5xl pointer-events-none -translate-x-1/2"
       >
         <div className="glass-white h-20 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 shadow-2xl pointer-events-auto">
           <span className="text-xl md:text-2xl font-black font-syne tracking-widest text-green-gradient uppercase cursor-pointer">ARSALAN</span>
@@ -177,17 +166,15 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           className="max-w-6xl w-full text-center space-y-4"
         >
-          <span className="text-sm font-medium text-muted-foreground tracking-[0.2em] uppercase">I&apos;m a</span>
-          <div className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center justify-center overflow-visible px-4">
-            <AnimatePresence mode="wait">
-              <motion.h1 
-                key={roles[roleIndex]}
-                initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }}
-                className="text-4xl md:text-[100px] lg:text-[140px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap pr-12 md:pr-20"
-              >
-                {roles[roleIndex]}
-              </motion.h1>
-            </AnimatePresence>
+          <div className="flex items-center justify-center overflow-visible px-4">
+            <motion.h1 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-[80px] md:text-[180px] lg:text-[240px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap pr-4 md:pr-8"
+            >
+              HAPPY
+            </motion.h1>
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium uppercase tracking-tight">
             Engineering scalable futures & scaling digital ecosystems since 2023.
@@ -303,7 +290,7 @@ export default function PortfolioPage() {
                   A high-impact ecosystem of <span className="text-[#1877F2] font-black italic">25,000+</span> individuals united by spiritual and digital excellence.
                 </p>
                 <div className="pt-6 flex justify-center lg:justify-start">
-                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/30 transition-transform hover:scale-105 active:scale-95 w-fit">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl shadow-[#1877F2]/30 transition-transform hover:scale-105 active:scale-95 w-fit mx-auto lg:mx-0">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
                 </div>
