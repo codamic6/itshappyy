@@ -177,7 +177,7 @@ export default function PortfolioPage() {
             </motion.h1>
           </div>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto font-medium uppercase tracking-tight">
-            Engineering scalable futures & scaling digital ecosystems since 2023.
+            WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl shadow-primary/20 transition-all hover:scale-105">EXPLORE WORK</Button>
