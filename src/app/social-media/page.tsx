@@ -5,7 +5,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import Image from 'next/image'
-import { Youtube, Instagram, Users, TrendingUp, Facebook, Twitter, Globe, Send } from 'lucide-react'
+import { Youtube, Instagram, Users, TrendingUp, Facebook, Twitter, Globe, Send, Mic2, Clock, Calendar, Sparkles, CloudRain, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -21,20 +21,63 @@ export default function SocialMediaPage() {
           <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
         </div>
 
-        {/* Voices of Haram Detailed - RECREATED */}
+        {/* Haramain Live Ecosystem */}
+        <section className="max-w-7xl mx-auto px-6 space-y-20">
+          <div className="text-center space-y-6">
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Haramain Intel</h2>
+            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-3xl mx-auto">
+              We provide the most comprehensive real-time updates from the Two Holy Mosques, bridging millions with the sacred heart of Islam.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <UpdateCard 
+              icon={<Mic2 />} 
+              title="Jummah Khateeb" 
+              desc="Real-time announcements of the designated Khateeb for Friday prayers at Masjid Al-Haram and Masjid An-Nabawi."
+            />
+            <UpdateCard 
+              icon={<Calendar />} 
+              title="Taraweeh Schedule" 
+              desc="Detailed rosters of Imams leading Taraweeh and Tahajjud prayers during the blessed month of Ramadan."
+            />
+            <UpdateCard 
+              icon={<Clock />} 
+              title="Salah Schedules" 
+              desc="Weekly and daily Imam schedules for all five prayers, ensuring global followers stay connected."
+            />
+            <UpdateCard 
+              icon={<Star />} 
+              title="Special Prayers" 
+              desc="Official updates on Istisqa (Rain), Khusoof (Eclipse), and Eid prayers with designated Imams."
+            />
+            <UpdateCard 
+              icon={<CloudRain />} 
+              title="Weather Updates" 
+              desc="Live coverage of rain and atmospheric moments from the Haramain, captured in high definition."
+            />
+            <UpdateCard 
+              icon={<Sparkles />} 
+              title="Haramain Moments" 
+              desc="Curated highlights of the most spiritual and historic moments occurring within the holy precincts."
+            />
+          </div>
+        </section>
+
+        {/* Voices of Haram Detailed */}
         <section className="py-20 max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-10 order-2 lg:order-none">
-              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase">
+            <div className="space-y-10 order-2 lg:order-none text-center lg:text-left">
+              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                 <Youtube className="h-4 w-4" />
                 ESTABLISHED 14 JUNE 2025
               </div>
               <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">Voices of <br/> Haram</h2>
-              <p className="text-muted-foreground text-xl leading-relaxed font-medium max-w-xl">
-                A premier digital ecosystem dedicated to global recitations and spiritual content. We bridge high-end engineering with sacred tradition to reach millions across the globe.
+              <p className="text-muted-foreground text-xl leading-relaxed font-medium max-w-xl mx-auto lg:mx-0">
+                A premier digital ecosystem dedicated to global recitations and spiritual content. We bridge high-end engineering with sacred tradition.
               </p>
               
-              <div className="grid grid-cols-2 gap-10 text-center lg:text-left">
+              <div className="grid grid-cols-2 gap-10">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
                   <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
@@ -60,7 +103,6 @@ export default function SocialMediaPage() {
                 frameBorder="0" 
                 allowFullScreen
               ></iframe>
-              <div className="absolute inset-0 pointer-events-none border-[12px] border-white/5 rounded-[3rem]" />
             </div>
           </div>
         </section>
@@ -123,7 +165,7 @@ export default function SocialMediaPage() {
                 <Instagram className="h-6 md:h-8 w-6 md:w-8 text-[#E1306C] shrink-0" />
                 <span className="text-xl md:text-3xl font-black tracking-tighter truncate">7,000+ Followers</span>
               </div>
-              <p className="text-lg md:text-3xl font-black tracking-widest text-primary uppercase break-all max-w-full overflow-hidden">@sheikh_waleed_al_shamsan</p>
+              <p className="text-xl md:text-3xl font-black tracking-widest text-primary uppercase max-w-[90vw] mx-auto truncate">@sheikh_waleed_al_shamsan</p>
               <div className="flex justify-center">
                 <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105 w-fit">
                   <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">VISIT</a>
@@ -133,6 +175,18 @@ export default function SocialMediaPage() {
           </div>
         </section>
       </main>
+    </div>
+  )
+}
+
+function UpdateCard({ icon, title, desc }: any) {
+  return (
+    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group text-center lg:text-left">
+      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform mx-auto lg:mx-0">
+        {React.cloneElement(icon, { className: "h-6 w-6" })}
+      </div>
+      <h3 className="text-xl font-black tracking-tighter uppercase mb-4 text-primary">{title}</h3>
+      <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
     </div>
   )
 }
@@ -161,5 +215,5 @@ function ReachCard({ icon, label, handle, count, color, href }: any) {
       </div>
       <div className={cn("text-6xl md:text-7xl font-black tracking-tighter", color)}>{count}</div>
     </a>
-  )
+  );
 }
