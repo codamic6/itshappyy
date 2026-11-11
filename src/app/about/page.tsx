@@ -1,0 +1,67 @@
+"use client"
+
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Navbar } from '@/components/navbar'
+import Image from 'next/image'
+import { Trophy, Star, ShieldCheck, Zap } from 'lucide-react'
+
+export default function AboutPage() {
+  return (
+    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+      <Navbar />
+      
+      <main className="pt-40 pb-20 px-6 max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          className="space-y-20"
+        >
+          {/* Main Story */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-10">
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">The Identity</h1>
+              <div className="space-y-6 text-muted-foreground text-xl leading-relaxed font-medium">
+                <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. I don't believe in average effort; I believe in breaking records through focus and spiritual grounding.</p>
+                <p>In 2023, I achieved a milestone that defines my work ethic: I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
+                <p>While the standard revision (Duhrai) period in the madrasa ecosystem is 6 months, I completed mine in exactly <span className="text-primary font-bold italic">1 Month</span>.</p>
+              </div>
+            </div>
+            <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
+              <Image src="https://picsum.photos/seed/happy-identity/1000/1000" alt="Identity" fill className="object-cover" />
+              <div className="absolute inset-0 bg-primary/10" />
+            </div>
+          </div>
+
+          {/* Core Values / Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ValueCard icon={<Trophy />} title="RECORD BREAKER" desc="Completed Hifz revision 6x faster than average." />
+            <ValueCard icon={<Star />} title="BRAND FOUNDER" desc="Voices of Haram established 14 June 2025." />
+            <ValueCard icon={<ShieldCheck />} title="SECURE LOGIC" desc="Architecting high-performance messaging systems." />
+            <ValueCard icon={<Zap />} title="FAST EXECUTION" desc="From zero to global scale in record time." />
+          </div>
+
+          {/* Deep Dive */}
+          <div className="crystal-panel p-12 md:p-20 rounded-[4rem] space-y-10">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">The Vision</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-muted-foreground font-medium text-lg leading-relaxed">
+              <p>Founded on June 14, 2025, my brand <span className="text-primary font-bold">Voices of Haram</span> serves as a global recitation ecosystem. It bridges the gap between spiritual tradition and modern digital engineering, reaching tens of thousands across YouTube, Facebook, and Instagram.</p>
+              <p>As a software architect, I focus on building systems that don't just work—they scale. Whether it's high-speed messaging in <span className="text-primary font-bold">HappyChat</span> or brand identity in <span className="text-primary font-bold">HappyLinks</span>, every project is a testament to precision.</p>
+            </div>
+          </div>
+        </motion.div>
+      </main>
+    </div>
+  )
+}
+
+function ValueCard({ icon, title, desc }: any) {
+  return (
+    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
+      <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+        {React.cloneElement(icon, { className: "h-6 w-6" })}
+      </div>
+      <h3 className="text-xs font-black tracking-[0.2em] uppercase mb-2 text-primary">{title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+    </div>
+  )
+}

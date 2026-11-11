@@ -76,3 +76,7 @@
 .animate-float {
   animation: float 8s ease-in-out infinite;
 }
+
+.crystal-panel {
+  @apply bg-white/50 backdrop-blur-xl border border-white/20 shadow-2xl;
+}
