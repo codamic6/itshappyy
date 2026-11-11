@@ -55,7 +55,7 @@
   @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857];
 }
 
-/* Custom Rounded Scrollbar */
+/* Premium Rounded Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }

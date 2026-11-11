@@ -281,7 +281,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* FB Hub Section (Rebuilt UI) */}
+      {/* FB Hub Section (Advanced UI) */}
       <section id="facebook" className="py-40 bg-[#F0F2F5] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 
