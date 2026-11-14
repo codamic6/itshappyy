@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react'
@@ -14,6 +15,7 @@ import {
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/lib/utils'
 
 export default function PortfolioPage() {
   return (
@@ -73,7 +75,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Haramain Intel Summary */}
+      {/* Features (Intel) Summary */}
       <section className="py-40 px-6 bg-primary/[0.02]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="order-2 lg:order-none grid grid-cols-2 gap-4">
