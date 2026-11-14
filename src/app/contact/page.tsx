@@ -19,61 +19,39 @@ export default function ContactPage() {
           className="space-y-24"
         >
           <div className="text-center md:text-left space-y-4">
-            <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">Contact</h1>
+            <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">Connect</h1>
             <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.4em]">The Connect Station</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-            {/* Contact Form */}
             <div className="crystal-panel p-12 md:p-20 rounded-[4rem] space-y-12">
-              <div className="space-y-4">
-                <h2 className="text-4xl font-black tracking-tighter uppercase">Start a Project</h2>
-                <p className="text-muted-foreground font-medium">Ready to scale your brand? Let's engineer something iconic.</p>
-              </div>
+              <h2 className="text-4xl font-black tracking-tighter uppercase">Message</h2>
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black tracking-widest uppercase text-primary ml-1">Name</label>
-                    <Input className="h-16 rounded-2xl bg-white/50 border-primary/10 focus:ring-primary/20" placeholder="YOUR NAME" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black tracking-widest uppercase text-primary ml-1">Email</label>
-                    <Input className="h-16 rounded-2xl bg-white/50 border-primary/10 focus:ring-primary/20" placeholder="YOUR EMAIL" />
-                  </div>
+                  <Input className="h-16 rounded-2xl border-primary/10" placeholder="NAME" />
+                  <Input className="h-16 rounded-2xl border-primary/10" placeholder="EMAIL" />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-primary ml-1">Subject</label>
-                  <Input className="h-16 rounded-2xl bg-white/50 border-primary/10 focus:ring-primary/20" placeholder="PROJECT TYPE" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-widest uppercase text-primary ml-1">Message</label>
-                  <Textarea className="min-h-[200px] rounded-3xl bg-white/50 border-primary/10 focus:ring-primary/20" placeholder="TELL ME ABOUT YOUR VISION..." />
-                </div>
-                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest text-lg uppercase shadow-2xl transition-transform hover:scale-105">
-                  SEND COMMAND <Send className="ml-2 h-5 w-5" />
+                <Input className="h-16 rounded-2xl border-primary/10" placeholder="SUBJECT" />
+                <Textarea className="min-h-[200px] rounded-3xl border-primary/10" placeholder="VISION..." />
+                <Button className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl">
+                  VISIT <Send className="ml-2 h-5 w-5" />
                 </Button>
               </form>
             </div>
 
-            {/* Direct Connect */}
             <div className="flex flex-col justify-center space-y-16">
               <div className="space-y-8">
-                <h3 className="text-[10px] font-black tracking-[0.5em] uppercase text-primary">DIRECT CHANNELS</h3>
+                <h3 className="text-[10px] font-black tracking-widest uppercase text-primary">CHANNELS</h3>
                 <div className="space-y-6">
                   <ContactInfo icon={<Mail />} label="Email" value="arsalan@example.com" />
-                  <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, Pakistan" />
-                  <ContactInfo icon={<Phone />} label="Status" value="Available for Projects" />
+                  <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
+                  <ContactInfo icon={<Phone />} label="Status" value="Available" />
                 </div>
               </div>
-
-              <div className="space-y-8">
-                <h3 className="text-[10px] font-black tracking-[0.5em] uppercase text-primary">ECOSYSTEM REACH</h3>
-                <div className="flex flex-wrap gap-4">
-                  <SocialCircle icon={<Youtube />} href="https://youtube.com/@VoicesOfHaram" />
-                  <SocialCircle icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
-                  <SocialCircle icon={<Github />} href="https://github.com/arsalan" />
-                  <SocialCircle icon={<Linkedin />} href="#" />
-                </div>
+              <div className="flex gap-4">
+                <SocialCircle icon={<Youtube />} href="#" />
+                <SocialCircle icon={<Instagram />} href="#" />
+                <SocialCircle icon={<Github />} href="#" />
               </div>
             </div>
           </div>
@@ -99,7 +77,7 @@ function ContactInfo({ icon, label, value }: any) {
 
 function SocialCircle({ icon, href }: any) {
   return (
-    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all hover:scale-110 shadow-xl">
+    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-xl">
       {React.cloneElement(icon, { className: "h-8 w-8" })}
     </a>
   )
