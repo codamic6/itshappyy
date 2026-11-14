@@ -53,7 +53,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* About Summary */}
+      {/* About Section */}
       <section id="about" className="py-40 px-6 max-w-7xl mx-auto border-t border-primary/5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10">
@@ -75,14 +75,14 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Features Summary */}
-      <section className="py-40 px-6 bg-primary/[0.02]">
+      {/* Features Section */}
+      <section id="features" className="py-40 px-6 bg-primary/[0.02]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="order-2 lg:order-none grid grid-cols-2 gap-4">
-            <FeatureIconBox icon={<Mic2 />} label="Khateeb Intel" />
-            <FeatureIconBox icon={<Clock />} label="Salah Logs" className="mt-8" />
-            <FeatureIconBox icon={<Calendar />} label="Imam Roster" />
-            <FeatureIconBox icon={<CloudRain />} label="Live Moments" className="mt-8" />
+            <FeatureIconBox icon={<Mic2 />} label="Khateeb" />
+            <FeatureIconBox icon={<Clock />} label="Salah" className="mt-8" />
+            <FeatureIconBox icon={<Calendar />} label="Schedule" />
+            <FeatureIconBox icon={<CloudRain />} label="Live" className="mt-8" />
           </div>
           <div className="space-y-10 text-center lg:text-left">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-[0.9]">Features</h2>
@@ -94,7 +94,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Academy Summary */}
+      {/* Academy Section */}
       <section id="education" className="py-40 px-6">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
@@ -103,8 +103,8 @@ export default function PortfolioPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
-            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Position record." />
-            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545. Physics, Math, CS & Chem core focus." />
+            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Record." />
+            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545 marks. Pure Science & Computer focus." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
@@ -114,8 +114,28 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* YT Summary */}
-      <section id="social-media" className="py-40 space-y-40">
+      {/* Work Section */}
+      <section id="projects" className="py-40 px-6 bg-white">
+        <div className="max-w-7xl mx-auto space-y-20">
+          <div className="text-center space-y-4">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Work</h2>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scalable Digital Architectures</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ProjectCard title="Chizzy AI" cat="AI Tool" link="https://chizzy-two.vercel.app" />
+            <ProjectCard title="HappyChat" cat="Messaging" link="https://happychat-murex.vercel.app" />
+            <ProjectCard title="HappyLink" cat="Identity" link="https://happylink-beta.vercel.app" />
+          </div>
+          <div className="text-center pt-10">
+            <Link href="/projects">
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase">ALL PROJECTS</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Youtube Section */}
+      <section id="social-media" className="py-40 space-y-40 bg-primary/[0.01]">
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 text-center lg:text-left">
@@ -153,7 +173,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Connect Summary */}
+      {/* Connect Section */}
       <section id="contact" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <div className="crystal-panel p-10 md:p-16 rounded-[4rem] space-y-10">
@@ -172,7 +192,7 @@ export default function PortfolioPage() {
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
             <div className="pt-10 flex gap-4">
               <Link href="/contact">
-                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black text-[10px] tracking-widest uppercase">ALL CHANNELS</Button>
+                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black text-[10px] tracking-widest uppercase">VISIT</Button>
               </Link>
             </div>
           </div>
@@ -205,6 +225,18 @@ function EduCard({ icon, year, title, institution, desc }: any) {
       </div>
       <p className="text-primary font-bold text-[9px] tracking-widest uppercase mb-4">{institution}</p>
       <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
+    </div>
+  )
+}
+
+function ProjectCard({ title, cat, link }: any) {
+  return (
+    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
+      <span className="inline-block px-4 py-1 rounded-full bg-primary/5 text-primary font-black text-[9px] mb-6 tracking-widest uppercase">{cat}</span>
+      <h3 className="text-3xl font-black tracking-tighter uppercase mb-6">{title}</h3>
+      <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
+        <a href={link} target="_blank">VISIT</a>
+      </Button>
     </div>
   )
 }
