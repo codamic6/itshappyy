@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "$schema": "https://vercel.sh",
   "services": {
     "app": {
       "root": ".",
@@ -13,13 +13,23 @@
   "rewrites": [
     {
       "source": "/editor/(.*)",
-      "service": "ai-editor",
-      "destination": "/$1"
+      "destination": {
+        "service": "ai-editor",
+        "path": "/$1"
+      }
+    },
+    {
+      "source": "/editor",
+      "destination": {
+        "service": "ai-editor",
+        "path": "/"
+      }
     },
     {
       "source": "/(.*)",
-      "service": "app",
-      "destination": "/$1"
+      "destination": {
+        "service": "app"
+      }
     }
   ]
 }
