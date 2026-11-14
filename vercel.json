@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "services": {
+    "app": {
+      "root": ".",
+      "framework": "nextjs"
+    },
+    "ai-editor": {
+      "root": "ai-editor",
+      "framework": "create-react-app"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/editor/(.*)",
+      "service": "ai-editor",
+      "destination": "/$1"
+    },
+    {
+      "source": "/(.*)",
+      "service": "app",
+      "destination": "/$1"
+    }
+  ]
+}
