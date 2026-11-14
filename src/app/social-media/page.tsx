@@ -21,10 +21,10 @@ export default function SocialMediaPage() {
           <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
         </div>
 
-        {/* Features (Intel) */}
-        <section id="intel" className="max-w-7xl mx-auto px-6 space-y-20">
+        {/* Features Section */}
+        <section id="features" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-6">
-            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Intel</h2>
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Features</h2>
             <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-3xl mx-auto">
               Real-time updates from the Two Holy Mosques, bridging millions with the sacred heart of Islam.
             </p>
