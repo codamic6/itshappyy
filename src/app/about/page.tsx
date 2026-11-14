@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -18,7 +19,7 @@ export default function AboutPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
-              <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">Identity</h1>
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">About</h1>
               <div className="space-y-6 text-muted-foreground text-xl leading-relaxed font-medium">
                 <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. I don't believe in average effort; I believe in breaking records through focus.</p>
                 <p>In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
@@ -26,7 +27,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
-              <Image src="https://picsum.photos/seed/happy-identity/1000/1000" alt="Identity" fill className="object-cover" />
+              <Image src="https://picsum.photos/seed/happy-identity/1000/1000" alt="About" fill className="object-cover" />
               <div className="absolute inset-0 bg-primary/10" />
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -70,7 +71,7 @@ export default function SocialMediaPage() {
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                 <Youtube className="h-4 w-4" /> EST. JUNE 2025
               </div>
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">VOH</h2>
+              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-red-600">YT</h2>
               <p className="text-muted-foreground text-xl leading-relaxed font-medium max-w-xl mx-auto lg:mx-0">
                 A premier digital ecosystem dedicated to global recitations and spiritual tradition.
               </p>

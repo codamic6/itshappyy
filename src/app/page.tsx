@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/navbar'
@@ -10,8 +10,8 @@ import Image from 'next/image'
 import { 
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
-  Youtube, Users, TrendingUp, Instagram, Send, Globe,
-  Mail, MapPin, Phone, Mic2, Clock, Calendar, CloudRain, Sparkles
+  Youtube, Mic2, Clock, Calendar, CloudRain, Sparkles,
+  Mail, MapPin
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -53,11 +53,11 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* Identity Summary */}
+      {/* About Summary */}
       <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Identity</h2>
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">About</h2>
             <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
               <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
               <p>While standard revision takes 6 months, I completed mine in exactly <span className="text-primary font-bold italic">1 Month</span>.</p>
@@ -69,7 +69,7 @@ export default function PortfolioPage() {
             </Link>
           </div>
           <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border border-primary/10">
-            <Image src="https://picsum.photos/seed/happy-identity/800/800" alt="Identity" fill className="object-cover" />
+            <Image src="https://picsum.photos/seed/happy-identity/800/800" alt="About" fill className="object-cover" />
             <div className="absolute inset-0 bg-primary/10" />
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Focus on Advanced Logic & Data Structures." />
             <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks (Roll 484655)." />
-            <EduCard icon={<Medal />} year="2024" title="9th - 3rd" institution="FSD Board" desc="3rd Position in FSD Board (Roll 190511)." />
+            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="FSD Board" desc="525/545 marks in Faisalabad Board (Roll 190511)." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
@@ -122,7 +122,7 @@ export default function PortfolioPage() {
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                 <Youtube className="h-4 w-4" /> Voices of Haram
               </div>
-              <h3 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">Reach</h3>
+              <h3 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">YT</h3>
               <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2025.</p>
               <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
                 <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>

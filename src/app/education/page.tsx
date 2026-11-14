@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -9,10 +10,10 @@ export default function EducationPage() {
   const educationTimeline = [
     { year: "2026", title: "ICS - 11th", institution: "Punjab College", details: "Deep focus on Advanced Logic and Digital Architectures.", icon: <GraduationCap /> },
     { year: "2025", title: "Matric - 1st", institution: "Al-Faisal School", details: "Secured 1st Position with 1165/1200 marks. (Roll 484655)", icon: <Award /> },
-    { year: "2024", title: "Class 9 - 3rd", institution: "Faisalabad Board", details: "3rd Position in Board with 525/545 marks. (Roll 190511)", icon: <Medal /> },
+    { year: "2024", title: "9th Grade", institution: "Faisalabad Board", details: "Scored 525/545 marks in the Board Exams. (Roll 190511)", icon: <Medal /> },
     { year: "2023", title: "Hifz Completion", institution: "Masjid-e-Niyaz", details: "Finished in 1 Year 9 Months. Revision in 1 Month.", icon: <BookOpen /> },
-    { year: "2020", title: "Class 5 - 2nd", institution: "Al-Faisal School", details: "Academic excellence award." },
-    { year: "2019", title: "Class 4 - 2nd", institution: "Al-Faisal School", details: "Consistent performance." }
+    { year: "2020", title: "Class 5 - 2nd", institution: "Al-Faisal School", details: "Academic excellence award with 2nd Position.", icon: <Award /> },
+    { year: "2019", title: "Class 4 - 2nd", institution: "Al-Faisal School", details: "Consistent performance with 2nd Position.", icon: <Award /> }
   ];
 
   return (
