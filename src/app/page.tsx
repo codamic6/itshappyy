@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { 
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
-  Youtube, Mic2, Clock, Calendar, CloudRain, Sparkles,
+  Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
   Mail, MapPin
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* About Summary */}
-      <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
+      <section id="about" className="py-40 px-6 max-w-7xl mx-auto border-t border-primary/5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">About</h2>
@@ -75,7 +75,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Features (Intel) Summary */}
+      {/* Features Summary */}
       <section className="py-40 px-6 bg-primary/[0.02]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="order-2 lg:order-none grid grid-cols-2 gap-4">
@@ -99,30 +99,30 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Academy</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Consistency Over A Decade</p>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Focus on Advanced Logic & Data Structures." />
-            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks (Roll 484655)." />
-            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="FSD Board" desc="525/545 marks in Faisalabad Board (Roll 190511)." />
+            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
+            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Position record." />
+            <EduCard icon={<BookOpen />} year="2023" title="Hifz Quran" institution="Masjid-e-Niyaz" desc="Completed in 1 Year 9 Months. Revision in 1 Month." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW TIMELINE</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW FULL TIMELINE</Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Reach Summary */}
+      {/* YT Summary */}
       <section id="social-media" className="py-40 space-y-40">
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 text-center lg:text-left">
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
-                <Youtube className="h-4 w-4" /> Voices of Haram
+                <YoutubeIcon className="h-4 w-4" /> Voices of Haram
               </div>
-              <h3 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">YT</h3>
+              <h3 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h3>
               <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2025.</p>
               <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
                 <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
@@ -151,25 +151,6 @@ export default function PortfolioPage() {
             </div>
           </div>
         </div>
-
-        <div className="py-40 bg-primary/5 text-center space-y-16">
-          <h2 className="text-6xl md:text-[120px] font-black tracking-tighter text-green-gradient uppercase leading-none">Waleed <br/> Al-Shamsan</h2>
-          <div className="relative inline-block">
-             <div className="w-48 h-48 md:w-80 md:h-80 rounded-[3rem] p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rotate-6 mx-auto">
-                <div className="w-full h-full rounded-[2.5rem] border-8 border-white overflow-hidden relative -rotate-6">
-                  <Image src="https://picsum.photos/seed/waleed-pro/600/600" alt="Sheikh Waleed" fill className="object-cover" />
-                </div>
-             </div>
-          </div>
-          <div className="space-y-6 px-4">
-            <p className="text-xl md:text-3xl font-black tracking-widest text-primary uppercase max-w-[90vw] mx-auto truncate">@sheikh_waleed_al_shamsan</p>
-            <div className="flex justify-center">
-              <Button asChild variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105 w-fit">
-                <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">VISIT</a>
-              </Button>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Connect Summary */}
@@ -191,7 +172,7 @@ export default function PortfolioPage() {
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
             <div className="pt-10 flex gap-4">
               <Link href="/contact">
-                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase">ALL CHANNELS</Button>
+                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black text-[10px] tracking-widest uppercase">ALL CHANNELS</Button>
               </Link>
             </div>
           </div>

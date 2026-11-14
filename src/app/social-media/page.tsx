@@ -5,7 +5,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import Image from 'next/image'
-import { Youtube, Instagram, Users, TrendingUp, Twitter, Globe, Send, Mic2, Clock, Calendar, Sparkles, CloudRain, Star } from 'lucide-react'
+import { Youtube as YoutubeIcon, Instagram, Users, TrendingUp, Twitter, Globe, Send, Mic2, Clock, Calendar, Sparkles, CloudRain, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -22,7 +22,7 @@ export default function SocialMediaPage() {
         </div>
 
         {/* Features (Intel) */}
-        <section className="max-w-7xl mx-auto px-6 space-y-20">
+        <section id="intel" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-6">
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Intel</h2>
             <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-3xl mx-auto">
@@ -34,44 +34,44 @@ export default function SocialMediaPage() {
             <UpdateCard 
               icon={<Mic2 />} 
               title="Khateeb" 
-              desc="Announcements of the designated Jummah Khateeb at Masjid Al-Haram and Masjid An-Nabawi."
+              desc="Designated Jummah Khateeb announcements for Masjid Al-Haram & Masjid An-Nabawi."
             />
             <UpdateCard 
               icon={<Calendar />} 
               title="Taraweeh" 
-              desc="Detailed rosters of Imams leading Taraweeh and Tahajjud prayers during Ramadan."
+              desc="Detailed schedule of Imams leading Taraweeh and Tahajjud during Ramadan."
             />
             <UpdateCard 
               icon={<Clock />} 
               title="Salah" 
-              desc="Weekly and daily Imam schedules for all five prayers, ensuring global followers stay connected."
+              desc="Weekly and daily Imam rosters for all five prayers, ensuring global connection."
             />
             <UpdateCard 
               icon={<Star />} 
               title="Special" 
-              desc="Updates on Istisqa, Khusoof, and Eid prayers with designated Imams."
+              desc="Updates on Istisqa, Khusoof, and Eid prayers with designated lead Imams."
             />
             <UpdateCard 
               icon={<CloudRain />} 
               title="Weather" 
-              desc="Live coverage of rain and atmospheric moments from the Haramain captured in HD."
+              desc="Live coverage of rain and atmospheric spiritual moments from the Haramain."
             />
             <UpdateCard 
               icon={<Sparkles />} 
               title="Moments" 
-              desc="Curated highlights of the most spiritual moments occurring within the holy precincts."
+              desc="Curated highlights of the most spiritual events occurring within the holy precincts."
             />
           </div>
         </section>
 
-        {/* YouTube */}
+        {/* YouTube Section */}
         <section className="py-20 max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 order-2 lg:order-none text-center lg:text-left">
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
-                <Youtube className="h-4 w-4" /> EST. JUNE 2025
+                <YoutubeIcon className="h-4 w-4" /> Voices of Haram
               </div>
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] text-red-600">YT</h2>
+              <h2 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h2>
               <p className="text-muted-foreground text-xl leading-relaxed font-medium max-w-xl mx-auto lg:mx-0">
                 A premier digital ecosystem dedicated to global recitations and spiritual tradition.
               </p>
@@ -148,7 +148,7 @@ export default function SocialMediaPage() {
           <ReachCard icon={<Twitter />} label="Threads" handle="@voicesofharam.official" count="6.5K+" color="text-[#7C3AED]" href="https://threads.net/@voicesofharam.official" />
         </section>
 
-        {/* Waleed */}
+        {/* Waleed Section */}
         <section className="py-40 bg-primary/5">
           <div className="max-w-7xl mx-auto px-6 text-center space-y-16">
             <h2 className="text-6xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Waleed <br/> Al-Shamsan</h2>
