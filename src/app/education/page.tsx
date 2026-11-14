@@ -26,28 +26,21 @@ export default function EducationPage() {
       year: "2024", 
       title: "9th Grade", 
       institution: "Al-Faisal Grammar School", 
-      details: "Scored 525/545 marks. Strong foundation in Science and Logic. Ahmadabad, Faisalabad.", 
+      details: "Scored 525/545 marks. Subjects: Computer Science, Physics, Mathematics, Chemistry. Ahmadabad, Faisalabad.", 
       icon: <Medal /> 
     },
     { 
       year: "2023", 
-      title: "Hifz Completion", 
-      institution: "Masjid-e-Niyaz", 
-      details: "Finished in 1 Year 9 Months. Revision completed in exactly 1 Month.", 
-      icon: <BookOpen /> 
-    },
-    { 
-      year: "2022", 
       title: "Class 8 - 3rd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Consistent academic performance. Ahmadabad, Faisalabad.", 
+      details: "Continued academic excellence in middle school. Ahmadabad, Faisalabad.", 
       icon: <Star /> 
     },
     { 
-      year: "2020-21", 
-      title: "Hifz Focus", 
+      year: "2021-22", 
+      title: "Hifz Completion", 
       institution: "Masjid-e-Niyaz", 
-      details: "Dedicated period for Quranic Memorization (Class 6-7).", 
+      details: "Dedicated period for Quranic Memorization (Class 6-7). Completed Hifz in 1 Year 9 Months.", 
       icon: <BookOpen /> 
     },
     { 
@@ -61,7 +54,7 @@ export default function EducationPage() {
       year: "2019", 
       title: "Class 4 - 2nd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Continued excellence. Ahmadabad, Faisalabad.", 
+      details: "Maintained consistent academic performance. Ahmadabad, Faisalabad.", 
       icon: <Award /> 
     },
     { 
@@ -82,14 +75,14 @@ export default function EducationPage() {
       year: "2016", 
       title: "Class 1 - 2nd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Early academic record. Ahmadabad, Faisalabad.", 
+      details: "Early academic record of excellence. Ahmadabad, Faisalabad.", 
       icon: <Award /> 
     },
     { 
       year: "2015", 
       title: "Prep - 3rd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Starting the journey of excellence. Ahmadabad, Faisalabad.", 
+      details: "The beginning of a journey of discipline. Ahmadabad, Faisalabad.", 
       icon: <Star /> 
     }
   ];

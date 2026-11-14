@@ -104,7 +104,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
             <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Position record." />
-            <EduCard icon={<BookOpen />} year="2023" title="Hifz Quran" institution="Masjid-e-Niyaz" desc="Completed in 1 Year 9 Months. Revision in 1 Month." />
+            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545. Physics, Math, CS & Chem core focus." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
