@@ -48,6 +48,10 @@ export default function AboutPage() {
           </div>
         </motion.div>
       </main>
+
+      <footer className="py-10 border-t border-primary/5 text-center">
+        <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">&copy; 2026 HAPPY | ALL RIGHTS RESERVED</p>
+      </footer>
     </div>
   )
 }
