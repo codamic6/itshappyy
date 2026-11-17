@@ -12,7 +12,7 @@ import {
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
-  Mail, MapPin, Phone, Instagram, Globe, BarChart3
+  Mail, MapPin, Phone, Instagram, Globe, BarChart3, Users
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -23,7 +23,7 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero - Responsive Background Switching */}
+      {/* Hero - PC/Mobile Background Switching */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           {/* PC Background */}
@@ -74,89 +74,94 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC (GOD MODE RESPONSIVE) */}
-      <section className="py-20 md:py-40 px-4 md:px-6 relative overflow-hidden">
+      {/* NEW GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC REDESIGN (STATIC & STABLE) */}
+      <section className="py-20 md:py-40 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative p-6 md:p-16 lg:p-24 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
+            className="relative p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
-            {/* Ultra-Smooth Mesh Gradients (Red-Green Fusion) */}
-            <div className="absolute top-0 right-0 w-64 md:w-[600px] h-64 md:h-[600px] bg-red-600/[0.05] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 md:w-[400px] h-64 md:h-[400px] bg-primary/[0.05] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
+            {/* Smoothest Mesh Gradients for Atmosphere */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.03] rounded-full blur-[120px] -mr-32 -mt-32 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-[100px] -ml-20 -mb-20 pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
-              <div className="space-y-8 md:space-y-12 text-center lg:text-left">
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[9px] md:text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
-                  <YoutubeIcon className="h-4 w-4" /> GLOBAL RANKING 2025
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+              <div className="space-y-10 text-center lg:text-left">
+                <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
+                  <YoutubeIcon className="h-4 w-4" /> GLOBAL MILESTONE 2025
                 </div>
                 
                 <div className="space-y-6">
-                  <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col">
+                  <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col break-words">
                     <span className="text-red-600">TOP 25%</span>
                     <span className="text-green-gradient">GLOBALLY</span>
                   </h2>
-                  <p className="text-base md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Alhamdulillah, <span className="text-primary font-black italic">Voices of Haram</span> has secured its position in the top 25% of creators in the 10K-50K tier worldwide.
                   </p>
                 </div>
 
-                {/* Stats Row */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-8 md:gap-12">
-                  <div className="space-y-1">
-                    <span className="text-4xl md:text-6xl font-black text-red-600">10K+</span>
-                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">COMMUNITY</p>
+                {/* Fixed Stats Grid */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-10 md:gap-16 pt-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 justify-center lg:justify-start">
+                      <Users className="h-6 w-6 text-red-600" />
+                      <span className="text-4xl md:text-6xl font-black text-red-600">30.5K+</span>
+                    </div>
+                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">COMMUNITY MEMBERS</p>
                   </div>
-                  <div className="w-px h-12 bg-gray-100 hidden sm:block" />
-                  <div className="space-y-1">
-                    <span className="text-4xl md:text-6xl font-black text-primary">Global</span>
-                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">FOOTPRINT</p>
+                  <div className="w-px h-16 bg-gray-100 hidden sm:block" />
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 justify-center lg:justify-start">
+                      <Globe className="h-6 w-6 text-primary" />
+                      <span className="text-4xl md:text-6xl font-black text-primary">Global</span>
+                    </div>
+                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">CREATOR RANKING</p>
                   </div>
                 </div>
 
-                <div className="pt-6 flex justify-center lg:justify-start">
-                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-10 h-16 md:h-20 text-sm md:text-lg font-black tracking-widest uppercase shadow-xl w-full sm:w-fit transition-all hover:scale-105">
-                    <a href="https://youtube.com/@VoicesOfHaram" target="_blank">EXPLORE CHANNEL</a>
+                <div className="pt-10 flex justify-center lg:justify-start">
+                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-12 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-full sm:w-fit transition-all hover:scale-105">
+                    <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT CHANNEL</a>
                   </Button>
                 </div>
               </div>
 
-              {/* Futuristic Trophy Visual - Fixed Responsiveness */}
-              <div className="relative group w-full max-w-[480px] mx-auto lg:ml-auto lg:mr-0 px-2 lg:px-0">
-                <motion.div 
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative aspect-square lg:aspect-square rounded-[3rem] sm:rounded-[3.5rem] md:rounded-[4.5rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden"
-                >
-                  <div className="w-full h-full bg-white rounded-[2.9rem] sm:rounded-[3.4rem] md:rounded-[4.4rem] flex flex-col items-center justify-center text-center p-6 md:p-14 space-y-4 md:space-y-10 relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+              {/* Static Showcase Visual - Zero Overflow Redesign */}
+              <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto lg:mr-0">
+                <div className="relative aspect-square rounded-[4rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden group">
+                  <div className="w-full h-full bg-white rounded-[3.9rem] flex flex-col items-center justify-center text-center p-8 md:p-16 space-y-8 md:space-y-12 relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700">
                       <BarChart3 className="w-full h-full p-6" />
                     </div>
                     
-                    <Trophy className="h-14 w-14 md:h-28 md:w-28 text-red-600 shrink-0" />
-                    <div className="space-y-2">
-                      <span className="text-[8px] md:text-[9px] font-black tracking-[0.4em] text-muted-foreground uppercase">Achievement</span>
-                      <h3 className="text-xl md:text-5xl font-black tracking-tighter text-primary uppercase leading-tight">Voices <br/> of Haram</h3>
+                    <Trophy className="h-16 w-16 md:h-28 md:w-28 text-red-600 shrink-0" />
+                    
+                    <div className="space-y-3">
+                      <span className="text-[9px] font-black tracking-[0.5em] text-muted-foreground uppercase">Verified Creator</span>
+                      <h3 className="text-2xl md:text-5xl font-black tracking-tighter text-primary uppercase leading-tight">Voices <br/> of Haram</h3>
                     </div>
+                    
                     <div className="w-full h-px bg-gray-100" />
-                    <div className="flex items-center gap-4 md:gap-10">
+                    
+                    <div className="grid grid-cols-2 gap-8 w-full">
                       <div className="text-center">
-                        <span className="text-base md:text-3xl font-black text-red-600">YouTube</span>
-                        <p className="text-[7px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">PLATFORM</p>
+                        <span className="text-xl md:text-3xl font-black text-red-600">30.5K</span>
+                        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">LOYAL SUBSCRIBERS</p>
                       </div>
-                      <div className="w-px h-8 bg-gray-100" />
-                      <div className="text-center">
-                        <span className="text-base md:text-3xl font-black text-primary">Top 25%</span>
-                        <p className="text-[7px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">RANK</p>
+                      <div className="text-center border-l border-gray-100">
+                        <span className="text-xl md:text-3xl font-black text-primary">25%</span>
+                        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">WORLDWIDE RANK</p>
                       </div>
                     </div>
-                    <Sparkles className="absolute top-6 md:top-10 right-6 md:right-10 h-4 md:h-6 w-4 md:w-6 text-red-600/20 animate-pulse" />
-                    <Star className="absolute bottom-6 md:bottom-10 left-6 md:left-10 h-4 md:h-6 w-4 md:w-6 text-primary/20 animate-pulse" />
+                    
+                    <Sparkles className="absolute top-8 right-8 h-6 w-6 text-red-600/20 animate-pulse" />
+                    <Star className="absolute bottom-8 left-8 h-6 w-6 text-primary/20 animate-pulse" />
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -166,7 +171,7 @@ export default function PortfolioPage() {
       {/* About Section */}
       <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-10">
+          <div className="space-y-10 text-center lg:text-left">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">About</h2>
             <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
               <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
@@ -248,7 +253,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Youtube Section */}
+      {/* Youtube & Facebook Hub */}
       <section id="social-media" className="py-40 space-y-40 bg-primary/[0.01]">
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -293,7 +298,7 @@ export default function PortfolioPage() {
       {/* Connect Section */}
       <section id="contact" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div className="crystal-panel p-10 md:p-16 rounded-[4rem] space-y-10">
+          <div className="crystal-panel p-10 md:p-16 rounded-[4rem] space-y-10 overflow-visible">
             <h2 className="text-4xl font-black tracking-tighter uppercase">Connect</h2>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -306,7 +311,7 @@ export default function PortfolioPage() {
               </div>
             </form>
           </div>
-          <div className="flex flex-col justify-center space-y-12 py-12 pb-12">
+          <div className="flex flex-col justify-center space-y-12 py-12 pb-12 overflow-visible">
             <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<Phone />} label="PHONE" value="+923434441031" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
