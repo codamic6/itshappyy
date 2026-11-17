@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { Youtube as YoutubeIcon, Instagram, Users, TrendingUp, Twitter, Globe, Send, Mic2, Clock, Calendar, Sparkles, CloudRain, Star } from 'lucide-react'
+import { Youtube as YoutubeIcon, Instagram, Users, TrendingUp, Twitter, Globe, Send, Mic2, Clock, Calendar, Sparkles, CloudRain, Star, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -77,14 +77,19 @@ export default function SocialMediaPage() {
                 A premier digital ecosystem dedicated to global recitations and spiritual tradition.
               </p>
               
-              <div className="grid grid-cols-2 gap-10 pt-6">
-                <div className="space-y-1">
-                  <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
-                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
+              <div className="flex flex-col gap-4 items-center lg:items-start">
+                <div className="flex items-center gap-3 text-red-600/60 font-black text-[10px] uppercase tracking-widest">
+                  <Mail className="h-4 w-4" /> voicesofharambusiness@yahoo.com
                 </div>
-                <div className="space-y-1">
-                  <span className="text-5xl font-black tracking-tighter text-red-600">5M+</span>
-                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Views</p>
+                <div className="grid grid-cols-2 gap-10 pt-6">
+                  <div className="space-y-1">
+                    <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
+                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-5xl font-black tracking-tighter text-red-600">5M+</span>
+                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Views</p>
+                  </div>
                 </div>
               </div>
 

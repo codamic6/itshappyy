@@ -35,7 +35,7 @@ export default function ContactPage() {
                 </div>
                 <Input className="h-16 rounded-2xl border-primary/10" placeholder="SUBJECT" />
                 <Textarea className="min-h-[200px] rounded-3xl border-primary/10" placeholder="VISION..." />
-                <div className="pt-6">
+                <div className="pt-10">
                   <Button className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl">
                     VISIT <Send className="ml-2 h-5 w-5" />
                   </Button>
@@ -47,15 +47,15 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <h3 className="text-[10px] font-black tracking-widest uppercase text-primary">CHANNELS</h3>
                 <div className="space-y-6">
-                  <ContactInfo icon={<Mail />} label="Email" value="arsalan@example.com" />
+                  <ContactInfo icon={<Mail />} label="Email" value="itsmuhammadahmad06@gmail.com" />
+                  <ContactInfo icon={<Phone />} label="Phone" value="+923434441031" />
                   <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
-                  <ContactInfo icon={<Phone />} label="Status" value="Available" />
                 </div>
               </div>
               <div className="flex gap-4">
-                <SocialCircle icon={<Youtube />} href="#" />
-                <SocialCircle icon={<Instagram />} href="#" />
-                <SocialCircle icon={<Github />} href="#" />
+                <SocialCircle icon={<Youtube />} href="https://youtube.com/@VoicesOfHaram" />
+                <SocialCircle icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
+                <SocialCircle icon={<Github />} href="https://github.com/codamic6" />
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ import {
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
-  Mail, MapPin
+  Mail, MapPin, Phone
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -191,13 +191,13 @@ export default function PortfolioPage() {
                 <Input placeholder="EMAIL" className="h-16 rounded-2xl border-primary/10" />
               </div>
               <Textarea placeholder="TELL ME ABOUT YOUR VISION..." className="min-h-[200px] rounded-3xl border-primary/10" />
-              <div className="pt-6">
+              <div className="pt-10">
                 <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">SEND</Button>
               </div>
             </form>
           </div>
           <div className="flex flex-col justify-center space-y-12 overflow-hidden">
-            <ContactInfo icon={<Mail />} label="EMAIL" value="arsalan@example.com" />
+            <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
             <div className="pt-10 flex gap-4">
               <Link href="/contact">
@@ -241,7 +241,7 @@ function ProjectCard({ title, cat, link }: any) {
     <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
       <span className="inline-block px-4 py-1 rounded-full bg-primary/5 text-primary font-black text-[9px] mb-6 tracking-widest uppercase">{cat}</span>
       <h3 className="text-3xl font-black tracking-tighter uppercase mb-6">{title}</h3>
-      <div className="pt-6">
+      <div className="pt-10">
         <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
           <a href={link} target="_blank">VISIT</a>
         </Button>
