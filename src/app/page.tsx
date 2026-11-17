@@ -74,32 +74,32 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC (FIXED RESPONSIVE) */}
-      <section className="py-20 md:py-40 px-4 md:px-6 relative">
+      {/* GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC (GOD MODE RESPONSIVE) */}
+      <section className="py-20 md:py-40 px-4 md:px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative p-8 md:p-20 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
+            className="relative p-6 md:p-16 lg:p-24 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
-            {/* Smooth Futuristic Mesh Gradients */}
-            <div className="absolute top-0 right-0 w-64 md:w-[600px] h-64 md:h-[600px] bg-red-600/[0.03] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 md:w-[400px] h-64 md:h-[400px] bg-primary/[0.03] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
+            {/* Ultra-Smooth Mesh Gradients (Red-Green Fusion) */}
+            <div className="absolute top-0 right-0 w-64 md:w-[600px] h-64 md:h-[600px] bg-red-600/[0.05] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 md:w-[400px] h-64 md:h-[400px] bg-primary/[0.05] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
               <div className="space-y-8 md:space-y-12 text-center lg:text-left">
                 <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[9px] md:text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                   <YoutubeIcon className="h-4 w-4" /> GLOBAL RANKING 2025
                 </div>
                 
                 <div className="space-y-6">
-                  <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter uppercase leading-[0.9] break-words">
-                    <span className="text-red-600">TOP 25%</span> <br/>
+                  <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col">
+                    <span className="text-red-600">TOP 25%</span>
                     <span className="text-green-gradient">GLOBALLY</span>
                   </h2>
-                  <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  <p className="text-base md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Alhamdulillah, <span className="text-primary font-black italic">Voices of Haram</span> has secured its position in the top 25% of creators in the 10K-50K tier worldwide.
                   </p>
                 </div>
@@ -107,54 +107,54 @@ export default function PortfolioPage() {
                 {/* Stats Row */}
                 <div className="flex flex-wrap justify-center lg:justify-start gap-8 md:gap-12">
                   <div className="space-y-1">
-                    <span className="text-4xl md:text-5xl font-black text-red-600">10K+</span>
+                    <span className="text-4xl md:text-6xl font-black text-red-600">10K+</span>
                     <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">COMMUNITY</p>
                   </div>
                   <div className="w-px h-12 bg-gray-100 hidden sm:block" />
                   <div className="space-y-1">
-                    <span className="text-4xl md:text-5xl font-black text-primary">Global</span>
+                    <span className="text-4xl md:text-6xl font-black text-primary">Global</span>
                     <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">FOOTPRINT</p>
                   </div>
                 </div>
 
                 <div className="pt-6 flex justify-center lg:justify-start">
-                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-12 h-16 md:h-20 text-sm md:text-lg font-black tracking-widest uppercase shadow-xl w-full sm:w-fit transition-all hover:scale-105">
+                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-10 h-16 md:h-20 text-sm md:text-lg font-black tracking-widest uppercase shadow-xl w-full sm:w-fit transition-all hover:scale-105">
                     <a href="https://youtube.com/@VoicesOfHaram" target="_blank">EXPLORE CHANNEL</a>
                   </Button>
                 </div>
               </div>
 
-              {/* Futuristic Trophy Visual */}
-              <div className="relative group perspective-1000 w-full max-w-md mx-auto">
+              {/* Futuristic Trophy Visual - Fixed Responsiveness */}
+              <div className="relative group w-full max-w-[480px] mx-auto lg:ml-auto lg:mr-0 px-2 lg:px-0">
                 <motion.div 
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative aspect-square rounded-[3rem] md:rounded-[4rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden"
+                  className="relative aspect-square lg:aspect-square rounded-[3rem] sm:rounded-[3.5rem] md:rounded-[4.5rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden"
                 >
-                  <div className="w-full h-full bg-white rounded-[2.9rem] md:rounded-[3.9rem] flex flex-col items-center justify-center text-center p-8 md:p-12 space-y-6 md:space-y-8 relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-                      <BarChart3 className="w-full h-full p-4" />
+                  <div className="w-full h-full bg-white rounded-[2.9rem] sm:rounded-[3.4rem] md:rounded-[4.4rem] flex flex-col items-center justify-center text-center p-6 md:p-14 space-y-4 md:space-y-10 relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                      <BarChart3 className="w-full h-full p-6" />
                     </div>
                     
-                    <Trophy className="h-16 w-16 md:h-24 md:w-24 text-red-600" />
+                    <Trophy className="h-14 w-14 md:h-28 md:w-28 text-red-600 shrink-0" />
                     <div className="space-y-2">
-                      <span className="text-[9px] font-black tracking-[0.4em] text-muted-foreground uppercase">Achievement</span>
-                      <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-primary uppercase">Voices <br/> of Haram</h3>
+                      <span className="text-[8px] md:text-[9px] font-black tracking-[0.4em] text-muted-foreground uppercase">Achievement</span>
+                      <h3 className="text-xl md:text-5xl font-black tracking-tighter text-primary uppercase leading-tight">Voices <br/> of Haram</h3>
                     </div>
                     <div className="w-full h-px bg-gray-100" />
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 md:gap-10">
                       <div className="text-center">
-                        <span className="text-xl md:text-2xl font-black text-red-600">YouTube</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase">PLATFORM</p>
+                        <span className="text-base md:text-3xl font-black text-red-600">YouTube</span>
+                        <p className="text-[7px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">PLATFORM</p>
                       </div>
                       <div className="w-px h-8 bg-gray-100" />
                       <div className="text-center">
-                        <span className="text-xl md:text-2xl font-black text-primary">Top 25%</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase">RANK</p>
+                        <span className="text-base md:text-3xl font-black text-primary">Top 25%</span>
+                        <p className="text-[7px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">RANK</p>
                       </div>
                     </div>
-                    <Sparkles className="absolute top-8 right-8 h-5 w-5 text-red-600/20 animate-pulse" />
-                    <Star className="absolute bottom-8 left-8 h-5 w-5 text-primary/20 animate-pulse" />
+                    <Sparkles className="absolute top-6 md:top-10 right-6 md:right-10 h-4 md:h-6 w-4 md:w-6 text-red-600/20 animate-pulse" />
+                    <Star className="absolute bottom-6 md:bottom-10 left-6 md:left-10 h-4 md:h-6 w-4 md:w-6 text-primary/20 animate-pulse" />
                   </div>
                 </motion.div>
               </div>
