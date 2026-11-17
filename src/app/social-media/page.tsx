@@ -76,7 +76,7 @@ export default function SocialMediaPage() {
                 A premier digital ecosystem dedicated to global recitations and spiritual tradition.
               </p>
               
-              <div className="grid grid-cols-2 gap-10">
+              <div className="grid grid-cols-2 gap-10 pt-6">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
                   <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
@@ -87,7 +87,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
 
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center lg:justify-start pt-10">
                 <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
                   <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
                 </Button>
@@ -124,7 +124,7 @@ export default function SocialMediaPage() {
                 <p className="text-2xl text-muted-foreground/80 font-medium max-w-md mx-auto lg:mx-0">
                   Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> individuals united through technology.
                 </p>
-                <div className="flex justify-center lg:justify-start">
+                <div className="flex justify-center lg:justify-start pt-10">
                   <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
@@ -155,17 +155,17 @@ export default function SocialMediaPage() {
             <div className="relative inline-block group">
               <div className="w-64 h-64 md:w-96 md:h-96 rounded-[4rem] p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rotate-6 group-hover:rotate-0 transition-transform">
                 <div className="w-full h-full rounded-[3.5rem] border-[10px] border-white overflow-hidden relative -rotate-6 group-hover:rotate-0 transition-transform">
-                  <Image src="https://picsum.photos/seed/waleed-pro/800/800" alt="Sheikh Waleed" fill className="object-cover" />
+                  <Image src="https://picsum.photos/seed/waleed-pro/800/800" alt="Sheikh Waleed" fill className="object-cover" data-ai-hint="portrait islamic" />
                 </div>
               </div>
             </div>
-            <div className="space-y-10 px-4">
+            <div className="space-y-10 px-4 pt-10">
               <div className="inline-flex items-center gap-4 px-6 py-4 rounded-full bg-white shadow-2xl border border-pink-100 max-w-full mx-auto">
                 <Instagram className="h-6 w-6 text-[#E1306C] shrink-0" />
                 <span className="text-xl md:text-3xl font-black tracking-tighter">7,000+ Followers</span>
               </div>
               <p className="text-xl md:text-3xl font-black tracking-widest text-primary uppercase max-w-[90vw] mx-auto truncate">@sheikh_waleed_al_shamsan</p>
-              <div className="flex justify-center">
+              <div className="flex justify-center pt-10">
                 <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105 w-fit">
                   <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">VISIT</a>
                 </Button>

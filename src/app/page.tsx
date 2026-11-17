@@ -62,14 +62,16 @@ export default function PortfolioPage() {
               <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
               <p>While standard revision takes 6 months, I completed mine in exactly <span className="text-primary font-bold italic">1 Month</span>.</p>
             </div>
-            <Link href="/about">
-              <Button variant="link" className="p-0 text-primary font-black tracking-widest text-[10px] uppercase group">
-                READ THE FULL STORY <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
-              </Button>
-            </Link>
+            <div className="pt-10">
+              <Link href="/about">
+                <Button variant="link" className="p-0 text-primary font-black tracking-widest text-[10px] uppercase group">
+                  READ THE FULL STORY <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
+                </Button>
+              </Link>
+            </div>
           </div>
           <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border border-primary/10">
-            <Image src="https://picsum.photos/seed/happy-identity/800/800" alt="About" fill className="object-cover" />
+            <Image src="https://picsum.photos/seed/happy-identity/800/800" alt="About" fill className="object-cover" data-ai-hint="portrait professional" />
             <div className="absolute inset-0 bg-primary/10" />
           </div>
         </div>
@@ -87,9 +89,11 @@ export default function PortfolioPage() {
           <div className="space-y-10 text-center lg:text-left">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-[0.9]">Features</h2>
             <p className="text-muted-foreground text-xl font-medium">Real-time Khutbah schedules, Imam rosters, Salah updates, and live atmospheric moments from the Two Holy Mosques.</p>
-            <Link href="/social-media">
-              <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">EXPLORE INTEL</Button>
-            </Link>
+            <div className="pt-10">
+              <Link href="/social-media">
+                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">EXPLORE INTEL</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -144,9 +148,11 @@ export default function PortfolioPage() {
               </div>
               <h3 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h3>
               <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2025.</p>
-              <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
-                <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
-              </Button>
+              <div className="pt-10 flex justify-center lg:justify-start">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
+                  <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
+                </Button>
+              </div>
             </div>
             <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-black">
               <iframe className="w-full h-full" src="https://www.youtube.com/embed/VOA8Gc44ZIE" title="VOH" frameBorder="0" allowFullScreen></iframe>
@@ -158,7 +164,7 @@ export default function PortfolioPage() {
               <div className="space-y-8">
                 <h3 className="text-[100px] md:text-[180px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h3>
                 <p className="text-2xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0">Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> members.</p>
-                <div className="flex justify-center lg:justify-start">
+                <div className="flex justify-center lg:justify-start pt-10">
                   <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
@@ -184,7 +190,9 @@ export default function PortfolioPage() {
                 <Input placeholder="EMAIL" className="h-16 rounded-2xl border-primary/10" />
               </div>
               <Textarea placeholder="TELL ME ABOUT YOUR VISION..." className="min-h-[200px] rounded-3xl border-primary/10" />
-              <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">SEND</Button>
+              <div className="pt-6">
+                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">SEND</Button>
+              </div>
             </form>
           </div>
           <div className="flex flex-col justify-center space-y-12">
@@ -234,9 +242,11 @@ function ProjectCard({ title, cat, link }: any) {
     <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
       <span className="inline-block px-4 py-1 rounded-full bg-primary/5 text-primary font-black text-[9px] mb-6 tracking-widest uppercase">{cat}</span>
       <h3 className="text-3xl font-black tracking-tighter uppercase mb-6">{title}</h3>
-      <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
-        <a href={link} target="_blank">VISIT</a>
-      </Button>
+      <div className="pt-6">
+        <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
+          <a href={link} target="_blank">VISIT</a>
+        </Button>
+      </div>
     </div>
   )
 }
