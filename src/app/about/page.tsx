@@ -60,7 +60,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
-              <Image src="https://picsum.photos/seed/happy-identity/1000/1000" alt="About" fill className="object-cover" />
+              <Image src="/my_avt.png" alt="About" fill className="object-cover" />
               <div className="absolute inset-0 bg-primary/10" />
             </div>
           </div>

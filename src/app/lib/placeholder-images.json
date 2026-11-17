@@ -8,6 +8,12 @@
       "imageHint": "main hero"
     },
     {
+      "id": "my-avatar",
+      "description": "User Profile Avatar",
+      "imageUrl": "/my_avt.png",
+      "imageHint": "portrait professional"
+    },
+    {
       "id": "happychat",
       "description": "HappyChat App UI - WhatsApp Clone",
       "imageUrl": "https://picsum.photos/seed/chat-app/600/400",

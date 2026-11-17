@@ -175,7 +175,7 @@ export default function PortfolioPage() {
             </div>
           </div>
           <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border border-primary/10">
-            <Image src="https://picsum.photos/seed/happy-identity/800/800" alt="About" fill className="object-cover" data-ai-hint="portrait professional" />
+            <Image src="/my_avt.png" alt="About" fill className="object-cover" data-ai-hint="portrait professional" />
             <div className="absolute inset-0 bg-primary/10" />
           </div>
         </div>
