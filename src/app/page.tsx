@@ -23,7 +23,7 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero with Enhanced Fade Background */}
+      {/* Hero - Background Transition Removed for Test */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
@@ -34,7 +34,7 @@ export default function PortfolioPage() {
             data-ai-hint="main hero"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
+          {/* Fade transition removed here as requested for Home Page test */}
         </div>
         
         <motion.div 
