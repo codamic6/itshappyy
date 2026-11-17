@@ -74,7 +74,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION - NEON REDESIGN 2026 (SHORTER & SPACIOUS) */}
+      {/* GLOBAL ACHIEVEMENT SECTION - NEON REDESIGN 2026 (SOFT GLOW) */}
       <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -129,24 +129,24 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* NEON YOUTUBE ICON IMPLEMENTATION */}
+              {/* NEON YOUTUBE ICON IMPLEMENTATION - SOFTENED GLOW */}
               <div className="relative w-full max-w-[400px] mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center py-10">
                 <div className="relative group">
-                  {/* Neon Glow Rings */}
-                  <div className="absolute inset-0 bg-red-600/20 blur-[100px] rounded-full scale-150 animate-pulse" />
-                  <div className="absolute inset-0 bg-primary/10 blur-[60px] rounded-full scale-125" />
+                  {/* Softer Neon Glow Rings */}
+                  <div className="absolute inset-0 bg-red-600/[0.05] blur-[80px] rounded-full scale-150 animate-pulse" />
+                  <div className="absolute inset-0 bg-primary/[0.03] blur-[50px] rounded-full scale-125" />
                   
                   {/* Neon Icon Container */}
-                  <div className="relative p-12 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] shadow-[0_0_80px_rgba(220,38,38,0.15)] flex items-center justify-center transition-all group-hover:shadow-[0_0_100px_rgba(220,38,38,0.3)]">
+                  <div className="relative p-12 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] shadow-[0_0_40px_rgba(220,38,38,0.05)] flex items-center justify-center transition-all group-hover:shadow-[0_0_60px_rgba(220,38,38,0.1)]">
                     <svg 
                       viewBox="0 0 24 24" 
-                      className="w-32 h-32 md:w-48 md:h-48 fill-red-600 drop-shadow-[0_0_25px_rgba(220,38,38,0.8)] filter transition-all group-hover:scale-110"
+                      className="w-32 h-32 md:w-48 md:h-48 fill-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.3)] filter transition-all group-hover:scale-105"
                     >
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                     
                     {/* Small Floating Elements */}
-                    <div className="absolute -top-4 -right-4 bg-white border border-red-100 shadow-xl rounded-full p-3 animate-bounce">
+                    <div className="absolute -top-4 -right-4 bg-white border border-red-50 shadow-xl rounded-full p-3 animate-bounce">
                       <Star className="h-5 w-5 text-red-600 fill-red-600" />
                     </div>
                   </div>
