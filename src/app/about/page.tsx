@@ -4,6 +4,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
 import Image from 'next/image'
 import { Trophy, Star, ShieldCheck, Zap } from 'lucide-react'
 
@@ -49,9 +50,7 @@ export default function AboutPage() {
         </motion.div>
       </main>
 
-      <footer className="py-10 border-t border-primary/5 text-center">
-        <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">&copy; 2026 HAPPY | ALL RIGHTS RESERVED</p>
-      </footer>
+      <Footer />
     </div>
   )
 }

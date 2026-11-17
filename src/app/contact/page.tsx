@@ -4,6 +4,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
 import { Mail, Github, Linkedin, Youtube, Instagram, Send, MapPin, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -61,9 +62,7 @@ export default function ContactPage() {
         </motion.div>
       </main>
 
-      <footer className="py-10 border-t border-primary/5 text-center">
-        <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">&copy; 2026 HAPPY | ALL RIGHTS RESERVED</p>
-      </footer>
+      <Footer />
     </div>
   )
 }
