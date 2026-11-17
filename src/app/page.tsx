@@ -74,7 +74,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* NEW GLOBAL ACHIEVEMENT SECTION - VOICES OF HARAM */}
+      {/* NEW GLOBAL ACHIEVEMENT SECTION - VOICES OF HARAM (FUTURISTIC) */}
       <section className="py-40 px-6 relative bg-primary/[0.01]">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -121,7 +121,7 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* Futuristic Visual Card */}
+              {/* Futuristic Visual Card with 3D Effect */}
               <div className="relative group perspective-1000">
                 <motion.div 
                   animate={{ y: [0, -20, 0] }}
@@ -267,7 +267,7 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          {/* FB Section - Responsive Grid Stack */}
+          {/* FB Section */}
           <div className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 text-center lg:text-left">
               <div className="space-y-8">
@@ -279,7 +279,6 @@ export default function PortfolioPage() {
                   </Button>
                 </div>
               </div>
-              {/* Responsive Stats Box - Stacks on Mobile */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
                 <MiniStat count="25K+" label="MEMBERS" />
                 <MiniStat count="Global" label="REACH" />
