@@ -21,11 +21,11 @@ export default function ContactPage() {
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image 
-              src="https://picsum.photos/seed/contact-hero/1200/800" 
+              src="/hero.png" 
               alt="Hero Background" 
               fill 
-              className="object-cover opacity-40"
-              data-ai-hint="minimalist abstract communication"
+              className="object-cover opacity-50"
+              data-ai-hint="contact hero"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
           </div>

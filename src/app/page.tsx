@@ -27,11 +27,11 @@ export default function PortfolioPage() {
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="https://picsum.photos/seed/portfolio1/1200/800" 
+            src="/hero.png" 
             alt="Hero Background" 
             fill 
-            className="object-cover opacity-40"
-            data-ai-hint="abstract dark technology"
+            className="object-cover opacity-50"
+            data-ai-hint="main hero"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />

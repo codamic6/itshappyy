@@ -3,9 +3,9 @@
   "placeholderImages": [
     {
       "id": "hero-bg",
-      "description": "Abstract futuristic dark background",
-      "imageUrl": "https://picsum.photos/seed/portfolio1/1200/800",
-      "imageHint": "abstract dark technology"
+      "description": "Main Hero Background from public/hero.png",
+      "imageUrl": "/hero.png",
+      "imageHint": "main hero"
     },
     {
       "id": "happychat",
@@ -33,33 +33,33 @@
     },
     {
       "id": "about-hero",
-      "description": "Professional abstract hero for about page",
-      "imageUrl": "https://picsum.photos/seed/about-hero/1200/800",
-      "imageHint": "abstract professional clean"
+      "description": "About Page Hero",
+      "imageUrl": "/hero.png",
+      "imageHint": "about hero"
     },
     {
       "id": "projects-hero",
-      "description": "Code and technology abstract hero",
-      "imageUrl": "https://picsum.photos/seed/projects-hero/1200/800",
-      "imageHint": "software code abstract"
+      "description": "Projects Page Hero",
+      "imageUrl": "/hero.png",
+      "imageHint": "projects hero"
     },
     {
       "id": "edu-hero",
-      "description": "Academic and architecture hero",
-      "imageUrl": "https://picsum.photos/seed/edu-hero/1200/800",
-      "imageHint": "library architecture modern"
+      "description": "Education Page Hero",
+      "imageUrl": "/hero.png",
+      "imageHint": "education hero"
     },
     {
       "id": "social-hero",
-      "description": "Digital reach and connection hero",
-      "imageUrl": "https://picsum.photos/seed/social-hero/1200/800",
-      "imageHint": "digital network connection"
+      "description": "Social Media Page Hero",
+      "imageUrl": "/hero.png",
+      "imageHint": "social hero"
     },
     {
       "id": "contact-hero",
-      "description": "Minimalist communication hero",
-      "imageUrl": "https://picsum.photos/seed/contact-hero/1200/800",
-      "imageHint": "minimalist abstract communication"
+      "description": "Contact Page Hero",
+      "imageUrl": "/hero.png",
+      "imageHint": "contact hero"
     }
   ]
 }

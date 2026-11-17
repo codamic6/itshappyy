@@ -18,11 +18,11 @@ export default function AboutPage() {
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image 
-              src="https://picsum.photos/seed/about-hero/1200/800" 
+              src="/hero.png" 
               alt="Hero Background" 
               fill 
-              className="object-cover opacity-40"
-              data-ai-hint="abstract clean"
+              className="object-cover opacity-50"
+              data-ai-hint="about hero"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
           </div>
