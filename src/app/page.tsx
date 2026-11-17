@@ -23,17 +23,24 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Atmosphere */}
-      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute top-[40%] -right-40 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px]" />
-      </div>
-
-      {/* Hero */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20">
+      {/* Hero with Fade Background */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="https://picsum.photos/seed/portfolio1/1200/800" 
+            alt="Hero Background" 
+            fill 
+            className="object-cover opacity-20"
+            data-ai-hint="abstract dark technology"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+        </div>
+        
         <motion.div 
-          initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-          className="max-w-6xl w-full text-center space-y-4"
+          initial={{ opacity: 0, y: 30 }} 
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
           <div className="flex items-center justify-center overflow-visible px-4">
             <h1 className="text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap">
@@ -55,7 +62,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-40 px-6 max-w-7xl mx-auto border-t border-primary/5">
+      <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">About</h2>
@@ -192,23 +199,21 @@ export default function PortfolioPage() {
               </div>
               <Textarea placeholder="TELL ME ABOUT YOUR VISION..." className="min-h-[200px] rounded-3xl border-primary/10" />
               <div className="pt-10">
-                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">VISIT</Button>
+                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase shadow-2xl">VISIT</Button>
               </div>
             </form>
           </div>
-          <div className="flex flex-col justify-center space-y-12 py-12">
+          <div className="flex flex-col justify-center space-y-12 py-12 pb-12">
             <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
+            <ContactInfo icon={<Phone />} label="PHONE" value="+923434441031" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
-            <div className="pt-10 pb-12 flex gap-6">
-               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
+            <div className="pt-10 flex gap-6">
+               <a href="https://youtube.com/@VoicesOfHaram" target="_blank" className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0 hover:bg-primary hover:text-white transition-all">
                 <YoutubeIcon className="h-6 w-6" />
-               </div>
-               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
+               </a>
+               <a href="https://instagram.com/voicesofharam.official" target="_blank" className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0 hover:bg-primary hover:text-white transition-all">
                 <Instagram className="h-6 w-6" />
-               </div>
-               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
-                <Phone className="h-6 w-6" />
-               </div>
+               </a>
             </div>
           </div>
         </div>
@@ -248,7 +253,7 @@ function ProjectCard({ title, cat, link }: any) {
       <span className="inline-block px-4 py-1 rounded-full bg-primary/5 text-primary font-black text-[9px] mb-6 tracking-widest uppercase">{cat}</span>
       <h3 className="text-3xl font-black tracking-tighter uppercase mb-6">{title}</h3>
       <div className="pt-10">
-        <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase">
+        <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase shadow-sm">
           <a href={link} target="_blank">VISIT</a>
         </Button>
       </div>
