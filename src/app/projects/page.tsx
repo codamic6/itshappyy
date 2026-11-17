@@ -132,7 +132,7 @@ export default function ProjectsPage() {
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 h-5 w-5" />
               <Input 
                 placeholder="SEARCH PROJECTS..." 
-                className="h-20 pl-16 pr-6 rounded-full border-primary/10 bg-primary/[0.01] text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
+                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-primary/[0.01] text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
