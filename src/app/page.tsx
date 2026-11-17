@@ -12,7 +12,7 @@ import {
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
-  Mail, MapPin, Phone, Instagram, Globe, BarChart3, Users
+  Mail, MapPin, Phone, Instagram, Globe, BarChart3, Users, Network, Activity, Radio
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -74,7 +74,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* NEW GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC REDESIGN (STATIC & STABLE) */}
+      {/* GLOBAL ACHIEVEMENT SECTION - 2026 REDESIGN (RED & GREEN RADAR UI) */}
       <section className="py-20 md:py-40 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -84,14 +84,14 @@ export default function PortfolioPage() {
             transition={{ duration: 0.8 }}
             className="relative p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
-            {/* Smoothest Mesh Gradients for Atmosphere */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.03] rounded-full blur-[120px] -mr-32 -mt-32 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.03] rounded-full blur-[100px] -ml-20 -mb-20 pointer-events-none" />
+            {/* Smooth Mesh Gradients */}
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-600/[0.04] rounded-full blur-[120px] -mr-32 -mt-32 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[100px] -ml-20 -mb-20 pointer-events-none" />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
                 <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
-                  <YoutubeIcon className="h-4 w-4" /> GLOBAL MILESTONE 2025
+                  <YoutubeIcon className="h-4 w-4" /> GLOBAL MILESTONE 2026
                 </div>
                 
                 <div className="space-y-6">
@@ -100,7 +100,7 @@ export default function PortfolioPage() {
                     <span className="text-green-gradient">GLOBALLY</span>
                   </h2>
                   <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                    Alhamdulillah, <span className="text-primary font-black italic">Voices of Haram</span> has secured its position in the top 25% of creators in the 10K-50K tier worldwide.
+                    Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top 25% of creators worldwide.
                   </p>
                 </div>
 
@@ -130,37 +130,51 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* Static Showcase Visual - Zero Overflow Redesign */}
-              <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto lg:mr-0">
-                <div className="relative aspect-square rounded-[4rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden group">
-                  <div className="w-full h-full bg-white rounded-[3.9rem] flex flex-col items-center justify-center text-center p-8 md:p-16 space-y-8 md:space-y-12 relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-700">
-                      <BarChart3 className="w-full h-full p-6" />
-                    </div>
-                    
-                    <Trophy className="h-16 w-16 md:h-28 md:w-28 text-red-600 shrink-0" />
-                    
-                    <div className="space-y-3">
-                      <span className="text-[9px] font-black tracking-[0.5em] text-muted-foreground uppercase">Verified Creator</span>
-                      <h3 className="text-2xl md:text-5xl font-black tracking-tighter text-primary uppercase leading-tight">Voices <br/> of Haram</h3>
-                    </div>
-                    
-                    <div className="w-full h-px bg-gray-100" />
-                    
-                    <div className="grid grid-cols-2 gap-8 w-full">
-                      <div className="text-center">
-                        <span className="text-xl md:text-3xl font-black text-red-600">30.5K</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">LOYAL SUBSCRIBERS</p>
-                      </div>
-                      <div className="text-center border-l border-gray-100">
-                        <span className="text-xl md:text-3xl font-black text-primary">25%</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">WORLDWIDE RANK</p>
+              {/* NEW RADAR NODE IMPLEMENTATION - UNIQUE VISUALIZATION */}
+              <div className="relative w-full max-w-[500px] mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center">
+                <div className="relative w-full aspect-square flex items-center justify-center">
+                  {/* Outer Rings */}
+                  <div className="absolute inset-0 border border-red-600/5 rounded-full scale-100" />
+                  <div className="absolute inset-0 border border-primary/5 rounded-full scale-75" />
+                  <div className="absolute inset-0 border border-red-600/10 rounded-full scale-50" />
+                  
+                  {/* Central Node */}
+                  <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-red-600 to-primary p-[2px] shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+                    <div className="w-full h-full bg-white rounded-full flex flex-col items-center justify-center text-center p-6 relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <Radio className="h-10 w-10 md:h-16 md:w-16 text-red-600 mb-2 animate-pulse" />
+                      <h3 className="text-xl md:text-2xl font-black text-primary uppercase leading-tight">VOH<br/>CORE</h3>
+                      <div className="mt-2 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
+                        <span className="text-[8px] font-black tracking-widest text-muted-foreground">ACTIVE NODE</span>
                       </div>
                     </div>
-                    
-                    <Sparkles className="absolute top-8 right-8 h-6 w-6 text-red-600/20 animate-pulse" />
-                    <Star className="absolute bottom-8 left-8 h-6 w-6 text-primary/20 animate-pulse" />
                   </div>
+
+                  {/* Satellite Data Points - Static & Balanced */}
+                  <div className="absolute top-[10%] left-[20%] p-4 bg-white border border-red-100 shadow-xl rounded-2xl flex items-center gap-3">
+                    <YoutubeIcon className="h-4 w-4 text-red-600" />
+                    <span className="text-[10px] font-black text-primary">30.5K+</span>
+                  </div>
+                  
+                  <div className="absolute top-[20%] right-[5%] p-4 bg-white border border-primary/10 shadow-xl rounded-2xl flex items-center gap-3">
+                    <Star className="h-4 w-4 text-primary" />
+                    <span className="text-[10px] font-black text-primary">TOP 25%</span>
+                  </div>
+
+                  <div className="absolute bottom-[20%] left-[5%] p-4 bg-white border border-primary/10 shadow-xl rounded-2xl flex items-center gap-3">
+                    <Network className="h-4 w-4 text-primary" />
+                    <span className="text-[10px] font-black text-primary">GLOBAL SYNC</span>
+                  </div>
+
+                  <div className="absolute bottom-[10%] right-[20%] p-4 bg-white border border-red-100 shadow-xl rounded-2xl flex items-center gap-3">
+                    <Activity className="h-4 w-4 text-red-600" />
+                    <span className="text-[10px] font-black text-primary">5M+ REACH</span>
+                  </div>
+
+                  {/* Connecting Lines (Simulated with CSS) */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent rotate-45 pointer-events-none" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-red-600/10 to-transparent -rotate-45 pointer-events-none" />
                 </div>
               </div>
             </div>
@@ -262,7 +276,7 @@ export default function PortfolioPage() {
                 <YoutubeIcon className="h-4 w-4" /> Voices of Haram
               </div>
               <h3 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h3>
-              <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2025.</p>
+              <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2026.</p>
               <div className="pt-10 flex justify-center lg:justify-start">
                 <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
                   <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>

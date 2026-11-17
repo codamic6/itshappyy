@@ -112,7 +112,7 @@ export default function SocialMediaPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-10 pt-6">
                   <div className="space-y-1">
-                    <span className="text-5xl font-black tracking-tighter text-red-600">30K+</span>
+                    <span className="text-5xl font-black tracking-tighter text-red-600">30.5K+</span>
                     <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
                   </div>
                   <div className="space-y-1">

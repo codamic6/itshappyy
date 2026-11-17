@@ -67,7 +67,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <ValueCard icon={<Trophy />} title="RECORD" desc="Hifz revision 6x faster than average." />
-            <ValueCard icon={<Star />} title="BRAND" desc="Voices of Haram established 2025." />
+            <ValueCard icon={<Star />} title="BRAND" desc="Voices of Haram established 2026." />
             <ValueCard icon={<ShieldCheck />} title="LOGIC" desc="High-performance brand architecting." />
             <ValueCard icon={<Zap />} title="SPEED" desc="Zero to global reach in record time." />
           </div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           <div className="crystal-panel p-12 md:p-20 rounded-[4rem] space-y-10">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Vision</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-muted-foreground font-medium text-lg leading-relaxed">
-              <p>Founded in 2025, <span className="text-primary font-bold">Voices of Haram</span> serves as a global ecosystem bridging spiritual tradition with digital engineering.</p>
+              <p>Founded in 2026, <span className="text-primary font-bold">Voices of Haram</span> serves as a global ecosystem bridging spiritual tradition with digital engineering.</p>
               <p>As a software architect, I build systems that scale. Every project is a testament to precision and focus.</p>
             </div>
           </div>

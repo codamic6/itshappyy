@@ -76,7 +76,7 @@ export function Footer() {
                   </div>
                   <div className="flex items-center gap-3 text-muted-foreground/60">
                     <Shield className="h-3 w-3" />
-                    <p className="text-[9px] uppercase tracking-widest font-bold">Est. 2025</p>
+                    <p className="text-[9px] uppercase tracking-widest font-bold">Est. 2026</p>
                   </div>
                 </div>
               </div>
