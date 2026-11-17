@@ -23,18 +23,18 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero - Background Transition Removed for Test */}
+      {/* Hero - Full Background Image for Mobile & PC */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero.png" 
             alt="Hero Background" 
             fill 
-            className="object-cover opacity-50"
+            className="object-cover object-center opacity-50"
             data-ai-hint="main hero"
             priority
           />
-          {/* Fade transition removed here as requested for Home Page test */}
+          {/* Note: Fade transition removed for Home Page as per test request */}
         </div>
         
         <motion.div 
@@ -43,11 +43,11 @@ export default function PortfolioPage() {
           className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
           <div className="flex items-center justify-center overflow-visible px-4">
-            <h1 className="text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap">
+            <h1 className="text-[80px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap">
               HAPPY
             </h1>
           </div>
-          <p className="text-sm md:text-base text-muted-foreground max-w-4xl mx-auto font-medium uppercase tracking-tight">
+          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] sm:tracking-tight px-4">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
@@ -88,13 +88,13 @@ export default function PortfolioPage() {
       {/* Features Section */}
       <section id="features" className="py-40 px-6 bg-primary/[0.02]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-none grid grid-cols-2 gap-4">
+          <div className="order-2 lg:order-none grid grid-cols-2 gap-4 md:gap-6">
             <FeatureIconBox icon={<Mic2 />} label="Khateeb" />
             <FeatureIconBox icon={<Clock />} label="Salah" className="mt-8" />
             <FeatureIconBox icon={<Calendar />} label="Schedule" />
             <FeatureIconBox icon={<CloudRain />} label="Live" className="mt-8" />
           </div>
-          <div className="space-y-10 text-center lg:text-left">
+          <div className="space-y-10 text-center lg:text-left shadow-accent/5">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-[0.9]">Features</h2>
             <p className="text-muted-foreground text-xl font-medium">Real-time Khutbah schedules, Imam rosters, Salah updates, and live atmospheric moments from the Two Holy Mosques.</p>
             <div className="pt-10">
@@ -167,6 +167,7 @@ export default function PortfolioPage() {
             </div>
           </div>
 
+          {/* FB Section - Responsive Grid Stack */}
           <div className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 text-center lg:text-left">
               <div className="space-y-8">
@@ -178,6 +179,7 @@ export default function PortfolioPage() {
                   </Button>
                 </div>
               </div>
+              {/* Responsive Stats Box - Stacks on Mobile */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
                 <MiniStat count="25K+" label="MEMBERS" />
                 <MiniStat count="Global" label="REACH" />
