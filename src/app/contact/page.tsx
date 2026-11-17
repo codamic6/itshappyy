@@ -34,9 +34,11 @@ export default function ContactPage() {
                 </div>
                 <Input className="h-16 rounded-2xl border-primary/10" placeholder="SUBJECT" />
                 <Textarea className="min-h-[200px] rounded-3xl border-primary/10" placeholder="VISION..." />
-                <Button className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl">
-                  VISIT <Send className="ml-2 h-5 w-5" />
-                </Button>
+                <div className="pt-6">
+                  <Button className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl">
+                    VISIT <Send className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
               </form>
             </div>
 
@@ -69,7 +71,7 @@ export default function ContactPage() {
 function ContactInfo({ icon, label, value }: any) {
   return (
     <div className="flex items-center gap-6 group">
-      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {React.cloneElement(icon, { className: "h-6 w-6" })}
       </div>
       <div>

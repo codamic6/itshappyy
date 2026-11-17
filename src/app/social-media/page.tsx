@@ -111,17 +111,17 @@ export default function SocialMediaPage() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="bg-[#F0F2F5] p-16 md:p-24 rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden"
+            className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden"
           >
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1877F2]/5 rounded-full blur-[120px] pointer-events-none" />
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-[#1877F2]/10 border border-[#1877F2]/20 text-[#1877F2] font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                   Digital Hub
                 </div>
-                <h2 className="text-[120px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
-                <p className="text-2xl text-muted-foreground/80 font-medium max-w-md mx-auto lg:mx-0">
+                <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
+                <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium max-w-md mx-auto lg:mx-0">
                   Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> individuals united through technology.
                 </p>
                 <div className="flex justify-center lg:justify-start pt-10">
@@ -131,7 +131,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <StatBox icon={<Users />} label="Members" count="25K+" />
                 <StatBox icon={<Send />} label="Weekly" count="100+" />
                 <StatBox icon={<TrendingUp />} label="Impact" count="High" />
@@ -196,7 +196,7 @@ function UpdateCard({ icon, title, desc }: any) {
 
 function StatBox({ icon, label, count }: any) {
   return (
-    <div className="p-6 md:p-8 rounded-[2.5rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4">
+    <div className="p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4 w-full">
       <div className="text-[#1877F2]">{React.cloneElement(icon, { className: "h-6 w-6 md:h-8 md:w-8" })}</div>
       <div className="space-y-1">
         <h4 className="text-xl md:text-2xl font-black tracking-tighter">{count}</h4>

@@ -91,7 +91,7 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground text-xl font-medium">Real-time Khutbah schedules, Imam rosters, Salah updates, and live atmospheric moments from the Two Holy Mosques.</p>
             <div className="pt-10">
               <Link href="/social-media">
-                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">EXPLORE INTEL</Button>
+                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
               </Link>
             </div>
           </div>
@@ -159,18 +159,18 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          <div className="bg-[#F0F2F5] p-12 md:p-24 rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10 text-center lg:text-left">
+          <div className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 text-center lg:text-left">
               <div className="space-y-8">
-                <h3 className="text-[100px] md:text-[180px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h3>
-                <p className="text-2xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0">Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> members.</p>
+                <h3 className="text-[80px] md:text-[180px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h3>
+                <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0">Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> members.</p>
                 <div className="flex justify-center lg:justify-start pt-10">
                   <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <MiniStat count="25K+" label="MEMBERS" />
                 <MiniStat count="Global" label="REACH" />
               </div>
@@ -185,7 +185,7 @@ export default function PortfolioPage() {
           <div className="crystal-panel p-10 md:p-16 rounded-[4rem] space-y-10">
             <h2 className="text-4xl font-black tracking-tighter uppercase">Connect</h2>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input placeholder="NAME" className="h-16 rounded-2xl border-primary/10" />
                 <Input placeholder="EMAIL" className="h-16 rounded-2xl border-primary/10" />
               </div>
@@ -253,8 +253,8 @@ function ProjectCard({ title, cat, link }: any) {
 
 function MiniStat({ count, label }: any) {
   return (
-    <div className="p-8 rounded-[2rem] bg-white shadow-xl flex flex-col items-center justify-center text-center space-y-2">
-      <span className="text-3xl font-black text-[#1877F2] tracking-tighter">{count}</span>
+    <div className="p-8 rounded-[2rem] bg-white shadow-xl flex flex-col items-center justify-center text-center space-y-2 min-h-[140px] w-full">
+      <span className="text-3xl md:text-4xl font-black text-[#1877F2] tracking-tighter">{count}</span>
       <span className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</span>
     </div>
   )
@@ -262,8 +262,10 @@ function MiniStat({ count, label }: any) {
 
 function ContactInfo({ icon, label, value }: any) {
   return (
-    <div className="flex items-center gap-6">
-      <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">{icon}</div>
+    <div className="flex items-center gap-6 group">
+      <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
+        {icon}
+      </div>
       <div>
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
         <p className="text-xl font-black tracking-tighter uppercase">{value}</p>
