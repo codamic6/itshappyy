@@ -12,7 +12,7 @@ import {
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
-  Mail, MapPin, Phone
+  Mail, MapPin, Phone, Instagram
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -45,10 +45,10 @@ export default function PortfolioPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
             <Link href="/projects">
-              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">EXPLORE WORK</Button>
+              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">VISIT</Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">GET IN TOUCH</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
             </Link>
           </div>
         </motion.div>
@@ -66,7 +66,7 @@ export default function PortfolioPage() {
             <div className="pt-10">
               <Link href="/about">
                 <Button variant="link" className="p-0 text-primary font-black tracking-widest text-[10px] uppercase group">
-                  READ THE FULL STORY <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
+                  VISIT <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
                 </Button>
               </Link>
             </div>
@@ -113,7 +113,7 @@ export default function PortfolioPage() {
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW FULL TIMELINE</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
             </Link>
           </div>
         </div>
@@ -127,13 +127,13 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scalable Digital Architectures</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard title="Chizzy AI" cat="AI Tool" link="https://chizzy-two.vercel.app" />
+            <ProjectCard title="Chizzy AI" cat="AI Tools" link="https://chizzy-two.vercel.app" />
             <ProjectCard title="HappyChat" cat="Messaging" link="https://happychat-murex.vercel.app" />
             <ProjectCard title="HappyLink" cat="Identity" link="https://happylink-beta.vercel.app" />
           </div>
           <div className="text-center pt-10">
             <Link href="/projects">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase">ALL PROJECTS</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase">VISIT</Button>
             </Link>
           </div>
         </div>
@@ -192,17 +192,23 @@ export default function PortfolioPage() {
               </div>
               <Textarea placeholder="TELL ME ABOUT YOUR VISION..." className="min-h-[200px] rounded-3xl border-primary/10" />
               <div className="pt-10">
-                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">SEND</Button>
+                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase">VISIT</Button>
               </div>
             </form>
           </div>
-          <div className="flex flex-col justify-center space-y-12 overflow-hidden">
+          <div className="flex flex-col justify-center space-y-12 py-12">
             <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
-            <div className="pt-10 flex gap-4">
-              <Link href="/contact">
-                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black text-[10px] tracking-widest uppercase">VISIT</Button>
-              </Link>
+            <div className="pt-10 pb-12 flex gap-6">
+               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
+                <YoutubeIcon className="h-6 w-6" />
+               </div>
+               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
+                <Instagram className="h-6 w-6" />
+               </div>
+               <div className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0">
+                <Phone className="h-6 w-6" />
+               </div>
             </div>
           </div>
         </div>
