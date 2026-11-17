@@ -115,17 +115,30 @@ export default function ProjectsPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
-      <main className="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="space-y-24"
-        >
-          {/* Header */}
-          <div className="text-center space-y-6">
-            <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase leading-none">Work</h1>
-            <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.3em]">Engineering Scalable Futures</p>
+      <main className="pb-20">
+        {/* Dedicated Hero Section with Fade */}
+        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image 
+              src="https://picsum.photos/seed/projects-hero/1200/800" 
+              alt="Hero Background" 
+              fill 
+              className="object-cover opacity-20"
+              data-ai-hint="software code abstract"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
           </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="relative z-10 text-center space-y-4 pt-20"
+          >
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Work</h1>
+            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Engineering Scalable Futures</p>
+          </motion.div>
+        </section>
 
+        <div className="max-w-7xl mx-auto px-6 space-y-24">
           {/* Search and Filters */}
           <div className="space-y-10">
             <div className="relative max-w-2xl mx-auto">
@@ -227,7 +240,7 @@ export default function ProjectsPage() {
               </motion.div>
             )}
           </div>
-        </motion.div>
+        </div>
       </main>
 
       <Footer />

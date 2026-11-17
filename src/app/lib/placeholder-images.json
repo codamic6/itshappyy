@@ -30,6 +30,36 @@
       "description": "Social Media Strategy for Sheikh Waleed",
       "imageUrl": "https://picsum.photos/seed/strategy/600/400",
       "imageHint": "social media dashboard"
+    },
+    {
+      "id": "about-hero",
+      "description": "Professional abstract hero for about page",
+      "imageUrl": "https://picsum.photos/seed/about-hero/1200/800",
+      "imageHint": "abstract professional clean"
+    },
+    {
+      "id": "projects-hero",
+      "description": "Code and technology abstract hero",
+      "imageUrl": "https://picsum.photos/seed/projects-hero/1200/800",
+      "imageHint": "software code abstract"
+    },
+    {
+      "id": "edu-hero",
+      "description": "Academic and architecture hero",
+      "imageUrl": "https://picsum.photos/seed/edu-hero/1200/800",
+      "imageHint": "library architecture modern"
+    },
+    {
+      "id": "social-hero",
+      "description": "Digital reach and connection hero",
+      "imageUrl": "https://picsum.photos/seed/social-hero/1200/800",
+      "imageHint": "digital network connection"
+    },
+    {
+      "id": "contact-hero",
+      "description": "Minimalist communication hero",
+      "imageUrl": "https://picsum.photos/seed/contact-hero/1200/800",
+      "imageHint": "minimalist abstract communication"
     }
   ]
 }

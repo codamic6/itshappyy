@@ -13,14 +13,33 @@ export default function AboutPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
-      <main className="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="space-y-20"
-        >
+      <main className="pb-20">
+        {/* Dedicated Hero Section with Fade */}
+        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image 
+              src="https://picsum.photos/seed/about-hero/1200/800" 
+              alt="Hero Background" 
+              fill 
+              className="object-cover opacity-20"
+              data-ai-hint="abstract clean"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="relative z-10 text-center space-y-4 pt-20"
+          >
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">About</h1>
+            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Extreme Discipline</p>
+          </motion.div>
+        </section>
+
+        <div className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
-              <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">About</h1>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Identity</h2>
               <div className="space-y-6 text-muted-foreground text-xl leading-relaxed font-medium">
                 <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. I don't believe in average effort; I believe in breaking records through focus.</p>
                 <p>In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
@@ -47,7 +66,7 @@ export default function AboutPage() {
               <p>As a software architect, I build systems that scale. Every project is a testament to precision and focus.</p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </main>
 
       <Footer />

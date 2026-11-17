@@ -15,12 +15,28 @@ export default function SocialMediaPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      <main className="pt-40 pb-20 space-y-40">
-        {/* Header */}
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
-          <h1 className="text-6xl md:text-9xl font-black tracking-tighter text-green-gradient uppercase">Reach</h1>
-          <p className="text-muted-foreground text-xl font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
-        </div>
+      <main className="pb-20 space-y-40">
+        {/* Dedicated Hero Section with Fade */}
+        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image 
+              src="https://picsum.photos/seed/social-hero/1200/800" 
+              alt="Hero Background" 
+              fill 
+              className="object-cover opacity-20"
+              data-ai-hint="digital network connection"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }}
+            className="relative z-10 text-center space-y-4 pt-20"
+          >
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Reach</h1>
+            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
+          </motion.div>
+        </section>
 
         {/* Features Section */}
         <section id="features" className="max-w-7xl mx-auto px-6 space-y-20">
