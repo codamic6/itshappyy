@@ -23,17 +23,31 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero - Full Background Image for Mobile & PC */}
+      {/* Hero - Responsive Background Switching */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/hero.png" 
-            alt="Hero Background" 
-            fill 
-            className="object-cover object-center opacity-50"
-            data-ai-hint="main hero"
-            priority
-          />
+          {/* PC Background */}
+          <div className="hidden md:block absolute inset-0">
+            <Image 
+              src="/hero.png" 
+              alt="Hero Background PC" 
+              fill 
+              className="object-cover object-center opacity-50"
+              data-ai-hint="main hero"
+              priority
+            />
+          </div>
+          {/* Mobile Background */}
+          <div className="md:hidden absolute inset-0">
+            <Image 
+              src="/hero_mobile.png" 
+              alt="Hero Background Mobile" 
+              fill 
+              className="object-cover object-center opacity-50"
+              data-ai-hint="main hero mobile"
+              priority
+            />
+          </div>
           {/* Note: Fade transition removed for Home Page as per test request */}
         </div>
         

@@ -94,16 +94,29 @@ export default function EducationPage() {
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Enhanced Fade */}
+        {/* Dedicated Hero Section with Responsive Switching & Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <Image 
-              src="/hero.png" 
-              alt="Hero Background" 
-              fill 
-              className="object-cover opacity-50"
-              data-ai-hint="education hero"
-            />
+            {/* PC Background */}
+            <div className="hidden md:block absolute inset-0">
+              <Image 
+                src="/hero.png" 
+                alt="Education Hero PC" 
+                fill 
+                className="object-cover opacity-50"
+                data-ai-hint="education hero"
+              />
+            </div>
+            {/* Mobile Background */}
+            <div className="md:hidden absolute inset-0">
+              <Image 
+                src="/hero_mobile.png" 
+                alt="Education Hero Mobile" 
+                fill 
+                className="object-cover opacity-50"
+                data-ai-hint="education hero mobile"
+              />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
           </div>
           <motion.div 
