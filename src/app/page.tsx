@@ -23,18 +23,18 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero with Fade Background */}
+      {/* Hero with Enhanced Fade Background */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="https://picsum.photos/seed/portfolio1/1200/800" 
             alt="Hero Background" 
             fill 
-            className="object-cover opacity-20"
+            className="object-cover opacity-40"
             data-ai-hint="abstract dark technology"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
         </div>
         
         <motion.div 

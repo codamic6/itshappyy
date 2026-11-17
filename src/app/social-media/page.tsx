@@ -16,17 +16,17 @@ export default function SocialMediaPage() {
       <Navbar />
       
       <main className="pb-20 space-y-40">
-        {/* Dedicated Hero Section with Fade */}
+        {/* Dedicated Hero Section with Enhanced Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image 
               src="https://picsum.photos/seed/social-hero/1200/800" 
               alt="Hero Background" 
               fill 
-              className="object-cover opacity-20"
+              className="object-cover opacity-40"
               data-ai-hint="digital network connection"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
@@ -204,7 +204,7 @@ export default function SocialMediaPage() {
 
 function UpdateCard({ icon, title, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group text-center lg:text-left">
+    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group text-center lg:text-left">
       <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform mx-auto lg:mx-0">
         {React.cloneElement(icon, { className: "h-6 w-6" })}
       </div>

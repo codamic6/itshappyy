@@ -14,17 +14,17 @@ export default function AboutPage() {
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Fade */}
+        {/* Dedicated Hero Section with Enhanced Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image 
               src="https://picsum.photos/seed/about-hero/1200/800" 
               alt="Hero Background" 
               fill 
-              className="object-cover opacity-20"
+              className="object-cover opacity-40"
               data-ai-hint="abstract clean"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
