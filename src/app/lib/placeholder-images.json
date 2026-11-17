@@ -8,6 +8,12 @@
       "imageHint": "main hero"
     },
     {
+      "id": "hero-mobile-bg",
+      "description": "Mobile Hero Background from public/hero_mobile.png",
+      "imageUrl": "/hero_mobile.png",
+      "imageHint": "main hero mobile"
+    },
+    {
       "id": "my-avatar",
       "description": "User Profile Avatar",
       "imageUrl": "/my_avt.png",
@@ -36,36 +42,6 @@
       "description": "Social Media Strategy for Sheikh Waleed",
       "imageUrl": "https://picsum.photos/seed/strategy/600/400",
       "imageHint": "social media dashboard"
-    },
-    {
-      "id": "about-hero",
-      "description": "About Page Hero",
-      "imageUrl": "/hero.png",
-      "imageHint": "about hero"
-    },
-    {
-      "id": "projects-hero",
-      "description": "Projects Page Hero",
-      "imageUrl": "/hero.png",
-      "imageHint": "projects hero"
-    },
-    {
-      "id": "edu-hero",
-      "description": "Education Page Hero",
-      "imageUrl": "/hero.png",
-      "imageHint": "education hero"
-    },
-    {
-      "id": "social-hero",
-      "description": "Social Media Page Hero",
-      "imageUrl": "/hero.png",
-      "imageHint": "social hero"
-    },
-    {
-      "id": "contact-hero",
-      "description": "Contact Page Hero",
-      "imageUrl": "/hero.png",
-      "imageHint": "contact hero"
     }
   ]
 }

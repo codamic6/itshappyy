@@ -26,6 +26,7 @@ export default function AboutPage() {
                 fill 
                 className="object-cover opacity-50"
                 data-ai-hint="about hero"
+                priority
               />
             </div>
             {/* Mobile Background */}
@@ -36,6 +37,7 @@ export default function AboutPage() {
                 fill 
                 className="object-cover opacity-50"
                 data-ai-hint="about hero mobile"
+                priority
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
@@ -133,7 +135,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
-              <Image src="/my_avt.png" alt="About" fill className="object-cover" />
+              <Image src="/my_avt.png" alt="About Arsalan" fill className="object-cover" data-ai-hint="portrait professional" />
               <div className="absolute inset-0 bg-primary/10" />
             </div>
           </div>
