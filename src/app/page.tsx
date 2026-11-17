@@ -170,7 +170,7 @@ export default function PortfolioPage() {
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
                 <MiniStat count="25K+" label="MEMBERS" />
                 <MiniStat count="Global" label="REACH" />
               </div>
@@ -195,7 +195,7 @@ export default function PortfolioPage() {
               </div>
             </form>
           </div>
-          <div className="flex flex-col justify-center space-y-12">
+          <div className="flex flex-col justify-center space-y-12 overflow-hidden">
             <ContactInfo icon={<Mail />} label="EMAIL" value="arsalan@example.com" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
             <div className="pt-10 flex gap-4">
@@ -262,13 +262,13 @@ function MiniStat({ count, label }: any) {
 
 function ContactInfo({ icon, label, value }: any) {
   return (
-    <div className="flex items-center gap-6 group">
+    <div className="flex items-center gap-6 group w-full overflow-hidden">
       <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {icon}
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-xl font-black tracking-tighter uppercase">{value}</p>
+        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>
     </div>
   )

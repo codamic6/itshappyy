@@ -42,7 +42,7 @@ export default function ContactPage() {
               </form>
             </div>
 
-            <div className="flex flex-col justify-center space-y-16">
+            <div className="flex flex-col justify-center space-y-16 overflow-hidden">
               <div className="space-y-8">
                 <h3 className="text-[10px] font-black tracking-widest uppercase text-primary">CHANNELS</h3>
                 <div className="space-y-6">
@@ -70,13 +70,13 @@ export default function ContactPage() {
 
 function ContactInfo({ icon, label, value }: any) {
   return (
-    <div className="flex items-center gap-6 group">
+    <div className="flex items-center gap-6 group w-full overflow-hidden">
       <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {React.cloneElement(icon, { className: "h-6 w-6" })}
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-xl font-black tracking-tighter uppercase">{value}</p>
+        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>
     </div>
   )
@@ -84,7 +84,7 @@ function ContactInfo({ icon, label, value }: any) {
 
 function SocialCircle({ icon, href }: any) {
   return (
-    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-xl">
+    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-xl shrink-0">
       {React.cloneElement(icon, { className: "h-8 w-8" })}
     </a>
   )

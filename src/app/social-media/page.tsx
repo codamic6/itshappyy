@@ -197,7 +197,7 @@ function UpdateCard({ icon, title, desc }: any) {
 function StatBox({ icon, label, count }: any) {
   return (
     <div className="p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4 w-full">
-      <div className="text-[#1877F2]">{React.cloneElement(icon, { className: "h-6 w-6 md:h-8 md:w-8" })}</div>
+      <div className="text-[#1877F2] shrink-0">{React.cloneElement(icon, { className: "h-6 w-6 md:h-8 md:w-8" })}</div>
       <div className="space-y-1">
         <h4 className="text-xl md:text-2xl font-black tracking-tighter">{count}</h4>
         <p className="text-[7px] md:text-[8px] font-bold text-muted-foreground uppercase tracking-widest">{label}</p>
@@ -208,13 +208,13 @@ function StatBox({ icon, label, count }: any) {
 
 function ReachCard({ icon, label, handle, count, color, href }: any) {
   return (
-    <a href={href} target="_blank" className="p-10 md:p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-6">
-      <div className={cn("p-6 md:p-8 rounded-full bg-primary/5 group-hover:scale-110 transition-transform", color)}>
+    <a href={href} target="_blank" className="p-10 md:p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-6 overflow-hidden">
+      <div className={cn("p-6 md:p-8 rounded-full bg-primary/5 group-hover:scale-110 transition-transform shrink-0", color)}>
         {React.cloneElement(icon as React.ReactElement, { className: "h-10 w-10 md:h-12 md:w-12" })}
       </div>
-      <div className="space-y-2">
-        <h4 className="text-xl md:text-2xl font-black uppercase tracking-widest">{label}</h4>
-        <p className="text-[8px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest">{handle}</p>
+      <div className="space-y-2 min-w-0 w-full">
+        <h4 className="text-xl md:text-2xl font-black uppercase tracking-widest truncate">{label}</h4>
+        <p className="text-[8px] md:text-[9px] font-bold text-muted-foreground uppercase tracking-widest truncate">{handle}</p>
       </div>
       <div className={cn("text-6xl md:text-7xl font-black tracking-tighter", color)}>{count}</div>
     </a>
