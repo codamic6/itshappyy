@@ -56,11 +56,11 @@ export default function PortfolioPage() {
           className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
           <div className="flex items-center justify-center overflow-visible px-4">
-            <h1 className="text-[80px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none whitespace-nowrap">
+            <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap">
               HAPPY
             </h1>
           </div>
-          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] sm:tracking-tight px-4">
+          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] px-4">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
@@ -74,85 +74,87 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* NEW GLOBAL ACHIEVEMENT SECTION - VOICES OF HARAM (FUTURISTIC) */}
-      <section className="py-40 px-6 relative bg-primary/[0.01]">
+      {/* GLOBAL ACHIEVEMENT SECTION - RED & GREEN FUTURISTIC (FIXED RESPONSIVE) */}
+      <section className="py-20 md:py-40 px-4 md:px-6 relative">
         <div className="max-w-7xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative p-8 md:p-24 rounded-[4rem] md:rounded-[6rem] bg-white border border-primary/10 shadow-[0_40px_100px_-20px_rgba(4,120,87,0.1)] overflow-hidden"
+            transition={{ duration: 0.8 }}
+            className="relative p-8 md:p-20 rounded-[3rem] md:rounded-[5rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
-            {/* Futuristic Atmosphere */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-[120px] -mr-64 -mt-64 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[100px] -ml-40 -mb-40 pointer-events-none" />
+            {/* Smooth Futuristic Mesh Gradients */}
+            <div className="absolute top-0 right-0 w-64 md:w-[600px] h-64 md:h-[600px] bg-red-600/[0.03] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 md:w-[400px] h-64 md:h-[400px] bg-primary/[0.03] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-              <div className="space-y-12 text-center lg:text-left">
-                <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/5 border border-primary/10 text-primary font-black text-[10px] tracking-[0.4em] uppercase mx-auto lg:mx-0">
-                  <Globe className="h-4 w-4 animate-spin-slow" /> GLOBAL RANKING ACHIEVED
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center relative z-10">
+              <div className="space-y-8 md:space-y-12 text-center lg:text-left">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[9px] md:text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
+                  <YoutubeIcon className="h-4 w-4" /> GLOBAL RANKING 2025
                 </div>
                 
                 <div className="space-y-6">
-                  <h2 className="text-6xl md:text-[110px] font-black tracking-tighter uppercase leading-[0.9] text-primary">
-                    TOP 25% <br/> <span className="text-green-gradient">GLOBALLY</span>
+                  <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[120px] font-black tracking-tighter uppercase leading-[0.9] break-words">
+                    <span className="text-red-600">TOP 25%</span> <br/>
+                    <span className="text-green-gradient">GLOBALLY</span>
                   </h2>
-                  <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                    Alhamdulillah, <span className="text-primary font-black italic">Voices of Haram</span> has officially secured its position in the top 25% of creators in the 10K-50K tier worldwide.
+                  <p className="text-lg md:text-2xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Alhamdulillah, <span className="text-primary font-black italic">Voices of Haram</span> has secured its position in the top 25% of creators in the 10K-50K tier worldwide.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-8 max-w-md mx-auto lg:mx-0">
-                  <div className="space-y-2">
-                    <span className="text-4xl font-black text-primary">Creator</span>
-                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">10K - 50K TIER</p>
+                {/* Stats Row */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-8 md:gap-12">
+                  <div className="space-y-1">
+                    <span className="text-4xl md:text-5xl font-black text-red-600">10K+</span>
+                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">COMMUNITY</p>
                   </div>
-                  <div className="space-y-2">
-                    <span className="text-4xl font-black text-primary">Digital</span>
-                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Global Reach</p>
+                  <div className="w-px h-12 bg-gray-100 hidden sm:block" />
+                  <div className="space-y-1">
+                    <span className="text-4xl md:text-5xl font-black text-primary">Global</span>
+                    <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">FOOTPRINT</p>
                   </div>
                 </div>
 
-                <div className="pt-10 flex justify-center lg:justify-start">
-                  <Button asChild className="bg-primary hover:bg-primary/90 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-full sm:w-fit transition-all hover:scale-105">
-                    <a href="https://youtube.com/@VoicesOfHaram" target="_blank">EXPLORE MILESTONE</a>
+                <div className="pt-6 flex justify-center lg:justify-start">
+                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-12 h-16 md:h-20 text-sm md:text-lg font-black tracking-widest uppercase shadow-xl w-full sm:w-fit transition-all hover:scale-105">
+                    <a href="https://youtube.com/@VoicesOfHaram" target="_blank">EXPLORE CHANNEL</a>
                   </Button>
                 </div>
               </div>
 
-              {/* Futuristic Visual Card with 3D Effect */}
-              <div className="relative group perspective-1000">
+              {/* Futuristic Trophy Visual */}
+              <div className="relative group perspective-1000 w-full max-w-md mx-auto">
                 <motion.div 
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative aspect-square rounded-[4rem] bg-gradient-to-tr from-primary via-primary/80 to-[#047857] p-1 shadow-2xl overflow-hidden"
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative aspect-square rounded-[3rem] md:rounded-[4rem] bg-gradient-to-tr from-red-600 via-red-500 to-primary p-[2px] shadow-2xl overflow-hidden"
                 >
-                  <div className="w-full h-full bg-white rounded-[3.8rem] flex flex-col items-center justify-center text-center p-12 space-y-8 relative overflow-hidden">
-                    {/* Background Texture */}
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-                      <BarChart3 className="w-full h-full" />
+                  <div className="w-full h-full bg-white rounded-[2.9rem] md:rounded-[3.9rem] flex flex-col items-center justify-center text-center p-8 md:p-12 space-y-6 md:space-y-8 relative overflow-hidden">
+                    <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+                      <BarChart3 className="w-full h-full p-4" />
                     </div>
                     
-                    <Trophy className="h-24 w-24 text-primary animate-float" />
+                    <Trophy className="h-16 w-16 md:h-24 md:w-24 text-red-600" />
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black tracking-[0.5em] text-muted-foreground uppercase">Achievement Unlocked</span>
-                      <h3 className="text-5xl font-black tracking-tighter text-primary uppercase">Voices of Haram</h3>
+                      <span className="text-[9px] font-black tracking-[0.4em] text-muted-foreground uppercase">Achievement</span>
+                      <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-primary uppercase">Voices <br/> of Haram</h3>
                     </div>
-                    <div className="w-full h-px bg-primary/10" />
+                    <div className="w-full h-px bg-gray-100" />
                     <div className="flex items-center gap-6">
-                      <div className="flex flex-col items-center">
-                        <span className="text-2xl font-black text-primary">YouTube</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase">Platform</p>
+                      <div className="text-center">
+                        <span className="text-xl md:text-2xl font-black text-red-600">YouTube</span>
+                        <p className="text-[8px] font-bold text-muted-foreground uppercase">PLATFORM</p>
                       </div>
-                      <div className="w-px h-10 bg-primary/10" />
-                      <div className="flex flex-col items-center">
-                        <span className="text-2xl font-black text-primary">Top 25%</span>
-                        <p className="text-[8px] font-bold text-muted-foreground uppercase">Metric</p>
+                      <div className="w-px h-8 bg-gray-100" />
+                      <div className="text-center">
+                        <span className="text-xl md:text-2xl font-black text-primary">Top 25%</span>
+                        <p className="text-[8px] font-bold text-muted-foreground uppercase">RANK</p>
                       </div>
                     </div>
-                    <Sparkles className="absolute top-10 right-10 h-6 w-6 text-primary/20 animate-pulse" />
-                    <Star className="absolute bottom-10 left-10 h-6 w-6 text-primary/20 animate-pulse" />
+                    <Sparkles className="absolute top-8 right-8 h-5 w-5 text-red-600/20 animate-pulse" />
+                    <Star className="absolute bottom-8 left-8 h-5 w-5 text-primary/20 animate-pulse" />
                   </div>
                 </motion.div>
               </div>
@@ -240,7 +242,7 @@ export default function PortfolioPage() {
           </div>
           <div className="text-center pt-10">
             <Link href="/projects">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase">VISIT</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/10 h-14 text-primary font-black tracking-widest text-[10px] uppercase">VISIT</Button>
             </Link>
           </div>
         </div>
@@ -308,7 +310,7 @@ export default function PortfolioPage() {
             <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<Phone />} label="PHONE" value="+923434441031" />
             <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
-            <div className="pt-10 flex gap-6">
+            <div className="pt-10 flex gap-6 pb-12">
                <a href="https://youtube.com/@VoicesOfHaram" target="_blank" className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0 hover:bg-primary hover:text-white transition-all">
                 <YoutubeIcon className="h-6 w-6" />
                </a>
