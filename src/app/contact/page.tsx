@@ -17,10 +17,8 @@ export default function ContactPage() {
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Responsive Switching & Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
                 src="/hero.jpg" 
@@ -31,7 +29,6 @@ export default function ContactPage() {
                 data-ai-hint="contact hero"
               />
             </div>
-            {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
                 src="/hero_mobile.jpg" 
@@ -101,7 +98,7 @@ function ContactInfo({ icon, label, value }: any) {
   return (
     <div className="flex items-center gap-6 group w-full overflow-hidden">
       <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
-        {React.cloneElement(icon, { className: "h-6 w-6" })}
+        {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
       </div>
       <div className="min-w-0">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
@@ -114,7 +111,7 @@ function ContactInfo({ icon, label, value }: any) {
 function SocialCircle({ icon, href }: any) {
   return (
     <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white hover:bg-primary hover:text-white transition-all shadow-xl shrink-0">
-      {React.cloneElement(icon, { className: "h-8 w-8" })}
+      {React.cloneElement(icon as React.ReactElement, { className: "h-8 w-8" })}
     </a>
   )
 }

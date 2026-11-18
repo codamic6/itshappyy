@@ -94,10 +94,8 @@ export default function EducationPage() {
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Responsive Switching & Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
                 src="/hero.jpg" 
@@ -108,7 +106,6 @@ export default function EducationPage() {
                 data-ai-hint="education hero"
               />
             </div>
-            {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
                 src="/hero_mobile.jpg" 

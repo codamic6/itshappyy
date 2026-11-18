@@ -8,10 +8,11 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import { cn } from '@/lib/utils'
 import { 
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
-  Youtube as YoutubeIcon, Users, Globe
+  Youtube as YoutubeIcon, Users, Globe, ExternalLink, Send, Mail, MapPin, Phone
 } from 'lucide-react'
 
 export default function PortfolioPage() {
@@ -62,16 +63,16 @@ export default function PortfolioPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
             <Link href="/projects">
-              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">VISIT</Button>
+              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">WORK</Button>
             </Link>
             <Link href="/contact">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">CONNECT</Button>
             </Link>
           </div>
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION - STATIC NEON UI */}
+      {/* GLOBAL ACHIEVEMENT SECTION */}
       <section id="global-milestone-home" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -93,7 +94,7 @@ export default function PortfolioPage() {
                 <div className="space-y-4">
                   <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col break-words">
                     <span className="text-red-600">TOP 25%</span>
-                    <span className="text-green-gradient">GLOBALLY</span>
+                    <span className="text-green-gradient text-nowrap">GLOBALLY</span>
                   </h2>
                   <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
@@ -126,14 +127,11 @@ export default function PortfolioPage() {
 
               <div className="relative w-full max-w-[400px] mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center py-10">
                 <div className="relative group">
-                  <div className="absolute inset-0 bg-red-600/[0.05] blur-[80px] rounded-full scale-150 animate-pulse" />
+                  <div className="absolute inset-0 bg-red-600/[0.05] blur-[80px] rounded-full scale-150" />
                   <div className="relative p-12 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] shadow-[0_0_40px_rgba(220,38,38,0.05)] flex items-center justify-center transition-all">
-                    <svg viewBox="0 0 24 24" className="w-32 h-32 md:w-48 md:h-48 fill-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.2)] filter transition-all duration-500 group-hover:scale-105">
+                    <svg viewBox="0 0 24 24" className="w-32 h-32 md:w-48 md:h-48 fill-red-600 drop-shadow-[0_0_15px_rgba(220,38,38,0.25)] filter">
                       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
-                    <div className="absolute -top-4 -right-4 bg-white border border-red-50 shadow-xl rounded-full p-3 animate-bounce">
-                      <Star className="h-5 w-5 text-red-600 fill-red-600" />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -154,7 +152,7 @@ export default function PortfolioPage() {
             <div className="pt-10">
               <Link href="/about">
                 <Button variant="link" className="p-0 text-primary font-black tracking-widest text-[10px] uppercase group">
-                  VISIT <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
+                  EXPLORE <span className="ml-2 transition-transform group-hover:translate-x-2">→</span>
                 </Button>
               </Link>
             </div>
@@ -166,7 +164,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Academy Highlights */}
+      {/* Academy Section */}
       <section id="education-home" className="py-40 px-6">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
@@ -180,8 +178,73 @@ export default function PortfolioPage() {
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW TIMELINE</Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Work Section */}
+      <section id="projects-home" className="py-40 px-6 max-w-7xl mx-auto">
+        <div className="space-y-20">
+          <div className="flex flex-col md:flex-row items-end justify-between gap-8">
+            <div className="space-y-4 text-center md:text-left">
+              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Work</h2>
+              <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
+            </div>
+            <Link href="/projects">
+              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">ALL PROJECTS</Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="https://picsum.photos/seed/ai-tool/1200/800" href="/projects" />
+            <ProjectFeatured title="HappyChat" cat="Messaging" img="https://picsum.photos/seed/chat-pro/1200/800" href="/projects" />
+          </div>
+        </div>
+      </section>
+
+      {/* Reach Section */}
+      <section id="social-home" className="py-40 px-6 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto space-y-24">
+          <div className="text-center space-y-4">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Reach</h2>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <ReachStat icon={<YoutubeIcon />} color="text-red-600" label="Youtube" val="30.5K+" />
+            <ReachStat icon={<Users />} color="text-primary" label="Facebook" val="25K+" />
+            <ReachStat icon={<Globe />} color="text-blue-500" label="Global" val="Top 25%" />
+          </div>
+
+          <div className="text-center">
+            <Link href="/social-media">
+              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW CHANNELS</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Connect Section */}
+      <section id="contact-home" className="py-40 px-6 max-w-7xl mx-auto">
+        <div className="crystal-panel p-12 md:p-24 rounded-[4rem] grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-12">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-none">Connect</h2>
+            <div className="space-y-6">
+              <ContactMini icon={<Mail />} label="Email" val="itsmuhammadahmad06@gmail.com" />
+              <ContactMini icon={<Phone />} label="Phone" val="+923434441031" />
+              <ContactMini icon={<MapPin />} label="Loc" val="Faisalabad, PK" />
+            </div>
+            <Link href="/contact">
+              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">SEND MESSAGE</Button>
+            </Link>
+          </div>
+          <div className="relative aspect-video rounded-[3rem] overflow-hidden border border-primary/10 shadow-2xl">
+            <Image src="/hero.jpg" alt="Contact Visual" fill unoptimized className="object-cover" data-ai-hint="contact hero" />
+            <div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px]" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Send className="h-20 w-20 text-white/50" />
+            </div>
           </div>
         </div>
       </section>
@@ -204,3 +267,50 @@ function EduCard({ icon, year, title, institution, desc }: any) {
     </div>
   )
 }
+
+function ProjectFeatured({ title, cat, img, href }: any) {
+  return (
+    <div className="group relative bg-white rounded-[4rem] border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Image src={img} alt={title} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" data-ai-hint="software project" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      </div>
+      <div className="p-10 space-y-4">
+        <div className="flex items-center justify-between">
+          <span className="px-5 py-1.5 rounded-full bg-primary/5 text-primary font-black text-[9px] uppercase tracking-widest">{cat}</span>
+          <Link href={href} className="text-primary hover:scale-110 transition-transform"><ExternalLink className="h-5 w-5" /></Link>
+        </div>
+        <h3 className="text-3xl font-black tracking-tighter uppercase text-primary">{title}</h3>
+      </div>
+    </div>
+  )
+}
+
+function ReachStat({ icon, color, label, val }: any) {
+  return (
+    <div className="p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 transition-all text-center space-y-6">
+      <div className={cn("mx-auto w-16 h-16 rounded-3xl bg-primary/5 flex items-center justify-center", color)}>
+        {React.cloneElement(icon as React.ReactElement, { className: "h-8 w-8" })}
+      </div>
+      <div className="space-y-1">
+        <h4 className="text-5xl font-black tracking-tighter text-primary">{val}</h4>
+        <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">{label}</p>
+      </div>
+    </div>
+  )
+}
+
+function ContactMini({ icon, label, val }: any) {
+  return (
+    <div className="flex items-center gap-6">
+      <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0">
+        {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5" })}
+      </div>
+      <div className="min-w-0">
+        <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
+        <p className="text-lg font-black tracking-tighter uppercase truncate">{val}</p>
+      </div>
+    </div>
+  )
+}
+
