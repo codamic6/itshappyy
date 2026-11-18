@@ -17,12 +17,11 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd handle form submission logic here.
     setIsSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
       <main className="pb-20">
@@ -128,7 +127,7 @@ export default function ContactPage() {
               </AnimatePresence>
             </div>
 
-            <div className="flex flex-col justify-center space-y-16 py-12">
+            <div className="flex flex-col justify-center space-y-16 py-12 min-w-0">
               <div className="space-y-8">
                 <h3 className="text-[10px] font-black tracking-widest uppercase text-primary">CHANNELS</h3>
                 <div className="space-y-6">
@@ -158,7 +157,7 @@ function ContactInfo({ icon, label, value }: any) {
       <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
       </div>
-      <div className="min-w-0">
+      <div className="min-w-0 flex-1">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
         <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>

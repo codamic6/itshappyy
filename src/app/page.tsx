@@ -179,7 +179,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Academy</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade</p>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade 2026</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
@@ -221,7 +221,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto space-y-40">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Reach</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons</p>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons 2026</p>
           </div>
 
           {/* YouTube Embed Area */}
@@ -337,7 +337,7 @@ export default function PortfolioPage() {
             </AnimatePresence>
           </div>
 
-          <div className="flex flex-col justify-center space-y-12">
+          <div className="flex flex-col justify-center space-y-12 min-w-0">
             <ContactInfo icon={<Mail />} label="Email" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<Phone />} label="Phone" value="+923434441031" />
             <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
@@ -408,13 +408,13 @@ function ReachCard({ icon, label, count, color, href }: any) {
 
 function ContactInfo({ icon, label, value }: any) {
   return (
-    <div className="flex items-center gap-6 group">
-      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+    <div className="flex items-center gap-6 group w-full overflow-hidden">
+      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {icon && React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
       </div>
-      <div>
+      <div className="min-w-0 flex-1">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-xl font-black tracking-tighter uppercase">{value}</p>
+        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>
     </div>
   )
