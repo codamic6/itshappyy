@@ -15,7 +15,7 @@ export default function AboutPage() {
       <Navbar />
       
       <main className="pb-20">
-        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+        <section id="about-hero" className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="hidden md:block absolute inset-0">
               <Image 

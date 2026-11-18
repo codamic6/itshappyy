@@ -16,7 +16,7 @@ export default function SocialMediaPage() {
       <Navbar />
       
       <main className="pb-20 space-y-40">
-        <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+        <section id="social-hero" className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="hidden md:block absolute inset-0">
               <Image 
@@ -227,32 +227,6 @@ export default function SocialMediaPage() {
           <ReachCard icon={<Instagram />} label="Insta" handle="@voicesofharam.official" count="1K+" color="text-[#E1306C]" href="https://instagram.com/voicesofharam.official" />
           <ReachCard icon={<TrendingUp />} label="TikTok" handle="@voicesofharam.official" count="600+" color="text-primary" href="https://tiktok.com/@voicesofharam.official" />
           <ReachCard icon={<Twitter />} label="Threads" handle="@voicesofharam.official" count="6.5K+" color="text-[#7C3AED]" href="https://threads.net/@voicesofharam.official" />
-        </section>
-
-        {/* Waleed Section */}
-        <section className="py-40 bg-primary/5">
-          <div className="max-w-7xl mx-auto px-6 text-center space-y-16">
-            <h2 className="text-6xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Waleed <br/> Al-Shamsan</h2>
-            <div className="relative inline-block group">
-              <div className="w-64 h-64 md:w-96 md:h-96 rounded-[4rem] p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rotate-6 group-hover:rotate-0 transition-transform">
-                <div className="w-full h-full rounded-[3.5rem] border-[10px] border-white overflow-hidden relative -rotate-6 group-hover:rotate-0 transition-transform">
-                  <Image src="https://picsum.photos/seed/waleed-pro/800/800" alt="Sheikh Waleed" fill unoptimized className="object-cover" data-ai-hint="portrait islamic" />
-                </div>
-              </div>
-            </div>
-            <div className="space-y-10 px-4 pt-10">
-              <div className="inline-flex items-center gap-4 px-6 py-4 rounded-full bg-white shadow-2xl border border-pink-100 max-w-full mx-auto">
-                <Instagram className="h-6 w-6 text-[#E1306C] shrink-0" />
-                <span className="text-xl md:text-3xl font-black tracking-tighter">7,000+ Followers</span>
-              </div>
-              <p className="text-xl md:text-3xl font-black tracking-widest text-primary uppercase max-w-[90vw] mx-auto truncate">@sheikh_waleed_al_shamsan</p>
-              <div className="flex justify-center pt-10">
-                <Button asChild variant="outline" className="rounded-full px-16 h-20 border-pink-200 text-pink-600 font-black tracking-widest text-sm uppercase transition-all hover:scale-105 w-fit">
-                  <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">VISIT</a>
-                </Button>
-              </div>
-            </div>
-          </div>
         </section>
       </main>
 

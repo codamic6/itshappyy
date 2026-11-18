@@ -20,7 +20,7 @@ export default function PortfolioPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      <section id="hero-home" className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="hidden md:block absolute inset-0">
             <Image 
@@ -44,6 +44,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
         </div>
         
         <motion.div 
@@ -142,7 +143,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-40 px-6 max-w-7xl mx-auto">
+      <section id="about-home" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10 text-center lg:text-left">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">About</h2>
