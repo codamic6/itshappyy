@@ -11,14 +11,12 @@ import { Button } from '@/components/ui/button'
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
                 src="/hero.png" 
@@ -29,7 +27,6 @@ export default function AboutPage() {
                 priority
               />
             </div>
-            {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
                 src="/hero_mobile.png" 
@@ -52,8 +49,8 @@ export default function AboutPage() {
           </motion.div>
         </section>
 
-        {/* GLOBAL ACHIEVEMENT SECTION - INTEGRATED 2026 */}
-        <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
+        {/* GLOBAL ACHIEVEMENT SECTION */}
+        <section id="global-milestone-about" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
           <div className="max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}

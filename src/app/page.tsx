@@ -14,9 +14,6 @@ import {
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
   Mail, MapPin, Phone, Instagram, Globe, Users, Send
 } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { cn } from '@/lib/utils'
 
 export default function PortfolioPage() {
   return (
@@ -26,7 +23,6 @@ export default function PortfolioPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* PC Background - Absolute path for Vercel */}
           <div className="hidden md:block absolute inset-0">
             <Image 
               src="/hero.png" 
@@ -37,7 +33,6 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          {/* Mobile Background - Absolute path for Vercel */}
           <div className="md:hidden absolute inset-0">
             <Image 
               src="/hero_mobile.png" 
@@ -75,7 +70,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* GLOBAL ACHIEVEMENT SECTION - STATIC FUTURISTIC UI */}
-      <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
+      <section id="global-milestone-home" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +79,6 @@ export default function PortfolioPage() {
             transition={{ duration: 0.8 }}
             className="relative p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
-            {/* Mesh Gradient Backgrounds */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.04] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
@@ -128,7 +122,6 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* Right Side - Soft Neon YouTube Icon */}
               <div className="relative w-full max-w-[400px] mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center py-10">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-red-600/[0.05] blur-[80px] rounded-full scale-150 animate-pulse" />
@@ -173,7 +166,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Academy Highlights */}
-      <section id="education" className="py-40 px-6">
+      <section id="education-home" className="py-40 px-6">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Academy</h2>

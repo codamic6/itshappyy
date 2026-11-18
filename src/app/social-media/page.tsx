@@ -16,10 +16,8 @@ export default function SocialMediaPage() {
       <Navbar />
       
       <main className="pb-20 space-y-40">
-        {/* Dedicated Hero Section with Responsive Switching & Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
                 src="/hero.png" 
@@ -29,7 +27,6 @@ export default function SocialMediaPage() {
                 data-ai-hint="social hero"
               />
             </div>
-            {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
                 src="/hero_mobile.png" 
@@ -51,8 +48,8 @@ export default function SocialMediaPage() {
           </motion.div>
         </section>
 
-        {/* GLOBAL ACHIEVEMENT SECTION - INTEGRATED 2026 */}
-        <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
+        {/* GLOBAL ACHIEVEMENT SECTION */}
+        <section id="global-milestone-social" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
           <div className="max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -124,7 +121,7 @@ export default function SocialMediaPage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="max-w-7xl mx-auto px-6 space-y-20">
+        <section id="social-features" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-6">
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Features</h2>
             <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-3xl mx-auto">
@@ -133,41 +130,17 @@ export default function SocialMediaPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <UpdateCard 
-              icon={<Mic2 />} 
-              title="Khateeb" 
-              desc="Designated Jummah Khateeb announcements for Masjid Al-Haram & Masjid An-Nabawi."
-            />
-            <UpdateCard 
-              icon={<Calendar />} 
-              title="Taraweeh" 
-              desc="Detailed schedule of Imams leading Taraweeh and Tahajjud during Ramadan."
-            />
-            <UpdateCard 
-              icon={<Clock />} 
-              title="Salah" 
-              desc="Weekly and daily Imam rosters for all five prayers, ensuring global connection."
-            />
-            <UpdateCard 
-              icon={<Star />} 
-              title="Special" 
-              desc="Updates on Istisqa, Khusoof, and Eid prayers with designated lead Imams."
-            />
-            <UpdateCard 
-              icon={<CloudRain />} 
-              title="Weather" 
-              desc="Live coverage of rain and atmospheric spiritual moments from the Haramain."
-            />
-            <UpdateCard 
-              icon={<Sparkles />} 
-              title="Moments" 
-              desc="Curated highlights of the most spiritual events occurring within the holy precincts."
-            />
+            <UpdateCard icon={<Mic2 />} title="Khateeb" desc="Designated Jummah Khateeb announcements for Masjid Al-Haram & Masjid An-Nabawi." />
+            <UpdateCard icon={<Calendar />} title="Taraweeh" desc="Detailed schedule of Imams leading Taraweeh and Tahajjud during Ramadan." />
+            <UpdateCard icon={<Clock />} title="Salah" desc="Weekly and daily Imam rosters for all five prayers, ensuring global connection." />
+            <UpdateCard icon={<Star />} title="Special" desc="Updates on Istisqa, Khusoof, and Eid prayers with designated lead Imams." />
+            <UpdateCard icon={<CloudRain />} title="Weather" desc="Live coverage of rain and atmospheric spiritual moments from the Haramain." />
+            <UpdateCard icon={<Sparkles />} title="Moments" desc="Curated highlights of the most spiritual events occurring within the holy precincts." />
           </div>
         </section>
 
         {/* YouTube Section */}
-        <section className="py-20 max-w-7xl mx-auto px-6">
+        <section id="social-youtube" className="py-20 max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 order-2 lg:order-none text-center lg:text-left">
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
@@ -214,7 +187,7 @@ export default function SocialMediaPage() {
         </section>
 
         {/* FB Hub */}
-        <section className="max-w-7xl mx-auto px-6">
+        <section id="social-fb" className="max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}

@@ -17,13 +17,11 @@ export function Footer() {
 
   return (
     <footer className="pt-40 pb-16 px-6 bg-white border-t border-primary/5 relative overflow-hidden">
-      {/* Background Atmosphere */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-primary/[0.02] rounded-full blur-[120px] -mr-64 -mb-64 pointer-events-none" />
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/[0.01] rounded-full blur-[100px] -ml-40 -mt-40 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto space-y-32 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
-          {/* Brand Vision */}
           <div className="space-y-12">
             <h3 className="text-7xl font-black tracking-tighter text-green-gradient uppercase italic leading-none">HAPPY</h3>
             <div className="space-y-8">
@@ -37,7 +35,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Core Navigation */}
           <div className="space-y-12">
             <h4 className="text-[10px] font-black tracking-[0.4em] text-primary uppercase border-l-2 border-primary/20 pl-6">Explore</h4>
             <div className="flex flex-col gap-6">
@@ -49,7 +46,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Strategic Channels */}
           <div className="space-y-12">
             <h4 className="text-[10px] font-black tracking-[0.4em] text-primary uppercase border-l-2 border-primary/20 pl-6">Connect</h4>
             <div className="flex flex-col gap-8">
@@ -60,7 +56,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Availability Status */}
           <div className="space-y-12">
             <h4 className="text-[10px] font-black tracking-[0.4em] text-primary uppercase border-l-2 border-primary/20 pl-6">Status</h4>
             <div className="space-y-8">
@@ -84,7 +79,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Legal & Final Branding */}
         <div className="pt-20 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-12">
           <p className="text-[10px] font-black tracking-[0.5em] text-muted-foreground uppercase opacity-50">
             &copy; 2026 HAPPY | PRECISION ENGINEERED BY ARSALAN
