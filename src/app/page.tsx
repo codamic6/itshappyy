@@ -1,21 +1,31 @@
 
 "use client"
 
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { 
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
-  Youtube as YoutubeIcon, Users, Globe, ExternalLink, Send, Mail, MapPin, Phone
+  Youtube as YoutubeIcon, Users, Globe, ExternalLink, Send, Mail, MapPin, Phone,
+  TrendingUp, Twitter, Instagram, Mic2, Clock, Calendar, Sparkles, CloudRain, CheckCircle2, ArrowRight
 } from 'lucide-react'
 
 export default function PortfolioPage() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+  };
+
   return (
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
@@ -164,7 +174,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Academy Section */}
+      {/* Education Section */}
       <section id="education-home" className="py-40 px-6">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
@@ -187,64 +197,150 @@ export default function PortfolioPage() {
       {/* Work Section */}
       <section id="projects-home" className="py-40 px-6 max-w-7xl mx-auto">
         <div className="space-y-20">
-          <div className="flex flex-col md:flex-row items-end justify-between gap-8">
-            <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Work</h2>
-              <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
-            </div>
-            <Link href="/projects">
-              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">ALL PROJECTS</Button>
-            </Link>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Work</h2>
+            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="https://picsum.photos/seed/ai-tool/1200/800" href="/projects" />
             <ProjectFeatured title="HappyChat" cat="Messaging" img="https://picsum.photos/seed/chat-pro/1200/800" href="/projects" />
+            <ProjectFeatured title="HappyLink" cat="Identity" img="https://picsum.photos/seed/links-pro/1200/800" href="/projects" />
+          </div>
+          <div className="text-center pt-12">
+            <Link href="/projects">
+              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-16 font-black tracking-widest text-sm uppercase shadow-2xl transition-all hover:scale-105">
+                VIEW MORE <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Reach Section */}
+      {/* Reach Section - Full Content from Social Page */}
       <section id="social-home" className="py-40 px-6 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto space-y-24">
+        <div className="max-w-7xl mx-auto space-y-40">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Reach</h2>
             <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <ReachStat icon={<YoutubeIcon />} color="text-red-600" label="Youtube" val="30.5K+" />
-            <ReachStat icon={<Users />} color="text-primary" label="Facebook" val="25K+" />
-            <ReachStat icon={<Globe />} color="text-blue-500" label="Global" val="Top 25%" />
+
+          {/* YouTube Embed Area */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-10 order-2 lg:order-none text-center lg:text-left">
+              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
+                <YoutubeIcon className="h-4 w-4" /> Voices of Haram
+              </div>
+              <h2 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h2>
+              <div className="grid grid-cols-2 gap-10 pt-6">
+                <div className="space-y-1">
+                  <span className="text-5xl font-black tracking-tighter text-red-600">30.5K+</span>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-5xl font-black tracking-tighter text-red-600">5M+</span>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Views</p>
+                </div>
+              </div>
+              <div className="flex justify-center lg:justify-start pt-10">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
+                  <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
+                </Button>
+              </div>
+            </div>
+            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border border-red-50 bg-black">
+              <iframe 
+                className="w-full h-full" 
+                src="https://www.youtube.com/embed/VOA8Gc44ZIE" 
+                title="VOH Main" 
+                frameBorder="0" 
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
 
-          <div className="text-center">
-            <Link href="/social-media">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/20 h-14 text-primary font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VIEW CHANNELS</Button>
-            </Link>
+          {/* FB Integration */}
+          <div className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+              <div className="space-y-10 text-center lg:text-left">
+                <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
+                <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium">
+                  Community of <span className="text-[#1877F2] font-black">25,000+</span>
+                </p>
+                <div className="flex justify-center lg:justify-start">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
+                    <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
+                  </Button>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <StatBox icon={<Users />} label="Members" count="25K+" />
+                <StatBox icon={<Send />} label="Weekly" count="100+" />
+                <StatBox icon={<TrendingUp />} label="Impact" count="High" />
+                <StatBox icon={<Globe />} label="Scope" count="Global" />
+              </div>
+            </div>
+          </div>
+
+          {/* Multi Platform Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <ReachCard icon={<Instagram />} label="Insta" count="1K+" color="text-[#E1306C]" href="https://instagram.com/voicesofharam.official" />
+            <ReachCard icon={<TrendingUp />} label="TikTok" count="600+" color="text-primary" href="https://tiktok.com/@voicesofharam.official" />
+            <ReachCard icon={<Twitter />} label="Threads" count="6.5K+" color="text-[#7C3AED]" href="https://threads.net/@voicesofharam.official" />
           </div>
         </div>
       </section>
 
-      {/* Connect Section */}
-      <section id="contact-home" className="py-40 px-6 max-w-7xl mx-auto">
-        <div className="crystal-panel p-12 md:p-24 rounded-[4rem] grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-12">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-none">Connect</h2>
-            <div className="space-y-6">
-              <ContactMini icon={<Mail />} label="Email" val="itsmuhammadahmad06@gmail.com" />
-              <ContactMini icon={<Phone />} label="Phone" val="+923434441031" />
-              <ContactMini icon={<MapPin />} label="Loc" val="Faisalabad, PK" />
-            </div>
-            <Link href="/contact">
-              <Button size="lg" className="rounded-full px-12 bg-primary text-white h-14 font-black tracking-widest text-[10px] uppercase shadow-2xl transition-all hover:scale-105">SEND MESSAGE</Button>
-            </Link>
+      {/* Connect Section - Contact Form + Info */}
+      <section id="contact-home" className="py-40 px-6 max-w-7xl mx-auto space-y-24">
+        <div className="text-center space-y-4">
+          <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Connect</h2>
+          <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">The Connect Station 2026</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[500px] flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              {!isSubmitted ? (
+                <motion.div 
+                  key="form"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  className="space-y-12"
+                >
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="NAME" required />
+                      <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="EMAIL" type="email" required />
+                    </div>
+                    <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="SUBJECT" required />
+                    <Textarea className="min-h-[150px] rounded-3xl border-primary/10 bg-white/50" placeholder="VISION..." required />
+                    <Button type="submit" className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl transition-all hover:scale-[1.02]">
+                      SUBMIT <Send className="ml-2 h-5 w-5" />
+                    </Button>
+                  </form>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center space-y-8"
+                >
+                  <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
+                    <CheckCircle2 className="w-16 h-16" />
+                  </div>
+                  <h2 className="text-5xl font-black tracking-tighter uppercase text-primary">Mission Success</h2>
+                  <p className="text-muted-foreground leading-relaxed uppercase tracking-widest text-xs">Message Secured</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          <div className="relative aspect-video rounded-[3rem] overflow-hidden border border-primary/10 shadow-2xl">
-            <Image src="/hero.jpg" alt="Contact Visual" fill unoptimized className="object-cover" data-ai-hint="contact hero" />
-            <div className="absolute inset-0 bg-primary/20 backdrop-blur-[2px]" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Send className="h-20 w-20 text-white/50" />
-            </div>
+
+          <div className="flex flex-col justify-center space-y-12">
+            <ContactInfo icon={<Mail />} label="Email" value="itsmuhammadahmad06@gmail.com" />
+            <ContactInfo icon={<Phone />} label="Phone" value="+923434441031" />
+            <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
           </div>
         </div>
       </section>
@@ -280,37 +376,46 @@ function ProjectFeatured({ title, cat, img, href }: any) {
           <span className="px-5 py-1.5 rounded-full bg-primary/5 text-primary font-black text-[9px] uppercase tracking-widest">{cat}</span>
           <Link href={href} className="text-primary hover:scale-110 transition-transform"><ExternalLink className="h-5 w-5" /></Link>
         </div>
-        <h3 className="text-3xl font-black tracking-tighter uppercase text-primary">{title}</h3>
+        <h3 className="text-2xl font-black tracking-tighter uppercase text-primary">{title}</h3>
       </div>
     </div>
   )
 }
 
-function ReachStat({ icon, color, label, val }: any) {
+function StatBox({ icon, label, count }: any) {
   return (
-    <div className="p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 transition-all text-center space-y-6">
-      <div className={cn("mx-auto w-16 h-16 rounded-3xl bg-primary/5 flex items-center justify-center", color)}>
-        {React.cloneElement(icon as React.ReactElement, { className: "h-8 w-8" })}
-      </div>
+    <div className="p-6 rounded-[2rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4">
+      <div className="text-[#1877F2]">{icon && React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}</div>
       <div className="space-y-1">
-        <h4 className="text-5xl font-black tracking-tighter text-primary">{val}</h4>
-        <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">{label}</p>
+        <h4 className="text-xl font-black tracking-tighter">{count}</h4>
+        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">{label}</p>
       </div>
     </div>
   )
 }
 
-function ContactMini({ icon, label, val }: any) {
+function ReachCard({ icon, label, count, color, href }: any) {
   return (
-    <div className="flex items-center gap-6">
-      <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0">
-        {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5" })}
+    <a href={href} target="_blank" className="p-12 rounded-[4rem] bg-white border border-primary/5 hover:border-primary/20 hover:shadow-2xl transition-all group flex flex-col items-center text-center space-y-6">
+      <div className={cn("p-6 rounded-full bg-primary/5 group-hover:scale-110 transition-transform", color)}>
+        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-10 w-10" })}
       </div>
-      <div className="min-w-0">
+      <h4 className="text-xl font-black uppercase tracking-widest">{label}</h4>
+      <div className={cn("text-6xl font-black tracking-tighter", color)}>{count}</div>
+    </a>
+  );
+}
+
+function ContactInfo({ icon, label, value }: any) {
+  return (
+    <div className="flex items-center gap-6 group">
+      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary transition-all group-hover:bg-primary group-hover:text-white">
+        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
+      </div>
+      <div>
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-lg font-black tracking-tighter uppercase truncate">{val}</p>
+        <p className="text-xl font-black tracking-tighter uppercase">{value}</p>
       </div>
     </div>
   )
 }
-
