@@ -26,6 +26,7 @@ export default function ContactPage() {
                 src="/hero.png" 
                 alt="Contact Hero PC" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="contact hero"
               />
@@ -36,6 +37,7 @@ export default function ContactPage() {
                 src="/hero_mobile.png" 
                 alt="Contact Hero Mobile" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="contact hero mobile"
               />

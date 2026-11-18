@@ -103,6 +103,7 @@ export default function EducationPage() {
                 src="/hero.png" 
                 alt="Education Hero PC" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="education hero"
               />
@@ -113,6 +114,7 @@ export default function EducationPage() {
                 src="/hero_mobile.png" 
                 alt="Education Hero Mobile" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="education hero mobile"
               />

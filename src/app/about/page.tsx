@@ -22,6 +22,7 @@ export default function AboutPage() {
                 src="/hero.png" 
                 alt="About Hero PC" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="about hero"
                 priority
@@ -32,6 +33,7 @@ export default function AboutPage() {
                 src="/hero_mobile.png" 
                 alt="About Hero Mobile" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="about hero mobile"
                 priority
@@ -131,7 +133,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl border border-primary/10">
-              <Image src="/my_avt.png" alt="About Arsalan" fill className="object-cover" data-ai-hint="portrait professional" />
+              <Image src="/my_avt.png" alt="About Arsalan" fill unoptimized className="object-cover" data-ai-hint="portrait professional" />
               <div className="absolute inset-0 bg-primary/10" />
             </div>
           </div>

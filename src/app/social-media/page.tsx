@@ -23,6 +23,7 @@ export default function SocialMediaPage() {
                 src="/hero.png" 
                 alt="Social Hero PC" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="social hero"
               />
@@ -32,6 +33,7 @@ export default function SocialMediaPage() {
                 src="/hero_mobile.png" 
                 alt="Social Hero Mobile" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="social hero mobile"
               />
@@ -234,7 +236,7 @@ export default function SocialMediaPage() {
             <div className="relative inline-block group">
               <div className="w-64 h-64 md:w-96 md:h-96 rounded-[4rem] p-2 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rotate-6 group-hover:rotate-0 transition-transform">
                 <div className="w-full h-full rounded-[3.5rem] border-[10px] border-white overflow-hidden relative -rotate-6 group-hover:rotate-0 transition-transform">
-                  <Image src="https://picsum.photos/seed/waleed-pro/800/800" alt="Sheikh Waleed" fill className="object-cover" data-ai-hint="portrait islamic" />
+                  <Image src="https://picsum.photos/seed/waleed-pro/800/800" alt="Sheikh Waleed" fill unoptimized className="object-cover" data-ai-hint="portrait islamic" />
                 </div>
               </div>
             </div>

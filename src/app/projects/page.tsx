@@ -125,6 +125,7 @@ export default function ProjectsPage() {
                 src="/hero.png" 
                 alt="Projects Hero PC" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="projects hero"
               />
@@ -135,6 +136,7 @@ export default function ProjectsPage() {
                 src="/hero_mobile.png" 
                 alt="Projects Hero Mobile" 
                 fill 
+                unoptimized
                 className="object-cover opacity-50"
                 data-ai-hint="projects hero mobile"
               />
@@ -208,6 +210,7 @@ export default function ProjectsPage() {
                       src={p.imgSrc} 
                       alt={p.title} 
                       fill 
+                      unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-700" 
                       data-ai-hint="software application"
                     />

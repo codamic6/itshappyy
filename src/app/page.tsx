@@ -11,7 +11,7 @@ import Image from 'next/image'
 import { 
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
-  Youtube as YoutubeIcon, Users, Globe, Play
+  Youtube as YoutubeIcon, Users, Globe
 } from 'lucide-react'
 
 export default function PortfolioPage() {
@@ -27,6 +27,7 @@ export default function PortfolioPage() {
               src="/hero.png" 
               alt="Hero Background PC" 
               fill 
+              unoptimized
               className="object-cover object-center opacity-50"
               data-ai-hint="main hero"
               priority
@@ -37,6 +38,7 @@ export default function PortfolioPage() {
               src="/hero_mobile.png" 
               alt="Hero Background Mobile" 
               fill 
+              unoptimized
               className="object-cover object-center opacity-50"
               data-ai-hint="main hero mobile"
               priority
@@ -157,7 +159,7 @@ export default function PortfolioPage() {
             </div>
           </div>
           <div className="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl border border-primary/10">
-            <Image src="/my_avt.png" alt="About Profile" fill className="object-cover" data-ai-hint="portrait professional" />
+            <Image src="/my_avt.png" alt="About Profile" fill unoptimized className="object-cover" data-ai-hint="portrait professional" />
             <div className="absolute inset-0 bg-primary/10" />
           </div>
         </div>
