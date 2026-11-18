@@ -12,7 +12,7 @@ import {
   Trophy, Star, ShieldCheck, Zap, 
   GraduationCap, Award, Medal, BookOpen,
   Youtube as YoutubeIcon, Mic2, Clock, Calendar, CloudRain, Sparkles,
-  Mail, MapPin, Phone, Instagram, Globe, BarChart3, Users, Network, Activity, Radio
+  Mail, MapPin, Phone, Instagram, Globe, Users, Send
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -23,10 +23,10 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
-      {/* Hero - PC/Mobile Background Switching */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* PC Background */}
+          {/* PC Background - Absolute path for Vercel */}
           <div className="hidden md:block absolute inset-0">
             <Image 
               src="/hero.png" 
@@ -37,7 +37,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          {/* Mobile Background */}
+          {/* Mobile Background - Absolute path for Vercel */}
           <div className="md:hidden absolute inset-0">
             <Image 
               src="/hero_mobile.png" 
@@ -74,7 +74,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION - NEON REDESIGN 2026 */}
+      {/* GLOBAL ACHIEVEMENT SECTION - STATIC FUTURISTIC UI */}
       <section className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -84,6 +84,7 @@ export default function PortfolioPage() {
             transition={{ duration: 0.8 }}
             className="relative p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] bg-white border border-primary/10 shadow-2xl overflow-hidden"
           >
+            {/* Mesh Gradient Backgrounds */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.04] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
@@ -127,6 +128,7 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
+              {/* Right Side - Soft Neon YouTube Icon */}
               <div className="relative w-full max-w-[400px] mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center py-10">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-red-600/[0.05] blur-[80px] rounded-full scale-150 animate-pulse" />
@@ -170,28 +172,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-40 px-6 bg-primary/[0.02]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-none grid grid-cols-2 gap-4 md:gap-6">
-            <FeatureIconBox icon={<Mic2 />} label="Khateeb" />
-            <FeatureIconBox icon={<Clock />} label="Salah" className="mt-8" />
-            <FeatureIconBox icon={<Calendar />} label="Schedule" />
-            <FeatureIconBox icon={<CloudRain />} label="Live" className="mt-8" />
-          </div>
-          <div className="space-y-10 text-center lg:text-left shadow-accent/5">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary leading-[0.9]">Features</h2>
-            <p className="text-muted-foreground text-xl font-medium">Real-time Khutbah schedules, Imam rosters, Salah updates, and live atmospheric moments from the Two Holy Mosques.</p>
-            <div className="pt-10">
-              <Link href="/social-media">
-                <Button size="lg" className="rounded-full px-12 bg-primary text-white font-black tracking-widest text-[10px] uppercase transition-all hover:scale-105">VISIT</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Academy Section */}
+      {/* Academy Highlights */}
       <section id="education" className="py-40 px-6">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
@@ -201,7 +182,7 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
             <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Record." />
-            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545 marks. Pure Science & Computer focus." />
+            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545 marks. Pure Science focus." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
@@ -211,110 +192,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Work Section */}
-      <section id="projects" className="py-40 px-6 bg-white">
-        <div className="max-w-7xl mx-auto space-y-20">
-          <div className="text-center space-y-4">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary">Work</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scalable Digital Architectures</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ProjectCard title="Chizzy AI" cat="AI Tools" link="https://chizzy-two.vercel.app" />
-            <ProjectCard title="HappyChat" cat="Messaging" link="https://happychat-murex.vercel.app" />
-            <ProjectCard title="HappyLink" cat="Identity" link="https://happylink-beta.vercel.app" />
-          </div>
-          <div className="text-center pt-10">
-            <Link href="/projects">
-              <Button size="lg" variant="outline" className="rounded-full px-12 border-primary/10 h-14 text-primary font-black tracking-widest text-[10px] uppercase">VISIT</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Youtube & Facebook Hub */}
-      <section id="social-media" className="py-40 space-y-40 bg-primary/[0.01]">
-        <div className="max-w-7xl mx-auto px-6 space-y-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-10 text-center lg:text-left">
-              <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
-                <YoutubeIcon className="h-4 w-4" /> Voices of Haram
-              </div>
-              <h3 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h3>
-              <p className="text-muted-foreground text-xl font-medium">Bridging engineering with spiritual tradition since 2026.</p>
-              <div className="pt-10 flex justify-center lg:justify-start">
-                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase w-full sm:w-fit shadow-2xl">
-                  <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
-                </Button>
-              </div>
-            </div>
-            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-black">
-              <iframe className="w-full h-full" src="https://www.youtube.com/embed/VOA8Gc44ZIE" title="VOH" frameBorder="0" allowFullScreen></iframe>
-            </div>
-          </div>
-
-          {/* FB Section */}
-          <div className="bg-[#F0F2F5] p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 relative overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 text-center lg:text-left">
-              <div className="space-y-8">
-                <h3 className="text-[80px] md:text-[180px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h3>
-                <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-md mx-auto lg:mx-0">Spiritual community of <span className="text-[#1877F2] font-black">25,000+</span> members.</p>
-                <div className="flex justify-center lg:justify-start pt-10">
-                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
-                    <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
-                  </Button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
-                <MiniStat count="25K+" label="MEMBERS" />
-                <MiniStat count="Global" label="REACH" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Connect Section */}
-      <section id="contact" className="py-40 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div className="crystal-panel p-10 md:p-16 rounded-[4rem] space-y-10 overflow-visible">
-            <h2 className="text-4xl font-black tracking-tighter uppercase">Connect</h2>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input placeholder="NAME" className="h-16 rounded-2xl border-primary/10" />
-                <Input placeholder="EMAIL" className="h-16 rounded-2xl border-primary/10" />
-              </div>
-              <Textarea placeholder="TELL ME ABOUT YOUR VISION..." className="min-h-[200px] rounded-3xl border-primary/10" />
-              <div className="pt-10">
-                <Button className="w-full h-20 rounded-full bg-primary text-white font-black tracking-widest uppercase shadow-2xl">VISIT</Button>
-              </div>
-            </form>
-          </div>
-          <div className="flex flex-col justify-center space-y-12 py-12 pb-12 overflow-visible">
-            <ContactInfo icon={<Mail />} label="EMAIL" value="itsmuhammadahmad06@gmail.com" />
-            <ContactInfo icon={<Phone />} label="PHONE" value="+923434441031" />
-            <ContactInfo icon={<MapPin />} label="LOCATION" value="Faisalabad, PK" />
-            <div className="pt-10 flex gap-6 pb-12">
-               <a href="https://youtube.com/@VoicesOfHaram" target="_blank" className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0 hover:bg-primary hover:text-white transition-all">
-                <YoutubeIcon className="h-6 w-6" />
-               </a>
-               <a href="https://instagram.com/voicesofharam.official" target="_blank" className="w-14 h-14 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white shadow-lg shrink-0 hover:bg-primary hover:text-white transition-all">
-                <Instagram className="h-6 w-6" />
-               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
-    </div>
-  )
-}
-
-function FeatureIconBox({ icon, label, className }: any) {
-  return (
-    <div className={cn("p-8 rounded-[2.5rem] bg-white border border-primary/5 shadow-xl space-y-4", className)}>
-      <div className="text-primary h-8 w-8">{icon}</div>
-      <h4 className="text-[10px] font-black tracking-widest uppercase text-primary">{label}</h4>
     </div>
   )
 }
@@ -329,43 +207,6 @@ function EduCard({ icon, year, title, institution, desc }: any) {
       </div>
       <p className="text-primary font-bold text-[9px] tracking-widest uppercase mb-4">{institution}</p>
       <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
-    </div>
-  )
-}
-
-function ProjectCard({ title, cat, link }: any) {
-  return (
-    <div className="p-10 rounded-[3rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
-      <span className="inline-block px-4 py-1 rounded-full bg-primary/5 text-primary font-black text-[9px] mb-6 tracking-widest uppercase">{cat}</span>
-      <h3 className="text-3xl font-black tracking-tighter uppercase mb-6">{title}</h3>
-      <div className="pt-10">
-        <Button asChild variant="outline" className="w-full rounded-full border-primary/10 text-primary font-black text-[10px] tracking-widest uppercase shadow-sm">
-          <a href={link} target="_blank">VISIT</a>
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-function MiniStat({ count, label }: any) {
-  return (
-    <div className="p-8 rounded-[2rem] bg-white shadow-xl flex flex-col items-center justify-center text-center space-y-2 min-h-[140px] w-full">
-      <span className="text-3xl md:text-4xl font-black text-[#1877F2] tracking-tighter">{count}</span>
-      <span className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</span>
-    </div>
-  )
-}
-
-function ContactInfo({ icon, label, value }: any) {
-  return (
-    <div className="flex items-center gap-6 group w-full overflow-hidden">
-      <div className="w-14 h-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
-        {icon}
-      </div>
-      <div className="min-w-0">
-        <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
-      </div>
     </div>
   )
 }

@@ -15,7 +15,7 @@ export default function AboutPage() {
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Responsive Image Switching & Fade */}
+        {/* Dedicated Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             {/* PC Background */}
@@ -145,14 +145,6 @@ export default function AboutPage() {
             <ValueCard icon={<Star />} title="BRAND" desc="Voices of Haram established 2026." />
             <ValueCard icon={<ShieldCheck />} title="LOGIC" desc="High-performance brand architecting." />
             <ValueCard icon={<Zap />} title="SPEED" desc="Zero to global reach in record time." />
-          </div>
-
-          <div className="crystal-panel p-12 md:p-20 rounded-[4rem] space-y-10">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Vision</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-muted-foreground font-medium text-lg leading-relaxed">
-              <p>Founded in 2026, <span className="text-primary font-bold">Voices of Haram</span> serves as a global ecosystem bridging spiritual tradition with digital engineering.</p>
-              <p>As a software architect, I build systems that scale. Every project is a testament to precision and focus.</p>
-            </div>
           </div>
         </div>
       </main>

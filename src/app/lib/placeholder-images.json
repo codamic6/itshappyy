@@ -3,13 +3,13 @@
   "placeholderImages": [
     {
       "id": "hero-bg",
-      "description": "Main Hero Background from public/hero.png",
+      "description": "Main Hero Background for PC",
       "imageUrl": "/hero.png",
       "imageHint": "main hero"
     },
     {
       "id": "hero-mobile-bg",
-      "description": "Mobile Hero Background from public/hero_mobile.png",
+      "description": "Main Hero Background for Mobile",
       "imageUrl": "/hero_mobile.png",
       "imageHint": "main hero mobile"
     },
@@ -21,27 +21,15 @@
     },
     {
       "id": "happychat",
-      "description": "HappyChat App UI - WhatsApp Clone",
+      "description": "HappyChat App UI",
       "imageUrl": "https://picsum.photos/seed/chat-app/600/400",
-      "imageHint": "chat application interface"
-    },
-    {
-      "id": "happylinks",
-      "description": "HappyLinks App UI - Linktree Clone",
-      "imageUrl": "https://picsum.photos/seed/links-app/600/400",
-      "imageHint": "bio link interface"
+      "imageHint": "chat application"
     },
     {
       "id": "voh",
-      "description": "Voices of Haram Digital Brand",
+      "description": "Voices of Haram Brand",
       "imageUrl": "https://picsum.photos/seed/islamic-brand/600/400",
-      "imageHint": "digital media platform"
-    },
-    {
-      "id": "social-strategy",
-      "description": "Social Media Strategy for Sheikh Waleed",
-      "imageUrl": "https://picsum.photos/seed/strategy/600/400",
-      "imageHint": "social media dashboard"
+      "imageHint": "digital brand"
     }
   ]
 }
