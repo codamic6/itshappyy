@@ -4,19 +4,19 @@
     {
       "id": "hero-bg",
       "description": "Main Hero Background for PC",
-      "imageUrl": "/hero.png",
+      "imageUrl": "/hero.jpg",
       "imageHint": "main hero"
     },
     {
       "id": "hero-mobile-bg",
       "description": "Main Hero Background for Mobile",
-      "imageUrl": "/hero_mobile.png",
+      "imageUrl": "/hero_mobile.jpg",
       "imageHint": "main hero mobile"
     },
     {
       "id": "my-avatar",
       "description": "User Profile Avatar",
-      "imageUrl": "/my_avt.png",
+      "imageUrl": "/my_avt.jpg",
       "imageHint": "portrait professional"
     },
     {

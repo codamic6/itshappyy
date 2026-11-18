@@ -23,7 +23,7 @@ export default function ContactPage() {
             {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
-                src="/hero.png" 
+                src="/hero.jpg" 
                 alt="Contact Hero PC" 
                 fill 
                 unoptimized
@@ -34,7 +34,7 @@ export default function ContactPage() {
             {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
-                src="/hero_mobile.png" 
+                src="/hero_mobile.jpg" 
                 alt="Contact Hero Mobile" 
                 fill 
                 unoptimized

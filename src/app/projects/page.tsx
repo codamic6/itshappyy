@@ -122,7 +122,7 @@ export default function ProjectsPage() {
             {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
-                src="/hero.png" 
+                src="/hero.jpg" 
                 alt="Projects Hero PC" 
                 fill 
                 unoptimized
@@ -133,7 +133,7 @@ export default function ProjectsPage() {
             {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
-                src="/hero_mobile.png" 
+                src="/hero_mobile.jpg" 
                 alt="Projects Hero Mobile" 
                 fill 
                 unoptimized

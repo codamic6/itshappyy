@@ -100,7 +100,7 @@ export default function EducationPage() {
             {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
-                src="/hero.png" 
+                src="/hero.jpg" 
                 alt="Education Hero PC" 
                 fill 
                 unoptimized
@@ -111,7 +111,7 @@ export default function EducationPage() {
             {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
-                src="/hero_mobile.png" 
+                src="/hero_mobile.jpg" 
                 alt="Education Hero Mobile" 
                 fill 
                 unoptimized
