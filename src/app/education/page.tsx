@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { GraduationCap, Award, Medal, BookOpen, Star, Trophy } from 'lucide-react'
+import { GraduationCap, Award, Medal, BookOpen, Star, Trophy, Target, ShieldCheck, Zap } from 'lucide-react'
 
 export default function EducationPage() {
   const educationTimeline = [
@@ -47,10 +47,45 @@ export default function EducationPage() {
     },
     { 
       year: "2020", 
-      title: "Class 5 - 2nd Position", 
+      title: "Class 5 - 1st Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Secured 2nd overall position in primary school, building the foundation for academic record-breaking.", 
+      details: "Secured overall 1st position, demonstrating peak academic performance in primary level.", 
       icon: <Star /> 
+    },
+    { 
+      year: "2019", 
+      title: "Class 4 - 2nd Position", 
+      institution: "Al-Faisal Grammar School", 
+      details: "Maintained elite ranking with overall 2nd position in grade.", 
+      icon: <Target /> 
+    },
+    { 
+      year: "2018", 
+      title: "Class 3 - 4th Position", 
+      institution: "Al-Faisal Grammar School", 
+      details: "Strong academic standing within the top tier of the class.", 
+      icon: <ShieldCheck /> 
+    },
+    { 
+      year: "2017", 
+      title: "Class 2 - 2nd Position", 
+      institution: "Al-Faisal Grammar School", 
+      details: "Consistent performance securing the 2nd overall position.", 
+      icon: <Award /> 
+    },
+    { 
+      year: "2016", 
+      title: "Class 1 - 2nd Position", 
+      institution: "Al-Faisal Grammar School", 
+      details: "Early academic record-breaking with 2nd overall position.", 
+      icon: <Medal /> 
+    },
+    { 
+      year: "2015", 
+      title: "Prep - 3rd Position", 
+      institution: "Al-Faisal Grammar School", 
+      details: "Foundation of excellence started with a 3rd position finish.", 
+      icon: <Zap /> 
     }
   ];
 
@@ -95,7 +130,7 @@ export default function EducationPage() {
         </section>
 
         {/* TIMELINE GRID */}
-        <div className="max-w-7xl mx-auto px-6 space-y-24">
+        <div className="max-w-7xl mx-auto px-6 space-y-24 pt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {educationTimeline.map((item, idx) => (
               <motion.div 
@@ -104,7 +139,7 @@ export default function EducationPage() {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.05 }}
-                className="group p-12 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
+                className="group p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/[0.02] rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
                 
