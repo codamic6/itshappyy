@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -5,59 +6,60 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { GraduationCap, Award, Medal, BookOpen, Star } from 'lucide-react'
+import { GraduationCap, Award, Medal, BookOpen, Star, Trophy } from 'lucide-react'
 
 export default function EducationPage() {
   const educationTimeline = [
     { 
       year: "2026", 
-      title: "ICS - 11th", 
+      title: "ICS - 11th Grade", 
       institution: "Punjab College", 
-      details: "Advanced Logic, Mathematics, and Computer Architectures.", 
+      details: "Current studies focusing on Advanced Logic, Mathematics, and Computer Science Architectures.", 
       icon: <GraduationCap /> 
     },
     { 
       year: "2025", 
       title: "Matric - 1st Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Secured 1165/1200 marks. Subjects: Computer Science, Physics, Mathematics, Chemistry. Ahmadabad, Faisalabad.", 
-      icon: <Award /> 
+      details: "Secured Board Level 1st Position with 1165/1200 marks. Specialized in Computer Science, Physics, and Math.", 
+      icon: <Trophy /> 
     },
     { 
       year: "2024", 
       title: "9th Grade", 
       institution: "Al-Faisal Grammar School", 
-      details: "Scored 525/545 marks. Subjects: Computer Science, Physics, Mathematics, Chemistry. Ahmadabad, Faisalabad.", 
-      icon: <Medal /> 
+      details: "Secured 525/545 marks, demonstrating consistent academic dominance in Science subjects.", 
+      icon: <Award /> 
     },
     { 
       year: "2023", 
       title: "Class 8 - 3rd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Continued academic excellence in middle school. Ahmadabad, Faisalabad.", 
-      icon: <Star /> 
+      details: "Achieved overall 3rd position in grade, maintaining a trajectory of excellence in Ahmadabad, Faisalabad.", 
+      icon: <Medal /> 
     },
     { 
       year: "2021-22", 
-      title: "Hifz Completion", 
+      title: "Hifz-e-Quran", 
       institution: "Masjid-e-Niyaz", 
-      details: "Dedicated period for Quranic Memorization (Class 6-7). Completed Hifz in 1 Year 9 Months.", 
+      details: "Completed Quranic Memorization in a record 1 Year 9 Months (Class 6-7). Followed by a 1-month full revision.", 
       icon: <BookOpen /> 
     },
     { 
       year: "2020", 
       title: "Class 5 - 2nd Position", 
       institution: "Al-Faisal Grammar School", 
-      details: "Secured 2nd Position in overall grade. Ahmadabad, Faisalabad.", 
-      icon: <Award /> 
+      details: "Secured 2nd overall position in primary school, building the foundation for academic record-breaking.", 
+      icon: <Star /> 
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter transition-colors duration-700">
       <Navbar />
       
       <main className="pb-20">
+        {/* HERO SECTION */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="hidden md:block absolute inset-0">
@@ -88,10 +90,11 @@ export default function EducationPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Academy</h1>
-            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">A Decade of Excellence</p>
+            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Excellence Over A Decade</p>
           </motion.div>
         </section>
 
+        {/* TIMELINE GRID */}
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {educationTimeline.map((item, idx) => (
@@ -101,16 +104,22 @@ export default function EducationPage() {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.05 }}
-                className="group p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
+                className="group p-12 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/[0.02] rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
-                <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-black text-[10px] tracking-widest uppercase mb-6">{item.year}</span>
-                <div className="flex items-center gap-4 mb-4">
-                  {item.icon && <div className="text-primary h-6 w-6">{item.icon}</div>}
+                
+                <span className="inline-block px-5 py-1.5 rounded-full bg-primary/10 text-primary font-black text-[10px] tracking-widest uppercase mb-8">{item.year}</span>
+                
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="text-primary h-7 w-7 transition-transform group-hover:scale-110">{item.icon}</div>
                   <h3 className="text-2xl font-black tracking-tighter uppercase group-hover:text-primary leading-tight">{item.title}</h3>
                 </div>
-                <p className="text-primary font-bold text-[10px] uppercase mb-4">{item.institution}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.details}</p>
+                
+                <p className="text-primary font-bold text-[10px] tracking-[0.1em] uppercase mb-6">{item.institution}</p>
+                
+                <p className="text-muted-foreground dark:text-white/60 text-sm leading-relaxed font-medium">
+                  {item.details}
+                </p>
               </motion.div>
             ))}
           </div>

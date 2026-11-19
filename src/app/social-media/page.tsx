@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -11,10 +12,11 @@ import { cn } from '@/lib/utils'
 
 export default function SocialMediaPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700">
       <Navbar />
       
       <main className="pb-20 space-y-40">
+        {/* HERO SECTION */}
         <section id="social-hero" className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="hidden md:block absolute inset-0">
@@ -45,11 +47,11 @@ export default function SocialMediaPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Reach</h1>
-            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Scaling Digital Icons</p>
+            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Scaling Digital Icons 2026</p>
           </motion.div>
         </section>
 
-        {/* GLOBAL ACHIEVEMENT SECTION */}
+        {/* YOUTUBE GLOBAL MILESTONE */}
         <section id="global-milestone-social" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <motion.div 
@@ -73,7 +75,7 @@ export default function SocialMediaPage() {
                       <span className="text-red-600 dark:text-red-500">TOP 25%</span>
                       <span className="text-green-gradient text-nowrap">GLOBALLY</span>
                     </h2>
-                    <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    <p className="text-lg md:text-xl text-muted-foreground dark:text-white/70 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                       Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
                     </p>
                   </div>
@@ -84,14 +86,14 @@ export default function SocialMediaPage() {
                         <Users className="h-6 w-6 text-red-600" />
                         <span className="text-4xl md:text-5xl font-black text-red-600 dark:text-red-500">30.5K+</span>
                       </div>
-                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">COMMUNITY MEMBERS</p>
+                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">COMMUNITY MEMBERS</p>
                     </div>
                     <div className="space-y-1">
                       <div className="flex items-center gap-3 justify-center lg:justify-start">
                         <Globe className="h-6 w-6 text-primary" />
                         <span className="text-4xl md:text-5xl font-black text-primary">Global</span>
                       </div>
-                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">CREATOR RANKING</p>
+                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">CREATOR RANKING</p>
                     </div>
                   </div>
 
@@ -117,8 +119,42 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="social-features" className="max-w-7xl mx-auto px-6 space-y-20">
+        {/* FACEBOOK HUB */}
+        <section id="facebook-hub-social" className="max-w-7xl mx-auto px-6">
+          <div className="bg-[#F0F2F5] dark:bg-blue-950/10 p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 dark:border-blue-900/20 relative overflow-hidden glowing-card">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+              <div className="space-y-10 text-center lg:text-left">
+                <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
+                <div className="space-y-4">
+                  <p className="text-xl md:text-2xl text-muted-foreground dark:text-white/70 font-medium">
+                    Community of <span className="text-[#1877F2] font-black">25,000+</span> dedicated members.
+                  </p>
+                  <p className="text-muted-foreground dark:text-white/50 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">
+                    Sharing high-frequency updates and spiritual insights daily with a global audience.
+                  </p>
+                </div>
+                <div className="flex justify-center lg:justify-start">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-full sm:w-fit transition-all hover:scale-105">
+                    <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT HUB</a>
+                  </Button>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <StatBox icon={<Users />} label="Members" count="25K+" fb />
+                <StatBox icon={<Send />} label="Weekly Posts" count="100+" fb />
+                <StatBox icon={<TrendingUp />} label="Impact" count="Extreme" fb />
+                <StatBox icon={<Globe />} label="Scope" count="Global" fb />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MASJID UPDATES FEATURES */}
+        <section id="social-features" className="max-w-7xl mx-auto px-6 space-y-20 pb-20">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Core Updates</h2>
+            <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Real-time Spiritual Intelligence</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <UpdateCard icon={<Mic2 />} title="Khateeb" desc="Designated Jummah Khateeb announcements for Masjid Al-Haram." />
             <UpdateCard icon={<Calendar />} title="Taraweeh" desc="Detailed schedule of Imams leading Taraweeh and Tahajjud." />
@@ -132,14 +168,31 @@ export default function SocialMediaPage() {
   )
 }
 
+function StatBox({ icon, label, count, fb }: any) {
+  return (
+    <div className={cn(
+      "p-8 rounded-[2.5rem] bg-white dark:bg-white/[0.05] shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4 transition-all hover:scale-105",
+      fb && "dark:border-blue-900/20"
+    )}>
+      <div className={fb ? "text-[#1877F2]" : "text-primary"}>
+        {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
+      </div>
+      <div className="space-y-1">
+        <h4 className="text-2xl font-black tracking-tighter">{count}</h4>
+        <p className="text-[9px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">{label}</p>
+      </div>
+    </div>
+  )
+}
+
 function UpdateCard({ icon, title, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group text-center lg:text-left glowing-card">
-      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform mx-auto lg:mx-0">
-        {React.cloneElement(icon, { className: "h-6 w-6" })}
+    <div className="p-12 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group text-center lg:text-left glowing-card">
+      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform mx-auto lg:mx-0">
+        {React.cloneElement(icon, { className: "h-7 w-7" })}
       </div>
-      <h3 className="text-xl font-black tracking-tighter uppercase mb-4 text-primary">{title}</h3>
-      <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
+      <h3 className="text-2xl font-black tracking-tighter uppercase mb-4 text-primary">{title}</h3>
+      <p className="text-muted-foreground dark:text-white/60 text-sm font-medium leading-relaxed">{desc}</p>
     </div>
   )
 }
