@@ -27,7 +27,7 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700">
+    <div className="min-h-screen bg-white dark:bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700 ease-in-out">
       <Navbar />
       
       {/* Hero Section */}
@@ -39,7 +39,7 @@ export default function PortfolioPage() {
               alt="Hero Background PC" 
               fill 
               unoptimized
-              className="object-cover object-center opacity-50 dark:opacity-30"
+              className="object-cover object-center opacity-50"
               data-ai-hint="main hero"
               priority
             />
@@ -50,12 +50,13 @@ export default function PortfolioPage() {
               alt="Hero Background Mobile" 
               fill 
               unoptimized
-              className="object-cover object-center opacity-50 dark:opacity-30"
+              className="object-cover object-center opacity-50"
               data-ai-hint="main hero mobile"
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 dark:via-black/20 to-white dark:to-background" />
+          {/* Subtle light gradient even in dark mode to keep hero "as is" */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white dark:to-background transition-colors duration-700" />
         </div>
         
         <motion.div 
@@ -63,7 +64,7 @@ export default function PortfolioPage() {
           animate={{ opacity: 1, y: 0 }}
           className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
-          <div className="flex items-center justify-center overflow-visible px-4">
+          <div className="flex items-center justify-center px-4">
             <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap glowing-text">
               HAPPY
             </h1>
@@ -224,7 +225,6 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons 2026</p>
           </div>
 
-          {/* YouTube Embed Area */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-10 order-2 lg:order-none text-center lg:text-left">
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
@@ -258,7 +258,6 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          {/* FB Integration */}
           <div className="bg-[#F0F2F5] dark:bg-blue-950/10 p-8 md:p-24 rounded-[3rem] md:rounded-[5rem] border border-[#1877F2]/10 dark:border-blue-900/20 relative overflow-hidden glowing-card">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
