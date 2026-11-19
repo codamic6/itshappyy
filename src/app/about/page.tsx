@@ -46,7 +46,7 @@ export default function AboutPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">About</h1>
-            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Extreme Discipline</p>
+            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Extreme Discipline</p>
           </motion.div>
         </section>
 
@@ -74,7 +74,7 @@ export default function AboutPage() {
                       <span className="text-red-600 dark:text-red-500">TOP 25%</span>
                       <span className="text-green-gradient text-nowrap">GLOBALLY</span>
                     </h2>
-                    <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    <p className="text-lg md:text-xl text-muted-foreground dark:text-white/70 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                       Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
                     </p>
                   </div>
@@ -85,14 +85,14 @@ export default function AboutPage() {
                         <Users className="h-6 w-6 text-red-600" />
                         <span className="text-4xl md:text-5xl font-black text-red-600 dark:text-red-500">30.5K+</span>
                       </div>
-                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">COMMUNITY MEMBERS</p>
+                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">COMMUNITY MEMBERS</p>
                     </div>
                     <div className="space-y-1">
                       <div className="flex items-center gap-3 justify-center lg:justify-start">
                         <Globe className="h-6 w-6 text-primary" />
                         <span className="text-4xl md:text-5xl font-black text-primary">Global</span>
                       </div>
-                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">CREATOR RANKING</p>
+                      <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">CREATOR RANKING</p>
                     </div>
                   </div>
 
@@ -122,7 +122,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary glowing-text">Identity</h2>
-              <div className="space-y-6 text-muted-foreground text-xl leading-relaxed font-medium">
+              <div className="space-y-6 text-muted-foreground dark:text-white/70 text-xl leading-relaxed font-medium">
                 <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. I don't believe in average effort; I believe in breaking records through focus.</p>
                 <p>In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
                 <p>While the standard revision period is 6 months, I completed mine in exactly <span className="text-primary font-bold italic">1 Month</span>.</p>
@@ -155,7 +155,7 @@ function ValueCard({ icon, title, desc }: any) {
         {React.cloneElement(icon, { className: "h-6 w-6" })}
       </div>
       <h3 className="text-xs font-black tracking-[0.2em] uppercase mb-2 text-primary">{title}</h3>
-      <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+      <p className="text-muted-foreground dark:text-white/60 text-sm leading-relaxed">{desc}</p>
     </div>
   )
 }

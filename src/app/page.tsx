@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState } from 'react'
@@ -39,7 +38,7 @@ export default function PortfolioPage() {
               alt="Hero Background PC" 
               fill 
               unoptimized
-              className="object-cover object-center opacity-50"
+              className="object-cover object-center"
               data-ai-hint="main hero"
               priority
             />
@@ -50,12 +49,11 @@ export default function PortfolioPage() {
               alt="Hero Background Mobile" 
               fill 
               unoptimized
-              className="object-cover object-center opacity-50"
+              className="object-cover object-center"
               data-ai-hint="main hero mobile"
               priority
             />
           </div>
-          {/* Subtle light gradient even in dark mode to keep hero "as is" */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white dark:to-background transition-colors duration-700" />
         </div>
         
@@ -69,7 +67,7 @@ export default function PortfolioPage() {
               HAPPY
             </h1>
           </div>
-          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground dark:text-white/40 max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] px-4">
+          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground dark:text-white/70 max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] px-4">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
@@ -91,7 +89,7 @@ export default function PortfolioPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative p-8 md:p-16 rounded-[3rem] md:rounded-[4rem] bg-white dark:bg-white/[0.02] border border-primary/10 dark:border-white/5 shadow-2xl overflow-hidden glowing-card"
+            className="relative p-8 md:p-16 rounded-[3rem] md:rounded-[4rem] bg-white dark:bg-card border border-primary/10 dark:border-white/5 shadow-2xl overflow-hidden glowing-card"
           >
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.04] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
@@ -107,7 +105,7 @@ export default function PortfolioPage() {
                     <span className="text-red-600 dark:text-red-500">TOP 25%</span>
                     <span className="text-green-gradient text-nowrap">GLOBALLY</span>
                   </h2>
-                  <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  <p className="text-lg md:text-xl text-muted-foreground dark:text-white/70 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                     Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
                   </p>
                 </div>
@@ -118,14 +116,14 @@ export default function PortfolioPage() {
                       <Users className="h-6 w-6 text-red-600" />
                       <span className="text-4xl md:text-5xl font-black text-red-600 dark:text-red-500">30.5K+</span>
                     </div>
-                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">COMMUNITY MEMBERS</p>
+                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">COMMUNITY MEMBERS</p>
                   </div>
                   <div className="space-y-1">
                     <div className="flex items-center gap-3 justify-center lg:justify-start">
                       <Globe className="h-6 w-6 text-primary" />
                       <span className="text-4xl md:text-5xl font-black text-primary">Global</span>
                     </div>
-                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground uppercase">CREATOR RANKING</p>
+                    <p className="text-[10px] font-black tracking-[0.2em] text-muted-foreground dark:text-white/40 uppercase">CREATOR RANKING</p>
                   </div>
                 </div>
 
@@ -156,7 +154,7 @@ export default function PortfolioPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-10 text-center lg:text-left">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">About</h2>
-            <div className="space-y-6 text-muted-foreground text-lg leading-relaxed font-medium">
+            <div className="space-y-6 text-muted-foreground dark:text-white/70 text-lg leading-relaxed font-medium">
               <p>My story is built on <span className="text-primary font-bold italic underline decoration-primary/20">Extreme Discipline</span>. In 2023, I completed <span className="text-primary font-bold">Hifz-e-Quran</span> at Masjid-e-Niyaz in just <span className="text-primary font-bold italic">1 Year 9 Months</span>.</p>
               <p>While standard revision takes 6 months, I completed mine in exactly <span className="text-primary font-bold italic">1 Month</span>.</p>
             </div>
@@ -180,7 +178,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">Academy</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade 2026</p>
+            <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Excellence Over A Decade 2026</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
@@ -200,7 +198,7 @@ export default function PortfolioPage() {
         <div className="space-y-20">
           <div className="flex flex-col items-center text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">Work</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
+            <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="https://picsum.photos/seed/ai-tool/1200/800" href="/projects" />
@@ -222,7 +220,7 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto space-y-40">
           <div className="text-center space-y-4">
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">Reach</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Scaling Digital Icons 2026</p>
+            <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Scaling Digital Icons 2026</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -234,11 +232,11 @@ export default function PortfolioPage() {
               <div className="grid grid-cols-2 gap-10 pt-6">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600 dark:text-red-500">30.5K+</span>
-                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Subscribers</p>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground dark:text-white/40 uppercase">Subscribers</p>
                 </div>
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600 dark:text-red-500">5M+</span>
-                  <p className="text-[10px] font-black tracking-widest text-muted-foreground uppercase">Views</p>
+                  <p className="text-[10px] font-black tracking-widest text-muted-foreground dark:text-white/40 uppercase">Views</p>
                 </div>
               </div>
               <div className="flex justify-center lg:justify-start pt-10">
@@ -262,7 +260,7 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
                 <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
-                <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium">
+                <p className="text-xl md:text-2xl text-muted-foreground/80 dark:text-white/70 font-medium">
                   Community of <span className="text-[#1877F2] font-black">25,000+</span>
                 </p>
                 <div className="flex justify-center lg:justify-start">
@@ -286,7 +284,7 @@ export default function PortfolioPage() {
       <section id="contact-home" className="py-40 px-6 max-w-7xl mx-auto space-y-24">
         <div className="text-center space-y-4">
           <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">Connect</h2>
-          <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">The Connect Station 2026</p>
+          <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">The Connect Station 2026</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
@@ -323,7 +321,7 @@ export default function PortfolioPage() {
                     <CheckCircle2 className="w-16 h-16" />
                   </div>
                   <h2 className="text-5xl font-black tracking-tighter uppercase text-primary">Mission Success</h2>
-                  <p className="text-muted-foreground leading-relaxed uppercase tracking-widest text-xs">Message Secured</p>
+                  <p className="text-muted-foreground dark:text-white/60 leading-relaxed uppercase tracking-widest text-xs">Message Secured</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -344,21 +342,21 @@ export default function PortfolioPage() {
 
 function EduCard({ icon, year, title, institution, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-white dark:bg-white/[0.02] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-xl group glowing-card">
+    <div className="p-10 rounded-[3rem] bg-white dark:bg-card border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-xl group glowing-card">
       <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-black text-[9px] mb-6">{year}</span>
       <div className="flex items-center gap-3 mb-4">
         <div className="text-primary">{icon}</div>
         <h3 className="text-2xl font-black tracking-tighter uppercase">{title}</h3>
       </div>
       <p className="text-primary font-bold text-[9px] tracking-widest uppercase mb-4">{institution}</p>
-      <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
+      <p className="text-muted-foreground dark:text-white/60 text-sm font-medium leading-relaxed">{desc}</p>
     </div>
   )
 }
 
 function ProjectFeatured({ title, cat, img, href }: any) {
   return (
-    <div className="group relative bg-white dark:bg-white/[0.02] rounded-[4rem] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden glowing-card">
+    <div className="group relative bg-white dark:bg-card rounded-[4rem] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden glowing-card">
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image src={img} alt={title} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" data-ai-hint="software project" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -385,7 +383,7 @@ function StatBox({ icon, label, count, fb }: any) {
       </div>
       <div className="space-y-1">
         <h4 className="text-xl font-black tracking-tighter">{count}</h4>
-        <p className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest">{label}</p>
+        <p className="text-[8px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">{label}</p>
       </div>
     </div>
   )
@@ -398,8 +396,8 @@ function ContactInfo({ icon, label, value }: any) {
         {icon && React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
+        <p className="text-[8px] font-black tracking-widest text-muted-foreground dark:text-white/40 uppercase">{label}</p>
+        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate dark:text-white">{value}</p>
       </div>
     </div>
   )
