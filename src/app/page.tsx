@@ -26,7 +26,7 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700 ease-in-out">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700 ease-in-out">
       <Navbar />
       
       {/* Hero Section */}
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white dark:to-background transition-colors duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background transition-colors duration-700" />
         </div>
         
         <motion.div 
@@ -89,7 +89,7 @@ export default function PortfolioPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative p-8 md:p-16 rounded-[3rem] md:rounded-[4rem] bg-white dark:bg-card border border-primary/10 dark:border-white/5 shadow-2xl overflow-hidden glowing-card"
+            className="relative p-8 md:p-16 rounded-[3rem] md:rounded-[4rem] bg-card border border-primary/10 shadow-2xl overflow-hidden glowing-card"
           >
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/[0.04] rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
@@ -201,9 +201,9 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="https://picsum.photos/seed/ai-tool/1200/800" href="/projects" />
-            <ProjectFeatured title="HappyChat" cat="Messaging" img="https://picsum.photos/seed/chat-pro/1200/800" href="/projects" />
-            <ProjectFeatured title="HappyLink" cat="Identity" img="https://picsum.photos/seed/links-pro/1200/800" href="/projects" />
+            <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="/chizzyai.jpg" href="/projects" />
+            <ProjectFeatured title="HappyChat" cat="Messaging" img="/happychat.jpg" href="/projects" />
+            <ProjectFeatured title="HappyLink" cat="Identity" img="/happylink.jpg" href="/projects" />
           </div>
           <div className="text-center pt-12">
             <Link href="/projects">
@@ -342,7 +342,7 @@ export default function PortfolioPage() {
 
 function EduCard({ icon, year, title, institution, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-white dark:bg-card border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-xl group glowing-card">
+    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-xl group glowing-card">
       <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-black text-[9px] mb-6">{year}</span>
       <div className="flex items-center gap-3 mb-4">
         <div className="text-primary">{icon}</div>
@@ -356,8 +356,8 @@ function EduCard({ icon, year, title, institution, desc }: any) {
 
 function ProjectFeatured({ title, cat, img, href }: any) {
   return (
-    <div className="group relative bg-white dark:bg-card rounded-[4rem] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden glowing-card">
-      <div className="relative aspect-[16/10] overflow-hidden">
+    <div className="group relative bg-card rounded-[4rem] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden glowing-card">
+      <div className="relative aspect-[16/9] overflow-hidden">
         <Image src={img} alt={title} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" data-ai-hint="software project" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
