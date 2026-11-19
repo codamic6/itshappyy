@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState, useMemo } from 'react'
@@ -56,42 +55,6 @@ const projects = [
     description: "Freelance workflow management system for tracking tasks and global deliverables.",
     link: "https://anytask-ten.vercel.app",
     icon: <Sparkles />
-  },
-  {
-    id: 6,
-    title: "HappyScroll",
-    category: "Media",
-    imgSrc: "https://picsum.photos/seed/scroll-pro/1200/800",
-    description: "Infinite media consumption engine optimized for high-retention content delivery.",
-    link: "https://happyscroll.vercel.app",
-    icon: <Zap />
-  },
-  {
-    id: 7,
-    title: "Al-Hameed",
-    category: "Business",
-    imgSrc: "https://picsum.photos/seed/jewel-pro/1200/800",
-    description: "Custom e-commerce storefront for Al-Hameed Jewelers featuring high-end inventories.",
-    link: "https://alhameedjewelers.vercel.app",
-    icon: <Globe />
-  },
-  {
-    id: 8,
-    title: "Direction Academy",
-    category: "Education",
-    imgSrc: "https://picsum.photos/seed/edu-2/1200/800",
-    description: "Strategic educational portal focused on student mentorship and curriculum design.",
-    link: "https://thedirectionacademy.vercel.app",
-    icon: <Code2 />
-  },
-  {
-    id: 9,
-    title: "Portfolio V1",
-    category: "Branding",
-    imgSrc: "https://picsum.photos/seed/port-zeta/1200/800",
-    description: "Initial digital identity deployment showcasing professional growth and core tech stack.",
-    link: "https://portfolio-zeta-eight-38.vercel.app",
-    icon: <Sparkles />
   }
 ];
 
@@ -112,66 +75,54 @@ export default function ProjectsPage() {
   }, [searchQuery, activeCategory]);
 
   return (
-    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
       <main className="pb-20">
-        {/* Dedicated Hero Section with Responsive Switching & Fade */}
         <section className="relative h-[60vh] md:h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
           <div className="absolute inset-0 z-0">
-            {/* PC Background */}
             <div className="hidden md:block absolute inset-0">
               <Image 
                 src="/hero.jpg" 
                 alt="Projects Hero PC" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="projects hero"
               />
             </div>
-            {/* Mobile Background */}
             <div className="md:hidden absolute inset-0">
               <Image 
                 src="/hero_mobile.jpg" 
                 alt="Projects Hero Mobile" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="projects hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Work</h1>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Work</h1>
             <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Engineering Scalable Futures</p>
           </motion.div>
         </section>
 
         <div className="max-w-7xl mx-auto px-6 space-y-24">
-          {/* Search and Filters */}
           <div className="space-y-10">
             <div className="relative max-w-2xl mx-auto">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 h-5 w-5" />
               <Input 
                 placeholder="SEARCH PROJECTS..." 
-                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-primary/[0.01] text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
+                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-card/50 text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              {searchQuery && (
-                <button 
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-6 top-1/2 -translate-y-1/2 p-2 hover:bg-primary/5 rounded-full transition-colors"
-                >
-                  <X className="h-5 w-5 text-primary/40" />
-                </button>
-              )}
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">
@@ -183,7 +134,7 @@ export default function ProjectsPage() {
                     "px-8 py-3 rounded-full text-[10px] font-black tracking-widest uppercase transition-all border shadow-sm",
                     activeCategory === cat 
                       ? "bg-primary text-white border-primary shadow-xl scale-105" 
-                      : "bg-white text-primary/40 border-primary/5 hover:border-primary/20 hover:text-primary"
+                      : "bg-card text-primary/40 border-primary/5 hover:border-primary/20 hover:text-primary"
                   )}
                 >
                   {cat}
@@ -192,7 +143,6 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 min-h-[400px]">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((p, idx) => (
@@ -203,7 +153,7 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group relative bg-white rounded-[4rem] border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden flex flex-col"
+                  className="group relative bg-card rounded-[4rem] border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden flex flex-col glowing-card"
                 >
                   <div className="relative aspect-video overflow-hidden">
                     <Image 
@@ -212,20 +162,15 @@ export default function ProjectsPage() {
                       fill 
                       unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                      data-ai-hint="software application"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                   
                   <div className="p-12 space-y-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between">
                       <span className="px-6 py-2 rounded-full bg-primary/5 text-primary font-black text-[10px] tracking-widest uppercase">{p.category}</span>
-                      <div className="text-primary h-5 w-5">{p.icon}</div>
                     </div>
-                    
                     <h2 className="text-4xl font-black tracking-tighter uppercase text-primary">{p.title}</h2>
                     <p className="text-muted-foreground font-medium leading-relaxed flex-1">{p.description}</p>
-                    
                     <div className="pt-10">
                       <Button asChild className="w-full rounded-full h-20 bg-primary text-white font-black tracking-widest text-sm uppercase shadow-xl transition-all hover:scale-105">
                         <a href={p.link} target="_blank">VISIT <ExternalLink className="ml-2 h-5 w-5" /></a>
@@ -235,26 +180,6 @@ export default function ProjectsPage() {
                 </motion.div>
               ))}
             </AnimatePresence>
-
-            {filteredProjects.length === 0 && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="col-span-full py-40 text-center space-y-6"
-              >
-                <div className="w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mx-auto">
-                  <Search className="h-8 w-8 text-primary/20" />
-                </div>
-                <h3 className="text-2xl font-black tracking-tighter uppercase text-primary/40">No Projects Found</h3>
-                <Button 
-                  variant="link" 
-                  className="text-primary font-black uppercase tracking-widest text-[10px]"
-                  onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
-                >
-                  CLEAR ALL FILTERS
-                </Button>
-              </motion.div>
-            )}
           </div>
         </div>
       </main>

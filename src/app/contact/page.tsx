@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState } from 'react'
@@ -21,7 +20,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
       <Navbar />
       
       <main className="pb-20">
@@ -33,7 +32,7 @@ export default function ContactPage() {
                 alt="Contact Hero PC" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="contact hero"
               />
             </div>
@@ -43,25 +42,25 @@ export default function ContactPage() {
                 alt="Contact Hero Mobile" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="contact hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Connect</h1>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Connect</h1>
             <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">The Connect Station 2026</p>
           </motion.div>
         </section>
 
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-20">
-            <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[600px] flex flex-col justify-center">
+            <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[600px] flex flex-col justify-center glowing-card">
               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
                   <motion.div 
@@ -74,11 +73,11 @@ export default function ContactPage() {
                     <h2 className="text-4xl font-black tracking-tighter uppercase">Message</h2>
                     <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="NAME" required />
-                        <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="EMAIL" type="email" required />
+                        <Input className="h-16 rounded-2xl border-primary/10 bg-card/50" placeholder="NAME" required />
+                        <Input className="h-16 rounded-2xl border-primary/10 bg-card/50" placeholder="EMAIL" type="email" required />
                       </div>
-                      <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="SUBJECT" required />
-                      <Textarea className="min-h-[200px] rounded-3xl border-primary/10 bg-white/50" placeholder="VISION..." required />
+                      <Input className="h-16 rounded-2xl border-primary/10 bg-card/50" placeholder="SUBJECT" required />
+                      <Textarea className="min-h-[200px] rounded-3xl border-primary/10 bg-card/50" placeholder="VISION..." required />
                       <div className="pt-10">
                         <Button type="submit" className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl transition-all hover:scale-[1.02] active:scale-95">
                           SUBMIT <Send className="ml-2 h-5 w-5" />
@@ -154,7 +153,7 @@ export default function ContactPage() {
 function ContactInfo({ icon, label, value }: any) {
   return (
     <div className="flex items-center gap-6 group w-full overflow-hidden">
-      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
+      <div className="w-16 h-16 rounded-2xl bg-primary/5 dark:bg-white/5 border border-primary/10 dark:border-white/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
         {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
       </div>
       <div className="min-w-0 flex-1">
@@ -167,7 +166,7 @@ function ContactInfo({ icon, label, value }: any) {
 
 function SocialCircle({ icon, href }: any) {
   return (
-    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 flex items-center justify-center text-primary bg-white hover:bg-primary hover:text-white transition-all shadow-xl shrink-0">
+    <a href={href} target="_blank" className="w-20 h-20 rounded-full border border-primary/10 dark:border-white/10 flex items-center justify-center text-primary bg-card hover:bg-primary hover:text-white transition-all shadow-xl shrink-0">
       {React.cloneElement(icon as React.ReactElement, { className: "h-8 w-8" })}
     </a>
   )

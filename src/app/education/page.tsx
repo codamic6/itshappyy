@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from 'react'
@@ -51,46 +50,11 @@ export default function EducationPage() {
       institution: "Al-Faisal Grammar School", 
       details: "Secured 2nd Position in overall grade. Ahmadabad, Faisalabad.", 
       icon: <Award /> 
-    },
-    { 
-      year: "2019", 
-      title: "Class 4 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "Maintained consistent academic performance. Ahmadabad, Faisalabad.", 
-      icon: <Award /> 
-    },
-    { 
-      year: "2018", 
-      title: "Class 3 - 4th Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "Ranked among top performers. Ahmadabad, Faisalabad.", 
-      icon: <Star /> 
-    },
-    { 
-      year: "2017", 
-      title: "Class 2 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "Academic consistency maintained. Ahmadabad, Faisalabad.", 
-      icon: <Award /> 
-    },
-    { 
-      year: "2016", 
-      title: "Class 1 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "Early academic record of excellence. Ahmadabad, Faisalabad.", 
-      icon: <Award /> 
-    },
-    { 
-      year: "2015", 
-      title: "Prep - 3rd Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "The beginning of a journey of discipline. Ahmadabad, Faisalabad.", 
-      icon: <Star /> 
     }
   ];
 
   return (
-    <div className="min-h-screen bg-white text-foreground selection:bg-primary/20 selection:text-primary font-inter">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
       <main className="pb-20">
@@ -102,7 +66,7 @@ export default function EducationPage() {
                 alt="Education Hero PC" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="education hero"
               />
             </div>
@@ -112,18 +76,18 @@ export default function EducationPage() {
                 alt="Education Hero Mobile" 
                 fill 
                 unoptimized
-                className="object-cover opacity-50"
+                className="object-cover"
                 data-ai-hint="education hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Academy</h1>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Academy</h1>
             <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">A Decade of Excellence</p>
           </motion.div>
         </section>
@@ -137,7 +101,7 @@ export default function EducationPage() {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.05 }}
-                className="group p-10 rounded-[3.5rem] bg-white border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden"
+                className="group p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/[0.02] rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
                 <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-black text-[10px] tracking-widest uppercase mb-6">{item.year}</span>

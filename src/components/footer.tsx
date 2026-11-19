@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from 'react'
@@ -16,11 +15,11 @@ export function Footer() {
   ];
 
   return (
-    <footer className="pt-40 pb-16 px-6 bg-white border-t border-primary/5 relative overflow-hidden">
+    <footer className="pt-40 pb-16 px-6 bg-background border-t border-primary/5 relative overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-32 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
           <div className="space-y-12">
-            <h3 className="text-7xl font-black tracking-tighter text-green-gradient uppercase italic leading-none">HAPPY</h3>
+            <h3 className="text-7xl font-black tracking-tighter text-green-gradient uppercase italic leading-none glowing-text">HAPPY</h3>
             <p className="text-muted-foreground text-xs font-bold leading-relaxed max-w-xs uppercase tracking-tight">
               Architecting Scalable Digital Ecosystems. Bridging high-performance engineering with spiritual tradition through extreme discipline and focus.
             </p>
@@ -65,7 +64,7 @@ export function Footer() {
 function SocialLink({ icon, name, href }: any) {
   return (
     <a href={href} target="_blank" className="flex items-center gap-4 text-[11px] font-black text-muted-foreground hover:text-primary transition-all group w-fit">
-      <div className="p-3 rounded-2xl bg-primary/[0.03] group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+      <div className="p-3 rounded-2xl bg-primary/[0.03] dark:bg-white/5 group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
         {icon}
       </div>
       <span className="tracking-[0.2em]">{name}</span>
