@@ -35,6 +35,36 @@
     
     --radius: 2rem;
   }
+
+  .dark {
+    --background: 161 10% 8%; /* Dark Gray Background */
+    --foreground: 0 0% 98%;
+    
+    --card: 161 10% 10%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 161 10% 10%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 161 94% 45%; /* Brighter Green for Dark Mode */
+    --primary-foreground: 161 94% 5%;
+    
+    --secondary: 161 10% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 161 10% 15%;
+    --muted-foreground: 161 5% 65%;
+    
+    --accent: 161 94% 45%;
+    --accent-foreground: 161 94% 5%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 161 10% 15%;
+    --input: 161 10% 15%;
+    --ring: 161 94% 45%;
+  }
 }
 
 @layer base {
@@ -42,17 +72,17 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden;
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden transition-colors duration-700 ease-in-out;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 .glass-white {
-  @apply bg-white/70 backdrop-blur-2xl border border-white/20 shadow-xl;
+  @apply bg-white/70 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-xl;
 }
 
 .text-green-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857] dark:from-[#10b981] dark:via-[#34d399] dark:to-[#6ee7b7];
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -78,5 +108,13 @@
 }
 
 .crystal-panel {
-  @apply bg-white/50 backdrop-blur-xl border border-white/20 shadow-2xl;
+  @apply bg-white/50 dark:bg-white/[0.02] backdrop-blur-xl border border-white/20 dark:border-white/5 shadow-2xl transition-all duration-500;
+}
+
+.dark .glowing-card {
+  box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.15);
+}
+
+.dark .glowing-text {
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
 }
