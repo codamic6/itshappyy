@@ -37,7 +37,7 @@
   }
 
   .dark {
-    --background: 161 10% 8%; /* Dark Gray Background */
+    --background: 161 10% 8%; /* Premium Dark Gray Background */
     --foreground: 0 0% 98%;
     
     --card: 161 10% 10%;
@@ -111,6 +111,7 @@
   @apply bg-white/50 dark:bg-white/[0.02] backdrop-blur-xl border border-white/20 dark:border-white/5 shadow-2xl transition-all duration-500;
 }
 
+/* God-Level Glowing Effects for Dark Mode */
 .dark .glowing-card {
   box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.15);
 }
