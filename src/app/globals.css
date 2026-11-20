@@ -45,14 +45,14 @@
     --popover: 161 10% 10%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 161 94% 45%; /* Brighter Green for Dark Mode */
+    --primary: 161 94% 45%; 
     --primary-foreground: 161 94% 5%;
     
     --secondary: 161 10% 15%;
     --secondary-foreground: 0 0% 98%;
     
     --muted: 161 10% 15%;
-    --muted-foreground: 161 5% 75%; /* Brighter for visibility */
+    --muted-foreground: 161 5% 75%;
     
     --accent: 161 94% 45%;
     --accent-foreground: 161 94% 5%;
@@ -76,45 +76,24 @@
   }
 }
 
-.glass-white {
-  @apply bg-white/70 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-xl;
-}
-
 .text-green-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857] dark:from-[#10b981] dark:via-[#34d399] dark:to-[#6ee7b7];
+  /* Consistent Green Gradient for both modes to maintain visibility on bright hero images */
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#064E3B] via-[#065F46] to-[#047857];
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  @apply bg-transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-primary/20 rounded-full border-2 border-transparent bg-clip-content;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/40;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-.crystal-panel {
-  @apply bg-white/50 dark:bg-white/[0.02] backdrop-blur-xl border border-white/20 dark:border-white/5 shadow-2xl;
-}
-
-/* God-Level Glowing Effects for Dark Mode */
+/* Specific Glow for Dark Mode Cards */
 .dark .glowing-card {
   box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.15);
 }
 
 .dark .glowing-text {
   text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.hero-text-shadow {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.glass-white {
+  @apply bg-white/70 dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-xl;
 }

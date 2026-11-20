@@ -54,7 +54,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-background transition-colors duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-background/20" />
         </div>
         
         <motion.div 
@@ -63,11 +63,11 @@ export default function PortfolioPage() {
           className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
           <div className="flex items-center justify-center px-4">
-            <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap glowing-text drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+            <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap glowing-text drop-shadow-2xl">
               HAPPY
             </h1>
           </div>
-          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground dark:text-white/90 max-w-4xl mx-auto font-black uppercase tracking-[0.1em] px-4 drop-shadow-md">
+          <p className="text-[10px] sm:text-sm md:text-base text-primary/80 dark:text-primary/90 max-w-4xl mx-auto font-black uppercase tracking-[0.1em] px-4 drop-shadow-sm hero-text-shadow">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">

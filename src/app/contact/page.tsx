@@ -20,7 +20,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter overflow-x-hidden transition-colors duration-700">
       <Navbar />
       
       <main className="pb-20">
@@ -46,15 +46,15 @@ export default function ContactPage() {
                 data-ai-hint="contact hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-background/20" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Connect</h1>
-            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">The Connect Station 2026</p>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">Connect</h1>
+            <p className="text-primary/80 dark:text-primary/90 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">The Connect Station 2026</p>
           </motion.div>
         </section>
 
@@ -161,7 +161,7 @@ function ContactInfo({ icon, label, value }: any) {
         <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>
     </div>
-  )
+  );
 }
 
 function SocialCircle({ icon, href }: any) {

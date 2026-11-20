@@ -45,7 +45,7 @@ export function Navbar() {
         className="fixed top-8 left-1/2 z-[100] w-[95%] max-w-5xl pointer-events-none -translate-x-1/2"
       >
         <div className="glass-white h-20 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 shadow-2xl pointer-events-auto">
-          {/* Brand Logo - Left Aligned */}
+          {/* Brand Logo - Extreme Left */}
           <Link href="/" className="text-xl md:text-2xl font-black font-syne tracking-widest text-green-gradient uppercase cursor-pointer shrink-0">HAPPY</Link>
           
           {/* Desktop Nav - Centered */}
@@ -61,7 +61,7 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Actions - Right Aligned */}
+          {/* Actions - Extreme Right */}
           <div className="flex items-center gap-2 md:gap-4 shrink-0">
             <ThemeToggle />
             <Link href="/contact">
