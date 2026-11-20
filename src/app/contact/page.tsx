@@ -46,7 +46,8 @@ export default function ContactPage() {
                 data-ai-hint="contact hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-background/20" />
+            {/* Subtle Bottom Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
@@ -54,7 +55,7 @@ export default function ContactPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">Connect</h1>
-            <p className="text-primary/80 dark:text-primary/90 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">The Connect Station 2026</p>
+            <p className="text-primary/80 dark:text-white/70 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">The Connect Station 2026</p>
           </motion.div>
         </section>
 
@@ -161,7 +162,7 @@ function ContactInfo({ icon, label, value }: any) {
         <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
       </div>
     </div>
-  );
+  )
 }
 
 function SocialCircle({ icon, href }: any) {

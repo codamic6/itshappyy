@@ -54,7 +54,8 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-background/20" />
+          {/* Subtle Bottom Fade Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
         </div>
         
         <motion.div 
@@ -67,7 +68,7 @@ export default function PortfolioPage() {
               HAPPY
             </h1>
           </div>
-          <p className="text-[10px] sm:text-sm md:text-base text-primary/80 dark:text-primary/90 max-w-4xl mx-auto font-black uppercase tracking-[0.1em] px-4 drop-shadow-sm hero-text-shadow">
+          <p className="text-[10px] sm:text-sm md:text-base text-primary/80 dark:text-white/70 max-w-4xl mx-auto font-black uppercase tracking-[0.1em] px-4 drop-shadow-sm hero-text-shadow">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">

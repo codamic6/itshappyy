@@ -38,7 +38,8 @@ export default function AboutPage() {
                 priority
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-background/20" />
+            {/* Subtle Bottom Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
@@ -46,7 +47,7 @@ export default function AboutPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">About</h1>
-            <p className="text-primary/80 dark:text-primary/90 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">Extreme Discipline</p>
+            <p className="text-primary/80 dark:text-white/70 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">Extreme Discipline</p>
           </motion.div>
         </section>
 

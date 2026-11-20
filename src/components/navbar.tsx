@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ThemeToggle } from './theme-toggle'
+import { cn } from '@/lib/utils'
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,10 +46,15 @@ export function Navbar() {
         className="fixed top-8 left-1/2 z-[100] w-[95%] max-w-5xl pointer-events-none -translate-x-1/2"
       >
         <div className="glass-white h-20 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 shadow-2xl pointer-events-auto">
-          {/* Brand Logo - Extreme Left */}
-          <Link href="/" className="text-xl md:text-2xl font-black font-syne tracking-widest text-green-gradient uppercase cursor-pointer shrink-0">HAPPY</Link>
+          {/* Brand Logo - Extreme Left with Dark Mode Visibility Fix */}
+          <Link href="/" className={cn(
+            "text-xl md:text-2xl font-black font-syne tracking-widest uppercase cursor-pointer shrink-0 transition-colors",
+            "text-green-gradient dark:text-primary"
+          )}>
+            HAPPY
+          </Link>
           
-          {/* Desktop Nav - Centered */}
+          {/* Desktop Nav - Centered (Contact removed as requested) */}
           <div className="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             {navLinks.map((link) => (
               <Link 

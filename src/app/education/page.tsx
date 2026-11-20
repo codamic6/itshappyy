@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from 'react'
@@ -117,7 +116,8 @@ export default function EducationPage() {
                 data-ai-hint="education hero mobile"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
+            {/* Subtle Bottom Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
