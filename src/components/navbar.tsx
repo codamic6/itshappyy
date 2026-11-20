@@ -25,13 +25,13 @@ export function Navbar() {
     lastScrollY.current = latest;
   });
 
+  // Removed CONTACT from navLinks as it exists as a primary button
   const navLinks = [
     { name: 'HOME', href: '/' },
     { name: 'ABOUT', href: '/about' },
     { name: 'EDUCATION', href: '/education' },
     { name: 'PROJECTS', href: '/projects' },
     { name: 'SOCIAL', href: '/social-media' },
-    { name: 'CONTACT', href: '/contact' },
   ];
 
   return (
@@ -67,7 +67,7 @@ export function Navbar() {
             <ThemeToggle />
             <Link href="/contact">
               <Button className="hidden sm:flex rounded-full px-8 bg-primary text-white font-black text-[10px] tracking-widest h-12 uppercase transition-transform hover:scale-105 shadow-xl">
-                VISIT
+                CONTACT
               </Button>
             </Link>
             <button 
@@ -115,7 +115,7 @@ export function Navbar() {
                 <div className="mt-auto pt-10">
                   <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
                     <Button className="w-full rounded-full py-8 bg-primary text-white font-black tracking-widest text-xs uppercase shadow-2xl">
-                      VISIT STATION
+                      CONTACT STATION
                     </Button>
                   </Link>
                 </div>
