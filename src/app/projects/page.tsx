@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState, useMemo } from 'react'
@@ -5,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { ExternalLink, Zap, Bot, Code2, Globe, Sparkles, Search, X, Gem, BookOpen, MousePointer2 } from 'lucide-react'
+import { ExternalLink, Zap, Bot, Code2, Globe, Sparkles, Search, X, Gem, BookOpen, MousePointer2, Layout } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
@@ -23,7 +24,7 @@ const projects = [
   {
     id: 2,
     title: "HappyChat",
-    category: "Messaging",
+    category: "Messaging Platforms",
     imgSrc: "/happychat.jpg",
     description: "Secure, high-speed messaging platform with real-time sync and custom encryption.",
     link: "https://happychat-murex.vercel.app",
@@ -32,7 +33,7 @@ const projects = [
   {
     id: 3,
     title: "HappyLink",
-    category: "Identity",
+    category: "Identity Solutions",
     imgSrc: "/happylink.jpg",
     description: "Premium bio-link solution featuring advanced analytics and social verification tools.",
     link: "https://happylink-beta.vercel.app",
@@ -41,7 +42,7 @@ const projects = [
   {
     id: 4,
     title: "Faast Global Academy",
-    category: "Education",
+    category: "Educational Systems",
     imgSrc: "/faastglobalacademy.jpg",
     description: "Scalable learning management system built for high-performance academic environments.",
     link: "https://faastglobalacademy.vercel.app",
@@ -50,29 +51,39 @@ const projects = [
   {
     id: 5,
     title: "Al-Hameed Jewelers",
-    category: "E-Commerce",
+    category: "E-Commerce Solutions",
     imgSrc: "/alhameedjewelers.jpg",
     description: "Premium jewelry e-commerce experience with exquisite digital cataloging.",
-    link: "#",
+    link: "https://alhameedjewelers.vercel.app",
     icon: <Gem />
   },
   {
     id: 6,
     title: "The Direction Academy",
-    category: "Education",
+    category: "Educational Systems",
     imgSrc: "/thedirectionacademy.jpg",
     description: "Educational guidance and learning portal for academic excellence.",
-    link: "#",
+    link: "https://thedirectionacademy.vercel.app",
     icon: <BookOpen />
   },
   {
     id: 7,
     title: "HappyScroll",
-    category: "Productivity",
+    category: "Productivity Tools",
     imgSrc: "/happyscroll.jpg",
     description: "Innovative content interaction platform designed for seamless engagement.",
-    link: "#",
+    link: "https://happyscroll.vercel.app",
     icon: <MousePointer2 />
+  },
+  {
+    id: 8,
+    title: "AnyTask",
+    category: "Productivity Tools",
+    imgSrc: "https://picsum.photos/seed/anytask/600/400",
+    description: "High-performance task management ecosystem for modern workflows.",
+    link: "https://anytask-ten.vercel.app",
+    icon: <Layout />,
+    aiHint: "task management"
   }
 ];
 
@@ -107,6 +118,7 @@ export default function ProjectsPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="projects hero"
+                priority
               />
             </div>
             <div className="md:hidden absolute inset-0">
@@ -117,17 +129,19 @@ export default function ProjectsPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="projects hero mobile"
+                priority
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
+            {/* Subtle Bottom Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Work</h1>
-            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Engineering Scalable Futures</p>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">Work</h1>
+            <p className="text-primary/80 dark:text-white/70 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">Engineering Scalable Futures</p>
           </motion.div>
         </section>
 
@@ -180,6 +194,7 @@ export default function ProjectsPage() {
                       fill 
                       unoptimized
                       className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                      data-ai-hint={p.aiHint || "software project"}
                     />
                   </div>
                   

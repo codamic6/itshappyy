@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react'
@@ -34,6 +35,7 @@ export default function ContactPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="contact hero"
+                priority
               />
             </div>
             <div className="md:hidden absolute inset-0">
@@ -44,6 +46,7 @@ export default function ContactPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="contact hero mobile"
+                priority
               />
             </div>
             {/* Subtle Bottom Fade Overlay */}
@@ -61,7 +64,7 @@ export default function ContactPage() {
 
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-20">
-            <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[600px] flex flex-col justify-center glowing-card">
+            <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[500px] md:min-h-[600px] flex flex-col justify-center glowing-card">
               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
                   <motion.div 
@@ -136,7 +139,7 @@ export default function ContactPage() {
                   <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
                 </div>
               </div>
-              <div className="flex flex-wrap gap-6 pt-4 pb-12">
+              <div className="flex flex-wrap gap-4 md:gap-6 pt-4 pb-12 justify-center lg:justify-start">
                 <SocialCircle icon={<Youtube />} href="https://youtube.com/@VoicesOfHaram" />
                 <SocialCircle icon={<Instagram />} href="https://instagram.com/voicesofharam.official" />
                 <SocialCircle icon={<Github />} href="https://github.com/codamic6" />

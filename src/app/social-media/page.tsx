@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -180,26 +181,26 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan (CLEANED) */}
+        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan (RESPONSIVE FIX) */}
         <section id="sheikh-mention" className="max-w-7xl mx-auto px-6 pb-20">
-          <div className="p-12 md:p-20 rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden glowing-card">
-            <div className="absolute top-0 right-0 p-10 opacity-10">
+          <div className="p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden glowing-card">
+            <div className="absolute top-0 right-0 p-10 opacity-10 hidden md:block">
               <InstagramIcon className="w-40 h-40" />
             </div>
             <div className="relative z-10 flex flex-col items-center text-center space-y-8">
-              <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <InstagramIcon className="w-12 h-12" />
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                <InstagramIcon className="w-10 h-10 md:w-12 md:h-12" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-3xl md:text-5xl font-black tracking-tighter uppercase text-primary">@sheikh_waleed_al_shamsan</h3>
+                <h3 className="text-2xl md:text-5xl font-black tracking-tighter uppercase text-primary break-all">@sheikh_waleed_al_shamsan</h3>
               </div>
               <div className="flex items-center gap-10">
                 <div className="text-center">
-                  <span className="text-5xl font-black text-primary">8000+</span>
+                  <span className="text-4xl md:text-5xl font-black text-primary">8000+</span>
                   <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-2">Followers</p>
                 </div>
               </div>
-              <Button asChild className="rounded-full px-12 h-16 bg-primary text-white font-black uppercase tracking-widest shadow-2xl transition-transform hover:scale-105">
+              <Button asChild className="rounded-full px-12 h-16 bg-primary text-white font-black uppercase tracking-widest shadow-2xl transition-transform hover:scale-105 w-full sm:w-fit">
                 <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PAGE</a>
               </Button>
             </div>

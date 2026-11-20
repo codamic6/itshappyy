@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react'
@@ -202,9 +203,9 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Engineering Scalable Futures</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="/chizzyai.jpg" href="/projects" />
-            <ProjectFeatured title="HappyChat" cat="Messaging" img="/happychat.jpg" href="/projects" />
-            <ProjectFeatured title="HappyLink" cat="Identity" img="/happylink.jpg" href="/projects" />
+            <ProjectFeatured title="Chizzy AI" cat="AI Tools" img="/chizzyai.jpg" href="https://chizzy-two.vercel.app" />
+            <ProjectFeatured title="HappyChat" cat="Messaging Platforms" img="/happychat.jpg" href="https://happychat-murex.vercel.app" />
+            <ProjectFeatured title="HappyLink" cat="Identity Solutions" img="/happylink.jpg" href="https://happylink-beta.vercel.app" />
           </div>
           <div className="text-center pt-12">
             <Link href="/projects">
@@ -365,7 +366,7 @@ function ProjectFeatured({ title, cat, img, href }: any) {
       <div className="p-10 space-y-4">
         <div className="flex items-center justify-between">
           <span className="px-5 py-1.5 rounded-full bg-primary/5 text-primary font-black text-[9px] uppercase tracking-widest">{cat}</span>
-          <Link href={href} className="text-primary hover:scale-110 transition-transform"><ExternalLink className="h-5 w-5" /></Link>
+          <a href={href} target="_blank" className="text-primary hover:scale-110 transition-transform"><ExternalLink className="h-5 w-5" /></a>
         </div>
         <h3 className="text-2xl font-black tracking-tighter uppercase text-primary">{title}</h3>
       </div>
