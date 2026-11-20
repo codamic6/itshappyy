@@ -50,7 +50,7 @@ export default function SocialMediaPage() {
             className="relative z-10 text-center space-y-4 pt-20"
           >
             <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">Reach</h1>
-            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Scaling Digital Icons 2026</p>
+            <p className="text-primary/80 dark:text-white/70 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">Scaling Digital Icons 2026</p>
           </motion.div>
         </section>
 
@@ -62,7 +62,7 @@ export default function SocialMediaPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative p-8 md:p-16 rounded-[3.5rem] bg-card border border-primary/10 shadow-2xl overflow-hidden glowing-card"
+              className="relative p-8 md:p-16 rounded-[3rem] bg-card border border-primary/10 shadow-2xl overflow-hidden glowing-card"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="space-y-8 text-center lg:text-left">
@@ -87,11 +87,11 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 2. CORE FEATURES (6 CARD GRID AS PER SAMPLE) */}
+        {/* 2. CORE FEATURES (6 CARD GRID) */}
         <section id="social-features" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-4">
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">FEATURES</h2>
-            <p className="text-muted-foreground dark:text-white/50 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-[0.1em]">
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">FEATURES</h2>
+            <p className="text-muted-foreground dark:text-white/50 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-[0.1em] text-sm md:text-base">
               Real-time updates from the Two Holy Mosques, bridging millions with the sacred heart of Islam.
             </p>
           </div>
@@ -168,7 +168,7 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 5. OTHERS SECTION (WITH UPDATED LINKS) */}
+        {/* 5. OTHERS SECTION */}
         <section id="others-social" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-4">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary glowing-text">Other Platforms</h2>
@@ -181,9 +181,9 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan (RESPONSIVE FIX) */}
+        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan */}
         <section id="sheikh-mention" className="max-w-7xl mx-auto px-6 pb-20">
-          <div className="p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden glowing-card">
+          <div className="p-6 sm:p-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden glowing-card">
             <div className="absolute top-0 right-0 p-10 opacity-10 hidden md:block">
               <InstagramIcon className="w-40 h-40" />
             </div>
@@ -191,8 +191,8 @@ export default function SocialMediaPage() {
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                 <InstagramIcon className="w-10 h-10 md:w-12 md:h-12" />
               </div>
-              <div className="space-y-2">
-                <h3 className="text-2xl md:text-5xl font-black tracking-tighter uppercase text-primary break-all">@sheikh_waleed_al_shamsan</h3>
+              <div className="space-y-2 w-full overflow-hidden">
+                <h3 className="text-xl sm:text-2xl md:text-5xl font-black tracking-tighter uppercase text-primary break-all">@sheikh_waleed_al_shamsan</h3>
               </div>
               <div className="flex items-center gap-10">
                 <div className="text-center">
@@ -216,15 +216,15 @@ export default function SocialMediaPage() {
 function StatBox({ icon, label, count, fb }: any) {
   return (
     <div className={cn(
-      "p-8 rounded-[2.5rem] bg-white dark:bg-white/[0.05] shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4 transition-all hover:scale-105",
+      "p-4 sm:p-8 rounded-[1.5rem] sm:rounded-[2.5rem] bg-white dark:bg-white/[0.05] shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-2 sm:space-y-4 transition-all hover:scale-105",
       fb && "dark:border-blue-900/20"
     )}>
       <div className={fb ? "text-[#1877F2]" : "text-primary"}>
-        {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
+        {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5 sm:h-6 sm:w-6" })}
       </div>
       <div className="space-y-1">
-        <h4 className="text-2xl font-black tracking-tighter">{count}</h4>
-        <p className="text-[9px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">{label}</p>
+        <h4 className="text-xl sm:text-2xl font-black tracking-tighter">{count}</h4>
+        <p className="text-[8px] sm:text-[9px] font-bold text-muted-foreground dark:text-white/40 uppercase tracking-widest">{label}</p>
       </div>
     </div>
   )

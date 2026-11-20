@@ -198,11 +198,11 @@ export default function ProjectsPage() {
                     />
                   </div>
                   
-                  <div className="p-12 space-y-6 flex-1 flex flex-col">
+                  <div className="p-8 sm:p-12 space-y-6 flex-1 flex flex-col">
                     <div className="flex items-center justify-between">
                       <span className="px-6 py-2 rounded-full bg-primary/5 text-primary font-black text-[10px] tracking-widest uppercase">{p.category}</span>
                     </div>
-                    <h2 className="text-4xl font-black tracking-tighter uppercase text-primary">{p.title}</h2>
+                    <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase text-primary">{p.title}</h2>
                     <p className="text-muted-foreground dark:text-white/60 font-medium leading-relaxed flex-1">{p.description}</p>
                     <div className="pt-10">
                       <Button asChild className="w-full rounded-full h-20 bg-primary text-white font-black tracking-widest text-sm uppercase shadow-xl transition-all hover:scale-105">
