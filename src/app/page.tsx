@@ -54,7 +54,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background transition-colors duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-background transition-colors duration-700" />
         </div>
         
         <motion.div 
@@ -63,11 +63,11 @@ export default function PortfolioPage() {
           className="relative z-10 max-w-6xl w-full text-center space-y-4 pt-20"
         >
           <div className="flex items-center justify-center px-4">
-            <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap glowing-text">
+            <h1 className="text-[60px] sm:text-[100px] md:text-[220px] lg:text-[280px] font-black tracking-tighter text-green-gradient uppercase italic leading-none break-all sm:whitespace-nowrap glowing-text drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
               HAPPY
             </h1>
           </div>
-          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground dark:text-white/70 max-w-4xl mx-auto font-medium uppercase tracking-[0.1em] px-4">
+          <p className="text-[10px] sm:text-sm md:text-base text-muted-foreground dark:text-white/90 max-w-4xl mx-auto font-black uppercase tracking-[0.1em] px-4 drop-shadow-md">
             WEB DEVELOPMENT | CONTENT CREATION | SOCIAL MEDIA MANAGEMENT | STUDENT | COLLEGE | ISLAM
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10">
@@ -81,7 +81,7 @@ export default function PortfolioPage() {
         </motion.div>
       </section>
 
-      {/* GLOBAL ACHIEVEMENT SECTION */}
+      {/* Achievement Section */}
       <section id="global-milestone-home" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <motion.div 

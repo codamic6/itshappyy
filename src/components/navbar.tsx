@@ -25,7 +25,6 @@ export function Navbar() {
     lastScrollY.current = latest;
   });
 
-  // Removed CONTACT from navLinks as it exists as a primary button
   const navLinks = [
     { name: 'HOME', href: '/' },
     { name: 'ABOUT', href: '/about' },

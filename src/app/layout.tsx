@@ -1,4 +1,3 @@
-
 import './globals.css';
 import { Inter, Syncopate, Syne } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -33,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${syncopate.variable} ${syne.variable} font-inter bg-white text-foreground antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${syncopate.variable} ${syne.variable} font-inter bg-background text-foreground antialiased overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
