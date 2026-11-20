@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { Youtube as YoutubeIcon, Instagram, Users, TrendingUp, Globe, Send, Mic2, Clock, Calendar, Sparkles, Instagram as InstagramIcon, MessageSquare, Twitter, Radio } from 'lucide-react'
+import { Youtube as YoutubeIcon, Instagram, Users, TrendingUp, Globe, Send, Mic2, Clock, Calendar, Sparkles, Instagram as InstagramIcon, MessageSquare, Twitter, Radio, Star, CloudRain } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -27,6 +27,7 @@ export default function SocialMediaPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="social hero"
+                priority
               />
             </div>
             <div className="md:hidden absolute inset-0">
@@ -37,6 +38,7 @@ export default function SocialMediaPage() {
                 unoptimized
                 className="object-cover"
                 data-ai-hint="social hero mobile"
+                priority
               />
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-background" />
@@ -84,16 +86,21 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 2. CORE FEATURES (MASJID UPDATES) */}
+        {/* 2. CORE FEATURES (6 CARD GRID AS PER SAMPLE) */}
         <section id="social-features" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Core Updates</h2>
-            <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Real-time Spiritual Intelligence</p>
+            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase text-primary glowing-text">FEATURES</h2>
+            <p className="text-muted-foreground dark:text-white/50 font-medium max-w-2xl mx-auto leading-relaxed uppercase tracking-[0.1em]">
+              Real-time updates from the Two Holy Mosques, bridging millions with the sacred heart of Islam.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <UpdateCard icon={<Mic2 />} title="Khateeb" desc="Designated Jummah Khateeb announcements for Masjid Al-Haram." />
-            <UpdateCard icon={<Calendar />} title="Taraweeh" desc="Detailed schedule of Imams leading Taraweeh and Tahajjud." />
-            <UpdateCard icon={<Clock />} title="Salah" desc="Weekly and daily Imam rosters for all five prayers." />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <UpdateCard icon={<Mic2 />} title="KHATEEB" desc="Designated Jummah Khateeb announcements for Masjid Al-Haram & Masjid An-Nabawi." />
+            <UpdateCard icon={<Calendar />} title="TARAWEEH" desc="Detailed schedule of Imams leading Taraweeh and Tahajjud during Ramadan." />
+            <UpdateCard icon={<Clock />} title="SALAH" desc="Weekly and daily Imam rosters for all five prayers, ensuring global connection." />
+            <UpdateCard icon={<Star />} title="SPECIAL" desc="Updates on Istisqa, Khusoof, and Eid prayers with designated lead Imams." />
+            <UpdateCard icon={<CloudRain />} title="WEATHER" desc="Live coverage of rain and atmospheric spiritual moments from the Haramain." />
+            <UpdateCard icon={<Sparkles />} title="MOMENTS" desc="Curated highlights of the most spiritual events occurring within the holy precincts." />
           </div>
         </section>
 
@@ -160,20 +167,20 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 5. OTHERS SECTION (THREADS, INSTA, TIKTOK) */}
+        {/* 5. OTHERS SECTION (WITH UPDATED LINKS) */}
         <section id="others-social" className="max-w-7xl mx-auto px-6 space-y-20">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Other Platforms</h2>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary glowing-text">Other Platforms</h2>
             <p className="text-muted-foreground dark:text-white/50 font-medium uppercase tracking-[0.2em]">Growing Ecosystem 2026</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <OtherSocialCard icon={<MessageSquare />} label="Threads" count="6.5K+" color="text-white bg-black dark:bg-white/10" />
-            <OtherSocialCard icon={<InstagramIcon />} label="Instagram" count="1K+" color="text-pink-600 bg-pink-50 dark:bg-pink-900/20" />
-            <OtherSocialCard icon={<Radio />} label="TikTok" count="600+" color="text-cyan-600 bg-cyan-50 dark:bg-cyan-900/20" />
+            <OtherSocialCard icon={<MessageSquare />} label="Threads" count="6.5K+" color="text-white bg-black dark:bg-white/10" href="https://www.threads.net/@voicesofharam.official" />
+            <OtherSocialCard icon={<InstagramIcon />} label="Instagram" count="1K+" color="text-pink-600 bg-pink-50 dark:bg-pink-900/20" href="https://www.instagram.com/voicesofharam.official" />
+            <OtherSocialCard icon={<Radio />} label="TikTok" count="600+" color="text-cyan-600 bg-cyan-50 dark:bg-cyan-900/20" href="https://www.tiktok.com/@voicesofharam.official" />
           </div>
         </section>
 
-        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan */}
+        {/* 6. SPECIAL MENTION: @sheikh_waleed_al_shamsan (CLEANED) */}
         <section id="sheikh-mention" className="max-w-7xl mx-auto px-6 pb-20">
           <div className="p-12 md:p-20 rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden glowing-card">
             <div className="absolute top-0 right-0 p-10 opacity-10">
@@ -185,7 +192,6 @@ export default function SocialMediaPage() {
               </div>
               <div className="space-y-2">
                 <h3 className="text-3xl md:text-5xl font-black tracking-tighter uppercase text-primary">@sheikh_waleed_al_shamsan</h3>
-                <p className="text-xl font-bold text-muted-foreground dark:text-white/60">Official Instagram Management</p>
               </div>
               <div className="flex items-center gap-10">
                 <div className="text-center">
@@ -225,8 +231,8 @@ function StatBox({ icon, label, count, fb }: any) {
 
 function UpdateCard({ icon, title, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group text-center lg:text-left glowing-card">
-      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform mx-auto lg:mx-0">
+    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group flex flex-col items-center text-center lg:items-start lg:text-left glowing-card">
+      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
         {React.cloneElement(icon, { className: "h-7 w-7" })}
       </div>
       <h3 className="text-2xl font-black tracking-tighter uppercase mb-4 text-primary">{title}</h3>
@@ -235,16 +241,16 @@ function UpdateCard({ icon, title, desc }: any) {
   )
 }
 
-function OtherSocialCard({ icon, label, count, color }: any) {
+function OtherSocialCard({ icon, label, count, color, href }: any) {
   return (
-    <div className="p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl text-center space-y-6 glowing-card">
-      <div className={cn("w-16 h-16 rounded-3xl flex items-center justify-center mx-auto transition-transform hover:rotate-12", color)}>
+    <a href={href} target="_blank" className="p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl text-center space-y-6 group glowing-card">
+      <div className={cn("w-16 h-16 rounded-3xl flex items-center justify-center mx-auto transition-transform group-hover:rotate-12", color)}>
         {React.cloneElement(icon, { className: "h-7 w-7" })}
       </div>
       <div className="space-y-1">
         <h4 className="text-4xl font-black tracking-tighter text-primary">{count}</h4>
         <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{label}</p>
       </div>
-    </div>
+    </a>
   )
 }
