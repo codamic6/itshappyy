@@ -1,3 +1,4 @@
+
 import './globals.css';
 import { Inter, Syncopate, Syne } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
