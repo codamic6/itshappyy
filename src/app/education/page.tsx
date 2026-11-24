@@ -89,7 +89,7 @@ export default function EducationPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter transition-colors duration-700">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
       <main className="pb-20">
@@ -116,16 +116,16 @@ export default function EducationPage() {
                 data-ai-hint="education hero mobile"
               />
             </div>
-            {/* Subtle Bottom Fade Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
+            {/* Transition Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text">Academy</h1>
-            <p className="text-muted-foreground dark:text-white/70 text-sm md:text-base font-medium uppercase tracking-[0.4em]">Excellence Over A Decade</p>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none">Academy</h1>
+            <p className="text-muted-foreground text-sm md:text-base font-medium uppercase tracking-[0.4em]">Excellence Over A Decade</p>
           </motion.div>
         </section>
 
@@ -139,7 +139,7 @@ export default function EducationPage() {
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.05 }}
-                className="group p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden glowing-card"
+                className="group p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/[0.02] rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
                 
@@ -152,7 +152,7 @@ export default function EducationPage() {
                 
                 <p className="text-primary font-bold text-[10px] tracking-[0.1em] uppercase mb-6">{item.institution}</p>
                 
-                <p className="text-muted-foreground dark:text-white/60 text-sm leading-relaxed font-medium">
+                <p className="text-muted-foreground text-sm leading-relaxed font-medium">
                   {item.details}
                 </p>
               </motion.div>

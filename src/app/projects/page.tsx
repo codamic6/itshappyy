@@ -1,4 +1,3 @@
-
 "use client"
 
 import React, { useState, useMemo } from 'react'
@@ -6,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { ExternalLink, Zap, Bot, Code2, Globe, Sparkles, Search, X, Gem, BookOpen, MousePointer2, Layout } from 'lucide-react'
+import { ExternalLink, Zap, Bot, Code2, Globe, Search, Gem, BookOpen, MousePointer2, Layout } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
@@ -104,7 +103,7 @@ export default function ProjectsPage() {
   }, [searchQuery, activeCategory]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter transition-colors duration-700 ease-in-out">
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary font-inter">
       <Navbar />
       
       <main className="pb-20">
@@ -132,16 +131,16 @@ export default function ProjectsPage() {
                 priority
               />
             </div>
-            {/* Subtle Bottom Fade Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/40" />
+            {/* Transition Fade Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
           </div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }}
             className="relative z-10 text-center space-y-4 pt-20"
           >
-            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none glowing-text drop-shadow-2xl">Work</h1>
-            <p className="text-primary/80 dark:text-white/70 text-sm md:text-base font-black uppercase tracking-[0.4em] hero-text-shadow">Engineering Scalable Futures</p>
+            <h1 className="text-7xl md:text-[140px] font-black tracking-tighter text-green-gradient uppercase leading-none drop-shadow-2xl">Work</h1>
+            <p className="text-primary/80 text-sm md:text-base font-black uppercase tracking-[0.4em]">Engineering Scalable Futures</p>
           </motion.div>
         </section>
 
@@ -151,7 +150,7 @@ export default function ProjectsPage() {
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 h-5 w-5" />
               <Input 
                 placeholder="SEARCH PROJECTS..." 
-                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-card/50 dark:bg-card/20 text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
+                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-card/50 text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -166,7 +165,7 @@ export default function ProjectsPage() {
                     "px-8 py-3 rounded-full text-[10px] font-black tracking-widest uppercase transition-all border shadow-sm",
                     activeCategory === cat 
                       ? "bg-primary text-white border-primary shadow-xl scale-105" 
-                      : "bg-card dark:bg-card/40 text-primary/40 border-primary/5 hover:border-primary/20 hover:text-primary"
+                      : "bg-card text-primary/40 border-primary/5 hover:border-primary/20 hover:text-primary"
                   )}
                 >
                   {cat}
@@ -185,7 +184,7 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="group relative bg-card dark:bg-card/20 rounded-[4rem] border border-primary/5 dark:border-white/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden flex flex-col glowing-card"
+                  className="group relative bg-card rounded-[4rem] border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl overflow-hidden flex flex-col"
                 >
                   <div className="relative aspect-video overflow-hidden">
                     <Image 
@@ -203,7 +202,7 @@ export default function ProjectsPage() {
                       <span className="px-6 py-2 rounded-full bg-primary/5 text-primary font-black text-[10px] tracking-widest uppercase">{p.category}</span>
                     </div>
                     <h2 className="text-3xl md:text-4xl font-black tracking-tighter uppercase text-primary">{p.title}</h2>
-                    <p className="text-muted-foreground dark:text-white/60 font-medium leading-relaxed flex-1">{p.description}</p>
+                    <p className="text-muted-foreground font-medium leading-relaxed flex-1">{p.description}</p>
                     <div className="pt-10">
                       <Button asChild className="w-full rounded-full h-20 bg-primary text-white font-black tracking-widest text-sm uppercase shadow-xl transition-all hover:scale-105">
                         <a href={p.link} target="_blank">VISIT <ExternalLink className="ml-2 h-5 w-5" /></a>
