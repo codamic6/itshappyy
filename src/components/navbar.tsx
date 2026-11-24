@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ThemeToggle } from './theme-toggle'
 import { cn } from '@/lib/utils'
 
 export function Navbar() {
@@ -46,15 +45,15 @@ export function Navbar() {
         className="fixed top-8 left-1/2 z-[100] w-[95%] max-w-5xl pointer-events-none -translate-x-1/2"
       >
         <div className="glass-white h-20 px-6 md:px-10 flex items-center justify-between rounded-full border border-primary/10 shadow-2xl pointer-events-auto">
-          {/* Brand Logo - Extreme Left with Dark Mode Visibility Fix */}
+          {/* Brand Logo - Extreme Left */}
           <Link href="/" className={cn(
             "text-xl md:text-2xl font-black font-syne tracking-widest uppercase cursor-pointer shrink-0 transition-colors",
-            "text-green-gradient dark:text-primary"
+            "text-green-gradient"
           )}>
             HAPPY
           </Link>
           
-          {/* Desktop Nav - Centered (Contact removed as requested) */}
+          {/* Desktop Nav - Centered */}
           <div className="hidden lg:flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             {navLinks.map((link) => (
               <Link 
@@ -69,9 +68,8 @@ export function Navbar() {
 
           {/* Actions - Extreme Right */}
           <div className="flex items-center gap-2 md:gap-4 shrink-0">
-            <ThemeToggle />
             <Link href="/contact">
-              <Button className="hidden sm:flex rounded-full px-8 bg-primary text-white font-black text-[10px] tracking-widest h-12 uppercase transition-transform hover:scale-105 shadow-xl">
+              <Button className="rounded-full px-8 bg-primary text-white font-black text-[10px] tracking-widest h-12 uppercase transition-transform hover:scale-105 shadow-xl">
                 CONTACT
               </Button>
             </Link>
@@ -95,7 +93,7 @@ export function Navbar() {
             />
             <motion.div 
               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
-              className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white dark:bg-[#0B0C10] z-[120] shadow-2xl flex flex-col"
+              className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white z-[120] shadow-2xl flex flex-col"
             >
               <div className="p-8 flex items-center justify-between border-b border-primary/5">
                 <span className="text-[10px] font-black tracking-widest text-primary uppercase">NAVIGATE</span>
