@@ -54,7 +54,7 @@ export default function PortfolioPage() {
               priority
             />
           </div>
-          {/* Transition Fade Overlay - From transparent to background color */}
+          {/* Transition Fade Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
         </div>
         

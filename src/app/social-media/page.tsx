@@ -5,7 +5,11 @@ import { motion } from 'framer-motion'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
-import { Youtube as YoutubeIcon, Users, TrendingUp, Globe, Send, Mic2, Clock, Calendar, Sparkles, Instagram as InstagramIcon, MessageSquare, Radio } from 'lucide-react'
+import { 
+  Youtube as YoutubeIcon, Users, TrendingUp, Globe, Send, Mic2, 
+  Clock, Calendar, Sparkles, Instagram as InstagramIcon, 
+  MessageSquare, Radio, CloudRain, Star 
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 

@@ -118,7 +118,7 @@ export function Navbar() {
                 <div className="mt-auto pt-10">
                   <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
                     <Button className="w-full rounded-full py-8 bg-primary text-white font-black tracking-widest text-xs uppercase shadow-2xl">
-                      CONTACT STATION
+                      CONTACT
                     </Button>
                   </Link>
                 </div>
