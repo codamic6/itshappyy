@@ -68,7 +68,8 @@ export function Navbar() {
 
           {/* Actions - Extreme Right */}
           <div className="flex items-center gap-2 md:gap-4 shrink-0">
-            <Link href="/contact">
+            {/* Hidden on mobile, visible on Desktop (lg) */}
+            <Link href="/contact" className="hidden lg:block">
               <Button className="rounded-full px-8 bg-primary text-white font-black text-[10px] tracking-widest h-12 uppercase transition-transform hover:scale-105 shadow-xl">
                 CONTACT
               </Button>
@@ -91,9 +92,10 @@ export function Navbar() {
               onClick={() => setIsMenuOpen(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-xl z-[110] lg:hidden"
             />
+            {/* Mobile Sidebar - Slided from the Left (Leftbar) */}
             <motion.div 
-              initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
-              className="fixed right-0 top-0 h-full w-[85%] max-w-sm bg-white z-[120] shadow-2xl flex flex-col"
+              initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+              className="fixed left-0 top-0 h-full w-[85%] max-w-sm bg-white z-[120] shadow-2xl flex flex-col"
             >
               <div className="p-8 flex items-center justify-between border-b border-primary/5">
                 <span className="text-[10px] font-black tracking-widest text-primary uppercase">NAVIGATE</span>
@@ -115,6 +117,7 @@ export function Navbar() {
                     {link.name}
                   </Link>
                 ))}
+                {/* Contact button is only here on mobile/tablet */}
                 <div className="mt-auto pt-10">
                   <Link href="/contact" onClick={() => setIsMenuOpen(false)}>
                     <Button className="w-full rounded-full py-8 bg-primary text-white font-black tracking-widest text-xs uppercase shadow-2xl">
