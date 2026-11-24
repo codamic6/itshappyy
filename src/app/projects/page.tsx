@@ -79,7 +79,7 @@ const projects = [
     id: 8,
     title: "AnyTask",
     category: "Productivity Tools",
-    imgSrc: "https://picsum.photos/seed/anytask/600/400",
+    imgSrc: "/anytask.jpg",
     description: "High-performance task management ecosystem for modern workflows.",
     link: "https://anytask-ten.vercel.app",
     icon: <Layout />,

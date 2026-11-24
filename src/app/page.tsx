@@ -244,7 +244,7 @@ export default function PortfolioPage() {
                 </div>
               </div>
               <div className="flex justify-center lg:justify-start pt-10">
-                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit transition-all hover:scale-105">
                   <a href="https://youtube.com/@VoicesOfHaram" target="_blank">VISIT</a>
                 </Button>
               </div>
@@ -270,7 +270,7 @@ export default function PortfolioPage() {
                   </p>
                 </div>
                 <div className="flex justify-center lg:justify-start">
-                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
+                  <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit transition-all hover:scale-105">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
                   </Button>
                 </div>
