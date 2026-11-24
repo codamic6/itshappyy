@@ -287,47 +287,50 @@ export default function PortfolioPage() {
           <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">The Connect Station 2026</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div className="crystal-panel p-12 md:p-20 rounded-[4rem] relative overflow-hidden min-h-[500px] flex flex-col justify-center">
-            <AnimatePresence mode="wait">
-              {!isSubmitted ? (
-                <motion.div 
-                  key="form"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  className="space-y-12"
-                >
-                  <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="NAME" required />
-                      <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="EMAIL" type="email" required />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-green-600/20 rounded-[3rem] blur opacity-25"></div>
+            <div className="relative bg-card p-8 md:p-16 rounded-[3rem] border border-primary/10 shadow-2xl min-h-[500px] flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                {!isSubmitted ? (
+                  <motion.div 
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-10"
+                  >
+                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Input className="h-16 rounded-2xl border-primary/10 bg-muted/30 font-bold uppercase tracking-widest" placeholder="NAME" required />
+                        <Input className="h-16 rounded-2xl border-primary/10 bg-muted/30 font-bold uppercase tracking-widest" placeholder="EMAIL" type="email" required />
+                      </div>
+                      <Input className="h-16 rounded-2xl border-primary/10 bg-muted/30 font-bold uppercase tracking-widest" placeholder="SUBJECT" required />
+                      <Textarea className="min-h-[150px] rounded-[2rem] border-primary/10 bg-muted/30 font-bold uppercase tracking-widest p-6" placeholder="VISION..." required />
+                      <Button type="submit" className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl transition-all hover:scale-[1.02]">
+                        SUBMIT <Send className="ml-2 h-5 w-5" />
+                      </Button>
+                    </form>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center space-y-8"
+                  >
+                    <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
+                      <CheckCircle2 className="w-12 h-12 md:w-16 md:h-16" />
                     </div>
-                    <Input className="h-16 rounded-2xl border-primary/10 bg-white/50" placeholder="SUBJECT" required />
-                    <Textarea className="min-h-[150px] rounded-3xl border-primary/10 bg-white/50" placeholder="VISION..." required />
-                    <Button type="submit" className="w-full h-20 rounded-full bg-primary text-white font-black uppercase shadow-2xl transition-all hover:scale-[1.02]">
-                      SUBMIT <Send className="ml-2 h-5 w-5" />
-                    </Button>
-                  </form>
-                </motion.div>
-              ) : (
-                <motion.div 
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center space-y-8"
-                >
-                  <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
-                    <CheckCircle2 className="w-16 h-16" />
-                  </div>
-                  <h2 className="text-5xl font-black tracking-tighter uppercase text-primary">Mission Success</h2>
-                  <p className="text-muted-foreground leading-relaxed uppercase tracking-widest text-xs">Message Secured</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-primary">Mission Success</h2>
+                    <p className="text-muted-foreground leading-relaxed uppercase tracking-widest text-[10px]">Message Secured</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
-          <div className="flex flex-col justify-center space-y-12 min-w-0">
+          <div className="flex flex-col justify-center space-y-8 md:space-y-12">
             <ContactInfo icon={<Mail />} label="Email" value="itsmuhammadahmad06@gmail.com" />
             <ContactInfo icon={<Phone />} label="Phone" value="+923434441031" />
             <ContactInfo icon={<MapPin />} label="Location" value="Faisalabad, PK" />
@@ -342,9 +345,9 @@ export default function PortfolioPage() {
 
 function EduCard({ icon, year, title, institution, desc }: any) {
   return (
-    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group">
+    <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl group text-center md:text-left">
       <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-black text-[9px] mb-6">{year}</span>
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex flex-col md:flex-row items-center gap-3 mb-4">
         <div className="text-primary">{icon}</div>
         <h3 className="text-2xl font-black tracking-tighter uppercase">{title}</h3>
       </div>
@@ -375,7 +378,7 @@ function ProjectFeatured({ title, cat, img, href }: any) {
 function StatBox({ icon, label, count, fb }: any) {
   return (
     <div className={cn(
-      "p-6 rounded-[2rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4",
+      "p-6 rounded-[2rem] bg-white shadow-xl border border-primary/5 flex flex-col items-center text-center space-y-4 transition-transform hover:scale-105",
       fb && "border-blue-100"
     )}>
       <div className={fb ? "text-[#1877F2]" : "text-primary"}>
@@ -391,13 +394,13 @@ function StatBox({ icon, label, count, fb }: any) {
 
 function ContactInfo({ icon, label, value }: any) {
   return (
-    <div className="flex items-center gap-6 group w-full overflow-hidden">
-      <div className="w-16 h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">
-        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6" })}
+    <div className="flex items-center gap-6 group w-full overflow-hidden p-2">
+      <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white group-hover:scale-110">
+        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5 md:h-6 md:w-6" })}
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-[8px] font-black tracking-widest text-muted-foreground uppercase">{label}</p>
-        <p className="text-lg md:text-xl font-black tracking-tighter uppercase truncate">{value}</p>
+        <p className="text-base md:text-xl font-black tracking-tighter uppercase truncate text-primary">{value}</p>
       </div>
     </div>
   )
