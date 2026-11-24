@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from 'react'
@@ -9,7 +8,7 @@ import Image from 'next/image'
 import { 
   Youtube as YoutubeIcon, Users, TrendingUp, Globe, Send, Mic2, 
   Clock, Calendar, Sparkles, Instagram as InstagramIcon, 
-  MessageSquare, Radio, CloudRain, Star, ExternalLink, ShieldCheck, Zap
+  ExternalLink, ShieldCheck, Zap, Star, CloudRain
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -80,7 +79,7 @@ export default function SocialMediaPage() {
                   <div className="space-y-4">
                     <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col break-words">
                       <span className="text-red-600">TOP 25%</span>
-                      <span className="text-green-gradient text-nowrap text-primary">GLOBALLY</span>
+                      <span className="text-green-gradient text-nowrap">GLOBALLY</span>
                     </h2>
                     <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                       Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
@@ -246,7 +245,7 @@ export default function SocialMediaPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative p-10 md:p-24 rounded-[4rem] bg-slate-50 border border-primary/5 shadow-2xl overflow-hidden group"
+            className="relative p-6 md:p-24 rounded-[4rem] bg-slate-50 border border-primary/5 shadow-2xl overflow-hidden group"
           >
             {/* Animated Background Mesh */}
             <div className="absolute inset-0 z-0">
@@ -254,7 +253,7 @@ export default function SocialMediaPage() {
               <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/[0.03] rounded-full blur-[100px] -ml-20 -mb-20" />
             </div>
 
-            <div className="relative z-10 flex flex-col items-center text-center space-y-12">
+            <div className="relative z-10 flex flex-col items-center text-center space-y-8 md:space-y-12">
               <div className="relative">
                 <div className="absolute inset-0 bg-primary/10 blur-[40px] rounded-full scale-150 animate-pulse" />
                 <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-2xl border-4 border-white flex items-center justify-center p-2">
@@ -264,8 +263,8 @@ export default function SocialMediaPage() {
                 </div>
               </div>
 
-              <div className="space-y-6 max-w-4xl mx-auto">
-                <h3 className="text-3xl md:text-7xl font-black tracking-tighter uppercase text-primary leading-none">
+              <div className="space-y-6 w-full max-w-4xl mx-auto overflow-hidden">
+                <h3 className="text-2xl sm:text-4xl md:text-7xl font-black tracking-tighter uppercase text-primary leading-tight break-all whitespace-normal px-2">
                   @sheikh_waleed_al_shamsan
                 </h3>
                 <div className="flex flex-wrap justify-center items-center gap-4">
@@ -302,7 +301,7 @@ function StatBox({ icon, label, count, fb }: any) {
       fb && "border-blue-100"
     )}>
       <div className={fb ? "text-[#1877F2]" : "text-primary"}>
-        {React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5 sm:h-6 sm:w-6" })}
+        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-5 w-5 sm:h-6 sm:w-6" })}
       </div>
       <div className="space-y-1">
         <h4 className="text-xl sm:text-2xl font-black tracking-tighter">{count}</h4>
@@ -316,7 +315,7 @@ function UpdateCard({ icon, title, desc }: any) {
   return (
     <div className="p-10 rounded-[3rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-2xl group flex flex-col items-center text-center lg:items-start lg:text-left">
       <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
-        {React.cloneElement(icon, { className: "h-7 w-7" })}
+        {icon && React.cloneElement(icon as React.ReactElement, { className: "h-7 w-7" })}
       </div>
       <h3 className="text-2xl font-black tracking-tighter uppercase mb-4 text-primary">{title}</h3>
       <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
@@ -342,7 +341,7 @@ function AdvancedSocialCard({ icon, label, count, variant, href }: any) {
       )}
     >
       <div className="relative z-10 space-y-6">
-        <div className="w-20 h-20 rounded-[2.5rem] bg-slate-50 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 group-hover:rotate-6 text-primary group-hover:text-inherit">
+        <div className="w-20 h-20 rounded-[2.5rem] bg-slate-50 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 group-hover:rotate-6 text-primary">
           {icon}
         </div>
         <div className="space-y-2">
@@ -372,4 +371,3 @@ function TikTokIcon() {
     </svg>
   );
 }
-
