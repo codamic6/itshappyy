@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState, useMemo } from 'react'
@@ -147,22 +148,22 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           <div className="space-y-10">
             <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-primary/40 h-5 w-5" />
+              <Search className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 text-primary/40 h-5 w-5" />
               <Input 
-                placeholder="SEARCH PROJECTS..." 
-                className="h-20 pl-16 pr-20 rounded-full border-primary/10 bg-card/50 text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
+                placeholder="SEARCH..." 
+                className="h-16 md:h-20 pl-12 md:pl-16 pr-4 md:pr-10 rounded-full border-primary/10 bg-card/50 text-base md:text-lg font-black tracking-widest placeholder:text-primary/20 focus-visible:ring-primary/20 shadow-2xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={cn(
-                    "px-8 py-3 rounded-full text-[10px] font-black tracking-widest uppercase transition-all border shadow-sm",
+                    "px-4 md:px-8 py-2 md:py-3 rounded-full text-[8px] md:text-[10px] font-black tracking-widest uppercase transition-all border shadow-sm",
                     activeCategory === cat 
                       ? "bg-primary text-white border-primary shadow-xl scale-105" 
                       : "bg-card text-primary/40 border-primary/5 hover:border-primary/20 hover:text-primary"

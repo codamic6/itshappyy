@@ -182,8 +182,8 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade 2026</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Intermediate in Computer Science. Focus on Advanced Logic and Digital Architectures." />
-            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal Grammar High School" desc="Secured overall 1st position in school with 1165/1200 marks." />
+            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Intermediate in Computer Science. Focus on Advanced Logic, Mathematics, and Computer Science Architectures." />
+            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal Grammar High School" desc="Secured overall 1st position in school with 1165/1200 marks. Specialized in Computer Science, Physics, and Math." />
             <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal Grammar High School" desc="Secured 525/545 marks, demonstrating consistent academic dominance in Science subjects." />
           </div>
           <div className="text-center pt-10">
