@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -58,7 +59,7 @@ export default function SocialMediaPage() {
         </section>
 
         {/* 1. ACHIEVEMENT SECTION (SYNCED WITH HOME PAGE) */}
-        <section id="global-milestone-social" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden">
+        <section id="global-milestone-social" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden text-center md:text-left">
           <div className="max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -71,7 +72,7 @@ export default function SocialMediaPage() {
               <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-                <div className="space-y-8 text-center lg:text-left">
+                <div className="space-y-8">
                   <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                     <YoutubeIcon className="h-4 w-4" /> GLOBAL MILESTONE 2026
                   </div>
@@ -151,6 +152,9 @@ export default function SocialMediaPage() {
                 <YoutubeIcon className="h-4 w-4" /> Voices of Haram
               </div>
               <h2 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h2>
+              <p className="text-lg text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Alhamdulillah, Voices of Haram has secured its position in the top creators worldwide.
+              </p>
               <div className="grid grid-cols-2 gap-10 pt-6">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600">30.5K+</span>
@@ -187,7 +191,7 @@ export default function SocialMediaPage() {
                 <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
                 <div className="space-y-4">
                   <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-                    Community of <span className="text-[#1877F2] font-black">25,000+</span> dedicated members.
+                    Community of <span className="text-[#1877F2] font-black">25,000+ dedicated members.</span>
                   </p>
                 </div>
                 <div className="flex justify-center lg:justify-start">

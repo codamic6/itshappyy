@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -13,27 +14,27 @@ export default function EducationPage() {
       year: "2026", 
       title: "ICS - 11th Grade", 
       institution: "Punjab College", 
-      details: "Current studies focusing on Advanced Logic, Mathematics, and Computer Science Architectures.", 
+      details: "Intermediate in Computer Science. Focus on Advanced Logic, Mathematics, and Computer Science Architectures.", 
       icon: <GraduationCap /> 
     },
     { 
       year: "2025", 
       title: "Matric - 1st Position", 
-      institution: "Al-Faisal Grammar School", 
-      details: "Secured Board Level 1st Position with 1165/1200 marks. Specialized in Computer Science, Physics, and Math.", 
+      institution: "Al-Faisal Grammar High School", 
+      details: "Secured overall 1st position in school with 1165/1200 marks. Specialized in Computer Science, Physics, and Math.", 
       icon: <Trophy /> 
     },
     { 
       year: "2024", 
       title: "9th Grade", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Secured 525/545 marks, demonstrating consistent academic dominance in Science subjects.", 
       icon: <Award /> 
     },
     { 
       year: "2023", 
       title: "Class 8 - 3rd Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Achieved overall 3rd position in grade, maintaining a trajectory of excellence in Ahmadabad, Faisalabad.", 
       icon: <Medal /> 
     },
@@ -47,42 +48,42 @@ export default function EducationPage() {
     { 
       year: "2020", 
       title: "Class 5 - 1st Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Secured overall 1st position, demonstrating peak academic performance in primary level.", 
       icon: <Star /> 
     },
     { 
       year: "2019", 
       title: "Class 4 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Maintained elite ranking with overall 2nd position in grade.", 
       icon: <Target /> 
     },
     { 
       year: "2018", 
       title: "Class 3 - 4th Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Strong academic standing within the top tier of the class.", 
       icon: <ShieldCheck /> 
     },
     { 
       year: "2017", 
       title: "Class 2 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Consistent performance securing the 2nd overall position.", 
       icon: <Award /> 
     },
     { 
       year: "2016", 
       title: "Class 1 - 2nd Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Early academic record-breaking with 2nd overall position.", 
       icon: <Medal /> 
     },
     { 
       year: "2015", 
       title: "Prep - 3rd Position", 
-      institution: "Al-Faisal Grammar School", 
+      institution: "Al-Faisal Grammar High School", 
       details: "Foundation of excellence started with a 3rd position finish.", 
       icon: <Zap /> 
     }

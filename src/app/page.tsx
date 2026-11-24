@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react'
@@ -83,7 +84,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Achievement Section */}
-      <section id="global-milestone-home" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden">
+      <section id="global-milestone-home" className="py-12 md:py-16 px-4 md:px-6 relative overflow-hidden text-center md:text-left">
         <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -96,7 +97,7 @@ export default function PortfolioPage() {
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[80px] -ml-20 -mb-20 pointer-events-none" />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
-              <div className="space-y-8 text-center lg:text-left">
+              <div className="space-y-8">
                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-red-50 border border-red-100 text-red-600 font-black text-[10px] tracking-[0.3em] uppercase mx-auto lg:mx-0">
                   <YoutubeIcon className="h-4 w-4" /> GLOBAL MILESTONE 2026
                 </div>
@@ -181,9 +182,9 @@ export default function PortfolioPage() {
             <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Excellence Over A Decade 2026</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Advanced Logic and Digital Architectures." />
-            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal School" desc="1st Position: 1165/1200 marks. Board Record." />
-            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal School" desc="Scored 525/545 marks. Pure Science focus." />
+            <EduCard icon={<GraduationCap />} year="2026" title="ICS - 11th" institution="Punjab College" desc="Intermediate in Computer Science. Focus on Advanced Logic and Digital Architectures." />
+            <EduCard icon={<Award />} year="2025" title="Matric - 1st" institution="Al-Faisal Grammar High School" desc="Secured overall 1st position in school with 1165/1200 marks." />
+            <EduCard icon={<Medal />} year="2024" title="9th Grade" institution="Al-Faisal Grammar High School" desc="Secured 525/545 marks, demonstrating consistent academic dominance in Science subjects." />
           </div>
           <div className="text-center pt-10">
             <Link href="/education">
@@ -229,6 +230,9 @@ export default function PortfolioPage() {
                 <YoutubeIcon className="h-4 w-4" /> Voices of Haram
               </div>
               <h2 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase leading-[0.9] text-red-600">Youtube</h2>
+              <p className="text-lg text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Alhamdulillah, Voices of Haram has secured its position in the top creators worldwide.
+              </p>
               <div className="grid grid-cols-2 gap-10 pt-6">
                 <div className="space-y-1">
                   <span className="text-5xl font-black tracking-tighter text-red-600">30.5K+</span>
@@ -260,9 +264,11 @@ export default function PortfolioPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
               <div className="space-y-10 text-center lg:text-left">
                 <h2 className="text-[100px] md:text-[200px] font-black tracking-tighter text-[#1877F2] leading-none">FB</h2>
-                <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium">
-                  Community of <span className="text-[#1877F2] font-black">25,000+</span>
-                </p>
+                <div className="space-y-4">
+                  <p className="text-xl md:text-2xl text-muted-foreground/80 font-medium">
+                    Community of <span className="text-[#1877F2] font-black">25,000+ dedicated members.</span>
+                  </p>
+                </div>
                 <div className="flex justify-center lg:justify-start">
                   <Button asChild className="bg-[#1877F2] hover:bg-[#1565C0] rounded-full px-16 h-20 text-lg font-black tracking-widest uppercase shadow-2xl w-fit">
                     <a href="https://facebook.com/voicesofharam.official" target="_blank">VISIT</a>
