@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from 'react'
@@ -8,7 +9,7 @@ import Image from 'next/image'
 import { 
   Youtube as YoutubeIcon, Users, TrendingUp, Globe, Send, Mic2, 
   Clock, Calendar, Sparkles, Instagram as InstagramIcon, 
-  MessageSquare, Radio, CloudRain, Star 
+  MessageSquare, Radio, CloudRain, Star, ExternalLink, ShieldCheck, Zap
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -79,7 +80,7 @@ export default function SocialMediaPage() {
                   <div className="space-y-4">
                     <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[105px] font-black tracking-tighter uppercase leading-[0.85] flex flex-col break-words">
                       <span className="text-red-600">TOP 25%</span>
-                      <span className="text-green-gradient text-nowrap">GLOBALLY</span>
+                      <span className="text-green-gradient text-nowrap text-primary">GLOBALLY</span>
                     </h2>
                     <p className="text-lg md:text-xl text-muted-foreground font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
                       Alhamdulillah, <span className="text-primary font-black italic underline decoration-primary/20">Voices of Haram</span> has secured its position in the top creators worldwide.
@@ -206,43 +207,86 @@ export default function SocialMediaPage() {
           </div>
         </section>
 
-        {/* 5. OTHERS SECTION */}
-        <section id="others-social" className="max-w-7xl mx-auto px-6 space-y-20">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-primary">Other Platforms</h2>
-            <p className="text-muted-foreground font-medium uppercase tracking-[0.2em]">Growing Ecosystem 2026</p>
+        {/* 5. OTHERS SECTION (REDESIGNED ADVANCED UI) */}
+        <section id="others-social-advanced" className="max-w-7xl mx-auto px-6 space-y-20">
+          <div className="text-center space-y-6">
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase text-primary">Global Reach</h2>
+            <p className="text-muted-foreground font-medium max-w-xl mx-auto uppercase tracking-[0.2em] text-[10px] md:text-xs">
+              Extending the spiritual footprint across the digital horizon 2026.
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <OtherSocialCard icon={<MessageSquare />} label="Threads" count="6.5K+" color="text-white bg-black" href="https://www.threads.net/@voicesofharam.official" />
-            <OtherSocialCard icon={<InstagramIcon />} label="Instagram" count="1K+" color="text-pink-600 bg-pink-50" href="https://www.instagram.com/voicesofharam.official" />
-            <OtherSocialCard icon={<Radio />} label="TikTok" count="600+" color="text-cyan-600 bg-cyan-50" href="https://www.tiktok.com/@voicesofharam.official" />
+            <AdvancedSocialCard 
+              icon={<ThreadsIcon />} 
+              label="Threads" 
+              count="6.5K+" 
+              variant="threads"
+              href="https://www.threads.net/@voicesofharam.official" 
+            />
+            <AdvancedSocialCard 
+              icon={<InstagramIcon className="h-8 w-8" />} 
+              label="Instagram" 
+              count="1K+" 
+              variant="instagram"
+              href="https://www.instagram.com/voicesofharam.official" 
+            />
+            <AdvancedSocialCard 
+              icon={<TikTokIcon />} 
+              label="TikTok" 
+              count="600+" 
+              variant="tiktok"
+              href="https://www.tiktok.com/@voicesofharam.official" 
+            />
           </div>
         </section>
 
-        {/* 6. SPECIAL MENTION */}
-        <section id="sheikh-mention" className="max-w-7xl mx-auto px-6 pb-20">
-          <div className="p-6 sm:p-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] bg-gradient-to-br from-primary/5 to-transparent border border-primary/10 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-10 opacity-10 hidden md:block">
-              <InstagramIcon className="w-40 h-40" />
+        {/* 6. SHEIKH WALEED MENTION (GOD-MODE REDESIGN) */}
+        <section id="sheikh-shamsan-premium" className="max-w-7xl mx-auto px-6 pb-20">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative p-10 md:p-24 rounded-[4rem] bg-slate-50 border border-primary/5 shadow-2xl overflow-hidden group"
+          >
+            {/* Animated Background Mesh */}
+            <div className="absolute inset-0 z-0">
+              <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[120px] -mr-32 -mt-32" />
+              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/[0.03] rounded-full blur-[100px] -ml-20 -mb-20" />
             </div>
-            <div className="relative z-10 flex flex-col items-center text-center space-y-8">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                <InstagramIcon className="w-10 h-10 md:w-12 md:h-12" />
-              </div>
-              <div className="space-y-2 w-full overflow-hidden">
-                <h3 className="text-xl sm:text-2xl md:text-5xl font-black tracking-tighter uppercase text-primary break-all">@sheikh_waleed_al_shamsan</h3>
-              </div>
-              <div className="flex items-center gap-10">
-                <div className="text-center">
-                  <span className="text-4xl md:text-5xl font-black text-primary">8000+</span>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mt-2">Followers</p>
+
+            <div className="relative z-10 flex flex-col items-center text-center space-y-12">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/10 blur-[40px] rounded-full scale-150 animate-pulse" />
+                <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-2xl border-4 border-white flex items-center justify-center p-2">
+                  <div className="w-full h-full rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] flex items-center justify-center text-white">
+                    <InstagramIcon className="w-16 h-16" />
+                  </div>
                 </div>
               </div>
-              <Button asChild className="rounded-full px-12 h-16 bg-primary text-white font-black uppercase tracking-widest shadow-2xl transition-transform hover:scale-105 w-full sm:w-fit">
-                <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank">FOLLOW PAGE</a>
-              </Button>
+
+              <div className="space-y-6 max-w-4xl mx-auto">
+                <h3 className="text-3xl md:text-7xl font-black tracking-tighter uppercase text-primary leading-none">
+                  @sheikh_waleed_al_shamsan
+                </h3>
+                <div className="flex flex-wrap justify-center items-center gap-4">
+                  <span className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white font-black text-xs tracking-widest uppercase shadow-xl">
+                    <Users className="h-4 w-4" /> 8000+ FOLLOWERS
+                  </span>
+                  <span className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-primary/10 text-primary font-black text-xs tracking-widest uppercase">
+                    <ShieldCheck className="h-4 w-4" /> VERIFIED REACH
+                  </span>
+                </div>
+              </div>
+
+              <div className="pt-4 w-full sm:w-fit">
+                <Button asChild className="w-full sm:w-fit rounded-full px-16 h-20 bg-primary text-white font-black uppercase tracking-[0.3em] text-sm shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all hover:scale-105 active:scale-95 group">
+                  <a href="https://instagram.com/sheikh_waleed_al_shamsan" target="_blank" className="flex items-center gap-3">
+                    VISIT PROFILE <ExternalLink className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </Button>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </section>
       </main>
 
@@ -280,16 +324,52 @@ function UpdateCard({ icon, title, desc }: any) {
   )
 }
 
-function OtherSocialCard({ icon, label, count, color, href }: any) {
+function AdvancedSocialCard({ icon, label, count, variant, href }: any) {
+  const styles = {
+    threads: "hover:bg-black hover:text-white border-black/5 hover:border-black shadow-black/5",
+    instagram: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#e6683c] hover:to-[#bc1888] hover:text-white border-pink-100 hover:border-transparent",
+    tiktok: "hover:bg-[#000000] hover:text-white border-cyan-100 hover:border-[#fe2c55] shadow-cyan-500/10"
+  };
+
   return (
-    <a href={href} target="_blank" className="p-10 rounded-[3.5rem] bg-card border border-primary/5 hover:border-primary/20 transition-all hover:shadow-xl text-center space-y-6 group">
-      <div className={cn("w-16 h-16 rounded-3xl flex items-center justify-center mx-auto transition-transform group-hover:rotate-12", color)}>
-        {React.cloneElement(icon, { className: "h-7 w-7" })}
+    <motion.a 
+      href={href} 
+      target="_blank" 
+      whileHover={{ y: -10 }}
+      className={cn(
+        "p-12 rounded-[4rem] bg-white border-2 transition-all duration-500 text-center space-y-8 group relative overflow-hidden",
+        styles[variant as keyof typeof styles]
+      )}
+    >
+      <div className="relative z-10 space-y-6">
+        <div className="w-20 h-20 rounded-[2.5rem] bg-slate-50 flex items-center justify-center mx-auto transition-transform group-hover:scale-110 group-hover:rotate-6 text-primary group-hover:text-inherit">
+          {icon}
+        </div>
+        <div className="space-y-2">
+          <h4 className="text-5xl font-black tracking-tighter">{count}</h4>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] opacity-50 group-hover:opacity-100 transition-opacity">{label}</p>
+        </div>
       </div>
-      <div className="space-y-1">
-        <h4 className="text-4xl font-black tracking-tighter text-primary">{count}</h4>
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground">{label}</p>
+      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-20 transition-opacity">
+        <Zap className="h-12 w-12" />
       </div>
-    </a>
+    </motion.a>
   )
 }
+
+function ThreadsIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+      <path d="M12 24c-6.627 0-12-5.373-12-12s5.373-12 12-12 12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11s-4.925-11-11-11-11 4.925-11 11 4.925 11 11 11zm3.762-11.458c0-.79-.115-1.503-.346-2.138-.232-.635-.558-1.156-.979-1.564s-.95-.713-1.585-.916c-.636-.202-1.353-.304-2.152-.304s-1.516.102-2.152.304c-.635.203-1.164.508-1.585.916s-.747.929-.979 1.564c-.231.635-.346 1.348-.346 2.138s.115 1.503.346 2.138c.232.635.558 1.156.979 1.564s.95.713 1.585.916c.636.202 1.353.304 2.152.304s1.516-.102 2.152-.304c.635-.203 1.164-.508 1.585-.916s.747-.929.979-1.564c.231-.635.346-1.348.346-2.138zM12 7.5c2.485 0 4.5 2.015 4.5 4.5s-2.015 4.5-4.5 4.5-4.5-2.015-4.5-4.5 2.015-4.5 4.5-4.5zm0 1c-1.933 0-3.5 1.567-3.5 3.5s1.567 3.5 3.5 3.5 3.5-1.567 3.5-3.5-1.567-3.5-3.5-3.5z" />
+    </svg>
+  );
+}
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+      <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a6.386 6.386 0 0 1-1.87-1.5c-.02 3.17-.01 6.34-.02 9.51-.02 1.23-.28 2.48-.87 3.57a6.32 6.32 0 0 1-3.25 3.12c-1.21.47-2.52.62-3.8.44-1.28-.18-2.5-.72-3.48-1.58a6.35 6.35 0 0 1-2.12-4.63c-.02-1.39.27-2.8.93-4.01a6.32 6.32 0 0 1 4.51-3.32c.11-.02.21-.03.32-.05v4.11c-.13.04-.26.07-.38.12a2.23 2.23 0 0 0-1.32 2.37c.07.64.44 1.22.99 1.56.55.34 1.25.4 1.86.15.61-.25 1.05-.8 1.19-1.44.06-.29.08-.59.07-.89V0h.01z" />
+    </svg>
+  );
+}
+
